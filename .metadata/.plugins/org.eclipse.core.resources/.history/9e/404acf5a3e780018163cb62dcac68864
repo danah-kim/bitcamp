@@ -1,0 +1,18 @@
+select * from tab;
+-- member
+-- User_id, pw, name, ssn, regidate, addr_seq, phone, email, profile, access_num, credit_rating, 
+
+CREATE TABLE member(
+	userid VARCHAR2(20) PRIMARY KEY,
+	password VARCHAR2(20),
+	name VARCHAR2(20),
+	ssn VARCHAR2(8),
+	regidate DATE,
+	phone VARCHAR2(13),
+	email VARCHAR2(20),
+	profile VARCHAR2(8),
+	access_num VARCHAR2(8),
+	credit_rating DECIMAL,
+	addr_seq DECIMAL,
+	account_seq DECIMAL
+);

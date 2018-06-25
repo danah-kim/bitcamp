@@ -1,0 +1,20 @@
+--
+
+SELECT * FROM TAB;
+
+CREATE TABLE account(
+	account_seq DECIMAL PRIMARY KEY,
+	money DECIMAL,
+	account_num VARCHAR2(11),
+	account_type VARCHAR2(20),
+	create_date DATE,
+	limit DECIMAL
+);
+
+INSERT INTO account VALUES(
+	1, 0, '123-456-789', '일반통장', SYSDATE, 0
+);
+
+SELECT * FROM account;
+
+DROP TABLE account;

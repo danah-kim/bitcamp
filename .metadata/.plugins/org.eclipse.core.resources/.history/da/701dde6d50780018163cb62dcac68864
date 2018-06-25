@@ -1,0 +1,34 @@
+-- TAB : address
+-- addr_seq (DECIMAL, PRIMARY KEY)
+-- zipcode
+-- province 경기도
+-- city 서울시, 안양시
+-- gugun 강남구, 가평군
+-- doro 백범로 15길
+
+-- 시퀀스 생성
+CREATE SEQUENCE adr_seq START WITH 1000;
+
+-- 데이터베이스 테이블 생성
+CREATE TABLE address(
+	addr_seq DECIMAL PRIMARY KEY,
+	zip_code VARCHAR2(20),
+	province VARCHAR2(20),
+	city VARCHAR2(20),
+	gugun VARCHAR2(20),
+	doro VARCHAR2(20)
+);
+
+-- 데이터베이스 객체 생성
+INSERT INTO address
+(
+	addr_seq.nextval, zip_code, province, city, gugun, doro
+)
+VALUES
+(
+	1, '123456', '경기도', '서울시', '강남구', '백범로 15길'
+);
+
+-- 데이타베이스 조회
+SELECT * FROM address;
+
