@@ -13,8 +13,15 @@ SELECT * FROM TAB;
 -- 테이블 삭제
 DROP TABLE address;
 
+-- 전체 시퀀스 조회
+SELECT * FROM user_sequences;
+
 -- 시퀀스 생성
 CREATE SEQUENCE addr_seq START WITH 1000;
+
+-- 시퀀스 삭제
+DROP SEQUENCE addr_seq;
+
 
 -- 데이터베이스 테이블 생성
 CREATE TABLE address(

@@ -9,7 +9,7 @@ DROP TABLE member;
 
 -- 데이터베이스 테이블 생성
 CREATE TABLE member(
-	userid VARCHAR2(20) PRIMARY KEY,
+	userid VARCHAR2(20) CONSTRAINT member_pk_userid PRIMARY KEY,
 	password VARCHAR2(20),
 	name VARCHAR2(20),
 	ssn VARCHAR2(8),
@@ -23,6 +23,12 @@ CREATE TABLE member(
 	account_seq DECIMAL
 );
 
+-- 데이터베이스 테이블 변경
+ALTER TABLE member ADD CONSTRAINT address_fk_addr_seq
+	FOREIGN KEY(addr_seq) REFERENCES address(addr_seq);
+
+ALTER TABLE member ADD CONSTRAINT account_fk_account_seq 
+	FOREIGN KEY(account_seq) REFERENCES account(account_seq);
 
 -- 데이터베이스 객체 생성
 INSERT INTO member
@@ -153,3 +159,4 @@ SELECT * FROM member, account
 WHERE member.account_seq = account.account_seq
 AND member.userid = 'kim'
 ;
+
