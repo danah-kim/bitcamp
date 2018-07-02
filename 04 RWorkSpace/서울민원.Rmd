@@ -1,0 +1,75 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+dyn.load('/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/jre/lib/server/libjvm.dylib')
+
+Sys.getenv('JAVA_HOME')
+Sys.setenv(JAVA_HOME = '/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home')
+
+if("rJava" %in% installed.packages("rJava") == FALSE)install.packages("rJava")
+library(rJava)
+if("KoNLP" %in% installed.packages("KoNLP") == FALSE)install.packages("KoNLP")
+library(KoNLP)
+if("tm" %in% installed.packages("tm") == FALSE)install.packages("tm")
+library(tm)
+if("wordcloud" %in% installed.packages("wordcloud") == FALSE)install.packages("wordcloud")
+library(wordcloud)
+
+
+target <- readLines("/Volumes/Study-1/Bitcamp/실습/RWorkSpace/seoul_new.txt")
+useSejongDic()
+target <- gsub("\\d+","",target)
+target <- sapply(target, extractNoun, USE.NAMES = F)
+target<-unlist(target)
+class(target)
+target <- Filter(function(x){!nchar(x) == 1},target)
+#head(sort(target,decreasing=T),20)
+target
+
+
+getwd()
+killer <- readLines("killer.txt")
+killer
+for(i in 1:length(killer)){
+  target <- gsub(killer[i],"",target)
+}
+
+
+target
+target <- unlist(target)
+target <- Filter(function(x){!nchar(x) == 0},target)
+
+write(unlist(target),"seoul_new_result.txt")
+target <- read.table("/Users/danah/Rproject/seoul_new_result.txt")
+target <- table(target)
+target
+pal <- brewer.pal(8, "Dark2")
+wordcloud::wordcloud(names(target), 
+                     freq = target, 
+                     min.freq = 1, 
+                     max.words = 200, 
+                     random.order = F, 
+                     rot.per = .1, 
+                     scale = c(4,0.3),
+                     colors = pal,
+                     family="AppleGothic")
+
+#############################
+#Sequence
+seq <- c(1:10)
+
+# Print Loop
+for (i in seq){
+  print(i)
+}
+
+# A sum variable
+sum <- 0
+
+#Sum loop
+for(i in seq){
+  sum <- seq[i] + seq[i]
+  print(sum)
+}
+#############################
