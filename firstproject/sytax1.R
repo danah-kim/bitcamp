@@ -41,3 +41,5 @@ sum(seq(length=100,from=1,by=1))
 # sample 함수 
 ?sample
 sample(1:3,1,replace = TRUE)
+
+
