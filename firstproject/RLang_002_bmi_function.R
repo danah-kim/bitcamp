@@ -21,4 +21,4 @@ bmi <- function(height, weight){
             })
 }
 
-cat(bmi(160,60))
+bmi(160,60)

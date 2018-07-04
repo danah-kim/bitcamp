@@ -10,4 +10,4 @@ rps <- function(com,user){
     '0' = "비김"
   )))
 }
-cat(rps(sample(1:3,1,replace = TRUE),sample(1:3,1,replace = TRUE)))
+rps(sample(1:3,1,replace = TRUE),sample(1:3,1,replace = TRUE))
