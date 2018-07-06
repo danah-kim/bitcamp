@@ -5,8 +5,8 @@ import java.util.List;
 import domain.SubjectBean;
 
 public class SubjectDaoImpl implements SubjectDao{
-	private static SubjectDaoImpl instance = new SubjectDaoImpl();
-	public static SubjectDaoImpl getInstance() {return instance;}
+	private static SubjectDao instance = new SubjectDaoImpl();
+	public static SubjectDao getInstance() {return instance;}
 	private SubjectDaoImpl () {}
 	@Override
 	public void insertSubject(SubjectBean Subject) {
@@ -19,12 +19,12 @@ public class SubjectDaoImpl implements SubjectDao{
 		return null;
 	}
 	@Override
-	public List<SubjectBean> selectBySearchWord(SubjectBean word) {
+	public List<SubjectBean> selectBySearchWord(String word) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
-	public SubjectBean selectBySeq(SubjectBean id) {
+	public SubjectBean selectByID(SubjectBean id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -5,8 +5,8 @@ import java.util.List;
 import domain.MemberBean;
 
 public class MemberDaoImpl implements MemberDao{
-	private static MemberDaoImpl instance = new MemberDaoImpl ();
-	public static MemberDaoImpl getInstance() {return instance;}
+	private static MemberDao instance = new MemberDaoImpl ();
+	public static MemberDao getInstance() {return instance;}
 	private MemberDaoImpl () {}
 	@Override
 	public void insertMember(MemberBean Member) {

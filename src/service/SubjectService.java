@@ -7,8 +7,8 @@ import domain.SubjectBean;
 public interface SubjectService {
 	public void createSubject(SubjectBean subject);
 	public List<SubjectBean> subjcetList();
-	public List<SubjectBean> findByWord(SubjectBean subject);
-	public SubjectBean findBySubject(SubjectBean subject);
+	public List<SubjectBean> findByWord(String word);
+	public SubjectBean findByID(SubjectBean id);
 	public int countSubject();
 	public void modifySubject(SubjectBean subject);
 	public void removeSubject(SubjectBean subject);

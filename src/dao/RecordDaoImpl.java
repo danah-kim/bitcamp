@@ -5,8 +5,8 @@ import java.util.List;
 import domain.RecordBean;
 
 public class RecordDaoImpl implements RecordDao{
-	private static RecordDaoImpl instance = new RecordDaoImpl();
-	public static RecordDaoImpl getInstance() {return instance;}
+	private static RecordDao instance = new RecordDaoImpl();
+	public static RecordDao getInstance() {return instance;}
 	private RecordDaoImpl() {}
 	@Override
 	public void insertRecord(RecordBean Record) {
@@ -42,6 +42,11 @@ public class RecordDaoImpl implements RecordDao{
 	public void deleteRecord(RecordBean Record) {
 		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	public String selectFistRowNum() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

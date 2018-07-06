@@ -5,8 +5,8 @@ import java.util.List;
 import domain.SubjectBean;
 
 public class SubjectServiceImple implements SubjectService{
-	private static SubjectServiceImple instance = new SubjectServiceImple();
-	public static SubjectServiceImple getInstance() {return instance;}
+	private static SubjectService instance = new SubjectServiceImple();
+	public static SubjectService getInstance() {return instance;}
 	private SubjectServiceImple() {}
 	@Override
 	public void createSubject(SubjectBean subject) {
@@ -19,12 +19,12 @@ public class SubjectServiceImple implements SubjectService{
 		return null;
 	}
 	@Override
-	public List<SubjectBean> findByWord(SubjectBean subject) {
+	public List<SubjectBean> findByWord(String word) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
-	public SubjectBean findBySubject(SubjectBean subject) {
+	public SubjectBean findByID(SubjectBean id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

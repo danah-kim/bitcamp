@@ -5,8 +5,8 @@ import java.util.List;
 import domain.ProjectTeamBean;
 
 public class ProjectTeamServiceImpl implements ProjectTeamService{
-	private ProjectTeamServiceImpl instance = new ProjectTeamServiceImpl();
-	public ProjectTeamServiceImpl getInstance () {return instance;}
+	private ProjectTeamService instance = new ProjectTeamServiceImpl();
+	public ProjectTeamService getInstance () {return instance;}
 	private ProjectTeamServiceImpl() {}
 	@Override
 	public void createProjectTeam(ProjectTeamBean projectTeam) {
@@ -19,12 +19,12 @@ public class ProjectTeamServiceImpl implements ProjectTeamService{
 		return null;
 	}
 	@Override
-	public List<ProjectTeamBean> findByName(ProjectTeamBean projectTeam) {
+	public List<ProjectTeamBean> findByWord(String word) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
-	public ProjectTeamBean findByID(ProjectTeamBean projectTeam) {
+	public ProjectTeamBean findByID(ProjectTeamBean id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

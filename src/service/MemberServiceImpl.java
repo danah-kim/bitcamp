@@ -4,8 +4,8 @@ import java.util.List;
 import domain.*;
 
 public class MemberServiceImpl implements MemberService{
-	private static MemberServiceImpl instance = new MemberServiceImpl();
-	public static MemberServiceImpl getInstance() {return instance;}
+	private static MemberService instance = new MemberServiceImpl();
+	public static MemberService getInstance() {return instance;}
 	private MemberServiceImpl() {}
 	@Override
 	public void createMember(MemberBean member) {
@@ -18,12 +18,12 @@ public class MemberServiceImpl implements MemberService{
 		return null;
 	}
 	@Override
-	public List<MemberBean> findByTeam(MemberBean member) {
+	public List<MemberBean> findByWord(String word) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
-	public MemberBean findByID(MemberBean member) {
+	public MemberBean findByID(MemberBean id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

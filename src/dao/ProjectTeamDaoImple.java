@@ -5,8 +5,8 @@ import java.util.List;
 import domain.ProjectTeamBean;
 
 public class ProjectTeamDaoImple implements ProjectTeamDao{
-	private static ProjectTeamDaoImple instance = new ProjectTeamDaoImple();
-	public static ProjectTeamDaoImple getInstance () {return instance;}
+	private static ProjectTeamDao instance = new ProjectTeamDaoImple();
+	public static ProjectTeamDao getInstance () {return instance;}
 	private ProjectTeamDaoImple() {}
 	@Override
 	public void insertProjectTeam(ProjectTeamBean ProjectTeam) {

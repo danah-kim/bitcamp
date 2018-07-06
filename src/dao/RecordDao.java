@@ -12,4 +12,5 @@ public interface RecordDao {
 	public int countRecord();
 	public void updateRecord(RecordBean Record);
 	public void deleteRecord(RecordBean Record);
+	public String selectFistRowNum();
 }

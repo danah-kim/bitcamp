@@ -5,8 +5,8 @@ import java.util.List;
 import domain.RecordBean;
 
 public class RecordServiceImpl implements RecordService{
-	private static RecordServiceImpl instance = new RecordServiceImpl();
-	public static RecordServiceImpl getInstance() {return instance;}
+	private static RecordService instance = new RecordServiceImpl();
+	public static RecordService getInstance() {return instance;}
 	private RecordServiceImpl() {}
 	@Override
 	public void createRecord(RecordBean record) {
@@ -19,12 +19,12 @@ public class RecordServiceImpl implements RecordService{
 		return null;
 	}
 	@Override
-	public List<RecordBean> findByWord(RecordBean record) {
+	public List<RecordBean> findByWord(String word) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
-	public RecordBean findByRecord(RecordBean record) {
+	public RecordBean findByID(RecordBean id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

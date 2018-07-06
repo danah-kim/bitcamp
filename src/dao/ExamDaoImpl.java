@@ -5,8 +5,8 @@ import java.util.List;
 import domain.ExamBean;
 
 public class ExamDaoImpl implements ExamDao{
-	private static ExamDaoImpl instance = new ExamDaoImpl();
-	public static ExamDaoImpl getInstance() {return instance;}
+	private static ExamDao instance = new ExamDaoImpl();
+	public static ExamDao getInstance() {return instance;}
 	private ExamDaoImpl() {}
 	
 	@Override
