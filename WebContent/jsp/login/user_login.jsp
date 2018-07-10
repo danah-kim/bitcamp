@@ -10,7 +10,7 @@
 <body>
 	<div class="margin_center">
 		<h1 ">로그인</h1>
-		<form action="mypage.html" class="form_box">
+		<form action="login/mypage.jsp" class="form_box">
 			<p class="input_box_font">ID : </p>
 			<input class="input_box" type="text" name="user_id" value="">
 			<br/>

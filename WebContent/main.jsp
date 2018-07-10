@@ -1,13 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<!-- start 자바 util 불러오기 -->
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
+<!-- end 자바 util -->
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!-- start 초기화 -->
+<%!
+	int a = 4;
+	int b = 3;
+	int c = 0;
+%>
+<!-- end 초기화 -->
+<!-- start 연산 -->
+<%
+	c = a + b;
+%>
+<!-- end 연산 -->
 <!doctype html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8" />
 	<title>MYHOME</title>
-	<link rel="stylesheet" type="text/css" href="../../css/style.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 <body>
+
 	<!-- table>tr*행갯수>td*열갯수 -->
 	<table id="main_tab_layout" class="width_full margin_auto">
 		<tr id="tab_head">
@@ -16,16 +32,20 @@
 		<tr id="tab_body">
 			<td id="tab_body_left_size">
 				<p class="text_center">
-					<img id="img_size" src="../../img/home/test.jpg" alt="이미지">
+					<img id="img_size" src="img/home/test.jpg" alt="이미지">
 				</p>
 			</td>
 			<td class="text_center" >
+			<!-- ul>li*리스트개수-->
 				<ul>
 					<li>
-						<a href="user_login.html">사용자 로그인</a>
+						<a href="jsp/login/user_login.jsp">사용자 로그인</a>
 					</li>
 					<li>
-						<a href="admin_login.html">관리자 로그인</a>
+						<a href="jsp/login/admin_login.jsp">관리자 로그인</a>
+					</li>
+					<li>
+						<%= new SimpleDateFormat("yyyy년 mm월 dd일 hh시 mm분 ss초").format(new Date()) %>
 					</li>
 				</ul>
 			</td>

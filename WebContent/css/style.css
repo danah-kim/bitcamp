@@ -18,6 +18,6 @@ h1 {text-align: center}
 .form_box{border: 1px solid black; width: 300px; margin: 0 auto;}
 .input_box{font-size: 20px; background-color: yellow;}
 .input_box_font{font-size: 15px; color: orange; font-weight: bold;}
-#submit_but{font-size: 20px; background-color: red; color :white; font-weight: bold;}
+#submit_but{ font-size: 20px; background-color: red; color :white; font-weight: bold;}
 
 /* user_login */

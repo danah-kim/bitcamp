@@ -17,11 +17,11 @@
 		<tr id="tab_body_size">
 			<td id="tab_body_left_size">
 				<p class="text_center" >
-					<img id="img_size" src="../../img/home/test.jpg" alt="이미지">
+					<img id="img_size" src="img/home/test.jpg" alt="이미지">
 				</p>
 			</td>
 			<td class="text_center" >
-				<a href="../home/main.html">로그아웃</a>
+				<a href="login/main.jsp">로그아웃</a>
 			</td>
 		</tr>
 		<tr id="tab_foot_size">
