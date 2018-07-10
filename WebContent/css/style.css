@@ -1,0 +1,23 @@
+table, tr, td {
+			border: 1px solid black;
+			border-collapse: collapse;
+		}
+.width_full{width: 100%; height: 1200px}
+.margin_auto{margin: 0 auto}
+.text_center{text-align: center}
+#tab_head{height: 20%}
+#tab_head_text{font-size: 100px; color:red; font-weight: bold;}
+#tab_body{height: 70%}
+#tab_body_left_size{width: 80%}
+#tab_foot{background-color: highlight; height: 10%; font-size: 15px;}
+#img_size{width: 100%}
+/*-- main & mypage --*/
+
+h1 {text-align: center}
+.margin_center{margin: 0 auto;}
+.form_box{border: 1px solid black; width: 300px; margin: 0 auto;}
+.input_box{font-size: 20px; background-color: yellow;}
+.input_box_font{font-size: 15px; color: orange; font-weight: bold;}
+#submit_but{font-size: 20px; background-color: red; color :white; font-weight: bold;}
+
+/* user_login */
