@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -9,10 +8,10 @@
 </head>
 <body>
 	<div class="margin_center">
-		<h1 ">로그인</h1>
-		<form action="login/mypage.jsp" class="form_box">
+		<h1>로그인</h1>
+		<form action="user_login_result.jsp" class="form_box">
 			<p class="input_box_font">ID : </p>
-			<input class="input_box" type="text" name="user_id" value="">
+			<input class="input_box" type="text" name="user_id">
 			<br/>
 			<p class="input_box_font">PW : </p>
 			<input class="input_box" type="text" name="user_pw">

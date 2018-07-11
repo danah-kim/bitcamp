@@ -39,7 +39,7 @@
 			<!-- ul>li*리스트개수-->
 				<ul>
 					<li>
-						<a href="jsp/login/user_login.jsp">사용자 로그인</a>
+						<a href="jsp/login/user_login_form.jsp">사용자 로그인</a>
 					</li>
 					<li>
 						<a href="jsp/login/admin_login.jsp">관리자 로그인</a>
