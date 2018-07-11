@@ -18,12 +18,12 @@
 	m = MemberServiceImpl.getInstance().login(m);
 	if(m!=null){
 		%>
-		<%= m %>
+		로그인 성공
 		<%
 	}else{
-		%>
-		일치하는 아이디나 비밀번호가 없습니다.
-		<%
+		 %>
+		 로그인 실패
+		 <%
 	}
 %>
 
