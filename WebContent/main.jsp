@@ -45,7 +45,7 @@
 						<a href="jsp/login/admin_login.jsp">관리자 로그인</a>
 					</li>
 					<li>
-						<%= new SimpleDateFormat("yyyy년 mm월 dd일 hh시 mm분 ss초").format(new Date()) %>
+						<a href="jsp/join/join_form.jsp">회원가입</a>
 					</li>
 				</ul>
 			</td>

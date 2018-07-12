@@ -7,7 +7,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8" />
-	<title>Document</title>
+	<title>로그인 결과 화면</title>
 </head>
 <body>
 
