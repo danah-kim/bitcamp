@@ -10,6 +10,7 @@ public class MemberServiceImpl implements MemberService{
 	private MemberServiceImpl() {}
 	@Override
 	public void createMember(MemberBean member) {
+		findByID(member);
 		member.setAge(createAge(member));
 		MemberDaoImpl.getInstance().insertMember(member);
 	}

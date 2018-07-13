@@ -3,11 +3,12 @@ package dao;
 import java.sql.*;
 import java.util.*;
 import domain.*;
+import enums.DBConstant;
+import enums.MemberQuery;
 import enums.Vendor;
 import factory.DataBaseFactory;
 import factory.Database;
-import factory.Oracle;
-import pool.DBConstant;;
+import factory.Oracle;;
 
 public class MemberDaoImpl implements MemberDao{
 	private static MemberDao instance = new MemberDaoImpl ();
@@ -17,39 +18,17 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public void insertMember(MemberBean member) {
 		try {
-			ResultSet rs = DataBaseFactory.createDataBase(Vendor.ORACLE, DBConstant.USERNAME, DBConstant.PASSWORD)
+			int rs = DataBaseFactory.createDataBase(Vendor.ORACLE, DBConstant.USERNAME.toString(), DBConstant.PASSWORD.toString())
 					.getConnection()
 					.createStatement()
-					.executeQuery(String.format("INSERT INTO MEMBER VALUES('"
-					+ member.getMemId()
-					+ "', '"
-					+ member.getTeamId()
-					+ "', '"
-					+ member.getName()
-					+ "', '"
-					+ member.getAge()
-					+ "', '"
-					+ member.getRoll()
-					+ "', '"
-					+ member.getPassWord()
-					+ "', '"
-					+ member.getSsn()
-					+ "')"));
-			System.out.println(String.format("INSERT INTO MEMBER VALUES('"
-					+ member.getMemId()
-					+ "', '"
-					+ member.getTeamId()
-					+ "', '"
-					+ member.getName()
-					+ "', '"
-					+ member.getAge()
-					+ "', '"
-					+ member.getRoll()
-					+ "', '"
-					+ member.getPassWord()
-					+ "', '"
-					+ member.getSsn()
-					+ "')"));
+					.executeUpdate(String.format(MemberQuery.INSERT_MEMBER.toString(),
+							member.getMemId(), member.getPassWord(), member.getName(), member.getSsn(),member.getAge()));
+			/*ResultSet rs = DataBaseFactory
+					.createDataBase(Vendor.ORACLE, DBConstant.USERNAME.toString(), DBConstant.PASSWORD.toString())
+					.getConnection()
+					.createStatement()
+					.executeQuery(String.format(MemberQuery.INSERT_MEMBER.toString(),
+							member.getMemId(), member.getPassWord(), member.getName(), member.getSsn(),member.getAge()));*/
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -58,16 +37,16 @@ public class MemberDaoImpl implements MemberDao{
 	public List<MemberBean> selectAllMember() {
 		List<MemberBean> list = null;
 		try {
-			ResultSet rs = DataBaseFactory.createDataBase(Vendor.ORACLE, DBConstant.USERNAME, DBConstant.PASSWORD)
+			ResultSet rs = DataBaseFactory.createDataBase(Vendor.ORACLE, DBConstant.USERNAME.toString(), DBConstant.PASSWORD.toString())
 					.getConnection()
 					.createStatement()
-					.executeQuery(String.format("SELECT * FROM MEMBER"));
+					.executeQuery(String.format(MemberQuery.SELECTALLMEMBER.toString()));
 			int i = 0;
 			while(rs.next()) {
 				list.get(i);
 				i++;
 			}
-			}
+		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -79,9 +58,16 @@ public class MemberDaoImpl implements MemberDao{
 		return null;
 	}
 	@Override
-	public MemberBean selectBySeq(MemberBean id) {
-		// TODO Auto-generated method stub
-		return null;
+	public MemberBean selectById(MemberBean id) {
+		try {
+			ResultSet re = DataBaseFactory.createDataBase(Vendor.ORACLE, DBConstant.USERNAME.toString(), DBConstant.PASSWORD.toString())
+					.getConnection()
+					.createStatement()
+					.executeQuery("sql");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return id;
 	}
 	@Override
 	public int countMember() {
@@ -101,17 +87,14 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public MemberBean login(MemberBean bean) {
 		try {
-			ResultSet rs = DataBaseFactory.createDataBase(Vendor.ORACLE, DBConstant.USERNAME, DBConstant.PASSWORD)
+			ResultSet rs = DataBaseFactory.createDataBase(Vendor.ORACLE, DBConstant.USERNAME.toString(), DBConstant.PASSWORD.toString())
 					.getConnection()
 					.createStatement()
-					.executeQuery(String.format(
-							"SELECT * "
-									 + "FROM MEMBER "
-									 + "WHERE MEM_ID LIKE '"
-									 + bean.getMemId()
-									 + "' AND PASSWORD LIKE '"
-									 + bean.getPassWord()
-									 + "'"));
+					.executeQuery(
+							String.format(
+									MemberQuery.LOGIN.toString(),
+									bean.getMemId(),
+									bean.getPassWord()));
 			if(rs.next()) {
 			do{
 				bean.setTeamId(rs.getString("TEAM_ID"));

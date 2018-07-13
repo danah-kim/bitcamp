@@ -17,6 +17,9 @@
 	m.setTeamId("");
 	MemberServiceImpl.getInstance().createMember(m);
 	%>
-	<%= m %>
+	<h3>가입완료</h3>
+	<form action="../login/user_login_form.jsp" class="form_box">
+		<button type="submit" >로그인 하기</button>
+	</form>
 </body>
 </html>

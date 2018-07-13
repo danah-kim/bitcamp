@@ -25,9 +25,9 @@
 <body>
 
 	<!-- table>tr*행갯수>td*열갯수 -->
-	<table id="main_tab_layout" class="width_full margin_auto">
+	<table id="main_tab_layout" class="width_full; margin_auto">
 		<tr id="tab_head">
-			<td colspan="2" class="text_center" id="tab_head_text">GMS</td>
+			<td colspan="2" class="text_center" id="tab_head_text" >GMS</td>
 		</tr>
 		<tr id="tab_body">
 			<td id="tab_body_left_size">

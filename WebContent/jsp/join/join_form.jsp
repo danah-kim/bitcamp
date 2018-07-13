@@ -1,3 +1,4 @@
+<%@page import="service.MemberServiceImpl"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- 
 memId, name, passWord, ssn
@@ -13,7 +14,14 @@ memId, name, passWord, ssn
 	<div class="margin_center">
 		<form action="join_result.jsp" class="form_box">
 			<h1>회원가입</h1>
-			<p> 아이디 : <input type="text" name="join_id"></p>
+			<p> 아이디 : <input type="text" name="join_id">
+				<%-- <button type="button"
+				<%if(MemberServiceImpl.getInstance().findByID(id)){
+					%>onclick="alert('사용가능한 아이디 입니다.')"<%
+					}else{
+						
+					}%>
+				onclick="alert('사용불가능한 아이디 입니다.')">중복확인</button> --%></p>
 			<p> 비밀번호 : <input type="text" name="join_pw"></p>
 			<p> 이름 : <input type="text" name="join_name"></p>
 <!-- 			<p> 팀 : <select name="join_team">
