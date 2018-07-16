@@ -1,0 +1,384 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"double",
+				"double"
+			],
+			[
+				"public",
+				"Public"
+			],
+			[
+				"de",
+				"default"
+			],
+			[
+				"Pa",
+				"Paper"
+			],
+			[
+				"d",
+				"double"
+			],
+			[
+				"Insa",
+				"Insapartner_styles"
+			],
+			[
+				"font",
+				"font_awesome"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 136.0,
+		"history":
+		[
+			"import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/W/html/wp-admin/includes/class-wp-post-comments-list-table.php",
+		"/W/html/wp-admin/admin-functions.php",
+		"/W/html/wp-admin/post.php",
+		"/X/05 WEB/테마/canonnam/canonnam.html",
+		"/W/html/wp-admin/user/index.php",
+		"/C/Users/Danah.Kim/Desktop/GradeReport.java",
+		"/C/Users/Danah.Kim/Downloads/AdminService.class",
+		"/C/Users/Danah.Kim/Desktop/workspace/BankCollectionArray/src/controller/AccountController.java",
+		"/C/Users/Danah.Kim/JavaStandardEdition/branchDemo/Calc04.java",
+		"/C/Users/Danah.Kim/JavaStandardEdition/branchDemo/GradeReport01.java",
+		"/C/Users/Danah.Kim/JavaStandardEdition/branchDemo/RPSGame.java",
+		"/C/Users/Danah.Kim/JavaStandardEdition/branchDemo/WhileDemo2.java",
+		"/C/Users/Danah.Kim/JavaStandardEdition/branchDemo/HowMuch.java",
+		"/C/Users/Danah.Kim/JavaStandardEdition/branchDemo/MonthEndday01.java",
+		"/C/Users/Danah.Kim/JavaStandardEdition/branchDemo/LeapYear01.java",
+		"/C/Users/Danah.Kim/JavaStandardEdition/branchDemo/CheckGender01.java",
+		"/C/Users/Danah.Kim/JavaStandardEdition/branchDemo/Bmi01.java",
+		"/C/Users/Danah.Kim/JavaStandardEdition/branchDemo/InfiniteLoop.java",
+		"/C/Users/Danah.Kim/JavaStandardEdition/branchDemo/LeapYear.java",
+		"/C/Users/Danah.Kim/JavaStandardEdition/branchDemo/MonthEndday.java",
+		"/C/Users/Danah.Kim/JavaStandardEdition/branchDemo/CheckGender.java",
+		"/C/Users/Danah.Kim/JavaStandardEdition/branchDemo/Bmi.java",
+		"/C/Users/Danah.Kim/JavaStandardEdition/branchDemo/WhileDome.java",
+		"/C/Users/Danah.Kim/JavaStandardEdition/branchDemo/BMI.java",
+		"/C/Users/Danah.Kim/JavaStandardEdition/GradeReport.java",
+		"/C/Users/Danah.Kim/JavaStandardEdition/GradeReport01.java",
+		"/C/Users/Danah.Kim/JavaStandardEdition/HowMuch.java",
+		"/C/Users/Danah.Kim/Desktop/JAVA/RPSGame.java",
+		"/C/Users/Danah.Kim/Desktop/JAVA/Calc04.java",
+		"/C/Users/Danah.Kim/Desktop/JAVA/HowMuch.java",
+		"/C/Users/Danah.Kim/Desktop/JAVA/Calc.java",
+		"/E/실습/calc04.java",
+		"/E/실습/Calc03.java",
+		"/E/실습/Calc02.java",
+		"/C/Users/Danah.Kim/Desktop/JAVA/Test0528_02.java",
+		"/C/Users/Danah.Kim/Desktop/JAVA/Calc03.java",
+		"/C/Users/Danah.Kim/Desktop/JAVA/Calc01.java",
+		"/C/Users/Danah.Kim/Desktop/JAVA/public class Test0528_02.java",
+		"/C/Users/Danah.Kim/Desktop/JAVA/HelloWorld.java",
+		"/W/html/wp-content/themes/Insapartner/functions.php",
+		"/W/html/wp-content/themes/Insapartner/style.css",
+		"/X/05 WEB/테마/canonnam/style.css",
+		"/X/05 WEB/테마/canonnam/index.php",
+		"/C/Users/Danah.Kim/Desktop/JAVA/Test.java",
+		"/C/Users/Danah.Kim/AppData/Roaming/Sublime Text 3/Packages/User/JavaC.sublime-build",
+		"/C/Users/Danah.Kim/AppData/Roaming/Sublime Text 3/Packages/User/Java.sublime-build",
+		"/C/Users/Danah.Kim/AppData/Roaming/Sublime Text 3/Packages/User/untitled.sublime-build",
+		"/C/Users/Danah.Kim/Desktop/JAVA/Test.class",
+		"/W/html/wp-content/themes/themotion-lite/inc/customizer-category-selector/class-themotion-category-selector.php",
+		"/C/Users/Danah.Kim/AppData/Local/Temp/fz3temp-2/functions.php",
+		"/C/Users/Danah.Kim/AppData/Local/Temp/fz3temp-2/header.php",
+		"/C/Users/Danah.Kim/AppData/Local/Temp/fz3temp-2/nav-inb.php",
+		"/C/Users/Danah.Kim/AppData/Local/Temp/fz3temp-2/footer.php",
+		"/C/Users/Danah.Kim/AppData/Local/Temp/fz3temp-2/nav_gnb.php",
+		"/C/Users/Danah.Kim/AppData/Local/Temp/fz3temp-2/nav_inb.php",
+		"/C/Users/Danah.Kim/AppData/Local/Temp/fz3temp-2/style.css",
+		"/C/Users/Danah.Kim/AppData/Local/Temp/fz3temp-2/ico_util.png",
+		"/W/html/wp-content/themes/twentyseventeen/functions.php",
+		"/C/Users/Danah.Kim/AppData/Local/Temp/fz3temp-2/fontawesome.css",
+		"/C/Users/Danah.Kim/AppData/Local/Temp/fz3temp-2/fontawesome.min.css",
+		"/C/Users/Danah.Kim/AppData/Local/Temp/fz3temp-2/404.php",
+		"/C/Users/Danah.Kim/AppData/Local/Temp/fz3temp-2/index.php",
+		"/W/html/wp-content/themes/twentyseventeen/template-parts/header/site-branding.php",
+		"/W/html/wp-content/themes/twentyseventeen/header.php",
+		"/W/html/wp-content/themes/themotion-lite/functions.php",
+		"/W/html/wp-content/themes/themotion-lite/index.php",
+		"/W/html/wp-content/themes/twentyseventeen/index.php",
+		"/W/html/wp-content/themes/themotion-lite/404.php",
+		"/W/html/wp-content/themes/twentyseventeen/404.php",
+		"/W/html/wp-content/languages/themes/themotion-lite-ko_KR.mo",
+		"/X/05 WEB/테마/twentyseventeen/functions.php",
+		"/X/05 WEB/테마/twentyseventeen/index.php",
+		"/X/05 WEB/테마/twentyseventeen/template-parts/header/site-branding.php",
+		"/X/05 WEB/테마/twentyseventeen/header.php",
+		"/X/05 WEB/테마/canonnam/style1.css",
+		"/W/html/wp-content/themes/themotion-lite/style.css",
+		"/X/05 WEB/테마/canonnam/home/1849",
+		"/X/05 WEB/테마/canonnam/resource/common/css/interface.css",
+		"/X/05 WEB/테마/canonnam/resource/common/css/bootstrap.min.css",
+		"/X/05 WEB/테마/canonnam/resource/common/css/bootstrap-theme.min.css",
+		"/X/05 WEB/테마/canonnam/html.html",
+		"/X/05 WEB/테마/canonnam/resource/common/css/font-awesome.min.css",
+		"/X/05 WEB/테마/Insapartner(제작중)/404.php",
+		"/X/05 WEB/테마/Insapartner(제작중)/archive.php",
+		"/W/html/wp-content/themes/Insapartner/header.php",
+		"/X/05 WEB/테마/canonnam/resource/official/common/css/bbs.css",
+		"/W/html/wp-content/themes/Insapartner/index.php",
+		"/X/05 WEB/테마/canonnam/resource/official/common/css/interface.css",
+		"/X/05 WEB/테마/canonnam/resource/official/common/css/official_comment.css",
+		"/X/05 WEB/테마/canonnam/resource/official/common/css/skin.css",
+		"/X/05 WEB/테마/canonnam/resource/official/common/js/bbs.js",
+		"/X/05 WEB/테마/canonnam/resource/official/common/js/common_v0.1.2.js",
+		"/X/05 WEB/테마/twentyseventeen/style.css",
+		"/X/05 WEB/테마/twentyseventeen/template-parts/page/content-front-page-panels.php",
+		"/X/05 WEB/테마/twentyseventeen/template-parts/page/content-front-page.php",
+		"/X/05 WEB/테마/twentyseventeen/template-parts/header/header-image.php",
+		"/X/05 WEB/테마/twentyseventeen/template-parts/navigation/navigation-top.php",
+		"/W/html/wp-content/themes/themotion-lite/header.php",
+		"/W/html/wp-content/themes/themotion-lite/header-main-function.php",
+		"/X/05 웹기획/테마/Insapartner(제작중)/index.php",
+		"/X/05 웹기획/테마/twentyseventeen/index.php",
+		"/X/05 웹기획/테마/canonnam/resource/official/common/css/bbs.css",
+		"/X/05 웹기획/테마/canonnam/resource/official/common/css/interface.css",
+		"/X/05 웹기획/테마/canonnam/home/1849",
+		"/X/05 웹기획/테마/canonnam/index.php",
+		"/W/html/wp-content/themes/Insapartner/page.php",
+		"/X/05 웹기획/테마/canonnam/resource/common/css/pages.css",
+		"/X/05 웹기획/테마/themotion-lite/style.css",
+		"/X/05 웹기획/테마/Insapartner/style.css",
+		"/X/05 웹기획/테마/Insapartner/header.php",
+		"/X/05 웹기획/테마/Insapartner/index.php",
+		"/X/05 웹기획/테마/themotion-lite/header.php",
+		"/X/05 웹기획/테마/canonnam/home/bbs_qna",
+		"/W/html/wp-admin/admin.php",
+		"/W/html/wp-admin/user/admin.php",
+		"/C/Users/Danah.Kim/Desktop/Canonnam/bbs_qna",
+		"/W/html/wp-content/plugins/coming-soon/coming-soon.php",
+		"/W/html/wp-content/plugins/korea-sns/uninstall.php",
+		"/W/html/wp-content/plugins/korea-sns/korea_sns.php",
+		"/W/html/wp-content/plugins/korea-sns/index.php",
+		"/W/html/wp-content/index.php",
+		"/W/html/index.php",
+		"/X/05 웹기획/테마/themotion-lite/header-main-function.php",
+		"/X/05 웹기획/테마/themotion-lite/index.php",
+		"/X/05 웹기획/테마/themotion-lite/searchform.php",
+		"/X/05 웹기획/테마/Insapartner/functions.php",
+		"/X/05 웹기획/테마/themotion-lite/functions.php",
+		"/W/html/wp-mail.php"
+	],
+	"find":
+	{
+		"height": 27.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"sum",
+			"show",
+			"else if",
+			"palyer",
+			"if else",
+			"heightHeader",
+			"wrap",
+			"heightHeader",
+			"nav",
+			"uti",
+			"nav",
+			"toggle",
+			"navbar-toggle",
+			"btn",
+			"nav",
+			"gnb",
+			"uti",
+			"gnb",
+			"nav",
+			"boot",
+			"min",
+			"regi",
+			"logo",
+			"ins",
+			"insa",
+			"uri",
+			"awe",
+			"404",
+			"font",
+			"css",
+			"footer",
+			"container",
+			"conta",
+			"heightHeader skipMotion",
+			"heightHeader skipMotion _menu_bg_color_bgcolor",
+			"image",
+			"nav-",
+			"navbar",
+			"gnb",
+			"font",
+			"impor",
+			"fonta",
+			"font",
+			"asset"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"case",
+			"player",
+			"else if",
+			"btn",
+			"Ins",
+			"nav_",
+			"nav"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/User/Java.sublime-build",
+	"project": ".project.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 188.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

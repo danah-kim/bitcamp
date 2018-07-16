@@ -15,6 +15,7 @@
 	m.setName(request.getParameter("join_name"));
 	m.setSsn(request.getParameter("join_birth")+request.getParameter("join_gender"));
 	m.setTeamId("");
+	m.setRoll("");
 	MemberServiceImpl.getInstance().createMember(m);
 	%>
 	<h3>가입완료</h3>

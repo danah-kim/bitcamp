@@ -14,4 +14,5 @@ public interface MemberService {
 	public void removeMember(MemberBean member);
 	public MemberBean login(MemberBean member);
 	public String createAge(MemberBean member);
+	public boolean iDDualCheck(String id);
 }

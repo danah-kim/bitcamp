@@ -1,5 +1,6 @@
 package service;
 
+
 import java.util.List;
 import dao.MemberDaoImpl;
 import domain.*;
@@ -10,39 +11,32 @@ public class MemberServiceImpl implements MemberService{
 	private MemberServiceImpl() {}
 	@Override
 	public void createMember(MemberBean member) {
-		findByID(member);
 		member.setAge(createAge(member));
 		MemberDaoImpl.getInstance().insertMember(member);
 	}
 	@Override
 	public List<MemberBean> memberList() {
-		// TODO Auto-generated method stub
-		return null;
+		return MemberDaoImpl.getInstance().selectAllMember();
 	}
 	@Override
 	public List<MemberBean> findByWord(String word) {
-		// TODO Auto-generated method stub
-		return null;
+		return MemberDaoImpl.getInstance().selectBySearchWord(word);
 	}
 	@Override
 	public MemberBean findByID(MemberBean id) {
-		// TODO Auto-generated method stub
-		return null;
+		return MemberDaoImpl.getInstance().selectById(id);
 	}
 	@Override
 	public int countMember() {
-		// TODO Auto-generated method stub
-		return 0;
+		return MemberDaoImpl.getInstance().countMember();
 	}
 	@Override
 	public void modifyMember(MemberBean member) {
-		// TODO Auto-generated method stub
-		
+		MemberDaoImpl.getInstance().updateMember(member);
 	}
 	@Override
 	public void removeMember(MemberBean member) {
-		// TODO Auto-generated method stub
-		
+		MemberDaoImpl.getInstance().deleteMember(member);
 	}
 	@Override
 	public MemberBean login(MemberBean member) {
@@ -53,6 +47,10 @@ public class MemberServiceImpl implements MemberService{
 		String year = "19"+member.getSsn().split("-")[0].substring(0, 2);
 		int result = 2018 - Integer.parseInt(year) + 1 ;
 		return String.valueOf(result);
+	}
+	@Override
+	public boolean iDDualCheck(String id) {
+		return MemberDaoImpl.getInstance().iDDualCheck(id);
 	}
 
 }
