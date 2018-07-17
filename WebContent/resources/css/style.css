@@ -1,0 +1,26 @@
+/*-- Start common style--*/
+.text_center {text-align: center;}
+/*-- End style--*/
+
+/*-- start main & main page --*/
+#main_tab_layout, #main_tab_head_size, #main_tab_body, #main_tab_body_left_size, #main_tab_foot{border: 1px solid black; border-collapse: collapse;}
+#main_tab_layout {width: 1100px; height: 800px; margin: 0 auto;}
+#main_tab_head_size {height: 20%;}
+#main_tab_head_text {font-size: 50px; color: #35C5F0; font-weight: bold;}
+#main_tab_body {height: 70%;}
+#main_tab_body_left_size {width: 80%}
+#main_tab_foot {background-color: #fafafa; height: 10%;}
+.footer_address_item{font-size: 10px; font-weight: bold;}
+#main_img_size {width: 100%;}
+/*-- end main & main page --*/
+
+/* end user_login */
+h1 {text-align: center;}
+.margin_center {margin: 0 auto;}
+.login_form_box, .join_form_box {border: 1px solid black; width: 300px; margin: 0 auto;}
+.login_input_box {font-size: 20px; background-color: yellow;}
+.login_input_box_font {font-size: 15px; color: orange; font-weight: bold;}
+#submit_but {font-size: 20px; background-color: red; color : white; font-weight: bold;}
+
+/* end user_login */
+
