@@ -40,7 +40,7 @@
 		</tr><%}%>
 	</table>
 	<br />
-	<form action="../../main.jsp" class="form_box">
+	<form action="../../../../index.jsp" class="form_box">
 		<button type="submit" >메인화면으로</button>
 	</form>
 </body>

@@ -11,7 +11,6 @@ public class MemberServiceImpl implements MemberService{
 	private MemberServiceImpl() {}
 	@Override
 	public void createMember(MemberBean member) {
-		member.setAge(createAge(member));
 		MemberDaoImpl.getInstance().insertMember(member);
 	}
 	@Override
@@ -41,12 +40,6 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public MemberBean login(MemberBean member) {
 		return MemberDaoImpl.getInstance().login(member);
-	}
-	@Override
-	public String createAge(MemberBean member) {
-		String year = "19"+member.getSsn().split("-")[0].substring(0, 2);
-		int result = 2018 - Integer.parseInt(year) + 1 ;
-		return String.valueOf(result);
 	}
 	@Override
 	public boolean iDDualCheck(String id) {

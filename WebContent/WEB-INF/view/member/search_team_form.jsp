@@ -9,7 +9,7 @@
 	<title>팀이름으로 검색</title>
 </head>
 <body>
-	<form action="<%= ctx %>/member/search_team_result.do">
+	<form action="<%= ctx %>/member.do">
 		<p>팀이름으로 검색 : 
 			<select name="search_team_id">
 				<option value="ATEAM">Ateam</option>
@@ -17,6 +17,8 @@
 				<option value="CTEAM">Cteam</option>
 				<option value="STEAM">Steam</option>
 			</select>
+			<input type="hidden" name="action" value="searchMemberByTeam"/>
+			<input type="hidden" name="page" value="search_team_result"/>
 			<input type="submit" value="검색"/>
 		</p>
 	</form>

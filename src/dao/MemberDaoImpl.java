@@ -15,6 +15,7 @@ public class MemberDaoImpl implements MemberDao{
 	}
 	@Override
 	public void insertMember(MemberBean member) {
+		member.setAge(String.valueOf(2018 - Integer.parseInt("19"+member.getSsn().split("-")[0].substring(0, 2)) + 1));
 		try {
 			int rs = DataBaseFactory.createDataBase(Vendor.ORACLE, DBConstant.USERNAME.toString(), DBConstant.PASSWORD.toString())
 					.getConnection()
@@ -130,14 +131,23 @@ public class MemberDaoImpl implements MemberDao{
 	}
 	@Override
 	public void updateMember(MemberBean member) {
-		try {
-			int rs = DataBaseFactory.createDataBase(Vendor.ORACLE, DBConstant.USERNAME.toString(), DBConstant.PASSWORD.toString())
-					.getConnection()
-					.createStatement()
-					.executeUpdate(String.format(MemberQuery.UPDATE_MEMBER.toString(),
-							member.getPassWord(),
-							member.getMemId()));
-		} catch (Exception e) {
+		String oldPass = member.getPassWord().split("/")[0];
+		String newPass = member.getPassWord().split("/")[1];
+		member = selectById(member);
+		if(oldPass.equals(member.getPassWord())) {
+			member.setPassWord(newPass);
+			try {
+				int rs = DataBaseFactory.createDataBase(Vendor.ORACLE, DBConstant.USERNAME.toString(), DBConstant.PASSWORD.toString())
+						.getConnection()
+						.createStatement()
+						.executeUpdate(String.format(MemberQuery.UPDATE_MEMBER.toString(),
+								member.getPassWord(),
+								member.getMemId()));
+			} catch (Exception e) {
+			}
+		}
+		else {
+			member = null;
 		}
 	}
 	@Override
@@ -148,6 +158,7 @@ public class MemberDaoImpl implements MemberDao{
 					.createStatement()
 					.executeUpdate(String.format(MemberQuery.DELETE_MEMBER.toString(),
 							member.getMemId()));
+			System.out.println(rs);
 		} catch (Exception e) {
 		}
 		

@@ -9,9 +9,11 @@
 	<title>아이디로 검색</title>
 </head>
 <body>
-	<form action="<%= ctx %>/member/search_id_result.do">
+	<form action="<%= ctx %>/member.do">
 		<p>이름 : 
 			<input type="text" name="search_id"/>
+			<input type="hidden" name="action" value="searchMemberById"/>
+			<input type="hidden" name="page" value="search_id_result"/>
 			<input type="submit" value="검색"/>
 		</p>
 	</form>

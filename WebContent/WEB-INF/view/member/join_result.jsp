@@ -22,7 +22,9 @@
 	MemberServiceImpl.getInstance().createMember(m);
 	%>
 	<h3>가입완료</h3>
-	<form action="<%= ctx %>member/user_login_form.do" class="form_box">
+	<form action="<%= ctx %>/member.do" class="form_box">
+		<input type="hidden" name="action" value="join"/>
+		<input type="hidden" name="page" value="user_login_form"/>
 		<button type="submit" >로그인 하기</button>
 	</form>
 </body>

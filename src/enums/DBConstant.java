@@ -50,6 +50,8 @@ public enum DBConstant{
 		case PASSWORD :
 			db = "1234";
 			break;
+		default :
+			break;
 		}
 		return db;
 	}

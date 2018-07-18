@@ -15,7 +15,7 @@ memId, name, passWord, ssn
 </head>
 <body>
 	<div>
-		<form class="join_form_box" action="<%= ctx %>member/join_result.do">
+		<form class="join_form_box" action="<%= ctx %>/member.do">
 		<h1>회원가입</h1>
 		<table id="join_table">
 			<tr>
@@ -62,12 +62,8 @@ memId, name, passWord, ssn
 				</td>
 			</tr>
 		</table>
-<!-- 			<p> 팀 : <select name="join_team">
-						<option value="ATEAM">Ateam</option>
-						<option value="HTEAM">Hteam</option>
-						<option value="CTEAM">Ceam</option>
-						<option value="STEAM">Steam</option>
-				   </select></p> -->
+			<input type="hidden" name="action" value="join"/>
+			<input type="hidden" name="page" value="join_result"/>		
 			<input type="submit" onclick="alert('환영합니다!')" value="가입하기">
 			<p></p>
 		</form>

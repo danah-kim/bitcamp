@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+String ctx = application.getContextPath();
+%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,7 +11,7 @@
 </head>
 <body>
 	<h3>회원 탈퇴</h3>
-	<form action="delete_result.jsp">
+	<form action="<%= ctx %>/member.do">
 	<table>
 		<tr>
 			<td>아이디</td>
@@ -22,14 +25,10 @@
 				<input type="text" name="delete_password"/>
 			</td>
 		</tr>
-		<tr>
-			<td>비밀번호 확인</td>
-			<td>
-				<input type="text" name="delete_check_password"/>
-			</td>
-		</tr>
 	</table>
 	<br />
+	<input type="hidden" name="action" value="memberDelete"/>
+	<input type="hidden" name="page" value="delete_result"/>
 	<input type="submit" value="회원탈퇴"/>
 	</form>
 </body>

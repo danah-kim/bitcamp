@@ -23,18 +23,20 @@
 	if(m!=null){
 		%>
 		<h3>로그인 성공</h3>
-		<ul>
-			<li>
-				<a href="<%= ctx %>/member/update_form.do">비밀번호 변경</a>
-			</li>
-			<li>
-				<a href="<%= ctx %>/member/delete_form.do">회원탈퇴</a>
-			</li>
-		</ul>
+			<form action="<%= ctx %>/member.do" class="form_box">
+				<input type="hidden" name="action" value="move"/>
+				<input type="hidden" name="page" value="mypage"/>
+				<button type="submit" >메인화면으로</button>
+			</form>
 		<%
 	}else{
 		 %>
 		 <h3>로그인 실패</h3>
+		 <form action="<%= ctx %>/member.do" class="form_box">
+		 	<input type="hidden" name="action" value="move"/>
+		 	<input type="hidden" name="page" value="user_login_form" />
+			<button type="submit" >이전화면으로</button>
+		</form>
 		 <%
 	}
 %>

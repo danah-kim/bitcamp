@@ -1,6 +1,6 @@
 <!-- start 자바 servlet 불러오기 -->
 <%
-	/* 어플리케이션 경로명, ctx를 입력하면 해당 경로로 가라는 메소드 */
+	/* 웹 어플리케이션이 실행되는 서버의 설정 정보, ctx를 입력하면 프로젝트의 서버 경로를 입력 */
 	String ctx = application.getContextPath();
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -26,26 +26,26 @@
 					</p>
 				</td>
 				<td class="text_center" >
-				<!-- ul>li*리스트개수-->
 					<ul>
 						<li>
 							<!-- 주소창에 표시될 값을 입력 -->
-							<a href="<%=ctx%>/member/user_login_form.do">사용자 로그인</a>
+							<a href="<%=ctx%>/member.do?action=move&page=user_login_form">사용자 로그인</a>
+							<%-- <%= System.out.printf(ctx) %> --%>
 						</li>
 						<li>
-							<a href="<%=ctx%>/member/admin_login.do">관리자 로그인</a>
+							<a href="<%=ctx%>/admin.do?action=move&page=admin_login">관리자 로그인</a>
 						</li>
 						<li>
-							<a href="<%=ctx%>/member/join_form.do">회원가입</a>
+							<a href="<%=ctx%>/member.do?action=move&page=join_form">회원가입</a>
 						</li>
 						<li>
-							<a href="<%=ctx%>/member/member_list.do">회원목록</a>
+							<a href="<%=ctx%>/member.do?action=memberList&page=member_list">회원목록</a>
 						</li>
 						<li>
-							<a href="<%=ctx%>/member/search_team_form.do">팀이름으로 검색</a>
+							<a href="<%=ctx%>/member.do?action=move&page=search_team_form">팀이름으로 검색</a>
 						</li>
 						<li>
-							<a href="<%=ctx%>/member/search_id_form.do">아이디로 검색</a>
+							<a href="<%=ctx%>/member.do?action=move&page=search_id_form">아이디로 검색</a>
 						</li>
 					</ul>
 				</td>
