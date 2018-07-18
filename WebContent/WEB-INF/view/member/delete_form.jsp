@@ -27,9 +27,9 @@ String ctx = application.getContextPath();
 		</tr>
 	</table>
 	<br />
-	<input type="hidden" name="action" value="memberDelete"/>
-	<input type="hidden" name="page" value="delete_result"/>
-	<input type="submit" value="회원탈퇴"/>
+	<input type="hidden" name="action" value="delete"/>
+	<input type="hidden" name="page" value=""/>
+	<input type="submit" onclick="alert('탈퇴완료!')" value="회원탈퇴"/>
 	</form>
 </body>
 </html>

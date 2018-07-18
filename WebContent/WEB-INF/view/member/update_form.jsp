@@ -33,9 +33,9 @@
 		</tr>
 	</table>
 	<br />
-	<input type="hidden" name="action" value="memberUpdate"/>
-	<input type="hidden" name="page" value="update_result"/>
-	<input type="submit" value="비밀번호 변경"/>
+	<input type="hidden" name="action" value="update"/>
+	<input type="hidden" name="page" value="mypage"/>
+	<input type="submit" onclick="alert('변경완료!')" value="비밀번호 변경"/>
 	</form>
 </body>
 </html>

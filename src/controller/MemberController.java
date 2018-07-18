@@ -11,32 +11,111 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sun.corba.se.spi.orbutil.fsm.Action;
-
 import command.Sentry;
 import command.Carrier;
 import domain.MemberBean;
 import service.MemberServiceImpl;
+import enums.Action;
 
 @WebServlet("/member.do")
 public class MemberController extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
 
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<MemberBean> list = null;
+		MemberBean member = null;
 		System.out.println("MemberController Enter");
-		// sentry를 요청으로 초기화
+		// 클라이언트의 요청을 Sentry의 init 메소드로 전달
 		Sentry.init(request);
 		System.out.println("액션: " + Sentry.cmd.getAction());
-		// Sentry.cmd.getAction() : cmd에서 받은 액션
-		switch (Sentry.cmd.getAction()) {
-		case "move" :
+		// Sentry.cmd.getAction() : cmd에 들어있는 action 값을 대문자로 가져옴
+		switch (Action.valueOf(Sentry.cmd.getAction().toUpperCase())) {
+		case MOVE :
 			try {
 				System.out.println("무브 안으로 진입");
+				// 요청과 응답을 Carrier의 send 메소드로 전달
 				Carrier.send(request, response);
 			} catch (Exception e) {e.printStackTrace();}
 			break;
-		case "join" :
+		case JOIN :
+			try {
+				System.out.println("조인 안으로 진입");
+				member = new MemberBean();
+				member.setMemId(request.getParameter("join_id"));
+				member.setPassWord(request.getParameter("join_pw"));
+				member.setName(request.getParameter("join_name"));
+				member.setSsn(request.getParameter("join_birth")+request.getParameter("join_gender"));
+				member.setTeamId("");
+				member.setRoll("");
+				//MemberServiceImpl.getInstance().createMember(member);
+				response.sendRedirect(request.getContextPath() + "/member.do?action=move&page=user_login_form");
+				Carrier.send(request, response);
+			} catch (Exception e) {e.printStackTrace();}
+			break;
+		case LIST :			
+			try {
+				System.out.println("memberList 들어옴");
+				list = MemberServiceImpl.getInstance().memberList();
+				Carrier.send(request, response);
+			} catch (Exception e) {e.printStackTrace();}
+			break;
+		case SEARCH :
+			try {
+				System.out.println("searchMemberByTeam 들어옴");
+				list = MemberServiceImpl.getInstance().findByWord("TEAM_ID"+"/"+request.getParameter("search_team_id"));
+				response.sendRedirect(request.getContextPath() + "/member.do?action=move&page=search_team_result");
+				Carrier.send(request, response);
+			} catch (Exception e) {e.printStackTrace();}
+			break;
+		case RETRIVE :
+			try {
+				System.out.println("searchMemberById 들어옴");
+				member = new MemberBean();
+				member.setMemId(request.getParameter("search_id"));
+				member = MemberServiceImpl.getInstance().findByID(member);
+				response.sendRedirect(request.getContextPath() + "/member.do?action=move&page=search_id_result");	
+				Carrier.send(request, response);
+			} catch (Exception e) {e.printStackTrace();}
+			break;
+		case COUNT :
+			try {
+				System.out.println("memberCount 들어옴");
+				list = MemberServiceImpl.getInstance().memberList();	
+				Carrier.send(request, response);
+			} catch (Exception e) {e.printStackTrace();}
+			break;
+		case UPDATE :
+			try {
+				System.out.println("memberUpdate 들어옴");
+				member = new MemberBean();
+				member.setMemId(request.getParameter("update_id"));
+				member.setPassWord(request.getParameter("update_old_password")+"/"+request.getParameter("update_new_password"));
+				MemberServiceImpl.getInstance().modifyMember(member);
+				Carrier.send(request, response);
+			} catch (Exception e) {e.printStackTrace();}
+			break;
+		case DELETE :
+			try {
+				System.out.println("memberDelete 들어옴");
+				member = new MemberBean();
+				member.setMemId(request.getParameter("delete_id"));
+				member.setPassWord(request.getParameter("delete_password"));
+				MemberServiceImpl.getInstance().removeMember(member);
+				response.sendRedirect(request.getContextPath());
+				Carrier.send(request, response);
+			} catch (Exception e) {e.printStackTrace();}
+			break;
+		case LOGIN :
+			try {
+				System.out.println("login 들어옴");
+				member = new MemberBean();
+				member.setMemId(request.getParameter("user_id"));
+				member.setPassWord(request.getParameter("user_pw"));
+				MemberServiceImpl.getInstance().login(member);
+				response.sendRedirect(request.getContextPath() + "/member.do?action=move&page=mypage");
+				Carrier.send(request, response);
+			} catch (Exception e) {e.printStackTrace();}
 			break;
 		default:
 			break;
@@ -44,11 +123,11 @@ public class MemberController extends HttpServlet {
 		
 		/*실제 프로젝트가 들어있는 경로
 		System.out.println("request.getRealPath() : " + request.getRealPath(""));
-		프로젝트 경로
+		프로젝트 경로 -> 도메인
 		System.out.println("request.getContextPath() : " + request.getContextPath());
-		파일 경로
+		파일 경로 -> 페이지 경로
 		System.out.println("request.getServletPath() : " + request.getServletPath());
-		프로젝트와 파일 경로
+		프로젝트와 파일 경로 -> URL
 		System.out.println("request.getRequestURL() : " + request.getRequestURI());
 		
 		System.out.println("request.getRemoteAddr() : " + request.getRemoteAddr());*/
@@ -96,7 +175,6 @@ public class MemberController extends HttpServlet {
 			member.setPassWord(request.getParameter("update_old_password")+"/"+request.getParameter("update_new_password"));
 			MemberServiceImpl.getInstance().modifyMember(member);
 			System.out.println("memberUpdate 들어옴");
-
 			break;
 		case "memberDelete":
 			member = new MemberBean();
@@ -111,7 +189,6 @@ public class MemberController extends HttpServlet {
 			member.setPassWord(request.getParameter("user_pw"));
 			member = MemberServiceImpl.getInstance().login(member);
 			System.out.println("login 들어옴");
-			
 			break;
 		}
 		request.getRequestDispatcher("/WEB-INF/view/member/"+page+".jsp").forward(request, response);*/

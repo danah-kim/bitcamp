@@ -1,34 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>GMS-MVC</display-name>
+<!-- 프로젝트에서 사용하고자 하는 servlet 등록 -->
   <servlet>
+<!-- servlet 이름 지정 -->
     <servlet-name>appServlet</servlet-name>
+<!-- servlet을 구현 할 패키지.클래스 등록, 현재는 프로젝트의 모든 클래스에서 servlet을 구현하겠다는 의미-->
     <servlet-class>*</servlet-class>
   </servlet>
+<!-- *.do 과 동일한 패턴의 요청이 들어오면 appServlet servlet으로 처리 -->
   <servlet-mapping>
+<!-- url-pattern을 적용할 servlet 이름으로 servlet이름과 동일해야 함 -->
     <servlet-name>appServlet</servlet-name>
+<!-- servlet이 실행될 시점 지정 -->
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
+<!-- servlet 기본값 설정 -->
   <servlet-mapping>
     <servlet-name>default</servlet-name>
     <url-pattern>/resources/*</url-pattern>
   </servlet-mapping>
-<!-- 웹 태그 어플리케이션에서 사용될 필터를 지정 -->
+  
+<!-- 프로젝트에서 사용하고자 하는 filter를 등록 -->
   <filter>
+<!-- filter 이름 지정 -->
     <filter-name>encodingFilter</filter-name>
     <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
-<!-- 웹 컨테이너에 의해 호출되어 필터에 서비스가 시작됨을 나타냄 -->
+<!-- 해당 필터 클래스가 실행되면서 기본적으로 갖게될 초기화 매개 변수 -->
     <init-param>
       <param-name>encoding</param-name>
       <param-value>UTF-8</param-value>
     </init-param>
   </filter>
-<!-- 특정 자원에 대해 어떤 필터를 사용할지 지정 -->
+<!-- /* 과 동일한 패턴의 요청이 들어오면 encodingFilter으로 처리  -->
   <filter-mapping>
+<!-- url-pattern을 적용할 filter 이름으로 filter이름과 동일해야함 -->
     <filter-name>encodingFilter</filter-name>
-<!-- 클라이언트가 특정 자원(여기서는 모든 자원)을 요청할 경우 encodingFilter가 사용되도록 지정-->
+<!-- filter가 실행될 시점 지정 -->
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  
+ <!-- 시작페이지 설정 -->
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>

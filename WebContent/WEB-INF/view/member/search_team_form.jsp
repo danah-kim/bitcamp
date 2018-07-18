@@ -17,7 +17,7 @@
 				<option value="CTEAM">Cteam</option>
 				<option value="STEAM">Steam</option>
 			</select>
-			<input type="hidden" name="action" value="searchMemberByTeam"/>
+			<input type="hidden" name="action" value="search"/>
 			<input type="hidden" name="page" value="search_team_result"/>
 			<input type="submit" value="검색"/>
 		</p>

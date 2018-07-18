@@ -44,7 +44,9 @@
 		</tr><%}%>
 	</table>
 	<br />
-	<form action="<%= ctx %>main.do" class="form_box">
+	<form action="<%= ctx %>/member.do" class="form_box">
+		<input type="hidden" name="action" value="move"/>
+		<input type="hidden" name="page" value=""/>
 		<button type="submit" >메인화면으로</button>
 	</form>
 </body>

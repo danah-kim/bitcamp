@@ -22,14 +22,13 @@ memId, name, passWord, ssn
 				<td id="join_id"> 아이디</td>
 				<td>
 					<input type="text" name="join_id">
-					<button type="button">중복확인</button>
-				<%-- <button type="button"
-				<%if(MemberServiceImpl.getInstance().findByID(id)){
+					<%-- <input type="button"
+				<%if(MemberServiceImpl.getInstance().iDDualCheck(request.getParameter("join_id"))){
 					%>onclick="alert('사용가능한 아이디 입니다.')"<%
 					}else{
-						
+						%>onclick="alert('사용불가능한 아이디 입니다.')"<% 
 					}%>
-				onclick="alert('사용불가능한 아이디 입니다.')">중복확인</button> --%>
+				value="중복확인"> --%>
 				</td>
 			</tr>
 			<tr>
@@ -63,7 +62,7 @@ memId, name, passWord, ssn
 			</tr>
 		</table>
 			<input type="hidden" name="action" value="join"/>
-			<input type="hidden" name="page" value="join_result"/>		
+			<input type="hidden" name="page" value="user_login_form"/>		
 			<input type="submit" onclick="alert('환영합니다!')" value="가입하기">
 			<p></p>
 		</form>

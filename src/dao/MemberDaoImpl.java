@@ -52,11 +52,6 @@ public class MemberDaoImpl implements MemberDao{
 				member.setSsn(rs.getString("SSN"));
 				list.add(member);
 			}
-			/*if(countMember()==list.size()) {
-				System.out.println("전체리스트인원 호출성공\n");
-			}else{
-				System.out.println("전체리스트인원 호출 실패\n");
-			}*/
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -65,15 +60,14 @@ public class MemberDaoImpl implements MemberDao{
 	}
 	@Override
 	public List<MemberBean> selectBySearchWord(String word) {
-		String condition = word.split("/")[0];
-		String teamId = word.split("/")[1];
+		String[] arr = word.split("/");
 		List<MemberBean> list = new ArrayList<>();
 		MemberBean member = null;
 		try {
 			ResultSet rs = DataBaseFactory.createDataBase(Vendor.ORACLE, DBConstant.USERNAME.toString(), DBConstant.PASSWORD.toString())
 					.getConnection()
 					.createStatement()
-					.executeQuery(String.format(MemberQuery.SELECT_BY_WORD.toString(),condition,teamId));
+					.executeQuery(String.format(MemberQuery.SELECT_BY_WORD.toString(),arr[0],arr[1]));
 			while(rs.next()) {
 				member = new MemberBean();
 				member.setMemId(rs.getString("MEM_ID"));
@@ -131,17 +125,15 @@ public class MemberDaoImpl implements MemberDao{
 	}
 	@Override
 	public void updateMember(MemberBean member) {
-		String oldPass = member.getPassWord().split("/")[0];
-		String newPass = member.getPassWord().split("/")[1];
+		String[] pass = member.getPassWord().split("/");
 		member = selectById(member);
-		if(oldPass.equals(member.getPassWord())) {
-			member.setPassWord(newPass);
+		if(pass[0].equals(member.getPassWord())) {
 			try {
 				int rs = DataBaseFactory.createDataBase(Vendor.ORACLE, DBConstant.USERNAME.toString(), DBConstant.PASSWORD.toString())
 						.getConnection()
 						.createStatement()
 						.executeUpdate(String.format(MemberQuery.UPDATE_MEMBER.toString(),
-								member.getPassWord(),
+								pass[1],
 								member.getMemId()));
 			} catch (Exception e) {
 			}
@@ -152,19 +144,23 @@ public class MemberDaoImpl implements MemberDao{
 	}
 	@Override
 	public void deleteMember(MemberBean member) {
-		try {
-			int rs = DataBaseFactory.createDataBase(Vendor.ORACLE, DBConstant.USERNAME.toString(), DBConstant.PASSWORD.toString())
-					.getConnection()
-					.createStatement()
-					.executeUpdate(String.format(MemberQuery.DELETE_MEMBER.toString(),
-							member.getMemId()));
-			System.out.println(rs);
-		} catch (Exception e) {
+		member = selectById(member);
+		if(member.getPassWord().equals(member.getPassWord())){
+			try {
+				int rs = DataBaseFactory.createDataBase(Vendor.ORACLE, DBConstant.USERNAME.toString(), DBConstant.PASSWORD.toString())
+						.getConnection()
+						.createStatement()
+						.executeUpdate(String.format(MemberQuery.DELETE_MEMBER.toString(),
+								member.getMemId()));
+				System.out.println(rs);
+			} catch (Exception e) {
+			}
+		} else {
+			
 		}
-		
 	}
 	@Override
-	public MemberBean login(MemberBean bean) {
+	public boolean login(MemberBean bean) {
 		try {
 			ResultSet rs = DataBaseFactory.createDataBase(Vendor.ORACLE, DBConstant.USERNAME.toString(), DBConstant.PASSWORD.toString())
 					.getConnection()
@@ -188,7 +184,7 @@ public class MemberDaoImpl implements MemberDao{
 		}catch (Exception e) {
 				e.printStackTrace();
 		}		
-		return bean;
+		return bean != null;
 	}
 	@Override
 	public boolean iDDualCheck(String id) {

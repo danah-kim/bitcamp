@@ -12,6 +12,6 @@ public interface MemberService {
 	public int countMember();
 	public void modifyMember(MemberBean member);
 	public void removeMember(MemberBean member);
-	public MemberBean login(MemberBean member);
+	public boolean login(MemberBean member);
 	public boolean iDDualCheck(String id);
 }

@@ -38,7 +38,7 @@ public class MemberServiceImpl implements MemberService{
 		MemberDaoImpl.getInstance().deleteMember(member);
 	}
 	@Override
-	public MemberBean login(MemberBean member) {
+	public boolean login(MemberBean member) {
 		return MemberDaoImpl.getInstance().login(member);
 	}
 	@Override

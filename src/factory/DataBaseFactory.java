@@ -11,13 +11,13 @@ public class DataBaseFactory {
 				database = new Oracle(DBConstant.ORACLE_DRIVER.toString(), DBConstant.ORACLE_URL.toString(), id, pass);
 				break;
 			case MYSQL :
-				database = new Oracle(DBConstant.MYSQL_DRIVER.toString(), DBConstant.MYSQL_URL.toString(), id, pass);
+				database = new MySQL(DBConstant.MYSQL_DRIVER.toString(), DBConstant.MYSQL_URL.toString(), id, pass);
 				break;
 			case MARIADB :
-				database = new Oracle(DBConstant.MARIADB_DRIVER.toString(), DBConstant.MARIADB_URL.toString(), id, pass);
+				database = new MariaDB(DBConstant.MARIADB_DRIVER.toString(), DBConstant.MARIADB_URL.toString(), id, pass);
 				break;
 			case MSSQL :
-				database = new Oracle(DBConstant.MSSQL_DRIVER.toString(), DBConstant.MSSQL_URL.toString(), id, pass);
+				database = new MySQL(DBConstant.MSSQL_DRIVER.toString(), DBConstant.MSSQL_URL.toString(), id, pass);
 				break;
 			default :
 				break;

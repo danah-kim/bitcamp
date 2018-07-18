@@ -12,6 +12,6 @@ public interface MemberDao {
 	public int countMember();
 	public void updateMember(MemberBean member);
 	public void deleteMember(MemberBean member);
-	public MemberBean login(MemberBean bean);
+	public boolean login(MemberBean bean);
 	public boolean iDDualCheck(String id);
 }

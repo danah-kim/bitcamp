@@ -19,8 +19,8 @@
 			<p class="login_input_box_font">PW : </p>
 			<input class="login_input_box" type="text" name="user_pw">
 			<p><br/></p>
-			<input type="hidden" name="action" value="login"/>
-			<input type="hidden" name="page" value="user_login_result"/>
+	 		<input type="hidden" name="action" value="login"/>
+			<input type="hidden" name="page" value="mypage"/>
 			<input id="submit_but" type="submit" value="제출">
 		</form>
 	</div>
