@@ -14,17 +14,14 @@ import javax.servlet.http.HttpServletResponse;
 import com.sun.corba.se.spi.orbutil.fsm.Action;
 
 import command.Sentry;
-import command.carrier;
+import command.Carrier;
 import domain.MemberBean;
 import service.MemberServiceImpl;
 
 @WebServlet("/member.do")
 public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public MemberController() {
-        super();
-    }
+
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("MemberController Enter");
@@ -36,7 +33,7 @@ public class MemberController extends HttpServlet {
 		case "move" :
 			try {
 				System.out.println("무브 안으로 진입");
-				carrier.send(request, response);
+				Carrier.send(request, response);
 			} catch (Exception e) {e.printStackTrace();}
 			break;
 		case "join" :

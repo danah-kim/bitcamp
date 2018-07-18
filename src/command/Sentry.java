@@ -9,6 +9,7 @@ public class Sentry {
 		String servletPath = request.getServletPath();
 		System.out.println("센트리 : "
 				+ servletPath.substring(1, servletPath.indexOf(".")));
+		
 		cmd = Commander.order(
 				// servletPath = @webServlet("/member.do")안에 있는 /member.do
 				// servletPath.substring(0, servletPath.indexOf(".")) = /

@@ -3,7 +3,7 @@ package command;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class carrier {
+public class Carrier {
 	public static void send(HttpServletRequest request,
 			HttpServletResponse response) 
 			throws Exception {
