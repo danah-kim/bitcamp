@@ -61,8 +61,7 @@ memId, name, passWord, ssn
 				</td>
 			</tr>
 		</table>
-			<input type="hidden" name="action" value="join"/>
-			<input type="hidden" name="page" value="user_login_form"/>		
+			<input type="hidden" name="action" value="join"/>	
 			<input type="submit" onclick="alert('환영합니다!')" value="가입하기">
 			<p></p>
 		</form>

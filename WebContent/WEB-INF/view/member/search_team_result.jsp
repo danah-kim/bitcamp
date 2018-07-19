@@ -14,7 +14,7 @@
 <body>
 <%
 	String condition = "TEAM_ID";
-	List<MemberBean> list = MemberServiceImpl.getInstance().findByWord(condition+"/"+request.getParameter("search_team_id"));
+	List<MemberBean> list = (List<MemberBean>)request.getAttribute("team");
 %>
 <h3>검색결과</h3>
 
@@ -40,7 +40,9 @@
 		</tr><%}%>
 	</table>
 	<br />
-	<form action="../../../../index.jsp" class="form_box">
+	<form class="form_box" action="<%= ctx %>/member.do">
+	<input type="hidden" name="action" value="main"/>
+	<input type="hidden" name="page" value=""/>
 		<button type="submit" >메인화면으로</button>
 	</form>
 </body>

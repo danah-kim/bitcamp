@@ -38,7 +38,7 @@
 							<a href="<%=ctx%>/member.do?action=move&page=join_form">회원가입</a>
 						</li>
 						<li>
-							<a href="<%=ctx%>/member.do?action=move&page=member_list">회원목록</a>
+							<a href="<%=ctx%>/member.do?action=list&page=member_list">회원목록</a>
 						</li>
 						<li>
 							<a href="<%=ctx%>/member.do?action=move&page=search_team_form">팀이름으로 검색</a>

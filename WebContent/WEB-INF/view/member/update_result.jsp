@@ -12,14 +12,9 @@
 	<title>비밀번호 변경 결과</title>
 </head>
 <body>
-<%
-	MemberBean member =	new MemberBean();
-	member.setMemId(request.getParameter("update_id"));
-	if(MemberServiceImpl.getInstance().findByID(member)==null){
-%>
 	<h3>변경완료</h3>
 	<form action="../../../index.jsp" class="form_box">
 		<button type="submit" >메인화면으로</button>
-	</form><%}else {}%>	
+	</form>
 </body>
 </html>

@@ -14,11 +14,9 @@
 	<link rel="stylesheet" type="text/css" href="../../css/style.css"/>
 </head>
 <body>
-	<%
-		List<MemberBean> list = MemberServiceImpl
-		.getInstance()
-		.memberList();
-	%>
+<%
+	List<MemberBean> list = (List<MemberBean>)request.getAttribute("list");
+%>
 	<h3>전체회원수 : <%= list.size() %>명</h3>
 	<table id="mbl_tab_layout">
 		<tr>
@@ -46,7 +44,6 @@
 	<br />
 	<form action="<%= ctx %>/member.do" class="form_box">
 		<input type="hidden" name="action" value="move"/>
-		<input type="hidden" name="page" value=""/>
 		<button type="submit" >메인화면으로</button>
 	</form>
 </body>

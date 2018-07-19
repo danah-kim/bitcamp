@@ -20,7 +20,7 @@
 			<input class="login_input_box" type="text" name="user_pw">
 			<p><br/></p>
 	 		<input type="hidden" name="action" value="login"/>
-			<input type="hidden" name="page" value="mypage"/>
+	 		<input type="hidden" name="page" value="mypage"/>
 			<input id="submit_but" type="submit" value="제출">
 		</form>
 	</div>

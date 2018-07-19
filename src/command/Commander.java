@@ -1,45 +1,48 @@
 package command;
 
+import javax.servlet.http.HttpServletRequest;
+
 import enums.Action;
 
 public class Commander{
-	public static  Command order(String domain, String action, String page){
+	public static  Command order(HttpServletRequest request){
 		Command cmd = null;
-		switch (Action.valueOf(action.toUpperCase())) {
+		switch (Action.valueOf(request.getParameter("action").toUpperCase())) {
 			case MOVE :
 				System.out.println("=== move 진입 ===");
-				cmd = new MoveCommand(domain, action, page);
+				cmd = new MoveCommand(request);
+				break;
 			case JOIN : 
 				System.out.println("=== join 진입 ===");
-				cmd = new CreateCommand(domain, action, page);
+				cmd = new CreateCommand(request);
 				break;
 			case LIST :
 				System.out.println("=== list 진입 ===");
-				cmd = new ListCommand(domain, action, page);
+				cmd = new ListCommand(request);
 				break;
 			case SEARCH :
 				System.out.println("=== search 진입 ===");
-				cmd = new FindByWordCommand(domain, action, page);
+				cmd = new SearchCommand(request);
 				break;
 			case RETRIVE :
 				System.out.println("=== retrive 진입 ===");
-				cmd = new FindByIDCommand(domain, action, page);
+				cmd = new RetriveCommand(request);
 				break;
 			case COUNT :
 				System.out.println("=== count 진입 ===");
-				cmd = new CountCommand(domain, action, page);
+				cmd = new CountCommand(request);
 				break;
 			case UPDATE :
 				System.out.println("=== update 진입 ===");
-				cmd = new UpdateCommand(domain, action, page);
+				cmd = new UpdateCommand(request);
 				break;
 			case DELETE :
 				System.out.println("=== delete 진입 ===");
-				cmd = new DeleteCommand(domain, action, page);
+				cmd = new DeleteCommand(request);
 				break;
 			case LOGIN :
 				System.out.println("=== login 진입 ===");
-				cmd = new LoginCommand(domain, action, page);
+				cmd = new LoginCommand(request);
 				break;
 			default :
 				break;

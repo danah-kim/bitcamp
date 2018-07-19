@@ -13,9 +13,7 @@ String ctx = application.getContextPath();
 </head>
 <body>
 	<%
-	MemberBean member = new MemberBean();
-	member.setMemId(request.getParameter("search_id"));
-	member = MemberServiceImpl.getInstance().findByID(member);
+	MemberBean member = (MemberBean)request.getAttribute("id");
 	%>
 	<h3>검색결과</h3><br />
 	<%

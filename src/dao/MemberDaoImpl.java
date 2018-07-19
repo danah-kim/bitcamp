@@ -15,7 +15,6 @@ public class MemberDaoImpl implements MemberDao{
 	}
 	@Override
 	public void insertMember(MemberBean member) {
-		member.setAge(String.valueOf(2018 - Integer.parseInt("19"+member.getSsn().split("-")[0].substring(0, 2)) + 1));
 		try {
 			int rs = DataBaseFactory.createDataBase(Vendor.ORACLE, DBConstant.USERNAME.toString(), DBConstant.PASSWORD.toString())
 					.getConnection()

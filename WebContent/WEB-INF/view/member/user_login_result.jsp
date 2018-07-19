@@ -19,7 +19,7 @@
 	MemberBean m = new MemberBean();
 	m.setMemId(request.getParameter("user_id"));
 	m.setPassWord(request.getParameter("user_pw"));
-	m = MemberServiceImpl.getInstance().login(m);
+	MemberServiceImpl.getInstance().login(m);
 	if(m!=null){
 		%>
 		<h3>로그인 성공</h3>

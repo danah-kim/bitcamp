@@ -42,8 +42,12 @@ public class MemberServiceImpl implements MemberService{
 		return MemberDaoImpl.getInstance().login(member);
 	}
 	@Override
+	public String createAge(MemberBean member) {
+		return String.valueOf(2018 - Integer.parseInt("19"+member.getSsn().split("-")[0].substring(0, 2)) + 1);	
+	}
+
+	@Override
 	public boolean iDDualCheck(String id) {
 		return MemberDaoImpl.getInstance().iDDualCheck(id);
 	}
-
 }
