@@ -19,7 +19,7 @@ public class CountCommand extends Command {
 	}
 	@Override
 	public void execute() {
-		switch(Domain.valueOf(Receiver.cmd.domain.toUpperCase())) {
+		switch(Domain.valueOf(domain.toUpperCase())) {
 		case MEMBER :
 			request.setAttribute("count", MemberServiceImpl.getInstance().countMember());	
 			break;

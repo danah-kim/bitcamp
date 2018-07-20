@@ -16,7 +16,7 @@ public class RetriveCommand extends Command {
 	}
 	@Override
 	public void execute() {
-		switch (Domain.valueOf(Receiver.cmd.domain.toUpperCase())) {
+		switch (Domain.valueOf(domain.toUpperCase())) {
 		case MEMBER :
 			System.out.println("아이디검색 안으로 진입");
 			MemberBean member = new MemberBean();

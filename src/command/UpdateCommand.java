@@ -16,7 +16,7 @@ public class UpdateCommand extends Command {
 	}
 	@Override
 	public void execute() {
-		switch(Domain.valueOf(Receiver.cmd.domain.toUpperCase())){
+		switch(Domain.valueOf(domain.toUpperCase())){
 			case MEMBER :
 				System.out.println("업데이트!!");
 				MemberBean member = new MemberBean();

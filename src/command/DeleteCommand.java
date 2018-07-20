@@ -16,7 +16,7 @@ public class DeleteCommand extends Command {
 	}
 	@Override
 	public void execute() {
-		switch (Domain.valueOf(Receiver.cmd.domain.toUpperCase())) {
+		switch (Domain.valueOf(domain.toUpperCase())) {
 			case MEMBER :
 				MemberBean member = new MemberBean();
 				member.setMemId(request.getParameter("delete_id"));

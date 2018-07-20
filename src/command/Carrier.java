@@ -18,6 +18,7 @@ public class Carrier {
 		}		
 	}
 	public static void redirect(HttpServletRequest request,	HttpServletResponse response, String url) {
+		System.out.println("뷰 : " + Receiver.cmd.getView());
 		try {
 			response.sendRedirect(request.getContextPath() + url);
 		} catch (Exception e) {

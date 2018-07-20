@@ -16,17 +16,17 @@ public class LoginCommand extends Command {
 	}
 	@Override
 	public void execute() {
-		switch (Domain.valueOf(Receiver.cmd.domain.toUpperCase())) {
-		case MEMBER :
-			MemberBean member = new MemberBean();
-			member.setMemId(request.getParameter("user_id"));
-			member.setPassWord(request.getParameter("user_pw"));
-			MemberServiceImpl.getInstance().login(member);
-			break;
-
-		default:
-			break;
-		}
 		super.execute();
+		MemberBean member = new MemberBean();
+		member.setMemId(request.getParameter("user_id"));
+		member.setPassWord(request.getParameter("user_pw"));
+		if(MemberServiceImpl.getInstance().login(member)) {
+			System.out.println("값이 있음");
+			request.setAttribute("match", "TRUE");
+			request.setAttribute("user", MemberServiceImpl.getInstance().findByID(member));
+		}else {
+			System.out.println("값이 없음");
+			request.setAttribute("match", "FALSE");
+		}
 	}
 }

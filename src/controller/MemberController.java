@@ -19,15 +19,19 @@ public class MemberController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("MemberController Enter");
-		// 클라이언트의 요청을 Sentry의 init 메소드로 전달
+		// 클라이언트의 요청을 Receiver의 init 메소드로 전달
 		Receiver.init(request);
 		System.out.println("액션: " + Receiver.cmd.getAction());
-		// Sentry.cmd.getAction() : cmd에 들어있는 action 값을 대문자로 가져옴
+		// Receiver.cmd.getAction().toUpperCase : cmd에 들어있는 action 값을 대문자로 가져옴
 		switch (Action.valueOf(Receiver.cmd.getAction().toUpperCase())) {
 		case MOVE :
 			System.out.println("무브 안으로 진입");
 			// 요청과 응답을 Carrier의 send 메소드로 전달
-			Carrier.forward(request, response);
+			if(Receiver.cmd.getAction().equals(Receiver.cmd.getPage())) {
+				Carrier.redirect(request, response, "");
+			}else {
+				Carrier.forward(request, response);
+			}
 			break;
 		case JOIN :
 			System.out.println("Join 들어옴");
@@ -59,11 +63,13 @@ public class MemberController extends HttpServlet {
 			break;
 		case LOGIN :
 			System.out.println("login 들어옴");
-			Carrier.forward(request, response);
-			break;
-		case MAIN :
-			System.out.println("main 들어옴");
-			Carrier.redirect(request, response, "");
+			if(request.getAttribute("match").equals("TRUE")) {
+				System.out.println("로그인성공");
+				Carrier.forward(request, response);
+			}else {
+				System.out.println("로그인실패");
+				Carrier.redirect(request, response, "/member.do?action=move&page=user_login_form");
+			}
 			break;
 		default :
 			Carrier.redirect(request, response, "");

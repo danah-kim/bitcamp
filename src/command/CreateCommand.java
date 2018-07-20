@@ -21,8 +21,8 @@ public class CreateCommand extends Command{
 
 	@Override
 	public void execute() {
-		System.out.println("도메인값 확인 : "+ Receiver.cmd.domain.toUpperCase());
-		switch (Domain.valueOf(Receiver.cmd.domain.toUpperCase())) {
+		System.out.println("도메인값 확인 : "+ domain.toUpperCase());
+		switch (Domain.valueOf(domain.toUpperCase())) {
 		case MEMBER :
 			System.out.println("조인 안으로 진입");
 			MemberBean member = new MemberBean();

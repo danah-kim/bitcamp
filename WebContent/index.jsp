@@ -29,22 +29,22 @@
 					<ul>
 						<li>
 							<!-- 주소창에 표시될 값을 입력 -->
-							<a href="<%=ctx%>/member.do?action=move&page=user_login_form">사용자 로그인</a>
+							<a href="<%=ctx%>/member.do?action=move&page=user_login_form">사용자 로그인</a></br>
 						</li>
 						<li>
-							<a href="<%=ctx%>/admin.do?action=move&page=admin_login">관리자 로그인</a>
+							<a href="<%=ctx%>/admin.do?action=move&page=admin_login">관리자 로그인</a></br>
 						</li>
 						<li>
-							<a href="<%=ctx%>/member.do?action=move&page=join_form">회원가입</a>
+							<a href="<%=ctx%>/member.do?action=move&page=join_form">회원가입</a></br>
 						</li>
 						<li>
-							<a href="<%=ctx%>/member.do?action=list&page=member_list">회원목록</a>
+							<a href="<%=ctx%>/member.do?action=list&page=member_list">회원목록</a></br>
 						</li>
 						<li>
-							<a href="<%=ctx%>/member.do?action=move&page=search_team_form">팀이름으로 검색</a>
+							<a href="<%=ctx%>/member.do?action=move&page=search_team_form">팀이름으로 검색</a></br>
 						</li>
 						<li>
-							<a href="<%=ctx%>/member.do?action=move&page=search_id_form">아이디로 검색</a>
+							<a href="<%=ctx%>/member.do?action=move&page=search_id_form">아이디로 검색</a></br>
 						</li>
 					</ul>
 				</td>
