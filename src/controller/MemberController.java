@@ -17,7 +17,7 @@ public class MemberController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("MemberController Enter");
 		// 클라이언트의 요청을 Receiver의 init 메소드로 전달
 		Receiver.init(request);
@@ -202,10 +202,6 @@ public class MemberController extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/view/member/delte_result.jsp").forward(request, response);
 			break;
 		}*/
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
 	}
 
 }

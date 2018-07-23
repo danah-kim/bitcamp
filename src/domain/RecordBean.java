@@ -1,7 +1,15 @@
 package domain;
 
+import lombok.Data;
+
+@Data
 public class RecordBean {
 	protected String recordSeq, avg, grade;
+
+	@Override
+	public String toString() {
+		return "RecordBean [recordSeq=" + recordSeq + ", avg=" + avg + ", grade=" + grade + "]";
+	}
 
 	public String getRecordSeq() {
 		return recordSeq;
