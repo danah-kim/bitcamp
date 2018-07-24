@@ -2,16 +2,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "java.util.*" %>
 <%@ page import = "domain.*" %>
-<%
-	String ctx = application.getContextPath();
-%>
 
 <!doctype html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8" />
 	<title>회원목록</title>
-	<link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+	<link rel="stylesheet" type="text/css" href="${css}/style.css"/>
 </head>
 <body>
 <%
@@ -42,7 +39,7 @@
 		</tr><%}%>
 	</table>
 	<br />
-	<form action="<%= ctx %>/admin.do" class="form_box">
+	<form action="${context}/admin.do" class="form_box" onsubmit="return sendForm()">
 		<input type="hidden" name="action" value="move"/>
 		<input type="hidden" name="page" value="move"/>
 		<button type="submit" >메인화면으로</button>

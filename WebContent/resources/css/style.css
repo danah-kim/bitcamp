@@ -1,4 +1,4 @@
-/*-- Start common style--*/
+
 body{
 	font-family: 'Malgun Gothic', 'Verdana';
 	background-color: #004080;
@@ -32,7 +32,16 @@ div#header{
 	padding-bottom: 0;
 	color: #000;
 }
-div#title{
+div#header h1{
+	color: #fff;
+	padding: 5px 0;
+	margin: 0;
+	border: none;
+	line-height: 2em;
+	font-weight: bold;
+	font-size: 32px;
+}
+div#title_box{
 	float: left;
 	text-align: left;
 	display: block;
@@ -85,24 +94,17 @@ ul#menu li a:active{
 	background-color: #8000ff;
 	text-decoration: none;
 }
-div#header h1{
-	color: #fff;
-	padding: 5px 0;
-	margin: 0;
-	border: none;
-	line-height: 2em;
-	font-weight: bold;
-	font-size: 32px;
-}
+
 div#content{
-	pause: 15px 30px;
+	padding: 15px 30px;
 	/* pause: 15px 30px 15px 30px; */
-	background-color: #00ffff;
+	background-color: #ffffff;
 	margin-bottom: 30px;
 	min-height: 400px;
 }
 div#content_box{
 	clear: both;
+	color : #ff8080;
 	margin-top: 40px;
 }
 div#footer{

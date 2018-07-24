@@ -1,8 +1,6 @@
 <%@page import="service.MemberServiceImpl"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-	String ctx = application.getContextPath();
-%>
+
 <!-- 
 memId, name, passWord, ssn
 -->
@@ -11,11 +9,11 @@ memId, name, passWord, ssn
 <head>
 	<meta charset="UTF-8" />
 	<title>회원가입 화면</title>
-	<link rel="stylesheet" type="text/css" href="../../css/style.css" />
+	<link rel="stylesheet" type="text/css" href="${css}/style.css" />
 </head>
 <body>
 	<div>
-		<form class="join_form_box" action="<%= ctx %>/member.do">
+		<form class="join_form_box" action="${context}/member.do" onsubmit="return sendForm()">
 		<h1>회원가입</h1>
 		<table id="join_table">
 			<tr>

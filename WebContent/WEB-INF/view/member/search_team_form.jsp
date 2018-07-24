@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-	String ctx = application.getContextPath();
-%>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -9,7 +7,7 @@
 	<title>팀이름으로 검색</title>
 </head>
 <body>
-	<form action="<%= ctx %>/member.do">
+	<form action="${context}/member.do" onsubmit="return sendForm()">
 		<p>팀이름으로 검색 : 
 			<select name="search_team_id">
 				<option value="ATEAM">Ateam</option>

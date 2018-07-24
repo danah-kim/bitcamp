@@ -1,17 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-String ctx = application.getContextPath();
-%>
 <!doctype html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8" />
 	<title>회원 탈퇴</title>
-	<link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+	<link rel="stylesheet" type="text/css" href="${css}/style.css"/>
 </head>
 <body>
 	<h3>회원 탈퇴</h3>
-	<form action="<%= ctx %>/member.do">
+	<form action="${context}/member.do" onsubmit="return sendForm()">
 	<table>
 		<tr>
 			<td>아이디</td>

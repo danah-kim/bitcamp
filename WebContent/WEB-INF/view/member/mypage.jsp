@@ -1,7 +1,5 @@
 <%@page import="domain.MemberBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="ctx" value="<%= application.getContextPath() %>"/>
 <% 
 	MemberBean member = (MemberBean)request.getAttribute("user");
 %>
@@ -10,7 +8,7 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>MYPAGE</title>
-	<link rel="stylesheet" type="text/css" href="resources/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="${css}/style.css" />
 </head>
 <body>
 	<h3> 현재 회원수 : <mark>22</mark>명</h3>
@@ -29,13 +27,13 @@
 					<p><%= member.getName() %>의 마이페이지 진입</p>
 					<ul>
 						<li>
-							<a href="${ctx}/member.do?action=move&page=update_form">비밀번호 변경</a></br>
+							<a href="${context}/member.do?action=move&page=update_form">비밀번호 변경</a></br>
 						</li>
 						<li>
-							<a href="${ctx}/member.do?action=move&page=delete_form">회원탈퇴</a></br>
+							<a href="${context}/member.do?action=move&page=delete_form">회원탈퇴</a></br>
 						</li>
 						<li>
-							<a href="${ctx}/member.do?action=move&page=move">로그아웃</a></br>
+							<a href="${context}/member.do?action=move&page=move">로그아웃</a></br>
 						</li>
 						</ul>
 				</td>

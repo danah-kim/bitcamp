@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-	String ctx = application.getContextPath();
-%>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -11,7 +9,7 @@
 </head>
 <body>
 	<h3>비밀번호 변경</h3>
-		<form action="<%= ctx %>/member.do">
+		<form action="${context}/member.do">
 	<table>
 		<tr>
 			<td>아이디</td>

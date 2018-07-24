@@ -2,9 +2,7 @@
 <%@page import="domain.MemberBean"%>
 <%@page import="java.util.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-String ctx = application.getContextPath();
-%>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -19,7 +17,7 @@ String ctx = application.getContextPath();
 	<%
 		if(member==null){
 		%>검색결과가 없습니다
-		<form action="<%= ctx %>/admin.do" class="form_box">
+		<form action="${context}/admin.do" class="form_box" onsubmit="return sendForm()">
 				<input type="hidden" name="action" value="move"/>
 				<input type="hidden" name="page" value="move"/>
 				<button type="submit" >메인화면으로</button>
