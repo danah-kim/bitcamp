@@ -7,7 +7,7 @@
 	<title>팀이름으로 검색</title>
 </head>
 <body>
-	<form action="${context}/member.do" onsubmit="return sendForm()">
+	<form action="${context}/member.do" onsubmit="return new Common().sendForm()">
 		<p>팀이름으로 검색 : 
 			<select name="search_team_id">
 				<option value="ATEAM">Ateam</option>

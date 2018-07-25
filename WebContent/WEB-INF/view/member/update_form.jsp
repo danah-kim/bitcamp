@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h3>비밀번호 변경</h3>
-		<form action="${context}/member.do">
+		<form action="${context}/member.do" onsubmit="return new Common().sendForm()">
 	<table>
 		<tr>
 			<td>아이디</td>

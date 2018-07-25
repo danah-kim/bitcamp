@@ -38,7 +38,7 @@
 		</tr><%}%>
 	</table>
 	<br />
-	<form class="form_box" action="${context}/member.do" onsubmit="return sendForm()">
+	<form class="form_box" action="${context}/member.do" onsubmit="return new Common().sendForm()">
 	<input type="hidden" name="action" value="move"/>
 	<input type="hidden" name="page" value="move"/>
 		<button type="submit" >메인화면으로</button>

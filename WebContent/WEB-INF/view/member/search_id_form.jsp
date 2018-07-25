@@ -7,7 +7,7 @@
 	<title>아이디로 검색</title>
 </head>
 <body>
-	<form action="${context}/member.do" onsubmit="return sendForm()">
+	<form action="${context}/member.do" onsubmit="return new Common().sendForm()">
 		<p>이름 : 
 			<input type="text" name="search_id"/>
 			<input type="hidden" name="action" value="retrive"/>

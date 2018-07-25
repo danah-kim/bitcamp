@@ -17,7 +17,7 @@
 	<%
 		if(member==null){
 		%>검색결과가 없습니다
-		<form action="${context}/admin.do" class="form_box" onsubmit="return sendForm()">
+		<form action="${context}/admin.do" class="form_box" onsubmit="return new Common().sendForm()">
 				<input type="hidden" name="action" value="move"/>
 				<input type="hidden" name="page" value="move"/>
 				<button type="submit" >메인화면으로</button>

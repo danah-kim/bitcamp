@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h3>회원 탈퇴</h3>
-	<form action="${context}/member.do" onsubmit="return sendForm()">
+	<form action="${context}/member.do" onsubmit="return new Common.sendForm()">
 	<table>
 		<tr>
 			<td>아이디</td>

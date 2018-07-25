@@ -6,14 +6,10 @@ memId, name, passWord, ssn
 -->
 <!doctype html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8" />
-	<title>회원가입 화면</title>
-	<link rel="stylesheet" type="text/css" href="${css}/style.css" />
-</head>
+<jsp:include page="../common/head.jsp"/>
 <body>
 	<div>
-		<form class="join_form_box" action="${context}/member.do" onsubmit="return sendForm()">
+		<form class="join_form_box" action="${context}/member.do" onsubmit="return new Common.sendForm()">
 		<h1>회원가입</h1>
 		<table id="join_table">
 			<tr>
