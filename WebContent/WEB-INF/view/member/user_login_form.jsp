@@ -20,13 +20,14 @@
 	</div>
 	<script>
 		document.getElementById('login_form_but').addEventListener('click',function(){
+			var member = new Member();
 			var form = document.getElementById('login_form_box');
 			form.action = "${context}/member.do";
 			form.method = "post";
 			alert('입력한 Id / pw : ' + form.user_id.value + "/" + form.user_pw.value);
-			member.setMemId(form.user_id.value);
-			member.setPassword(form.user_pw.value);
-			if(member.loginValidation()){form.submit();}
+			/* member.setMemId(form.user_id.value);
+			member.setPassword(form.user_pw.value); */
+			if(service.login_validation([form.user_id.value,form.user_pw.value])){form.submit();}
 		});
 	</script>
 </body>

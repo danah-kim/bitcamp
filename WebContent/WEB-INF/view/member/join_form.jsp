@@ -9,20 +9,14 @@ memId, name, passWord, ssn
 <jsp:include page="../common/head.jsp"/>
 <body>
 	<div>
-		<form class="join_form_box" action="${context}/member.do" onsubmit="return new Common.sendForm()">
+		<form id="join_form_box">
 		<h1>회원가입</h1>
 		<table id="join_table">
 			<tr>
 				<td id="join_id"> 아이디</td>
 				<td>
 					<input type="text" name="join_id">
-					<%-- <input type="button"
-				<%if(MemberServiceImpl.getInstance().iDDualCheck(request.getParameter("join_id"))){
-					%>onclick="alert('사용가능한 아이디 입니다.')"<%
-					}else{
-						%>onclick="alert('사용불가능한 아이디 입니다.')"<% 
-					}%>
-				value="중복확인"> --%>
+					<input id="join_id_chk" type="button" value="중복확인">
 				</td>
 			</tr>
 			<tr>
@@ -56,9 +50,17 @@ memId, name, passWord, ssn
 			</tr>
 		</table>
 			<input type="hidden" name="action" value="join"/>	
-			<input type="submit" onclick="alert('환영합니다!')" value="가입하기">
+			<input id="join_form_but" type="button" onclick="alert('환영합니다!')" value="가입하기">
 			<p></p>
 		</form>
 	</div>
+	<script>
+		document.getElementById('join_form_but').addEventListener('click',function(){
+			var form = document.getElementById('join_form_box');
+			form.action = "${context}/member.do";
+			form.method = "post";
+			service.join_validation(form.join_id_chk.value);
+		});
+	</script>
 </body>
 </html>
