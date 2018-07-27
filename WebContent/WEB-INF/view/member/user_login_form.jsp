@@ -20,14 +20,15 @@
 	</div>
 	<script>
 		document.getElementById('login_form_but').addEventListener('click',function(){
-			var member = new Member();
-			var form = document.getElementById('login_form_box');
-			form.action = "${context}/member.do";
-			form.method = "post";
-			alert('입력한 Id / pw : ' + form.user_id.value + "/" + form.user_pw.value);
-			/* member.setMemId(form.user_id.value);
-			member.setPassword(form.user_pw.value); */
-			if(service.login_validation([form.user_id.value,form.user_pw.value])){form.submit();}
+			x = service.null_chk([document.getElementById('login_form_box').user_id.value, document.getElementById('login_form_box').user_pw.value]);
+			if(x.checker){
+				alert('유효성 체크 통과!');
+				document.getElementById('login_form_box').action = "${context}/member.do";
+				document.getElementById('login_form_box').method = "post";
+				document.getElementById('login_form_box').submit();
+			}else{
+				alert(x.text);
+			}
 		});
 	</script>
 </body>

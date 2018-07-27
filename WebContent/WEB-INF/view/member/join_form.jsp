@@ -15,51 +15,100 @@ memId, name, passWord, ssn
 			<tr>
 				<td id="join_id"> 아이디</td>
 				<td>
-					<input type="text" name="join_id">
+					<input type="text" name="id">
 					<input id="join_id_chk" type="button" value="중복확인">
 				</td>
 			</tr>
 			<tr>
 				<td id="join_password">비밀번호</td>
 				<td>
-					<input type="text" name="join_pw">
+					<input type="text" name="pw">
 				</td>
 			</tr>
 			<tr>
 				<td id="join_name"> 이름</td>
 				<td>
-					<input type="text" name="join_name">
+					<input type="text" name="name">
 				</td>
 			</tr>
 			<tr>
 				<td id="join_birth"> 생년월일</td>
 				<td>
 					<input type="text" 
-						   name="join_birth"
+						   name="birth"
 						   placeholder="생년월일(6자)" 
 						   maxlength="6"
                            title = "990101 형식으로 입력해주세요" >
+                           -
+                    <input type="text" name="gender" maxlength="1" />
 				</td>
 			</tr>
 			<tr>
-				<td id="join_gender"> 성별</td>
+				<td> 소속팀</td>
 				<td>
-					<input type="radio" name="join_gender" value="-1">남자
-					<input type="radio" name="join_gender" value="-2">여자
+					<input type="radio" name="teamid" value="" checked="checked"/>없음
+					<input type="radio" name="teamid" value="ATEAM" checked="checked"/>걍놀자
+					<input type="radio" name="teamid" value="HTEAM" checked="checked"/>지은이네
+					<input type="radio" name="teamid" value="STEAM" checked="checked"/>왕거북이
+					<input type="radio" name="teamid" value="CTEAM" checked="checked"/>코딩짱
+				</td>
+			</tr>
+			<tr>
+				<td> 프로젝트 역할</td>
+				<td>
+					<select name="roll">
+						<option value="Leader">팀장</option>
+						<option value="front">프론트개발</option>
+						<option value="back">백단개발</option>
+						<option value="android">안드로이드개발</option>
+						<option value="minfe">민폐</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td> 수강과목</td>
+				<td>
+					<input type="checkbox" name="subject" value="clang" checked="checked"/>C언어
+					<input type="checkbox" name="subject" value="JSP"/>JSP
+					<input type="checkbox" name="subject" value="PHP"/>PHP
+					<input type="checkbox" name="subject" value="nodejs"/>NodeJs
+					<input type="checkbox" name="subject" value="linux"/>Linux
+					<input type="checkbox" name="subject" value="html"/>HTML
+					<input type="checkbox" name="subject" value="spring"/>Spring
 				</td>
 			</tr>
 		</table>
-			<input type="hidden" name="action" value="join"/>	
-			<input id="join_form_but" type="button" onclick="alert('환영합니다!')" value="가입하기">
+		<br>
+			<input type="hidden" name="action" value="join"/>
+			<input type="hidden" name="age"/>
+			<input type="hidden" name="ssn"/>
+			<input id="join_form_but" type="button" value="가입하기">
 			<p></p>
 		</form>
 	</div>
 	<script>
 		document.getElementById('join_form_but').addEventListener('click',function(){
-			var form = document.getElementById('join_form_box');
-			form.action = "${context}/member.do";
-			form.method = "post";
-			service.join_validation(form.join_id_chk.value);
+			x = service.null_chk([
+				document.getElementById('join_form_box').id.value,
+				document.getElementById('join_form_box').pw.value,
+				document.getElementById('join_form_box').name.value,
+				document.getElementById('join_form_box').birth.value,
+				document.getElementById('join_form_box').gender.value
+				]);
+			if(x.checker){
+				document.getElementById('join_form_box').action = "${context}/member.do";
+				document.getElementById('join_form_box').method = "post";
+				member.join([
+					document.getElementById('join_form_box').birth.value,
+					document.getElementById('join_form_box').gender.value]);
+				document.getElementById('join_form_box').ssn.value = member.getSsn();
+				document.getElementById('join_form_box').age.value = member.getAge();
+				document.getElementById('join_form_box').gender.value = member.getGender();
+				document.getElementById('join_form_box').submit();
+				alert('환영합니다');
+			}else{
+				alert(x.text);
+			}
 		});
 	</script>
 </body>

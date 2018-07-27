@@ -4,11 +4,6 @@ import lombok.Data;
 
 @Data
 public class MemberBean {
-	protected String memId, teamId, name, age, roll, passWord, ssn;
+	protected String memId, teamId, name, age, roll, passWord, ssn, gender, subject;
 	
-	@Override
-	public String toString() {
-		return "MemberBean [memId=" + memId + ", teamId=" + teamId + ", name=" + name + ", age=" + age + ", roll="
-				+ roll + ", passWord=" + passWord + ", ssn=" + ssn + "]";
-	}
 }

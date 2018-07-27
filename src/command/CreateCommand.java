@@ -26,13 +26,15 @@ public class CreateCommand extends Command{
 		case MEMBER :
 			System.out.println("조인 안으로 진입");
 			MemberBean member = new MemberBean();
-			member.setMemId(request.getParameter("join_id"));
-			member.setPassWord(request.getParameter("join_pw"));
-			member.setName(request.getParameter("join_name"));
-			member.setSsn(request.getParameter("join_birth")+"/"+request.getParameter("join_gender"));
-			member.setTeamId("");
-			member.setRoll("");
-			member.setAge(MemberServiceImpl.getInstance().createAge(member));
+			member.setMemId(request.getParameter("id"));
+			member.setPassWord(request.getParameter("pw"));
+			member.setName(request.getParameter("name"));
+			member.setSsn(request.getParameter("ssn"));
+			member.setTeamId(request.getParameter("teamid"));
+			member.setRoll(request.getParameter("roll"));
+			member.setAge(request.getParameter("age"));
+			member.setGender(request.getParameter("gender"));
+			member.setSubject(ParamMap.getValues(request, "subject"));
 			MemberServiceImpl.getInstance().createMember(member);
 			break;
 		default:

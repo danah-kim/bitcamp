@@ -7,7 +7,6 @@
 	<link rel="stylesheet" type="text/css" href="${css}/style.css" />
 <!-- function 선언 -->
 	<script src="${js}/app.js">
-		
 	</script>
 
 </head>
