@@ -1,4 +1,3 @@
-<%@page import="service.MemberServiceImpl"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!-- 
@@ -46,17 +45,18 @@ memId, name, passWord, ssn
 			<tr>
 				<td> 소속팀</td>
 				<td>
-					<input type="radio" name="teamid" value="" checked="checked"/>없음
-					<input type="radio" name="teamid" value="ATEAM" checked="checked"/>걍놀자
-					<input type="radio" name="teamid" value="HTEAM" checked="checked"/>지은이네
-					<input type="radio" name="teamid" value="STEAM" checked="checked"/>왕거북이
-					<input type="radio" name="teamid" value="CTEAM" checked="checked"/>코딩짱
+					<input type="radio" name="teamid" value=""/>없음
+					<input type="radio" name="teamid" value="ATEAM"/>걍놀자
+					<input type="radio" name="teamid" value="HTEAM"/>지은이네
+					<input type="radio" name="teamid" value="STEAM"/>왕거북이
+					<input type="radio" name="teamid" value="CTEAM"/>코딩짱
 				</td>
 			</tr>
 			<tr>
 				<td> 프로젝트 역할</td>
 				<td>
 					<select name="roll">
+						<option value="">없음</option>
 						<option value="Leader">팀장</option>
 						<option value="front">프론트개발</option>
 						<option value="back">백단개발</option>
@@ -104,11 +104,8 @@ memId, name, passWord, ssn
 				document.getElementById('join_form_box').ssn.value = member.getSsn();
 				document.getElementById('join_form_box').age.value = member.getAge();
 				document.getElementById('join_form_box').gender.value = member.getGender();
-				document.getElementById('join_form_box').submit();
-				alert('환영합니다');
-			}else{
-				alert(x.text);
-			}
+				/* document.getElementById('join_form_box').submit(); */
+			}else{alert(x.text);}
 		});
 	</script>
 </body>

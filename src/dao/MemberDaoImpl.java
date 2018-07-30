@@ -49,6 +49,8 @@ public class MemberDaoImpl implements MemberDao{
 				member.setRoll(rs.getString("ROLL"));
 				member.setPassWord(rs.getString("PASSWORD"));
 				member.setSsn(rs.getString("SSN"));
+				member.setSsn(rs.getString("GENDER"));
+				member.setSsn(rs.getString("SUBJECT"));
 				list.add(member);
 			}
 		}
@@ -74,8 +76,7 @@ public class MemberDaoImpl implements MemberDao{
 				member.setName(rs.getString("NAME"));
 				member.setAge(rs.getString("AGE"));
 				member.setRoll(rs.getString("ROLL"));
-				member.setPassWord(rs.getString("PASSWORD"));
-				member.setSsn(rs.getString("SSN"));
+				
 				list.add(member);
 			}
 		} catch (Exception e) {
@@ -97,6 +98,8 @@ public class MemberDaoImpl implements MemberDao{
 					id.setRoll(rs.getString("ROLL"));
 					id.setPassWord(rs.getString("PASSWORD"));
 					id.setSsn(rs.getString("SSN"));
+					id.setGender(rs.getString("GENDER"));
+					id.setSubject(rs.getString("SUBJECT"));
 					} while(rs.next());
 			}else {
 				id = null;
@@ -125,20 +128,25 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public void updateMember(MemberBean member) {
 		String[] pass = member.getPassWord().split("/");
-		member = selectById(member);
-		if(pass[0].equals(member.getPassWord())) {
-			try {
-				int rs = DataBaseFactory.createDataBase(Vendor.ORACLE, DBConstant.USERNAME.toString(), DBConstant.PASSWORD.toString())
-						.getConnection()
-						.createStatement()
-						.executeUpdate(String.format(MemberQuery.UPDATE_MEMBER.toString(),
-								pass[1],
-								member.getMemId()));
-			} catch (Exception e) {
-			}
-		}
-		else {
-			member = null;
+		System.out.println("쿼리실행중입니다===================");
+		System.out.println(String.format(MemberQuery.UPDATE_MEMBER.toString(),
+							pass[1],
+							member.getTeamId(),
+							member.getRoll(),
+							member.getMemId(),
+							pass[0]));
+		try {
+			int rs = DataBaseFactory.createDataBase(Vendor.ORACLE, DBConstant.USERNAME.toString(), DBConstant.PASSWORD.toString())
+					.getConnection()
+					.createStatement()
+					.executeUpdate(String.format(MemberQuery.UPDATE_MEMBER.toString(),
+							pass[1],
+							member.getTeamId(),
+							member.getRoll(),
+							member.getMemId(),
+							pass[0]));
+		} catch (Exception e) {
+			
 		}
 	}
 	@Override
@@ -160,6 +168,7 @@ public class MemberDaoImpl implements MemberDao{
 	}
 	@Override
 	public boolean login(MemberBean bean) {
+		boolean flag = false;
 		try {
 			ResultSet rs = DataBaseFactory.createDataBase(Vendor.ORACLE, DBConstant.USERNAME.toString(), DBConstant.PASSWORD.toString())
 					.getConnection()
@@ -170,20 +179,12 @@ public class MemberDaoImpl implements MemberDao{
 									bean.getMemId(),
 									bean.getPassWord()));
 			if(rs.next()) {
-				do{
-					bean.setTeamId(rs.getString("TEAM_ID"));
-					bean.setName(rs.getString("NAME"));
-					bean.setAge(rs.getString("AGE"));
-					bean.setRoll(rs.getString("ROLL"));
-					bean.setSsn(rs.getString("SSN"));
-				}while(rs.next());} 
-			else {
-					bean = null;
+				flag = true;
 			}
 		}catch (Exception e) {
 				e.printStackTrace();
 		}		
-		return bean != null;
+		return flag;
 	}
 	@Override
 	public boolean iDDualCheck(String id) {

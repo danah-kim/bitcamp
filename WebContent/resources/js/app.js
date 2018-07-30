@@ -1,30 +1,35 @@
-(function() {
+/*(function() {
 	
-}());
+}());*/
 
-var router = (()=>{
+// 에러나면 바로 보여주겠음
+"use strict";
+
+let router = (()=>{
 // key default value is String
 	return {move : x => {
-		location.href = x[0] + "/" + x[1] 
-		+ ".do?action=" + x[2] 
-		+ "&page=" + x[3];
+		location.href = 
+			x.context + '/' 
+			+ x.domain
+			+ '.do?action=' + x.action 
+			+ '&page=' + x.page;
 		}
 	};
 })();
 
-var service = (()=>{
+let service = (()=>{
 	return {
 		null_chk : x =>{
-			var i = 0;
-			var json = {
+			let i = 0;
+			let json = {
 					checker : true,
-					text : '필수입력값이 없습니다.'
+					text : '필수입력값이 입력되지 않았습니다.'
 			};
+			
 			for (i in x){
-				if(x[i] === ''){
-					json.checker = false;
-				}
+				if(x[i] === '') json.checker = false;
 			}
+			
 			return json;
 		}
 /*		null_chk : member =>{
@@ -45,13 +50,14 @@ var service = (()=>{
 	};
 })();
 
-var member = (()=>{
-	var _id,_pw,_name,_gender,_ssn,_age,_teamid,_roll,_subjec,join;
-	var setId = x => {this._id = x;}
-	var setPw = x => {this._pw = x;}
-	var setName = x => {this._name = x;}
-	var setGender = x => {
+let member = (()=>{
+	let _id,_pw,_name,_gender,_ssn,_age,_teamid,_roll,_subjec,join;
+	let setId = x => {this._id = x;}
+	let setPw = x => {this._pw = x;}
+	let setName = x => {this._name = x;}
+	let setGender = x => {
 		var rs;
+		
 		switch (x) {
 			case '1':
 			case '3':
@@ -66,23 +72,24 @@ var member = (()=>{
 			default:
 				rs = "?";
 				break;
-			}
+		}
+		
 		this._gender = rs;}
-	var setSsn = x => {this._ssn = x;}
-	var setAge = x => {
-		this._age = new Date().getFullYear() - Number(19 + x.substring(0, 2)) + 1;}
-	var setTeamid = x => {this._teamid = x;}
-	var setRoll = x => {this._roll = x;}
-	var setSubject = x => {this._subject = x;}
-	var getId = () => {return this._id;}
-	var getPw = () => {return this._pw;}
-	var getName = () => {return this._name;}
-	var getGender = () => {return this._gender;}
-	var getSsn = () => {return this._ssn;}
-	var getAge = () => {return this._age;}
-	var getTeamid = () => {return this._teamid;}
-	var getRoll = () => {return this._roll;}
-	var getSubject = () => {return this._subject;}
+	let setSsn = x => {this._ssn = x;}
+	let setAge = x => {this._age = new Date().getFullYear() - +(19 + x.substring(0, 2)) + 1;}
+	let setTeamid = x => {this._teamid = x;}
+	let setRoll = x => {this._roll = x;}
+	let setSubject = x => {this._subject = x;}
+	let getId = () => {return this._id;}
+	let getPw = () => {return this._pw;}
+	let getName = () => {return this._name;}
+	let getGender = () => {return this._gender;}
+	let getSsn = () => {return this._ssn;}
+	let getAge = () => {return this._age;}
+	let getTeamid = () => {return this._teamid;}
+	let getRoll = () => {return this._roll;}
+	let getSubject = () => {return this._subject;}
+	
 	return {
 		setId : setId,
 		setPw : setPw,

@@ -14,19 +14,18 @@
 			<input class="login_input_box" type="text" name="user_pw">
 			<p><br/></p>
 			<input type="hidden" name="action" value="login"/>
-	 		<input type="hidden" name="page" value="mypage"/>
 			<input id="login_form_but" type="button" value="제출">
 		</form>
 	</div>
 	<script>
 		document.getElementById('login_form_but').addEventListener('click',function(){
 			x = service.null_chk([document.getElementById('login_form_box').user_id.value, document.getElementById('login_form_box').user_pw.value]);
-			if(x.checker){
+			if (x.checker) {
 				alert('유효성 체크 통과!');
 				document.getElementById('login_form_box').action = "${context}/member.do";
 				document.getElementById('login_form_box').method = "post";
 				document.getElementById('login_form_box').submit();
-			}else{
+			} else {
 				alert(x.text);
 			}
 		});

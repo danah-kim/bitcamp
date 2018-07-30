@@ -7,10 +7,10 @@
 <script>
 	document.getElementById('move_loging_form').addEventListener('click', function() {
 		alert('로그인 클릭 이벤트 체크');
-		router.move(['${context}', 'member' , 'move' , 'user_login_form']);
+		router.move({context : '${context}', domain : 'member', action : 'move', page : 'user_login_form'});
 	});
 	document.getElementById('move_join_form').addEventListener('click', function() {
 		alert('가입 클릭 이벤트 체크');
-		router.move(['${context}', 'member' , 'move' , 'join_form']);
+		router.move({context : '${context}', domain : 'member', action : 'move', page : 'join_form'});
 	});
 </script>

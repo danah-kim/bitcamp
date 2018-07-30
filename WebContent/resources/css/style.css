@@ -104,7 +104,7 @@ div#content{
 }
 div#content_box{
 	clear: both;
-	color : #ff8080;
+	color : #0080ff;
 	margin-top: 40px;
 }
 div#footer{
@@ -115,6 +115,16 @@ div#footer{
 	padding:  : 10px 0;
 	line-height: normal;
 	font-size: 1.5em;
+}
+
+div#mypage_content_box{
+	color: #000000;
+	text-align: center;
+}
+ul#mypage_info_list li{
+	text-align : left;
+	display: inline;
+	list-style: none;
 }
 /*-- end main & main page --*/
 
@@ -127,4 +137,6 @@ h1 {text-align: center;}
 .login_input_box_font {font-size: 15px; color: orange; font-weight: bold;}
 #submit_but {font-size: 20px; background-color: red; color : white; font-weight: bold;}
 end user_login */
+
+
 
