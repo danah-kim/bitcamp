@@ -65,10 +65,6 @@ public class MemberController extends HttpServlet {
 			System.out.println("login 들어옴");
 			if(request.getAttribute("match").equals("TRUE")) {
 				System.out.println("로그인성공");
-				// command는 Java의 영역이기 때문에 session의 영역이 아님
-				request.getSession().setAttribute("user", request.getAttribute("user"));
-				/*Receiver.cmd.setPage("mypage");
-				Receiver.cmd.execute();*/
 				Carrier.forward(request, response);
 			}else {
 				System.out.println("로그인실패");

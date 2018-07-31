@@ -36,12 +36,12 @@ public enum MemberQuery {
 					+ "SET PASSWORD = '%s', "
 					+ "TEAM_ID = '%s', "
 					+ "ROLL='%s' "
-					+ "WHERE MEM_ID LIKE '%s' "
-					+ "AND PASSWORD LIKE '%s'";
+					+ "WHERE MEM_ID LIKE '%s' ";
 			break;
 		case DELETE_MEMBER :
 			query = "DELETE MEMBER "
-					+ "WHERE MEM_ID LIKE '%s'";
+					+ "WHERE MEM_ID LIKE '%s' "
+					+ "AND PASSWORD LIKE '%s'";
 			break;
 		case IDDUALCHECK :
 			query = "SELECT MEM_ID "

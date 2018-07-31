@@ -127,24 +127,15 @@ public class MemberDaoImpl implements MemberDao{
 	}
 	@Override
 	public void updateMember(MemberBean member) {
-		String[] pass = member.getPassWord().split("/");
-		System.out.println("쿼리실행중입니다===================");
-		System.out.println(String.format(MemberQuery.UPDATE_MEMBER.toString(),
-							pass[1],
-							member.getTeamId(),
-							member.getRoll(),
-							member.getMemId(),
-							pass[0]));
 		try {
 			int rs = DataBaseFactory.createDataBase(Vendor.ORACLE, DBConstant.USERNAME.toString(), DBConstant.PASSWORD.toString())
 					.getConnection()
 					.createStatement()
 					.executeUpdate(String.format(MemberQuery.UPDATE_MEMBER.toString(),
-							pass[1],
+							member.getPassWord(),
 							member.getTeamId(),
 							member.getRoll(),
-							member.getMemId(),
-							pass[0]));
+							member.getMemId()));
 		} catch (Exception e) {
 			
 		}
@@ -158,7 +149,8 @@ public class MemberDaoImpl implements MemberDao{
 						.getConnection()
 						.createStatement()
 						.executeUpdate(String.format(MemberQuery.DELETE_MEMBER.toString(),
-								member.getMemId()));
+								member.getMemId(),
+								member.getPassWord()));
 				System.out.println(rs);
 			} catch (Exception e) {
 			}

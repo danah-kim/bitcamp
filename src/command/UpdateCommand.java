@@ -20,12 +20,12 @@ public class UpdateCommand extends Command {
 			case MEMBER :
 				System.out.println("업데이트!!");
 				MemberBean member = new MemberBean();
-				member.setMemId(request.getParameter("id"));
-				member.setPassWord(request.getParameter("old_pw")+"/"+request.getParameter("new_pw"));
+				member.setMemId(((MemberBean)request.getSession().getAttribute("user")).getMemId());
+				member.setPassWord(request.getParameter("new_pw"));
 				member.setTeamId(request.getParameter("teamid"));
 				member.setRoll(request.getParameter("roll"));
 				MemberServiceImpl.getInstance().modifyMember(member);
-				request.setAttribute("user", MemberServiceImpl.getInstance().findByID(member));
+				request.getSession().setAttribute("user", MemberServiceImpl.getInstance().findByID(member));
 				break;
 			default :
 				break;

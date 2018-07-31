@@ -17,12 +17,13 @@
 		alert('정보변경 이동');
 		router.move({context : '${context}', domain : 'member', action : 'move', page : 'update_form'});
 	});
-	document.getElementById('move_member_delete').addEventListener('click', function(){
-		alert('회원탈퇴 이동');
-		router.move({context : '${context}', domian : 'member', action : 'move', page : 'delete_form'});
-	});
 	document.getElementById('move_main').addEventListener('click', function(){
 		alert('로그아웃')
 		router.move({context : '${context}', domain : 'member', action : 'move', page : 'move'});
 	});
+	document.getElementById('move_member_delete').addEventListener('click', function(){
+		alert('회원탈퇴 이동')
+		router.move({context : '${context}', domain : 'member', action : 'move', page : 'delete_form'});
+	});
+	
 </script>

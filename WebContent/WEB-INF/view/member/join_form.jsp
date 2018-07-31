@@ -79,9 +79,6 @@ memId, name, passWord, ssn
 			</tr>
 		</table>
 		<br>
-			<input type="hidden" name="action" value="join"/>
-			<input type="hidden" name="age"/>
-			<input type="hidden" name="ssn"/>
 			<input id="join_form_but" type="button" value="가입하기">
 			<p></p>
 		</form>
@@ -96,15 +93,24 @@ memId, name, passWord, ssn
 				document.getElementById('join_form_box').gender.value
 				]);
 			if(x.checker){
-				document.getElementById('join_form_box').action = "${context}/member.do";
-				document.getElementById('join_form_box').method = "post";
 				member.join([
 					document.getElementById('join_form_box').birth.value,
 					document.getElementById('join_form_box').gender.value]);
-				document.getElementById('join_form_box').ssn.value = member.getSsn();
-				document.getElementById('join_form_box').age.value = member.getAge();
-				document.getElementById('join_form_box').gender.value = member.getGender();
-				/* document.getElementById('join_form_box').submit(); */
+
+				var x = {age : member.getAge(), ssn : member.getSsn(), gender : member.getGender(),
+						action : 'join'};
+				
+				for(var key in x){
+					var node = document.createElement('input');
+					node.setAttribute('type', 'hidden');
+					node.setAttribute('name', key);
+					node.setAttribute('value', x[key]);
+					document.getElementById('join_form_box').appendChild(node);
+				}
+				
+				document.getElementById('join_form_box').action = "${context}/member.do";
+				document.getElementById('join_form_box').method = "post";
+				document.getElementById('join_form_box').submit(); 
 			}else{alert(x.text);}
 		});
 	</script>

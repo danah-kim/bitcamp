@@ -3,7 +3,6 @@ package command;
 import javax.servlet.http.HttpServletRequest;
 
 import domain.MemberBean;
-import enums.Domain;
 import service.MemberServiceImpl;
 
 public class LoginCommand extends Command {
@@ -22,7 +21,7 @@ public class LoginCommand extends Command {
 		member.setPassWord(request.getParameter("user_pw"));
 		if(MemberServiceImpl.getInstance().login(member)) {
 			request.setAttribute("match", "TRUE");
-			request.setAttribute("user", MemberServiceImpl.getInstance().findByID(member));
+			request.getSession().setAttribute("user", MemberServiceImpl.getInstance().findByID(member));
 		}else {
 			request.setAttribute("match", "FALSE");
 		}

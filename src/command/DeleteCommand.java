@@ -19,9 +19,10 @@ public class DeleteCommand extends Command {
 		switch (Domain.valueOf(domain.toUpperCase())) {
 			case MEMBER :
 				MemberBean member = new MemberBean();
-				member.setMemId(request.getParameter("delete_id"));
-				member.setPassWord(request.getParameter("delete_password"));
+				member.setMemId(((MemberBean)request.getSession().getAttribute("user")).getMemId());
+				member.setPassWord(request.getParameter("pw1"));
 				MemberServiceImpl.getInstance().removeMember(member);
+				request.getSession().invalidate();
 				break;
 			default:
 				break;

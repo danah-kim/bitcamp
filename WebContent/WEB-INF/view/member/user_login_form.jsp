@@ -13,7 +13,6 @@
 			<p class="login_input_box_font">PW : </p>
 			<input class="login_input_box" type="text" name="user_pw">
 			<p><br/></p>
-			<input type="hidden" name="action" value="login"/>
 			<input id="login_form_but" type="button" value="제출">
 		</form>
 	</div>
@@ -22,6 +21,11 @@
 			x = service.null_chk([document.getElementById('login_form_box').user_id.value, document.getElementById('login_form_box').user_pw.value]);
 			if (x.checker) {
 				alert('유효성 체크 통과!');
+				
+				var node = document.createElement('input');
+				node.innerHTML = '<input type="hidden" name="action" value="login"/>';
+				document.getElementById('login_form_box').appendChild(node);
+				
 				document.getElementById('login_form_box').action = "${context}/member.do";
 				document.getElementById('login_form_box').method = "post";
 				document.getElementById('login_form_box').submit();

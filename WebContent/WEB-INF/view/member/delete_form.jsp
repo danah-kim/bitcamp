@@ -1,31 +1,78 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8" />
-	<title>회원 탈퇴</title>
-	<link rel="stylesheet" type="text/css" href="${css}/style.css"/>
-</head>
+<jsp:include page="../common/head.jsp"/>
 <body>
-	<h3>회원 탈퇴</h3>
-	<form action="${context}/member.do" onsubmit="return new Common.sendForm()">
-	<table>
-		<tr>
-			<td>아이디</td>
-			<td>
-				<input type="text" name="delete_id"/>
-			</td>
-		</tr>
-		<tr>
-			<td>비밀번호</td>
-			<td>
-				<input type="text" name="delete_password"/>
-			</td>
-		</tr>
-	</table>
-	<br />
-	<input type="hidden" name="action" value="delete"/>
-	<input type="submit" onclick="alert('탈퇴완료!')" value="회원탈퇴"/>
-	</form>
+	<div id="wrapper">
+		<div id="header">
+			<jsp:include page="../common/title_box.jsp"/>
+			<jsp:include page="menu_box.jsp"/>
+		</div> 
+		<div id="content">
+			<h3>회원 탈퇴</h3>
+			<form id="delete_form_box">
+				<table>
+					<tr>
+						<td>아이디</td>
+						<td>${user.memId}</td>
+					</tr>
+					<tr>
+						<td>비밀번호</td>
+						<td>
+							<input type="text" name="pw1"/>
+						</td>
+					</tr>
+					<tr>
+						<td>비밀번호 확인</td>
+						<td>
+							<input type="text" name="pw2"/>
+						</td>
+					</tr>
+				</table>
+				<br />
+				<input type="hidden" name="action" value="delete"/>
+				<input id="delete_form_but" type="button" value="회원탈퇴"/>
+			</form>
+		</div>
+		<div id="footer">
+			<jsp:include page="../common/footer_box.jsp"/>
+		</div>
+	</div>
+<script>
+	document.getElementById('delete_form_but').addEventListener('click', function() {
+		alert('삭제버튼 클릭');
+
+		x = service.null_chk([document.getElementById('delete_form_box').pw1.value, document.getElementById('delete_form_box').pw2.value]);
+
+		if(!x.checker){
+			alert(x.text);
+		}else if(document.getElementById('delete_form_box').pw1.value !== document.getElementById('delete_form_box').pw2.value){
+			alert('기존비밀번호와 확인 비밀번호가 일치하지 않습니다.');
+		}else if('${user.passWord}' !== document.getElementById('delete_form_box').pw1.value){
+			alert('기존비밀번호가 일치하지 않습니다.');
+		}else{
+			alert('탈퇴완료');
+
+			var node = document.createElement('input');
+			node.innerHTML = '<input type="hidden" name="action" value="delete"/>';
+			document.getElementById('delete_form_box').appendChild(node);
+			
+			var x = {age : member.getAge(), ssn : member.getSsn(), gender : member.getGender(),
+					action : 'join'};
+			
+			for(var key in x){
+				var node = document.createElement('input');
+				node.setAttribute('type', 'hidden');
+				node.setAttribute('name', key);
+				node.setAttribute('value', x[key]);
+				document.getElementById('join_form_box').appendChild(node);
+			}
+			
+			document.getElementById('delete_form_box').action = "${context}/member.do";
+			document.getElementById('delete_form_box').method = "post";
+			document.getElementById('delete_form_box').submit();
+		}
+	});
+</script>
 </body>
 </html>

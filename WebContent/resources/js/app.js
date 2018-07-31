@@ -13,6 +13,7 @@ let router = (()=>{
 			+ x.domain
 			+ '.do?action=' + x.action 
 			+ '&page=' + x.page;
+		System.out.print(move());
 		}
 	};
 })();
@@ -91,24 +92,24 @@ let member = (()=>{
 	let getSubject = () => {return this._subject;}
 	
 	return {
-		setId : setId,
-		setPw : setPw,
-		setName : setName,
-		setGender : setGender,
-		setSsn : setSsn,
-		setAge : setAge,
-		setTeamid : setTeamid,
-		setRoll : setRoll,
-		setSubject : setSubject,
-		getId : getId,
-		getPw : getPw,
-		getName : getName,
-		getGender : getGender,
-		getSsn : getSsn,
-		getAge : getAge,
-		getTeamid : getTeamid,
-		getRoll : getRoll,
-		getSubject : getSubject,
+		setId,
+		setPw,
+		setName,
+		setGender,
+		setSsn,
+		setAge,
+		setTeamid,
+		setRoll,
+		setSubject,
+		getId,
+		getPw,
+		getName,
+		getGender,
+		getSsn,
+		getAge,
+		getTeamid,
+		getRoll,
+		getSubject,
 		join : x => {
 			setSsn(x[0]+'-'+x[1]);
 			setGender(x[1]);

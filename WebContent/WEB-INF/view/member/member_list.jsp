@@ -5,44 +5,54 @@
 
 <!doctype html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8" />
-	<title>회원목록</title>
-	<link rel="stylesheet" type="text/css" href="${css}/style.css"/>
-</head>
+<jsp:include page="../common/head.jsp"/>
 <body>
-<%
-	List<MemberBean> list = (List<MemberBean>)request.getAttribute("list");
-%>
-	<h3>전체회원수 : <%= list.size() %>명</h3>
-	<table id="mbl_tab_layout">
-		<tr>
-			<th>이름</th>
-			<th>아이디</th>
-			<th>비밀번호</th>
-			<th>팀아이디</th>
-			<th>역할</th>
-			<th>주민번호</th>
-			<th>나이</th>
-		</tr>
-		<% 
-				for(MemberBean m : list){
-		%>
-		<tr>
-			<td><%=	m.getName() %></td>
-			<td><%= m.getMemId() %></td>
-			<td><%= m.getPassWord() %></td>
-			<td><%= m.getTeamId() %></td>
-			<td><%= m.getRoll() %></td>
-			<td><%= m.getSsn() %></td>
-			<td><%= m.getAge() %></td>
-		</tr><%}%>
-	</table>
-	<br />
-	<form action="${context}/admin.do" class="form_box" onsubmit="return sendForm()">
-		<input type="hidden" name="action" value="move"/>
-		<input type="hidden" name="page" value="move"/>
-		<button type="submit" >메인화면으로</button>
-	</form>
+	<div id="wrapper">
+		<div id="header">
+			<jsp:include page="../common/title_box.jsp"/>
+			<jsp:include page="menu_box.jsp"/>
+		</div> 
+		<div id="content">
+			<%
+				List<MemberBean> list = (List<MemberBean>)request.getAttribute("list");
+			%>
+			<h3>전체회원수 : <%= list.size() %>명</h3>
+			<table id="mbl_tab_layout">
+				<tr>
+					<th>이름</th>
+					<th>아이디</th>
+					<th>비밀번호</th>
+					<th>팀아이디</th>
+					<th>역할</th>
+					<th>주민번호</th>
+					<th>나이</th>
+				</tr>
+				<% 
+						for(MemberBean m : list){
+				%>
+				<tr>
+					<td><%=	m.getName() %></td>
+					<td><%= m.getMemId() %></td>
+					<td><%= m.getPassWord() %></td>
+					<td><%= m.getTeamId() %></td>
+					<td><%= m.getRoll() %></td>
+					<td><%= m.getSsn() %></td>
+					<td><%= m.getAge() %></td>
+				</tr><%}%>
+			</table>
+			<br />
+			<form id="move_main_box">
+				<input type="hidden" name="action" value="move"/>
+				<input type="hidden" name="page" value="move"/>
+				<button type="submit" >메인화면으로</button>
+			</form>
+		</div>
+		<div id="footer">
+			<jsp:include page="../common/footer_box.jsp"/>
+		</div>
+	</div>
+	<script>
+	
+	</script>
 </body>
 </html>
