@@ -20,7 +20,7 @@ public class MemberDaoImpl implements MemberDao{
 					.getConnection()
 					.createStatement()
 					.executeUpdate(String.format(MemberQuery.INSERT_MEMBER.toString(),
-							member.getMemId(), member.getPassWord(), member.getName(), member.getSsn(),member.getAge(), member.getTeamId(), member.getRoll()));
+							member.getMemId(), member.getPassWord(), member.getName(), member.getSsn(),member.getAge(), member.getTeamId(), member.getRoll(), member.getGender()));
 			/*ResultSet rs = DataBaseFactory
 					.createDataBase(Vendor.ORACLE, DBConstant.USERNAME.toString(), DBConstant.PASSWORD.toString())
 					.getConnection()

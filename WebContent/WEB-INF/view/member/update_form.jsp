@@ -62,6 +62,7 @@
 		</div>
 	</div>
 <script>
+
 	for(var i=1; i<=4; i++){
 		if(document.getElementById('teamid_'+i).value === '${user.teamId}'){
 			document.getElementById('teamid_'+i).checked = true;
@@ -77,24 +78,35 @@
 	}
 	
 	document.getElementById('update_form_but').addEventListener('click', function(){
-		if(document.getElementById('update_form_box').old_pw.value === ''){
+		var form = document.getElementById('update_form_box');
+		var x = {action : 'update'};
+		
+		if(form.old_pw.value === ''){
 			alert('기존 비밀번호를 입력해 주세요.');
-		}else if('${user.passWord}' !== document.getElementById('delete_form_box').old_pw.value){
+		}else if('${user.passWord}' !== form.old_pw.value){
 			alert('기존 비밀번호가 일치하지 않습니다.');
-		}else if(document.getElementById('update_form_box').new_pw.value === document.getElementById('update_form_box').old_pw.value) {
+		}else if(form.new_pw.value === form.old_pw.value) {
 			alert('기존 비밀번호와 변경 비밀번호가 동일합니다.');
 		}else{
-			document.getElementById('update_form_box').new_pw.value 
-				= document.getElementById('update_form_box').new_pw.value 
-				|| document.getElementById('update_form_box').old_pw.value;
+			form.new_pw.value 
+				= form.new_pw.value 
+				|| form.old_pw.value;
 
-			var node = document.createElement('input');
+			/* var node = document.createElement('input');
 			node.innerHTML = '<input type="hidden" name="action" value="update"/>';
-			document.getElementById('update_form_box').appendChild(node);
+			form.appendChild(node); */
 
-			document.getElementById('update_form_box').action = "${context}/member.do";
-			document.getElementById('update_form_box').method = "post";
-			document.getElementById('update_form_box').submit();
+		for(var key in x){
+			var node = document.createElement('input');
+			node.setAttribute('type', 'hidden');
+			node.setAttribute('name', key);
+			node.setAttribute('value', x[key]);
+			form.appendChild(node);
+		}
+
+		form.action = "${context}/member.do";
+		form.method = "post";
+		form.submit();
 		}
 	});
 </script>

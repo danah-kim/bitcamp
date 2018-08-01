@@ -45,7 +45,6 @@ memId, name, passWord, ssn
 			<tr>
 				<td> 소속팀</td>
 				<td>
-					<input type="radio" name="teamid" value=""/>없음
 					<input type="radio" name="teamid" value="ATEAM"/>걍놀자
 					<input type="radio" name="teamid" value="HTEAM"/>지은이네
 					<input type="radio" name="teamid" value="STEAM"/>왕거북이
@@ -85,32 +84,36 @@ memId, name, passWord, ssn
 	</div>
 	<script>
 		document.getElementById('join_form_but').addEventListener('click',function(){
-			x = service.null_chk([
-				document.getElementById('join_form_box').id.value,
-				document.getElementById('join_form_box').pw.value,
-				document.getElementById('join_form_box').name.value,
-				document.getElementById('join_form_box').birth.value,
-				document.getElementById('join_form_box').gender.value
+			var form = document.getElementById('join_form_box');
+			
+			var x = service.null_chk([
+				form.id.value,
+				form.pw.value,
+				form.name.value,
+				form.birth.value,
+				form.gender.value
 				]);
 			if(x.checker){
 				member.join([
-					document.getElementById('join_form_box').birth.value,
-					document.getElementById('join_form_box').gender.value]);
+					form.birth.value,
+					form.gender.value]);
 
-				var x = {age : member.getAge(), ssn : member.getSsn(), gender : member.getGender(),
-						action : 'join'};
+				var arr = [{type : 'hidden', name : 'age', value : member.getAge()},
+						{type : 'hidden', name : 'ssn', value : member.getSsn()},
+						{type : 'hidden', name : 'gender', value : member.getGender()},
+						{type : 'hidden', name : 'action', value : 'join'}];
 				
-				for(var key in x){
+				for(var i=0; i<4; i++){
 					var node = document.createElement('input');
-					node.setAttribute('type', 'hidden');
-					node.setAttribute('name', key);
-					node.setAttribute('value', x[key]);
-					document.getElementById('join_form_box').appendChild(node);
+					node.setAttribute('type', arr[i].type );
+					node.setAttribute('name', arr[i].name);
+					node.setAttribute('value', arr[i].value);
+					form.appendChild(node);
 				}
 				
-				document.getElementById('join_form_box').action = "${context}/member.do";
-				document.getElementById('join_form_box').method = "post";
-				document.getElementById('join_form_box').submit(); 
+				form.action = "${context}/member.do";
+				form.method = "post";
+				form.submit(); 
 			}else{alert(x.text);}
 		});
 	</script>

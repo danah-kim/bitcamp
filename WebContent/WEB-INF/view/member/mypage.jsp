@@ -8,8 +8,54 @@
 			<jsp:include page="../common/title_box.jsp"/>
 			<jsp:include page="menu_box.jsp"/>
 		</div> 
-		<div id="content">
-			<jsp:include page="content_box.jsp"/>
+		<div id="mypage_content_box">
+			<table>
+			<colgroup>
+			<col style="width: 15%">
+			<col style="width: 15%">
+			<col style="width: 70%">
+			</colgroup>
+			  <tr>
+			    <th colspan="3">
+			    	<p>WELCOM ADMIN HOMEPAGE</p>
+			    	<p> 현재 회원수 : <mark><%-- ${count} --%></mark>명</p>
+			    </th>
+			  </tr>
+			  <tr>
+			    <td colspan="2">이미지</td>
+			    <td rowspan="2" style="text-align: center;">
+					<img src="resources/img/home/test.jpg" alt="이미지">
+				</td>
+			  </tr>
+			  <tr>
+			    <td>
+			    	<ul id="mypage_info_list">
+						<li>아이디 : <br/></li>
+						<li>비밀번호 : <br/></li>
+						<li>이름 : <br/></li>
+						<li>주민등록번호 : <br/></li>
+						<li>성별 : <br/></li>
+						<li>나이 : <br/></li>
+						<li>팀명 : <br/></li>
+						<li>역할 : <br/></li>
+						<li>과목 : <br/></li>
+					</ul>
+				</td>
+			    <td>
+					<ul id="mypage_info_list">
+						<li>${user.memId}<br/></li>
+						<li>**** <br/></li>
+						<li>${user.name}<br/></li>
+						<li>${user.ssn}<br/></li>
+						<li>${user.gender}<br/></li>
+						<li>${user.age}<br/></li>
+						<li>${user.teamId}<br/></li>
+						<li>${user.roll}<br/></li>
+						<li>${user.subject}<br/></li>
+					</ul>
+				</td>
+			  </tr>
+			</table>
 		</div>
 		<div id="footer">
 			<jsp:include page="../common/footer_box.jsp"/>

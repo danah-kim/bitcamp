@@ -11,7 +11,7 @@ public class ListCommand extends Command {
 		setRequest(request);
 		setDomain(request.getServletPath().substring(1, request.getServletPath().indexOf(".")));
 		System.out.println("도메인 : " + domain);
-		setAction(request.getParameter("action"));
+		setAction("move");
 		setPage(request.getParameter("page"));
 		execute();
 	}
@@ -19,6 +19,7 @@ public class ListCommand extends Command {
 	public void execute() {
 		switch (Domain.valueOf(domain.toUpperCase())) {
 		case MEMBER :
+		case ADMIN :
 			System.out.println("리스트 안으로 진입");
 			request.setAttribute("list", MemberServiceImpl.getInstance().memberList());
 			break;

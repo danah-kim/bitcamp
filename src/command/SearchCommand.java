@@ -19,6 +19,7 @@ public class SearchCommand extends Command {
 	public void execute() {
 		switch (Domain.valueOf(domain.toUpperCase())) {
 		case MEMBER :
+		case ADMIN :
 			System.out.println("검색 안으로 진입");
 			request.setAttribute("team", MemberServiceImpl.getInstance().findByWord("TEAM_ID"+"/"+request.getParameter("search_team_id")));
 			break;

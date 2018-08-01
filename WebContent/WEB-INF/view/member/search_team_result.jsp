@@ -10,7 +10,7 @@
 	<div id="wrapper">
 		<div id="header">
 			<jsp:include page="../common/title_box.jsp"/>
-			<jsp:include page="menu_box.jsp"/>
+			<jsp:include page="../admin/menu_box.jsp"/>
 		</div> 
 		<div id="content">
 		<%
@@ -41,7 +41,7 @@
 					</tr><%}%>
 				</table>
 				<br />
-				<form class="search_team_result_form_box" action="${context}/member.do" onsubmit="return new Common().sendForm()">
+				<form class="search_team_result_form_box">
 				<input type="hidden" name="action" value="move"/>
 				<input type="hidden" name="page" value="move"/>
 				<button id="search_team_result_form_but" type="button">메인화면으로</button>

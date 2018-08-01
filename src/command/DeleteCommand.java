@@ -18,6 +18,7 @@ public class DeleteCommand extends Command {
 	public void execute() {
 		switch (Domain.valueOf(domain.toUpperCase())) {
 			case MEMBER :
+			case ADMIN :
 				MemberBean member = new MemberBean();
 				member.setMemId(((MemberBean)request.getSession().getAttribute("user")).getMemId());
 				member.setPassWord(request.getParameter("pw1"));

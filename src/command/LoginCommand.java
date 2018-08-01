@@ -17,8 +17,8 @@ public class LoginCommand extends Command {
 	public void execute() {
 		super.execute();
 		MemberBean member = new MemberBean();
-		member.setMemId(request.getParameter("user_id"));
-		member.setPassWord(request.getParameter("user_pw"));
+		member.setMemId(request.getParameter("id"));
+		member.setPassWord(request.getParameter("pw"));
 		if(MemberServiceImpl.getInstance().login(member)) {
 			request.setAttribute("match", "TRUE");
 			request.getSession().setAttribute("user", MemberServiceImpl.getInstance().findByID(member));

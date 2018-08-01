@@ -29,6 +29,30 @@ public class AdminCotroller extends HttpServlet {
 				Carrier.forward(request, response);
 			}
 			break;
+		case LIST :			
+			System.out.println("memberList 들어옴");
+			Carrier.forward(request, response);
+			break;
+		case SEARCH :
+			System.out.println("searchMemberByTeam 들어옴");
+			Carrier.forward(request, response);
+			break;
+		case RETRIVE :
+			System.out.println("searchMemberById 들어옴");
+			Carrier.forward(request, response);
+			break;
+		case COUNT :
+			System.out.println("memberCount 들어옴");
+			Carrier.forward(request, response);
+			break;
+		case UPDATE :
+			System.out.println("memberUpdate 들어옴");
+			Carrier.redirect(request, response, "/member.do?action=move&page=mypage");
+			break;
+		case DELETE :
+			System.out.println("memberDelete 들어옴");
+			Carrier.redirect(request, response, "");
+			break;
 		default :
 			Carrier.redirect(request, response, "");
 			break;

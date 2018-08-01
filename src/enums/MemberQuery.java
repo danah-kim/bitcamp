@@ -15,9 +15,9 @@ public enum MemberQuery {
 			break;
 		case INSERT_MEMBER :
 			query = "INSERT INTO MEMBER "
-					+ "(MEM_ID, PASSWORD, NAME, SSN, AGE, TEAM_ID, ROLL) "
+					+ "(MEM_ID, PASSWORD, NAME, SSN, AGE, TEAM_ID, ROLL, gender) "
 					+ "VALUES "
-					+ "('%s','%s','%s','%s','%s','%s','%s') ";
+					+ "('%s','%s','%s','%s','%s','%s','%s','%s') ";
 			break;
 		case SELECT_ALL_MEMBER :
 			query = "SELECT * FROM MEMBER";

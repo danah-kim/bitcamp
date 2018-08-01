@@ -1,6 +1,3 @@
-<%@page import="service.MemberServiceImpl"%>
-<%@page import="domain.MemberBean"%>
-<%@page import="java.util.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!doctype html>
@@ -10,7 +7,7 @@
 	<div id="wrapper">
 		<div id="header">
 			<jsp:include page="../common/title_box.jsp"/>
-			<jsp:include page="menu_box.jsp"/>
+			<jsp:include page="../admin/menu_box.jsp"/>
 		</div> 
 		<div id="content">
 			<h3>검색결과</h3><br />
@@ -25,19 +22,17 @@
 						<th>나이 : </th>
 					</tr>
 					<tr>
-						<td>${member.teamId()}</td>
-						<td>${member.name()}</td>
-						<td>${member.memId()}</td>
-						<td>${member.passWord()}</td>
-						<td>${member.roll()}</td>
-						<td>${member.ssn()}</td>
-						<td>${member.age()}</td>
+						<td>${id.teamId}</td>
+						<td>${id.name}</td>
+						<td>${id.memId}</td>
+						<td>${id.passWord}</td>
+						<td>${id.roll}</td>
+						<td>${id.ssn}</td>
+						<td>${id.age}</td>
 					</tr>
 			</table>
 
 			<form id="search_id_result_box">
-				<input type="hidden" name="action" value="move"/>
-				<input type="hidden" name="page" value="move"/>
 				<button id="search_id_result_but" type="button" >메인화면으로</button>
 			</form>
 		</div>
@@ -46,14 +41,23 @@
 		</div>
 	</div>
 	<script>
-		var list = (MemberBean)request.getAttribute("id");
-		document.getElementById('search_id_result_but').addEventListener('click', Function(){
-			document.getElementById('search_id_result_box').action = '${context}/member.do';
-			document.getElementById('search_id_result_box').method = 'get';
+		document.getElementById('search_id_result_but').addEventListener('click', function(){
+			var x = [{type : 'hidden', name : 'action', value : 'move'},
+				{type : 'hidden', name : 'page', value : 'move'}];
+	
+			form.action = '${context}/admin.do';
+			form.method = 'get';
+			
+			for(var i=0; i<2; i++){
+				var node = document.createElement('input');
+				node.setAttribute('type', arr[i].type);
+				node.setAttribute('name', arr[i].name);
+				node.setAttribute('value', arr[i].value);
+				form.appendChild(node);
+			}
+			
 			document.getElementById('search_id_result_box').submit();
-		})
-
-
+		});
 	</script>
 </body>
 </html>

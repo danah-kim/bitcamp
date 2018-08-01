@@ -39,38 +39,28 @@
 		</div>
 	</div>
 <script>
+	
 	document.getElementById('delete_form_but').addEventListener('click', function() {
 		alert('삭제버튼 클릭');
-
-		x = service.null_chk([document.getElementById('delete_form_box').pw1.value, document.getElementById('delete_form_box').pw2.value]);
+		var form = document.getElementById('delete_form_box');
+		var x = service.null_chk([form.pw1.value, form.pw2.value]);
 
 		if(!x.checker){
 			alert(x.text);
-		}else if(document.getElementById('delete_form_box').pw1.value !== document.getElementById('delete_form_box').pw2.value){
+		}else if(form.pw1.value !== form.pw2.value){
 			alert('기존비밀번호와 확인 비밀번호가 일치하지 않습니다.');
-		}else if('${user.passWord}' !== document.getElementById('delete_form_box').pw1.value){
+		}else if('${user.passWord}' !== form.pw1.value){
 			alert('기존비밀번호가 일치하지 않습니다.');
 		}else{
 			alert('탈퇴완료');
-
+			
 			var node = document.createElement('input');
 			node.innerHTML = '<input type="hidden" name="action" value="delete"/>';
-			document.getElementById('delete_form_box').appendChild(node);
+			form.appendChild(node);
 			
-			var x = {age : member.getAge(), ssn : member.getSsn(), gender : member.getGender(),
-					action : 'join'};
-			
-			for(var key in x){
-				var node = document.createElement('input');
-				node.setAttribute('type', 'hidden');
-				node.setAttribute('name', key);
-				node.setAttribute('value', x[key]);
-				document.getElementById('join_form_box').appendChild(node);
-			}
-			
-			document.getElementById('delete_form_box').action = "${context}/member.do";
-			document.getElementById('delete_form_box').method = "post";
-			document.getElementById('delete_form_box').submit();
+			form.action = "${context}/member.do";
+			form.method = "post";
+			form.submit();
 		}
 	});
 </script>

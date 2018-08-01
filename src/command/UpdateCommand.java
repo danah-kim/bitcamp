@@ -11,13 +11,14 @@ public class UpdateCommand extends Command {
 		setRequest(request);
 		setDomain(request.getServletPath().substring(1, request.getServletPath().indexOf(".")));
 		setAction(request.getParameter("action"));
-		setPage("mypage");
+		setPage(request.getParameter("page"));
 		execute();
 	}
 	@Override
 	public void execute() {
 		switch(Domain.valueOf(domain.toUpperCase())){
 			case MEMBER :
+			case ADMIN :
 				System.out.println("업데이트!!");
 				MemberBean member = new MemberBean();
 				member.setMemId(((MemberBean)request.getSession().getAttribute("user")).getMemId());

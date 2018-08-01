@@ -13,6 +13,7 @@ h1{
 	font-size: 2em;
 	padding-bottom: 0;
 	margin-bottom: 0;
+	text-align: center;
 }
 
 /*-- End common style--*/
@@ -116,27 +117,84 @@ div#footer{
 	line-height: normal;
 	font-size: 1.5em;
 }
+/*-- end main page --*/
 
 div#mypage_content_box{
+	background-color : #ffffff;
 	color: #000000;
-	text-align: center;
+	text-align: -webkit-center;
 }
 ul#mypage_info_list li{
 	text-align : left;
 	display: inline;
 	list-style: none;
 }
-/*-- end main & main page --*/
+/*-- end mypage --*/
 
 
-/* end user_login
-h1 {text-align: center;}
-.margin_center {margin: 0 auto;}
-.login_form_box, .join_form_box {border: 1px solid black; width: 300px; margin: 0 auto;}
-.login_input_box {font-size: 20px; background-color: yellow;}
-.login_input_box_font {font-size: 15px; color: orange; font-weight: bold;}
-#submit_but {font-size: 20px; background-color: red; color : white; font-weight: bold;}
-end user_login */
+div#login_content{width: 90%; margin: 0 auto; text-align: -webkit-center;}
 
+form#login_form_box {border: 3px solid #f1f1f1; width: 50%; background-color: #ffffff;}
 
+div.login_container input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+div.login_container button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+div.login_container button:hover {
+    opacity: 0.8;
+}
+
+div.login_container.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+}
+
+div.login_imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+}
+
+div.login_imgcontainer img.avatar {
+    width: 40%;
+    border-radius: 50%;
+}
+
+div.login_container {
+    padding: 16px;
+    background-color:#f1f1f1
+}
+
+div.login_container span.pw {
+    float: right;
+    padding-top: 16px;
+}
+
+@media screen and (max-width: 300px) {
+		div.login_container span.pw {
+	       display: block;
+	       float: none;
+	    }
+		div.login_container button#login_cancelbtn {
+	       width: 100%;
+	    }
+	}
+
+/* end user_login */
+.bg_color_yellow{background-color: #ffff00}
 

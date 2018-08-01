@@ -8,5 +8,4 @@
 <!-- function 선언 -->
 	<script src="${js}/app.js">
 	</script>
-
 </head>

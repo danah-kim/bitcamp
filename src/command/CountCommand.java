@@ -11,14 +11,15 @@ public class CountCommand extends Command {
 		setRequest(request);
 		setDomain(request.getServletPath().substring(1, request.getServletPath().indexOf(".")));
 		setAction(request.getParameter("action"));
-		setPage(request.getParameter("page"));
+		setPage(request.getParameter("move"));
 		execute();
 	}
 	@Override
 	public void execute() {
 		switch(Domain.valueOf(domain.toUpperCase())) {
 		case MEMBER :
-			request.setAttribute("count", MemberServiceImpl.getInstance().countMember());	
+		case ADMIN :
+			request.getSession().setAttribute("count", MemberServiceImpl.getInstance().countMember());
 			break;
 		default:
 			break;

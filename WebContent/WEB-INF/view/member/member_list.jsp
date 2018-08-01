@@ -10,14 +10,11 @@
 	<div id="wrapper">
 		<div id="header">
 			<jsp:include page="../common/title_box.jsp"/>
-			<jsp:include page="menu_box.jsp"/>
+			<jsp:include page="../common/menu_box.jsp"/>
 		</div> 
 		<div id="content">
-			<%
-				List<MemberBean> list = (List<MemberBean>)request.getAttribute("list");
-			%>
-			<h3>전체회원수 : <%= list.size() %>명</h3>
-			<table id="mbl_tab_layout">
+			<%-- <h3>전체회원수 : <%= list.size() %>명</h3> --%>
+			<table id="member_list_form_box">
 				<tr>
 					<th>이름</th>
 					<th>아이디</th>
@@ -27,10 +24,10 @@
 					<th>주민번호</th>
 					<th>나이</th>
 				</tr>
-				<% 
+				<%-- <% 
 						for(MemberBean m : list){
-				%>
-				<tr>
+				%> --%>
+				<%-- <tr>
 					<td><%=	m.getName() %></td>
 					<td><%= m.getMemId() %></td>
 					<td><%= m.getPassWord() %></td>
@@ -38,13 +35,13 @@
 					<td><%= m.getRoll() %></td>
 					<td><%= m.getSsn() %></td>
 					<td><%= m.getAge() %></td>
-				</tr><%}%>
+				</tr><%}%> --%>
 			</table>
 			<br />
-			<form id="move_main_box">
+			<form id="member_list_form_box">
 				<input type="hidden" name="action" value="move"/>
 				<input type="hidden" name="page" value="move"/>
-				<button type="submit" >메인화면으로</button>
+				<button type="member_list_form_but" >메인화면으로</button>
 			</form>
 		</div>
 		<div id="footer">
@@ -52,7 +49,13 @@
 		</div>
 	</div>
 	<script>
-	
+		var list = (List<MemberBean>)request.getAttribute("list");
+
+		document.getElementById('member_list_form_but').addEventListener('click', Function(){
+			document.getElementById('member_list_form_box').action = '${context}/member.do';
+			document.getElementById('member_list_form_box').method = 'get';
+			document.getElementById('member_list_form_box').submit();
+		})
 	</script>
 </body>
 </html>

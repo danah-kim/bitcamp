@@ -13,7 +13,6 @@ let router = (()=>{
 			+ x.domain
 			+ '.do?action=' + x.action 
 			+ '&page=' + x.page;
-		System.out.print(move());
 		}
 	};
 })();
@@ -33,21 +32,27 @@ let service = (()=>{
 			
 			return json;
 		}
-/*		null_chk : member =>{
-			var count = 0;
-			for (x in member){
-				if(member[x] === ''){
-					count += 1;
+	};
+})();
+
+var admin = (()=>{
+	return{
+		check : x => {
+			var isAdmin = confirm('관리자입니까');
+			if(isAdmin){
+				var password = prompt('관리자비번을 입력바랍니다');
+				if(password == 1){
+						alert('관리자페이지 이동');
+						router.move({
+							context : x, 
+							domain : 'admin', 
+							action : 'list', 
+							page : 'main'});
 				}
+			}else{
+				alert('관리자만 접근이 허용 됩니다.');
 			}
-			if(count == 0){
-				alert('로그인');
-				return true;
-				}else{
-					alert('입력해주세요');
-					return false;
-					}
-			}*/
+		}
 	};
 })();
 

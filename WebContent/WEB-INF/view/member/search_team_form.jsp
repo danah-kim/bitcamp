@@ -7,7 +7,7 @@
 	<div id="wrapper">
 		<div id="header">
 			<jsp:include page="../common/title_box.jsp"/>
-			<jsp:include page="menu_box.jsp"/>
+			<jsp:include page="../admin/menu_box.jsp"/>
 		</div> 
 		<div id="content">
 			<form id="search_team_form_box">
