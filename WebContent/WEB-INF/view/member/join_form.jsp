@@ -8,30 +8,30 @@ memId, name, passWord, ssn
 <jsp:include page="../common/head.jsp"/>
 <body>
 	<div>
-		<form id="join_form_box">
+		<form id="joinFormBox">
 		<h1>회원가입</h1>
 		<table id="join_table">
 			<tr>
-				<td id="join_id"> 아이디</td>
+				<td id="joinId"> 아이디</td>
 				<td>
-					<input type="text" name="id">
-					<input id="join_id_chk" type="button" value="중복확인">
+					<input id="joinIDChkText" type="text" name="id">
+					<input id="joinIdChkBtn" type="button" value="중복확인">
 				</td>
 			</tr>
 			<tr>
-				<td id="join_password">비밀번호</td>
+				<td id="joinPassword">비밀번호</td>
 				<td>
 					<input type="text" name="pw">
 				</td>
 			</tr>
 			<tr>
-				<td id="join_name"> 이름</td>
+				<td id="joinName"> 이름</td>
 				<td>
 					<input type="text" name="name">
 				</td>
 			</tr>
 			<tr>
-				<td id="join_birth"> 생년월일</td>
+				<td id="joinBirth"> 생년월일</td>
 				<td>
 					<input type="text" 
 						   name="birth"
@@ -78,44 +78,12 @@ memId, name, passWord, ssn
 			</tr>
 		</table>
 		<br>
-			<input id="join_form_but" type="button" value="가입하기">
+			<input id="joinFormBut" type="button" value="가입하기">
 			<p></p>
 		</form>
 	</div>
-	<script>
-		document.getElementById('join_form_but').addEventListener('click',function(){
-			var form = document.getElementById('join_form_box');
-			
-			var x = service.null_chk([
-				form.id.value,
-				form.pw.value,
-				form.name.value,
-				form.birth.value,
-				form.gender.value
-				]);
-			if(x.checker){
-				member.join([
-					form.birth.value,
-					form.gender.value]);
-
-				var arr = [{type : 'hidden', name : 'age', value : member.getAge()},
-						{type : 'hidden', name : 'ssn', value : member.getSsn()},
-						{type : 'hidden', name : 'gender', value : member.getGender()},
-						{type : 'hidden', name : 'action', value : 'join'}];
-				
-				for(var i=0; i<4; i++){
-					var node = document.createElement('input');
-					node.setAttribute('type', arr[i].type );
-					node.setAttribute('name', arr[i].name);
-					node.setAttribute('value', arr[i].value);
-					form.appendChild(node);
-				}
-				
-				form.action = "${context}/member.do";
-				form.method = "post";
-				form.submit(); 
-			}else{alert(x.text);}
-		});
-	</script>
+<script>
+	member.join('${context}');
+</script>
 </body>
 </html>

@@ -7,9 +7,7 @@ public class Carrier {
 	public static void forward(HttpServletRequest request,	HttpServletResponse response) {
 		System.out.println("뷰 : " + Receiver.cmd.getView());
 		try {
-			request
-			.getRequestDispatcher(Receiver.cmd.getView())
-			.forward(request, response);
+			request.getRequestDispatcher(Receiver.cmd.getView()).forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		

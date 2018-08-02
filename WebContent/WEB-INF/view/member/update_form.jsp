@@ -10,7 +10,7 @@
 		</div> 
 		<div id="content">
 			<h3>개인정보 변경</h3>
-			<form id="update_form_box">
+			<form id="updateFormBox">
 				<table>
 					<tr>
 						<td>아이디</td>
@@ -35,10 +35,10 @@
 					<tr>
 						<td>팀 변경(현재팀 : ${user.teamId})</td>
 						<td>
-							<input type="radio" id="teamid_1" name="teamid" value="ATEAM"/>걍놀자
-							<input type="radio" id="teamid_2" name="teamid" value="HTEAM"/>지은이네
-							<input type="radio" id="teamid_3" name="teamid" value="STEAM"/>왕거북이
-							<input type="radio" id="teamid_4" name="teamid" value="CTEAM"/>코딩짱
+							<input class= "teamid" type="radio" name="teamid" value="ATEAM"/>걍놀자
+							<input class= "teamid" type="radio" name="teamid" value="HTEAM"/>지은이네
+							<input class= "teamid" type="radio" name="teamid" value="STEAM"/>왕거북이
+							<input class= "teamid" type="radio" name="teamid" value="CTEAM"/>코딩짱
 						</td>
 					</tr>
 					<tr>
@@ -54,7 +54,7 @@
 						</td>
 					</tr>
 				</table><br/>
-				<input id="update_form_but" type="button" value="변경하기"/>
+				<input id="updateFormBut" type="button" value="변경하기"/>
 			</form>
 		</div>
 		<div id="footer">
@@ -62,53 +62,7 @@
 		</div>
 	</div>
 <script>
-
-	for(var i=1; i<=4; i++){
-		if(document.getElementById('teamid_'+i).value === '${user.teamId}'){
-			document.getElementById('teamid_'+i).checked = true;
-		}
-	}
-	
-	var roll = document.getElementById('roll');
-
-	for(var i=0; i<roll.options.length; i++){
-		if(roll.options[i].value === '${user.roll}'){
-			roll.options[i].setAttribute("selected", "selected");
-		}
-	}
-	
-	document.getElementById('update_form_but').addEventListener('click', function(){
-		var form = document.getElementById('update_form_box');
-		var x = {action : 'update'};
-		
-		if(form.old_pw.value === ''){
-			alert('기존 비밀번호를 입력해 주세요.');
-		}else if('${user.passWord}' !== form.old_pw.value){
-			alert('기존 비밀번호가 일치하지 않습니다.');
-		}else if(form.new_pw.value === form.old_pw.value) {
-			alert('기존 비밀번호와 변경 비밀번호가 동일합니다.');
-		}else{
-			form.new_pw.value 
-				= form.new_pw.value 
-				|| form.old_pw.value;
-
-			/* var node = document.createElement('input');
-			node.innerHTML = '<input type="hidden" name="action" value="update"/>';
-			form.appendChild(node); */
-
-		for(var key in x){
-			var node = document.createElement('input');
-			node.setAttribute('type', 'hidden');
-			node.setAttribute('name', key);
-			node.setAttribute('value', x[key]);
-			form.appendChild(node);
-		}
-
-		form.action = "${context}/member.do";
-		form.method = "post";
-		form.submit();
-		}
-	});
+	member.update(['${context}','${user.passWord}','${user.teamId}','${user.roll}']);
 </script>
 </body>
 </html>

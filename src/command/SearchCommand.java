@@ -32,14 +32,8 @@ public class SearchCommand extends Command {
 						y = "(SELECT TEAM_ID from RPROJECT_TEAM WHERE TEAM_NAME LIKE '"+request.getParameter("word")+"')";
 						break;
 					case "age" :
-						y = request.getParameter("word");
-						break;
 					case "roll" :
-						y = request.getParameter("word");
-						break;
 					case "gender" :
-						y = request.getParameter("word");
-						break;
 					case "subject" :
 						y = request.getParameter("word");
 						break;

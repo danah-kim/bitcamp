@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div id="admin_content_box" >
 	<div id="admin_context_box_search">
-		<form id="admin_search_form_box">
+		<form id="adminSearchFormBox">
 			<select id="admin_search_select" name="admin_search_select">
 				<option value="none">검색조건</option>
 				<option value="userid">아이디</option>
@@ -10,7 +10,7 @@
 				<option value="teamName">팀  명</option>
 			</select>
 			<input id="admin_search_text" type="text" placeholder="검색어 입력" name="word"/>
-			<input id="admin_search_btn" type="button" value="검색"/>
+			<input id="adminSearchBtn" type="button" value="검색"/>
 		</form>
 	<p><br/></p>
 	</div>
@@ -40,5 +40,4 @@
 </div>
 <script>
 	admin.main('${context}');
-	alert(${list});
 </script>

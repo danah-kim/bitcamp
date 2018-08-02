@@ -71,6 +71,10 @@ public class MemberController extends HttpServlet {
 				Carrier.redirect(request, response, "/member.do?action=move&page=user_login_form");
 			}
 			break;
+		case DUAL :
+			System.out.println("dual 들어옴");
+			Carrier.forward(request, response);
+			break;
 		default :
 			Carrier.redirect(request, response, "");
 			break;
@@ -97,10 +101,10 @@ public class MemberController extends HttpServlet {
 			break;
 		case "join" :
 			member = new MemberBean();
-			member.setMemId(request.getParameter("join_id"));
+			member.setMemId(request.getParameter("joinId"));
 			member.setPassWord(request.getParameter("join_pw"));
-			member.setName(request.getParameter("join_name"));
-			member.setSsn(request.getParameter("join_birth")+request.getParameter("join_gender"));
+			member.setName(request.getParameter("joinName"));
+			member.setSsn(request.getParameter("joinBirth")+request.getParameter("join_gender"));
 			member.setTeamId("");
 			member.setRoll("");
 			MemberServiceImpl.getInstance().createMember(member);

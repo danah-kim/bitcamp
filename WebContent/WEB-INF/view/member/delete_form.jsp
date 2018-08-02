@@ -10,7 +10,7 @@
 		</div> 
 		<div id="content">
 			<h3>회원 탈퇴</h3>
-			<form id="delete_form_box">
+			<form id="deleteFormBox">
 				<table>
 					<tr>
 						<td>아이디</td>
@@ -31,7 +31,7 @@
 				</table>
 				<br />
 				<input type="hidden" name="action" value="delete"/>
-				<input id="delete_form_but" type="button" value="회원탈퇴"/>
+				<input id="deleteFormBut" type="button" value="회원탈퇴"/>
 			</form>
 		</div>
 		<div id="footer">
@@ -39,30 +39,7 @@
 		</div>
 	</div>
 <script>
-	
-	document.getElementById('delete_form_but').addEventListener('click', function() {
-		alert('삭제버튼 클릭');
-		var form = document.getElementById('delete_form_box');
-		var x = service.null_chk([form.pw1.value, form.pw2.value]);
-
-		if(!x.checker){
-			alert(x.text);
-		}else if(form.pw1.value !== form.pw2.value){
-			alert('기존비밀번호와 확인 비밀번호가 일치하지 않습니다.');
-		}else if('${user.passWord}' !== form.pw1.value){
-			alert('기존비밀번호가 일치하지 않습니다.');
-		}else{
-			alert('탈퇴완료');
-			
-			var node = document.createElement('input');
-			node.innerHTML = '<input type="hidden" name="action" value="delete"/>';
-			form.appendChild(node);
-			
-			form.action = "${context}/member.do";
-			form.method = "post";
-			form.submit();
-		}
-	});
+	member.delete('${context}');
 </script>
 </body>
 </html>
