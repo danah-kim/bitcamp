@@ -196,5 +196,75 @@ div.login_container span.pw {
 	}
 
 /* end user_login */
-.bg_color_yellow{background-color: #ffff00}
+.adminSelect{
+	 padding: 10px;
+    font-size: 16.5px;
+    border: 1px solid grey;
+    float: left;
+    width: 12%;
+}
 
+.adminSelect:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+
+.adminSearchFormText {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 20%;
+    background: #f1f1f1;
+}
+
+.adminSearchBtn {
+    float: left;
+    width: 5%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 15px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+}
+
+.adminSearchBtn:hover {
+    background: #0b7dda;
+}
+
+.adminSearchForm::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.adminList {
+	text-align: center;
+}
+
+.adminListTable {
+	border: 1px solid #ccc;
+	border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}
+
+.adminListTable th{
+	padding: 10px 0px;
+}
+
+.adminListTableMeta {
+	background-color: #2196F3;
+	margin: 0 auto;
+	}
+
+/* end admin_content*/

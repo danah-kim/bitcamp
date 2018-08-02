@@ -31,6 +31,13 @@ let service = (()=>{
 			}
 			
 			return json;
+		},
+		addClass : (dom,cName) => {
+			var arr = cName.split(" ");
+			// 특정값을 찾을 수 없으면 -1을 리턴
+			if (arr.indexOf(cName) == -1) {
+				dom.className += " " + cName;
+			}
 		}
 	};
 })();
@@ -38,7 +45,12 @@ let service = (()=>{
 var admin = (()=>{
 	return{
 		check : x => {
-			var isAdmin = confirm('관리자입니까');
+			router.move({
+				context : x, 
+				domain : 'admin', 
+				action : 'list', 
+				page : 'main'});
+			/*var isAdmin = confirm('관리자입니까');
 			if(isAdmin){
 				var password = prompt('관리자비번을 입력바랍니다');
 				if(password == 1){
@@ -51,7 +63,85 @@ var admin = (()=>{
 				}
 			}else{
 				alert('관리자만 접근이 허용 됩니다.');
-			}
+			}*/
+		},
+		main : x => {
+			service.addClass(
+					document.getElementById('admin_content_box'),
+					'admin_content '
+				);
+				service.addClass(
+					document.getElementById('admin_search_select'),
+					'adminSelect '
+				);
+				service.addClass(
+					document.getElementById('admin_search_form_box'),
+					'adminSearchForm '
+				);
+				service.addClass(
+					document.getElementById('admin_search_form_box').word,
+					'adminSearchFormText '
+				);
+/*				service.addClass(
+					document.getElementById('admin_search_select'),
+					'admin_search_select '
+				);*/
+/*				service.addClass(
+					document.getElementById('admin_search_text'),
+					'admin_search_text '
+				);*/
+				service.addClass(
+					document.getElementById('admin_search_btn'),
+					'adminSearchBtn '
+				);
+				service.addClass(
+					document.getElementById('admin_context_box_table'),
+					'adminList '
+				);
+				service.addClass(
+					document.getElementById('admin_list_tab_box'),
+					'adminListTable '
+				);
+				service.addClass(
+					document.getElementById('admin_list_tab_meta'),
+					'adminListTableMeta '
+				);
+				
+				document.getElementById('admin_search_btn').addEventListener('click', function(){
+					var form = document.getElementById('admin_search_form_box');
+					var s = document.getElementById('admin_search_select');
+					var condition = s.options[s.selectedIndex].value;
+					
+					alert(condition);
+					var result;
+					
+					switch (condition) {
+					case "userid" :
+						result = x+'/admin.do?action=retrive&page=memberDetail&search_id='+ form.word.value;
+						break;		
+					case "name" :
+					case "teamName" :
+						result = x+'/admin.do?action=search&page=main&condition=' + condition
+							+ '&word=' + form.word.value;
+						break;
+					default:
+						break;
+					}
+					alert(result);
+					form.action = result;
+					form.method = "post";
+					form.submit();
+					
+				});
+
+				for(var i of document.querySelectorAll('.username')){					
+					i.style.color = 'red';
+					i.style.cursor = 'pointer';
+					i.addEventListener('click', function(){
+						alert('클릭'+this.getAttribute('id'));
+						location.href= x + "/admin.do?action=retrive&page=memberDetail&search_id=" + this.getAttribute('id');
+					});
+				}	
 		}
 	};
 })();

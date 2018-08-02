@@ -49,8 +49,8 @@ public class MemberDaoImpl implements MemberDao{
 				member.setRoll(rs.getString("ROLL"));
 				member.setPassWord(rs.getString("PASSWORD"));
 				member.setSsn(rs.getString("SSN"));
-				member.setSsn(rs.getString("GENDER"));
-				member.setSsn(rs.getString("SUBJECT"));
+				member.setGender(rs.getString("GENDER"));
+				member.setSubject(rs.getString("SUBJECT"));
 				list.add(member);
 			}
 		}
@@ -76,7 +76,8 @@ public class MemberDaoImpl implements MemberDao{
 				member.setName(rs.getString("NAME"));
 				member.setAge(rs.getString("AGE"));
 				member.setRoll(rs.getString("ROLL"));
-				
+				member.setGender(rs.getString("GENDER"));
+				member.setSubject(rs.getString("SUBJECT"));
 				list.add(member);
 			}
 		} catch (Exception e) {
