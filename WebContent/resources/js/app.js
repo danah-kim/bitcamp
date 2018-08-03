@@ -33,7 +33,6 @@ let service = (()=>{
 		},
 		addClass : (dom,cName) => {
 			var arr = cName.split(" ");
-			// 특정값을 찾을 수 없으면 -1을 리턴
 			if (arr.indexOf(cName) == -1) {
 				dom.className += " " + cName;
 			}
