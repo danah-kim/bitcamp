@@ -6,7 +6,6 @@
 "use strict";
 
 let router = (()=>{
-// key default value is String
 	return {move : x => {
 		location.href = 
 			x.context + '/' 
