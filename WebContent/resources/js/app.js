@@ -40,7 +40,7 @@ let service = (()=>{
 	};
 })();
 
-var admin = (()=>{
+var admin = (() => {
 	return{
 		check : x => {
 			router.move({
@@ -48,6 +48,11 @@ var admin = (()=>{
 				domain : 'admin', 
 				action : 'list', 
 				page : 'main'});
+			/*router.move({
+				context : x, 
+				domain : 'admin', 
+				action : 'count', 
+				page : 'main'})*/
 			/*var isAdmin = confirm('관리자입니까');
 			if(isAdmin){
 				var password = prompt('관리자비번을 입력바랍니다');
@@ -65,73 +70,96 @@ var admin = (()=>{
 		},
 		main : x => {
 			service.addClass(
-					document.getElementById('admin_content_box'),
-					'admin_content '
-				);
-				service.addClass(
-					document.getElementById('admin_search_select'),
-					'adminSelect '
-				);
-				service.addClass(
-					document.getElementById('adminSearchFormBox'),
-					'adminSearchForm '
-				);
-				service.addClass(
-					document.getElementById('adminSearchFormBox').word,
-					'adminSearchFormText '
-				);
-				service.addClass(
-					document.getElementById('adminSearchBtn'),
-					'adminSearchBtn '
-				);
-				service.addClass(
-					document.getElementById('admin_context_box_table'),
-					'adminList '
-				);
-				service.addClass(
-					document.getElementById('admin_list_tab_box'),
-					'adminListTable '
-				);
-				service.addClass(
-					document.getElementById('admin_list_tab_meta'),
-					'adminListTableMeta '
-				);
+				document.getElementById('admin_content_box'),
+				'admin_content '
+			);
+			service.addClass(
+				document.getElementById('admin_search_select'),
+				'adminSelect '
+			);
+			service.addClass(
+				document.getElementById('adminSearchFormBox'),
+				'adminSearchForm '
+			);
+			service.addClass(
+				document.getElementById('adminSearchFormBox').word,
+				'adminSearchFormText '
+			);
+			service.addClass(
+				document.getElementById('adminSearchBtn'),
+				'adminSearchBtn '
+			);
+			service.addClass(
+				document.getElementById('admin_context_box_table'),
+				'adminList '
+			);
+			service.addClass(
+				document.getElementById('admin_list_tab_box'),
+				'adminListTable '
+			);
+			service.addClass(
+				document.getElementById('admin_list_tab_meta'),
+				'adminListTableMeta '
+			);
 				
-				document.getElementById('adminSearchBtn').addEventListener('click', function(){
-					var form = document.getElementById('adminSearchFormBox');
-					var s = document.getElementById('admin_search_select');
-					var condition = s.options[s.selectedIndex].value;
-					
-					form.action = (condition === 'none')? alert('검색조건을 선택하세요') 
-							: (form.word.value === '' ) ? alert('검색할 단어를 입력하세요')
-							: (condition === 'userid')? 
-							router.move({
-								context : x, 
-								domain : 'admin', 
-								action : 'retrive', 
-								page: ('memberDetail&search_id='+ form.word.value, form.submit())})
-							: router.move({
-								context : x, 
-								domain : 'admin', 
-								action : 'search', 
-								page: ('main&condition=' + condition + '&word=' + form.word.value, form.submit())});
-					form.method = "get";
-					
-					
-				});
-
-				for(var i of document.querySelectorAll('.username')){					
-					i.style.color = 'red';
-					i.style.cursor = 'pointer';
-					i.addEventListener('click', function(){
-						alert('클릭'+this.getAttribute('id'));
+			document.getElementById('adminSearchBtn').addEventListener('click', function(){
+				var form = document.getElementById('adminSearchFormBox');
+				var s = document.getElementById('admin_search_select');
+				var condition = s.options[s.selectedIndex].value;
+				
+				form.action = (condition === 'none')? alert('검색조건을 선택하세요') 
+						: (form.word.value === '' ) ? alert('검색할 단어를 입력하세요')
+						: (condition === 'userid')? 
 						router.move({
 							context : x, 
 							domain : 'admin', 
 							action : 'retrive', 
-							page: 'memberDetail&search_id='+ this.getAttribute('id')});
-					});
-				}	
+							page: ('memberDetail&search_id='+ form.word.value, form.submit())})
+						: router.move({
+							context : x, 
+							domain : 'admin', 
+							action : 'search', 
+							page: ('main&condition=' + condition + '&word=' + form.word.value, form.submit())});
+				form.method = "get";
+				
+				
+			});
+
+			for(var i of document.querySelectorAll('.username')){				
+				i.style.color = 'red';
+				i.style.cursor = 'pointer';
+				i.addEventListener('click', function(){
+					alert('클릭'+this.getAttribute('id'));
+					router.move({
+						context : x, 
+						domain : 'admin', 
+						action : 'retrive', 
+						page: 'memberDetail&search_id='+ this.getAttribute('id')});
+				});
+			}
+			
+			/*var tc = '${count}';
+		    var tp = ((tc-1) / pr) + 1;
+		    var pr = 5;
+		    var pn = 1;
+		    var sp = ((p-1)/tp)*tp+1;
+		    var ep = sp + pr -1; 
+			
+			document.getElementById('pageNum').value = pageSet[n];
+			
+			for(var i of document.querySelectorAll('.pageNum')){
+				
+			}
+			
+			document.getElementById('nextPage').addEventListener('click', function(){
+				router.move({
+					context : x, 
+					domain : 'admin', 
+					action : 'move', 
+					page: 'main'});
+				n++;
+			});*/
+			
 		}
 	};
 })();

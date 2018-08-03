@@ -23,7 +23,7 @@ public class RetriveCommand extends Command {
 			System.out.println("아이디검색 안으로 진입");		
 			System.out.println(domain);
 			MemberBean member = new MemberBean();
-			member.setMemId(request.getParameter("search_id"));
+			member.setMemId(request.getParameter("search_id").toUpperCase());
 			request.setAttribute("id", MemberServiceImpl.getInstance().findByID(member));
 			break;
 		default:

@@ -29,7 +29,7 @@ public class SearchCommand extends Command {
 						break;
 					case "teamName" :
 						x = "TEAM_ID";
-						y = "(SELECT TEAM_ID from RPROJECT_TEAM WHERE TEAM_NAME LIKE '"+request.getParameter("word")+"')";
+						y = "(SELECT TEAM_ID FROM RPROJECT_TEAM WHERE TEAM_NAME LIKE '"+request.getParameter("word")+"')";
 						break;
 					case "age" :
 					case "roll" :
@@ -41,7 +41,7 @@ public class SearchCommand extends Command {
 						break;
 				}
 				
-				request.setAttribute("list", MemberServiceImpl.getInstance().findByWord(x+"/"+y));
+				request.setAttribute("list", MemberServiceImpl.getInstance().findByWord(x.toUpperCase()+"/"+y.toUpperCase()));
 				break;
 			default:
 				break;

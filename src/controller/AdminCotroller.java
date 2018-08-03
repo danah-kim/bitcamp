@@ -17,7 +17,7 @@ public class AdminCotroller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("AdminController Enter");
+		System.out.println("AdminController 진입");
 		Receiver.init(request);
 		System.out.println("액션: " + Receiver.cmd.getAction());
 		switch (Action.valueOf(Receiver.cmd.getAction().toUpperCase())) {
@@ -30,27 +30,27 @@ public class AdminCotroller extends HttpServlet {
 			}
 			break;
 		case LIST :			
-			System.out.println("memberList 들어옴");
+			System.out.println("memberList 진입");
 			Carrier.forward(request, response);
 			break;
 		case SEARCH :
-			System.out.println("searchMemberByTeam 들어옴");
+			System.out.println("searchMemberByTeam 진입");
 			Carrier.forward(request, response);
 			break;
 		case RETRIVE :
-			System.out.println("searchMemberById 들어옴");
+			System.out.println("searchMemberById 진입");
 			Carrier.forward(request, response);
 			break;
 		case COUNT :
-			System.out.println("memberCount 들어옴");
+			System.out.println("memberCount 진입");
 			Carrier.forward(request, response);
 			break;
 		case UPDATE :
-			System.out.println("memberUpdate 들어옴");
+			System.out.println("memberUpdate 진입");
 			Carrier.redirect(request, response, "/member.do?action=move&page=mypage");
 			break;
 		case DELETE :
-			System.out.println("memberDelete 들어옴");
+			System.out.println("memberDelete 진입");
 			Carrier.redirect(request, response, "");
 			break;
 		default :

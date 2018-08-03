@@ -35,6 +35,20 @@
 				<td>${i.teamId}</td>
 			</tr>
 			</c:forEach>
+			<tr>
+				<td colspan="6">
+					전체 회원수 : ${count}
+					<br />
+					<span class="pageNum" id="pageNum"></span>
+					<span id="nextPage">다음</span>
+					<%-- <c:forEach begin="1" end="${count}" var="i" step="1">
+						<span class="pageNum" id="pageNum"></span>
+						<c:if test="${i%5 == 0 && i>=5}">
+							<span id="nextPage">다음</span>
+						</c:if>
+					</c:forEach> --%>
+				</td>
+			</tr>
 		</table>
 	</div>
 </div>

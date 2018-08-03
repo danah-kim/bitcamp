@@ -4,9 +4,12 @@ import java.sql.*;
 import java.util.*;
 import domain.*;
 import enums.DBConstant;
+import enums.Domain;
 import enums.MemberQuery;
 import enums.Vendor;
 import factory.DataBaseFactory;
+import template.PstmtQuery;
+import template.QueryTemplate;
 
 public class MemberDaoImpl implements MemberDao{
 	private static MemberDao instance = new MemberDaoImpl ();
@@ -61,7 +64,19 @@ public class MemberDaoImpl implements MemberDao{
 	}
 	@Override
 	public List<MemberBean> selectBySearchWord(String word) {
-		String[] arr = word.split("/");
+		QueryTemplate q = new PstmtQuery();
+		List<MemberBean> list = new ArrayList<>();
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("column", word.split("/")[0]);
+		map.put("value",word.split("/")[1]);
+		map.put("table", Domain.MEMBER);
+		q.play(map);
+		for(Object s: q.getList()) {
+			list.add((MemberBean)s);
+		}
+		return list;
+		
+		/*String[] arr = word.split("/");
 		List<MemberBean> list = new ArrayList<>();
 		MemberBean member = null;
 		try {
@@ -82,7 +97,7 @@ public class MemberDaoImpl implements MemberDao{
 			}
 		} catch (Exception e) {
 		}
-		return list;
+		return list;*/
 	}
 	@Override
 	public MemberBean selectById(MemberBean id) {

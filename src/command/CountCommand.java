@@ -11,7 +11,7 @@ public class CountCommand extends Command {
 		setRequest(request);
 		setDomain(request.getServletPath().substring(1, request.getServletPath().indexOf(".")));
 		setAction(request.getParameter("action"));
-		setPage(request.getParameter("move"));
+		setPage(request.getParameter("page"));
 		execute();
 	}
 	@Override
@@ -19,6 +19,8 @@ public class CountCommand extends Command {
 		switch(Domain.valueOf(domain.toUpperCase())) {
 		case MEMBER :
 		case ADMIN :
+			System.out.println("카운트 안으로 진입");
+			action = "move";
 			request.getSession().setAttribute("count", MemberServiceImpl.getInstance().countMember());
 			break;
 		default:

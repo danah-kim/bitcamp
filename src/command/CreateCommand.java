@@ -26,7 +26,7 @@ public class CreateCommand extends Command{
 		case MEMBER :
 			System.out.println("조인 안으로 진입");
 			MemberBean member = new MemberBean();
-			member.setMemId(request.getParameter("id"));
+			member.setMemId(request.getParameter("id").toUpperCase());
 			member.setPassWord(request.getParameter("pw"));
 			member.setName(request.getParameter("name"));
 			member.setSsn(request.getParameter("ssn"));
