@@ -18,6 +18,8 @@ public class AdminCotroller extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("AdminController 진입");
+		System.out.println("Action : "+request.getParameter("action"));
+		System.out.println("page : "+request.getParameter("page"));
 		Receiver.init(request);
 		System.out.println("액션: " + Receiver.cmd.getAction());
 		switch (Action.valueOf(Receiver.cmd.getAction().toUpperCase())) {

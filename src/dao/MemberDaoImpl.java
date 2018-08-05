@@ -68,7 +68,7 @@ public class MemberDaoImpl implements MemberDao{
 		List<MemberBean> list = new ArrayList<>();
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("column", word.split("/")[0]);
-		map.put("value",word.split("/")[1]);
+		map.put("value", word.split("/")[1]);
 		map.put("table", Domain.MEMBER);
 		q.play(map);
 		for(Object s: q.getList()) {

@@ -3,13 +3,13 @@
 <div id="admin_content_box" >
 	<div id="admin_context_box_search">
 		<form id="adminSearchFormBox">
-			<select id="admin_search_select" name="admin_search_select">
+			<select id="adminSearchSelect" name="adminSearchSelect">
 				<option value="none">검색조건</option>
 				<option value="userid">아이디</option>
 				<option value="name">이  름</option>
 				<option value="teamName">팀  명</option>
 			</select>
-			<input id="admin_search_text" type="text" placeholder="검색어 입력" name="word"/>
+			<input id="adminSearchText" type="text" placeholder="검색어 입력" name="word"/>
 			<input id="adminSearchBtn" type="button" value="검색"/>
 		</form>
 	<p><br/></p>

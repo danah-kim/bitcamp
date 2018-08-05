@@ -19,7 +19,15 @@ public class ColumnFinder {
 		}
 		Field[] f = clazz.getDeclaredFields();
 		for (int i=0; i<f.length; i++) {
-			s += (i != (f.length-1)) ? f[i].getName() + "," : f[i].getName();
+			s += (i != (f.length-1)) ? 
+					(f[i].getName().equals("teamId") ?
+							"TEAM_ID"
+							: (f[i].getName().equals("memId") ? "MEM_ID" 
+									: (f[i].getName().equals("passWord") ? "PASSWORD" : f[i].getName().toUpperCase()))) + "," 
+					: (f[i].getName().equals("teamId") ?
+							"TEAM_ID"
+							: (f[i].getName().equals("memId") ? "MEM_ID" 
+									: (f[i].getName().equals("passWord") ? "PASSWORD" : f[i].getName().toUpperCase())));
 		}
 		return s;
 	}

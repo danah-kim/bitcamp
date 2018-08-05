@@ -6,7 +6,7 @@ import enums.Action;
 
 public class Commander{
 	public static  Command order(HttpServletRequest request){
-		System.out.println("order 진입");
+		System.out.println("commander 진입");
 		Command cmd = null;
 		switch (Action.valueOf(request.getParameter("action").toUpperCase())) {
 			case MOVE :
@@ -19,13 +19,13 @@ public class Commander{
 				break;
 			case LIST :
 				System.out.println("=== list 진입 ===");
-				cmd = new CountCommand(request);
 				cmd = new ListCommand(request);
+				cmd = new CountCommand(request);
 				break;
 			case SEARCH :
 				System.out.println("=== search 진입 ===");
-				cmd = new CountCommand(request);
 				cmd = new SearchCommand(request);
+				cmd = new CountCommand(request);
 				break;
 			case RETRIVE :
 				System.out.println("=== retrive 진입 ===");

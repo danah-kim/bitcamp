@@ -74,7 +74,7 @@ var admin = (() => {
 				'admin_content '
 			);
 			service.addClass(
-				document.getElementById('admin_search_select'),
+				document.getElementById('adminSearchSelect'),
 				'adminSelect '
 			);
 			service.addClass(
@@ -104,25 +104,28 @@ var admin = (() => {
 				
 			document.getElementById('adminSearchBtn').addEventListener('click', function(){
 				var form = document.getElementById('adminSearchFormBox');
-				var s = document.getElementById('admin_search_select');
+				var s = document.getElementById('adminSearchSelect');
 				var condition = s.options[s.selectedIndex].value;
+				alert(condition);
+				alert(form.word.value);
+				form.method = "get"; 
+				form.submit();
 				
-				form.action = (condition === 'none')? alert('검색조건을 선택하세요') 
-						: (form.word.value === '' ) ? alert('검색할 단어를 입력하세요')
-						: (condition === 'userid')? 
-						router.move({
-							context : x, 
-							domain : 'admin', 
-							action : 'retrive', 
-							page: ('memberDetail&search_id='+ form.word.value, form.submit())})
-						: router.move({
-							context : x, 
-							domain : 'admin', 
-							action : 'search', 
-							page: ('main&condition=' + condition + '&word=' + form.word.value, form.submit())});
-				form.method = "get";
-				
-				
+				/*location.href = x + '/admin.do?action=' + ((condition === 'userid') ? 
+					'retrive&page=memberDetail&search_id='
+					: ('search&page=main&condition=' + condition+ '&word=')
+					+ form.word.value);*/
+				router.move({
+					context : x,
+					domain : 'admin',
+					action : (condition === 'userid') ?
+					'retrive'
+					: 'search',
+					page : ((condition === 'userid') ?
+						'memberDetail&search_id='
+						: 'main&condition=' + condition+ '&word=') + form.word.value
+				});
+
 			});
 
 			for(var i of document.querySelectorAll('.username')){				

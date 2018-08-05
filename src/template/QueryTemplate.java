@@ -15,12 +15,16 @@ public abstract class QueryTemplate {
 	List<Object> list;
 	PreparedStatement pstmt;
 	public final void play(HashMap<String, Object> map) {
+		System.out.println("Query Template 진입");
 		this.pstmt = null;
 		this.list = new ArrayList<>();
 		this.map = map;
-		this.map.put("Vender", Vendor.ORACLE);
-		this.map.put("username", DBConstant.USERNAME);
-		this.map.put("password", DBConstant.PASSWORD);
+		this.map.put("vendor", Vendor.ORACLE);
+		System.out.println(this.map.get("vendor"));
+		this.map.put("username", DBConstant.USERNAME.toString());
+		System.out.println(this.map.get("username"));
+		this.map.put("password", DBConstant.PASSWORD.toString());
+		System.out.println(this.map.get("password"));
 		initialize();
 		startPlay();
 		endPlay();
