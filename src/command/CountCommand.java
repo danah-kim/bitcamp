@@ -4,13 +4,14 @@ package command;
 import javax.servlet.http.HttpServletRequest;
 
 import enums.Domain;
-import service.MemberServiceImpl;
 
 public class CountCommand extends Command {
+	private Stock stock = new Stock();
+	
 	public CountCommand(HttpServletRequest request) {
 		setRequest(request);
 		setDomain(request.getServletPath().substring(1, request.getServletPath().indexOf(".")));
-		setAction(request.getParameter("action"));
+		setAction("move");
 		setPage(request.getParameter("page"));
 		execute();
 	}
@@ -19,9 +20,7 @@ public class CountCommand extends Command {
 		switch(Domain.valueOf(domain.toUpperCase())) {
 		case MEMBER :
 		case ADMIN :
-			System.out.println("카운트 안으로 진입");
-			action = "move";
-			request.getSession().setAttribute("count", MemberServiceImpl.getInstance().countMember());
+			stock.count(request);
 			break;
 		default:
 			break;

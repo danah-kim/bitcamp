@@ -8,6 +8,8 @@
 				<option value="userid">아이디</option>
 				<option value="name">이  름</option>
 				<option value="teamName">팀  명</option>
+				<option value="gender">성  별</option>
+				<option value="roll">역  할</option>
 			</select>
 			<input id="adminSearchText" type="text" placeholder="검색어 입력" name="word"/>
 			<input id="adminSearchBtn" type="button" value="검색"/>

@@ -2,11 +2,10 @@ package command;
 
 import javax.servlet.http.HttpServletRequest;
 
-import domain.MemberBean;
 import enums.Domain;
-import service.MemberServiceImpl;
 
 public class CreateCommand extends Command{
+	private Stock stock = new Stock();
 	
 	public CreateCommand(HttpServletRequest request) {
 		setRequest(request);
@@ -21,21 +20,9 @@ public class CreateCommand extends Command{
 
 	@Override
 	public void execute() {
-		System.out.println("도메인값 확인 : "+ domain.toUpperCase());
 		switch (Domain.valueOf(domain.toUpperCase())) {
 		case MEMBER :
-			System.out.println("조인 안으로 진입");
-			MemberBean member = new MemberBean();
-			member.setMemId(request.getParameter("id").toUpperCase());
-			member.setPassWord(request.getParameter("pw"));
-			member.setName(request.getParameter("name"));
-			member.setSsn(request.getParameter("ssn"));
-			member.setTeamId(request.getParameter("teamid"));
-			member.setRoll(request.getParameter("roll"));
-			member.setAge(request.getParameter("age"));
-			member.setGender(request.getParameter("gender"));
-			member.setSubject(ParamMap.getValues(request, "subject"));
-			MemberServiceImpl.getInstance().createMember(member);
+			stock.create(request);
 			break;
 		default:
 			break;

@@ -39,7 +39,7 @@
 		</div>
 	</div>
 <script>
-	member.delete('${context}');
+	member.delete(['${context}','${user.passWord}']);
 </script>
 </body>
 </html>

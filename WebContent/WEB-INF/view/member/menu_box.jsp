@@ -11,18 +11,18 @@
 </div>
 <script>
 	document.getElementById('moveMypage').addEventListener('click', function(){
-		router.move({context : x, domain : 'member', action : 'move', page : 'mypage'});
+		router.move({context : '${context}', domain : 'member', action : 'move', page : 'mypage'});
 	});
 	document.getElementById('moveMain').addEventListener('click', function(){
 		alert('메인이동')
-		router.move({context : x, domain : 'member', action : 'move', page : 'move'});
+		router.move({context : '${context}', domain : 'member', action : 'move', page : 'move'});
 	});
 	document.getElementById('moveMemberUpdate').addEventListener('click', function(){
 		alert('정보변경 이동');
-		router.move({context : x, domain : 'member', action : 'move', page : 'update_form'});
+		router.move({context : '${context}', domain : 'member', action : 'move', page : 'update_form'});
 	});
 	document.getElementById('moveMemberDelete').addEventListener('click', function(){
 		alert('회원탈퇴 이동')
-		router.move({context : x, domain : 'member', action : 'move', page : 'delete_form'});
+		router.move({context : '${context}', domain : 'member', action : 'move', page : 'delete_form'});
 	});
 </script>

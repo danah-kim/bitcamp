@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import command.Receiver;
-import command.Carrier;
+import command.Server;
 import enums.Action;
 
 @WebServlet("/member.do")
@@ -28,55 +28,51 @@ public class MemberController extends HttpServlet {
 			System.out.println("무브 안으로 진입");
 			// 요청과 응답을 Carrier의 send 메소드로 전달
 			if(Receiver.cmd.getAction().equals(Receiver.cmd.getPage())) {
-				Carrier.redirect(request, response, "");
+				Server.redirect(request, response, "");
 			}else {
-				Carrier.forward(request, response);
+				Server.forward(request, response);
 			}
 			break;
 		case JOIN :
 			System.out.println("Join 들어옴");
-			Carrier.redirect(request, response, "/member.do?action=move&page=user_login_form");
+			Server.redirect(request, response, "/member.do?action=move&page=user_login_form");
 			break;
-		case LIST :			
+		/*case LIST :			
 			System.out.println("memberList 들어옴");
-			Carrier.forward(request, response);
+			Server.forward(request, response);
 			break;
 		case SEARCH :
 			System.out.println("searchMemberByTeam 들어옴");
-			Carrier.forward(request, response);
+			Server.forward(request, response);
 			break;
 		case RETRIVE :
 			System.out.println("searchMemberById 들어옴");
-			Carrier.forward(request, response);
-			break;
-		case COUNT :
-			System.out.println("memberCount 들어옴");
-			Carrier.forward(request, response);
-			break;
+			Server.forward(request, response);
+			break;*/
 		case UPDATE :
 			System.out.println("memberUpdate 들어옴");
-			Carrier.redirect(request, response, "/member.do?action=move&page=mypage");
+			Server.redirect(request, response, "/member.do?action=move&page=mypage");
 			break;
 		case DELETE :
 			System.out.println("memberDelete 들어옴");
-			Carrier.redirect(request, response, "");
+			Server.redirect(request, response, "");
 			break;
 		case LOGIN :
 			System.out.println("login 들어옴");
 			if(request.getAttribute("match").equals("TRUE")) {
 				System.out.println("로그인성공");
-				Carrier.forward(request, response);
+				Server.forward(request, response);
 			}else {
 				System.out.println("로그인실패");
-				Carrier.redirect(request, response, "/member.do?action=move&page=user_login_form");
+				Server.redirect(request, response, "/member.do?action=move&page=user_login_form");
 			}
 			break;
-		case DUAL :
+		/*case DUAL :
 			System.out.println("dual 들어옴");
-			Carrier.forward(request, response);
-			break;
+			Server.forward(request, response);
+			break;*/
 		default :
-			Carrier.redirect(request, response, "");
+			Server.redirect(request, response, "");
 			break;
 		}
 		

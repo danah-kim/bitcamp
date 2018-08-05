@@ -4,9 +4,9 @@ package command;
 import javax.servlet.http.HttpServletRequest;
 
 import enums.Domain;
-import service.MemberServiceImpl;
 
 public class SearchCommand extends Command {
+	private Stock stock = new Stock();
 
 	public SearchCommand(HttpServletRequest request) {
 		setRequest(request);
@@ -20,16 +20,7 @@ public class SearchCommand extends Command {
 		switch (Domain.valueOf(domain.toUpperCase())) {
 			case MEMBER :
 			case ADMIN :
-				System.out.println("검색 안으로 진입");
-				System.out.println("조건 : "+request.getParameter("condition")+" 내용 : "+request.getParameter("word"));
-				String condtion = (request.getParameter("condition").toString().equals("teamName")) ?
-						"TEAM_ID"
-						: request.getParameter("condition");
-				String word = (request.getParameter("condition").toString().equals("teamName")) ?
-						"(SELECT TEAM_ID FROM RPROJECT_TEAM WHERE TEAM_NAME LIKE '"+ request.getParameter("word")+"')"
-						: request.getParameter("word");
-				
-				request.setAttribute("list", MemberServiceImpl.getInstance().findByWord(condtion.toUpperCase()+"/"+word.toUpperCase()));
+				stock.search(request);
 				break;
 			default:
 				break;

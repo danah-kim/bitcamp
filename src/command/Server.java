@@ -3,7 +3,7 @@ package command;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class Carrier {
+public class Server {
 	public static void forward(HttpServletRequest request,	HttpServletResponse response) {
 		System.out.println("뷰 : " + Receiver.cmd.getView());
 		try {

@@ -43,15 +43,15 @@
 				</td>
 			    <td>
 					<ul id="mypage_info_list">
-						<li>${id.memId}<br/></li>
+						<li>${member.memId}<br/></li>
 						<li>**** <br/></li>
-						<li>${id.name}<br/></li>
-						<li>${id.ssn}<br/></li>
-						<li>${id.gender}<br/></li>
-						<li>${id.age}<br/></li>
-						<li>${id.teamId}<br/></li>
-						<li>${id.roll}<br/></li>
-						<li>${id.subject}<br/></li>
+						<li>${member.name}<br/></li>
+						<li>${member.ssn}<br/></li>
+						<li>${member.gender}<br/></li>
+						<li>${member.age}<br/></li>
+						<li>${member.teamId}<br/></li>
+						<li>${member.roll}<br/></li>
+						<li>${member.subject}<br/></li>
 					</ul>
 				</td>
 			  </tr>

@@ -7,10 +7,10 @@ public enum Term {
 		String result = "";
 		switch (this) {
 		case WEBPATH :
-			result = "/WEB-INF/view";
+			result = "/WEB-INF/view/";
 			break;
 		case MAIN :
-			result = "/main.jsp";
+			result = "main.jsp";
 			break;
 		default:
 			break;

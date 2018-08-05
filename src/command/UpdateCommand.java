@@ -4,9 +4,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import domain.MemberBean;
 import enums.Domain;
-import service.MemberServiceImpl;
 
 public class UpdateCommand extends Command {
+	private Stock stock = new Stock();
+	
 	public UpdateCommand(HttpServletRequest request) {
 		setRequest(request);
 		setDomain(request.getServletPath().substring(1, request.getServletPath().indexOf(".")));
@@ -19,14 +20,8 @@ public class UpdateCommand extends Command {
 		switch(Domain.valueOf(domain.toUpperCase())){
 			case MEMBER :
 			case ADMIN :
-				System.out.println("업데이트!!");
-				MemberBean member = new MemberBean();
-				member.setMemId(((MemberBean)request.getSession().getAttribute("user")).getMemId());
-				member.setPassWord(request.getParameter("new_pw"));
-				member.setTeamId(request.getParameter("teamid"));
-				member.setRoll(request.getParameter("roll"));
-				MemberServiceImpl.getInstance().modifyMember(member);
-				request.getSession().setAttribute("user", MemberServiceImpl.getInstance().findByID(member));
+				System.out.println("updatecommand ID : " + ((MemberBean) request.getSession().getAttribute("user")).getMemId());
+				stock.update(request);
 				break;
 			default :
 				break;

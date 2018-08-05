@@ -111,10 +111,6 @@ var admin = (() => {
 				form.method = "get"; 
 				form.submit();
 				
-				/*location.href = x + '/admin.do?action=' + ((condition === 'userid') ? 
-					'retrive&page=memberDetail&search_id='
-					: ('search&page=main&condition=' + condition+ '&word=')
-					+ form.word.value);*/
 				router.move({
 					context : x,
 					domain : 'admin',
@@ -122,7 +118,7 @@ var admin = (() => {
 					'retrive'
 					: 'search',
 					page : ((condition === 'userid') ?
-						'memberDetail&search_id='
+						'memberDetail&condition='
 						: 'main&condition=' + condition+ '&word=') + form.word.value
 				});
 
@@ -137,7 +133,7 @@ var admin = (() => {
 						context : x, 
 						domain : 'admin', 
 						action : 'retrive', 
-						page: 'memberDetail&search_id='+ this.getAttribute('id')});
+						page: 'memberDetail&condition='+ this.getAttribute('id')});
 				});
 			}
 			
@@ -246,22 +242,22 @@ let member = (()=>{
 					setSsn(form.birth.value+'-'+form.gender.value);
 					setGender(form.gender.value);
 					setAge(form.birth.value);
+					form.gender.value = getGender();
 
 					var arr = [{type : 'hidden', name : 'age', value : member.getAge()},
 							{type : 'hidden', name : 'ssn', value : member.getSsn()},
-							{type : 'hidden', name : 'gender', value : member.getGender()},
 							{type : 'hidden', name : 'action', value : 'join'}];
 					
-					for(var i=0; i<4; i++){
+					for(var i in arr){
 						var node = document.createElement('input');
-						node.setAttribute('type', arr[i].type );
+						node.setAttribute('type', arr[i].type);
 						node.setAttribute('name', arr[i].name);
 						node.setAttribute('value', arr[i].value);
 						form.appendChild(node);
 					}
 					
 					form.action = x+"/member.do";
-					form.method = "get";
+					form.method = "post";
 					form.submit(); 
 				}else{alert(y.text);}
 			});
@@ -280,7 +276,7 @@ let member = (()=>{
 					form.appendChild(node);
 					
 					form.action = x+"/member.do";
-					form.method = "get";
+					form.method = "post";
 					form.submit();
 				} else {
 					alert(y.text);
@@ -288,7 +284,6 @@ let member = (()=>{
 			});
 		},
 		update : x => {
-			alert('수정버튼 클릭');
 			for(var i of document.querySelectorAll('.teamid')){
 				if(i.value === x[2]){
 					i.checked = true;
@@ -302,7 +297,6 @@ let member = (()=>{
 			}*/
 			
 			for(var i of document.getElementById('roll')){
-				alert(i.value+"///"+x[3]);
 				if(i.value === x[3]){
 					i.setAttribute("selected", "selected");
 				}
@@ -337,7 +331,7 @@ let member = (()=>{
 					node.setAttribute('value', y[key]);
 					form.appendChild(node);
 				}
-
+				
 				form.action = x[0]+"/member.do";
 				form.method = "post";
 				form.submit();
@@ -354,7 +348,7 @@ let member = (()=>{
 					alert(y.text);
 				}else if(form.pw1.value !== form.pw2.value){
 					alert('기존비밀번호와 확인 비밀번호가 일치하지 않습니다.');
-				}else if(x[2] !== form.pw1.value){
+				}else if(x[1] !== form.pw1.value){
 					alert('기존비밀번호가 일치하지 않습니다.');
 				}else{
 					alert('탈퇴완료');
@@ -363,7 +357,7 @@ let member = (()=>{
 					node.innerHTML = '<input type="hidden" name="action" value="delete"/>';
 					form.appendChild(node);
 					
-					form.action = x+"/member.do";
+					form.action = x[0]+"/member.do";
 					form.method = "post";
 					form.submit();
 				}

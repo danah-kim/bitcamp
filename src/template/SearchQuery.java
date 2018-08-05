@@ -3,23 +3,17 @@ package template;
 import java.sql.ResultSet;
 
 import domain.MemberBean;
-import enums.Domain;
+import enums.MemberQuery;
 import factory.DataBaseFactory;
 
-public class PstmtQuery extends QueryTemplate{
+public class SearchQuery extends QueryTemplate{
 
 	@Override
 	void initialize() {
 		System.out.println("initialize override");
-		map.put("sql", String.format(
-				"SELECT "
-				+ ColumnFinder.find(Domain.MEMBER)
-				+ " FROM %s "
-				+ "WHERE %s "
-				// ?는 preparedstatement 사용한부분
-				+ "LIKE ? ",
-				map.get("table"),
-				map.get("column")));
+		map.put("sql", String.format(MemberQuery.SELECT_BY_WORD.toString(),
+										map.get("table"),
+										map.get("column")));
 	}
 
 	@Override
@@ -36,8 +30,6 @@ public class PstmtQuery extends QueryTemplate{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-				
-
 	}
 
 	@Override
@@ -46,6 +38,7 @@ public class PstmtQuery extends QueryTemplate{
 		try {
 			ResultSet rs = pstmt.executeQuery();
 			MemberBean mem = null;
+			
 			while (rs.next()) {
 				mem = new MemberBean();
 				mem.setMemId(rs.getString("MEM_ID"));
@@ -54,7 +47,7 @@ public class PstmtQuery extends QueryTemplate{
 				mem.setAge(rs.getString("AGE"));
 				mem.setGender(rs.getString("GENDER"));
 				mem.setRoll(rs.getString("ROLL"));
-				mem.setPassWord(rs.getString("PASSWORD"));
+				mem.setPassWord(rs.getString("PASS_WORD"));
 				mem.setSsn(rs.getString("SSN"));
 				list.add(mem);
 			}
