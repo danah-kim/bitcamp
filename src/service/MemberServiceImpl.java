@@ -2,6 +2,8 @@ package service;
 
 
 import java.util.List;
+import java.util.Map;
+
 import dao.MemberDaoImpl;
 import domain.*;
 
@@ -16,6 +18,10 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public List<MemberBean> memberList() {
 		return MemberDaoImpl.getInstance().selectAllMember();
+	}
+	@Override
+	public List<MemberBean> getList(Map<?, ?> param) {
+		return MemberDaoImpl.getInstance().selectList(param);
 	}
 	@Override
 	public List<MemberBean> findByWord(String word) {

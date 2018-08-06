@@ -1,5 +1,9 @@
 package command;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import domain.MemberBean;
@@ -23,7 +27,33 @@ public class Stock {
 	}
 	
 	public void list(HttpServletRequest request) {
-		request.setAttribute("list", MemberServiceImpl.getInstance().memberList());
+		/*request.setAttribute("list", MemberServiceImpl.getInstance().memberList());*/
+		request.setAttribute("count", MemberServiceImpl.getInstance().countMember());
+		
+		int totalRecode = MemberServiceImpl.getInstance().countMember();
+		int recodeSize = 5;
+		int totalPage = (totalRecode-1)/recodeSize+1;
+		int pageSize = 5;
+		int pageNum = (request.getParameter("pageNum")==null) ? 1 : Integer.parseInt(request.getParameter("pageNum"));
+		int startPage = (request.getParameter("startPage")==null) ? 1 : Integer.parseInt(request.getParameter("startPage"));
+		int endPage = (totalPage < (startPage + pageSize  - 1)) ? totalPage : (startPage + pageSize -1);
+		
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("pageNum", totalPage);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("totalPage", totalPage);
+
+		System.out.println("**시작:"+startPage+"/총페이지수:" + totalPage+"/끝:" + endPage+"****");	
+		
+		Map<String, Object> map = new HashMap<>();
+		String startRow = String.valueOf((recodeSize*(pageNum-1))+1);
+		String endRow = String.valueOf((totalRecode < (Integer.parseInt(startRow) + recodeSize - 1)) 
+										? totalRecode 
+										: pageNum*(recodeSize));
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		request.setAttribute("list", MemberServiceImpl.getInstance().getList(map));
+		
 	}
 	
 	public void search(HttpServletRequest request) {
@@ -36,6 +66,7 @@ public class Stock {
 				: request.getParameter("word");
 		
 		request.setAttribute("list", MemberServiceImpl.getInstance().findByWord(condtion.toUpperCase()+"/"+word.toUpperCase()));
+		request.setAttribute("count", MemberServiceImpl.getInstance().countMember());
 	}
 	
 	public void retrive(HttpServletRequest request) {

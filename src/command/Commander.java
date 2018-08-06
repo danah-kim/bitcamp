@@ -20,12 +20,10 @@ public class Commander{
 			case LIST :
 				System.out.println("=== list 진입 ===");
 				cmd = new ListCommand(request);
-				cmd = new CountCommand(request);
 				break;
 			case SEARCH :
 				System.out.println("=== search 진입 ===");
 				cmd = new SearchCommand(request);
-				cmd = new CountCommand(request);
 				break;
 			case RETRIVE :
 				System.out.println("=== retrive 진입 ===");

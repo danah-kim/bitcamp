@@ -277,3 +277,12 @@ form#loginFormBox {
 	}
 
 /* end admin_content*/
+
+.pageBox{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.pageBox li{
+	display: inline;
+}

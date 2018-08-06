@@ -3,7 +3,10 @@ package enums;
 import template.ColumnFinder;
 
 public enum MemberQuery {
-	LOGIN, INSERT_MEMBER, COUNT_MEMBER, SELECT_ALL_MEMBER, SELECT_BY_ID, UPDATE_MEMBER, DELETE_MEMBER, IDDUALCHECK, SELECT_BY_WORD;
+	LOGIN,
+	INSERT_MEMBER,
+	SELECT_ALL_MEMBER, SELECT_BY_WORD, SELECT_BY_ID, COUNT_MEMBER, 
+	UPDATE_MEMBER, DELETE_MEMBER, IDDUALCHECK, PAGINATION;
 	@Override
 	public String toString() {
 		String query = "";
@@ -58,7 +61,13 @@ public enum MemberQuery {
 					+ "FROM MEMBER "
 					+ "WHERE MEM_ID LIKE '%s'";
 			break;
-		
+		case PAGINATION :
+			query = "SELECT T.* "
+					+ "FROM(SELECT ROWNUM SEQ, M.* "
+					+ "FROM %s M "
+					+ "ORDER BY SEQ DESC)T "
+					+ "WHERE T.SEQ BETWEEN ? AND ?";
+			break;
 		default :
 			break;
 		}

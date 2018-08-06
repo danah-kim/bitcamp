@@ -15,6 +15,7 @@ import template.DeleteQuery;
 import template.InsertQuery;
 import template.ListQuery;
 import template.LoginQuery;
+import template.PagiNationQuery;
 import template.QueryTemplate;
 import template.RetriveQuery;
 
@@ -45,6 +46,24 @@ public class MemberDaoImpl implements MemberDao{
 		QueryTemplate query = new ListQuery();
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("table", Domain.MEMBER);
+		query.play(map);
+		
+		for(Object e: query.getList()) {
+			list.add((MemberBean)e);
+		}
+		
+		return list;
+	}
+	@Override
+	public List<MemberBean> selectList(Map<?, ?> param) {
+		List<MemberBean> list = new ArrayList<>();
+		QueryTemplate query= new PagiNationQuery();
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("table", Domain.MEMBER);
+		map.put("startRow", param.get("startRow"));
+		map.put("endRow", param.get("endRow"));
+		System.out.println("=====시작행========="+param.get("startRow"));
+		System.out.println("=====종료행========="+param.get("endRow"));
 		query.play(map);
 		
 		for(Object e: query.getList()) {

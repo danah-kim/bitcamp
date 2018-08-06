@@ -112,11 +112,9 @@ var admin = (() => {
 				form.submit();
 				
 				router.move({
-					context : x,
+					context : x[0],
 					domain : 'admin',
-					action : (condition === 'userid') ?
-					'retrive'
-					: 'search',
+					action : (condition === 'userid') ? 'retrive' : 'search',
 					page : ((condition === 'userid') ?
 						'memberDetail&condition='
 						: 'main&condition=' + condition+ '&word=') + form.word.value
@@ -130,33 +128,21 @@ var admin = (() => {
 				i.addEventListener('click', function(){
 					alert('클릭'+this.getAttribute('id'));
 					router.move({
-						context : x, 
+						context : x[0], 
 						domain : 'admin', 
 						action : 'retrive', 
 						page: 'memberDetail&condition='+ this.getAttribute('id')});
 				});
 			}
 			
-			/*var tc = '${count}';
-		    var tp = ((tc-1) / pr) + 1;
-		    var pr = 5;
-		    var pn = 1;
-		    var sp = ((p-1)/tp)*tp+1;
-		    var ep = sp + pr -1; 
-			
-			document.getElementById('pageNum').value = pageSet[n];
-			
-			for(var i of document.querySelectorAll('.pageNum')){
-				
-			}
-			
-			document.getElementById('nextPage').addEventListener('click', function(){
+			/*document.getElementById('nextPageBtn').addEventListener('click', function(){
+				x[1] = +x[1]+5;
+
 				router.move({
-					context : x, 
+					context : x[0], 
 					domain : 'admin', 
-					action : 'move', 
+					action : 'list', 
 					page: 'main'});
-				n++;
 			});*/
 			
 		}
