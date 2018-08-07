@@ -29,8 +29,8 @@
 			<c:forEach items="${list}" var="i">
 			<tr>
 				<td>${i.memId}</td>
-				<%-- <td><a href="${context}/admin.do?action=retrive&page=memberDetail&search_id=${i.memId}" style="cursor: pointer;">${i.name}</a></td> --%>
-				<td><a class="username" id="${i.memId}" style="cursor: pointer;">${i.name}</a></td>
+				<%-- <td><a href="${context}/admin.do?action=retrive&page=memberDetail&search_id="+ this.getAttribute('id') style="cursor: pointer;">${i.name}</a></td> --%>
+				<td><a class="userName" id="${i.memId}" style="cursor: pointer;">${i.name}</a></td>
 				<td>${i.age}</td>
 				<td>${i.gender}</td>
 				<td>${i.roll}</td>
@@ -42,20 +42,23 @@
 					전체 회원수 : ${count}
 					<br />
 					<ul class="pageBox">
-						<c:if test='${startPage ne 1}'>
-							<a href='${context}/admin.do?action=list&page=main&startPage=${startPage-5}' id='prePageBtn'>이전</a>
+						<c:if test="${existPre}">
+						
 						</c:if>
-						<c:forEach begin='${startPage}' end='${endPage}' step='1' var='i'>
+						<li>
+							<a id='prePageBtn'></a>
+						</li>
+						<c:forEach begin='${startPage}' end='${endPage}' step='1' varStatus='i'>
 							<li>
-								<a href='${context}/admin.do?action=list&page=main&pageNum=${i}' 
-									style="cursor: pointer;">
-									${i}
-								</a>
+								<a class= "pageNum" id = '${i.index}' style="cursor: pointer;">${i.index}</a>
 							</li>
 						</c:forEach>
-						<c:if test='${endPage lt totalPage and startPage ne totalPage}'>
-							<a href='${context}/admin.do?action=list&page=main&startPage=${endPage+1}' id="nextPageBtn">다음</a>
+						<c:if test="${existNext}">
+						
 						</c:if>
+						<li>
+							<a id='nextPageBtn'></a>
+						</li>
 					</ul>
 				</td>
 			</tr>
@@ -63,5 +66,10 @@
 	</div>
 </div>
 <script>
-	admin.main(['${context}','${startPage}']);
+	admin.main({context : '${context}', 
+				startPage : '${startPage}',
+				endPage : '${endPage}',
+				totalPage : '${totalPage}'
+	});
+	
 </script>

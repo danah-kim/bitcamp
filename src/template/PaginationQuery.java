@@ -6,7 +6,7 @@ import domain.MemberBean;
 import enums.MemberQuery;
 import factory.DataBaseFactory;
 
-public class PagiNationQuery extends QueryTemplate{
+public class PaginationQuery extends QueryTemplate{
 
 	@Override
 	void initialize() {
@@ -26,8 +26,8 @@ public class PagiNationQuery extends QueryTemplate{
 			pstmt = DataBaseFactory.createDataBase2(map)
 					.getConnection()
 					.prepareStatement((String)map.get("sql"));
-			pstmt.setString(1, (String) map.get("startRow"));
-			pstmt.setString(2, (String) map.get("endRow"));
+			pstmt.setString(1, map.get("startRow").toString());
+			pstmt.setString(2, map.get("endRow").toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

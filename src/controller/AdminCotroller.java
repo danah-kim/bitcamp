@@ -33,7 +33,7 @@ public class AdminCotroller extends HttpServlet {
 			Server.forward(request, response);
 			break;
 		case SEARCH :
-			System.out.println("searchMemberByTeam 진입");
+			System.out.println("searchMemberByWord 진입");
 			Server.forward(request, response);
 			break;
 		case RETRIVE :

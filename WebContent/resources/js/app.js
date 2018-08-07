@@ -112,7 +112,7 @@ var admin = (() => {
 				form.submit();
 				
 				router.move({
-					context : x[0],
+					context : x.context,
 					domain : 'admin',
 					action : (condition === 'userid') ? 'retrive' : 'search',
 					page : ((condition === 'userid') ?
@@ -122,28 +122,57 @@ var admin = (() => {
 
 			});
 
-			for(var i of document.querySelectorAll('.username')){				
+			for(var i of document.querySelectorAll('.userName')){				
 				i.style.color = 'red';
 				i.style.cursor = 'pointer';
 				i.addEventListener('click', function(){
 					alert('클릭'+this.getAttribute('id'));
 					router.move({
-						context : x[0], 
+						context : x.context, 
 						domain : 'admin', 
 						action : 'retrive', 
 						page: 'memberDetail&condition='+ this.getAttribute('id')});
 				});
 			}
 			
-			/*document.getElementById('nextPageBtn').addEventListener('click', function(){
-				x[1] = +x[1]+5;
+			if(x.endPage < x.totalPage && x.startPage !== x.totalPage){
+				var next = document.getElementById('nextPageBtn');
+				next.innerHTML = '다음';
+				
+				next.addEventListener('click', function(){
+				alert(x.endPage*1+1);
+					
+					router.move({
+						context : x.context, 
+						domain : 'admin', 
+						action : 'list', 
+						page: 'main&pageNum='+(x.endPage*1+1)});
+				});
+			}
+			
+			if(x.startPage != 1){
+				var pre = document.getElementById('prePageBtn');
+				pre.innerHTML = '이전';
+				pre.addEventListener('click', function(){
+					/*alert(x.startPage-5);*/
+					
+					router.move({
+						context : x.context, 
+						domain : 'admin', 
+						action : 'list', 
+						page: 'main&pageNum='+(x.startPage*1-5)});
+				});
+			}
 
-				router.move({
-					context : x[0], 
-					domain : 'admin', 
-					action : 'list', 
-					page: 'main'});
-			});*/
+			for(var i of document.querySelectorAll('.pageNum')){
+				i.style.cursor = 'pointer';
+				i.addEventListener('click', function(){
+					router.move({context : x.context, 
+									domain : 'admin', 
+									action : 'list', 
+									page: 'main&pageNum='+ this.getAttribute('id')});
+				});
+			}
 			
 		}
 	};

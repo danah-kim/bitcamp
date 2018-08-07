@@ -15,9 +15,10 @@ import template.DeleteQuery;
 import template.InsertQuery;
 import template.ListQuery;
 import template.LoginQuery;
-import template.PagiNationQuery;
+import template.PaginationQuery;
 import template.QueryTemplate;
 import template.RetriveQuery;
+import template.SearchJoinQuery;
 
 public class MemberDaoImpl implements MemberDao{
 	private static MemberDao instance = new MemberDaoImpl ();
@@ -57,7 +58,7 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public List<MemberBean> selectList(Map<?, ?> param) {
 		List<MemberBean> list = new ArrayList<>();
-		QueryTemplate query= new PagiNationQuery();
+		QueryTemplate query= new PaginationQuery();
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("table", Domain.MEMBER);
 		map.put("startRow", param.get("startRow"));
@@ -74,7 +75,7 @@ public class MemberDaoImpl implements MemberDao{
 	}
 	@Override
 	public List<MemberBean> selectBySearchWord(String word) {
-		QueryTemplate q = new SearchQuery();
+		QueryTemplate q = (word.split("/")[0].equals("teamName")) ? new SearchJoinQuery() : new SearchQuery();
 		HashMap<String, Object> map = new HashMap<>();
 		List<MemberBean> list = new ArrayList<>();
 		map.put("column", word.split("/")[0]);

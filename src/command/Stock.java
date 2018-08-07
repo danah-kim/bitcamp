@@ -35,38 +35,53 @@ public class Stock {
 		int totalPage = (totalRecode-1)/recodeSize+1;
 		int pageSize = 5;
 		int pageNum = (request.getParameter("pageNum")==null) ? 1 : Integer.parseInt(request.getParameter("pageNum"));
-		int startPage = (request.getParameter("startPage")==null) ? 1 : Integer.parseInt(request.getParameter("startPage"));
-		int endPage = (totalPage < (startPage + pageSize  - 1)) ? totalPage : (startPage + pageSize -1);
+		int startPage = 1 + (int) (Math.ceil((pageNum-1)/pageSize)) * pageSize;
+		int endPage = (totalPage < startPage + pageSize  - 1) ? totalPage : (startPage + pageSize -1);
 		
 		request.setAttribute("startPage", startPage);
-		request.setAttribute("pageNum", totalPage);
+		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("totalPage", totalPage);
 
-		System.out.println("**시작:"+startPage+"/총페이지수:" + totalPage+"/끝:" + endPage+"****");	
+		System.out.println("**시작:"+startPage+"/총페이지수:" + totalPage+"/끝:" + endPage+"/현재페이지:" + pageNum+"****");	
 		
 		Map<String, Object> map = new HashMap<>();
-		String startRow = String.valueOf((recodeSize*(pageNum-1))+1);
-		String endRow = String.valueOf((totalRecode < (Integer.parseInt(startRow) + recodeSize - 1)) 
+		int startRow = 1 + ((pageNum-1) * recodeSize);
+		int endRow = (totalRecode < startRow + recodeSize - 1) 
 										? totalRecode 
-										: pageNum*(recodeSize));
-		map.put("startRow", startRow);
-		map.put("endRow", endRow);
+										: pageNum*(recodeSize);
+		map.put("startRow", String.valueOf(startRow));
+		map.put("endRow", String.valueOf(endRow));
 		request.setAttribute("list", MemberServiceImpl.getInstance().getList(map));
+		
+		int prevBlock = startPage - pageSize;
+		int nextBlock = startPage + pageSize;
+		
+		boolean existPrev = false;
+		if(prevBlock >= 0) {
+			existPrev = true;
+		}
+		boolean existNext = false;
+		if(nextBlock <= recodeSize) {
+			existNext = true;
+		}
 		
 	}
 	
 	public void search(HttpServletRequest request) {
 		System.out.println("조건 : "+request.getParameter("condition")+" 내용 : "+request.getParameter("word"));
-		String condtion = (request.getParameter("condition").toString().equals("teamName")) ?
-				"TEAM_ID"
+		
+		String condtion = (request.getParameter("condition").toString().equals("teamName"))
+				? "TEAM_NAME"
 				: request.getParameter("condition");
-		String word = (request.getParameter("condition").toString().equals("teamName")) ?
-				"(SELECT TEAM_ID FROM RPROJECT_TEAM WHERE TEAM_NAME LIKE '"+ request.getParameter("word")+"')"
-				: request.getParameter("word");
+		String word = request.getParameter("word");
+		
+		if(request.getParameter("condition").toString().equals("none")) {
+			condtion = " ";
+			word = " ";
+		}
 		
 		request.setAttribute("list", MemberServiceImpl.getInstance().findByWord(condtion.toUpperCase()+"/"+word.toUpperCase()));
-		request.setAttribute("count", MemberServiceImpl.getInstance().countMember());
 	}
 	
 	public void retrive(HttpServletRequest request) {

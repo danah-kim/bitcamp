@@ -5,8 +5,10 @@ import template.ColumnFinder;
 public enum MemberQuery {
 	LOGIN,
 	INSERT_MEMBER,
-	SELECT_ALL_MEMBER, SELECT_BY_WORD, SELECT_BY_ID, COUNT_MEMBER, 
-	UPDATE_MEMBER, DELETE_MEMBER, IDDUALCHECK, PAGINATION;
+	SELECT_ALL_MEMBER, SELECT_BY_WORD, SELECT_JOIN_WORD, SELECT_BY_ID, COUNT_MEMBER, 
+	UPDATE_MEMBER, DELETE_MEMBER, 
+	IDDUALCHECK, PAGINATION;
+	
 	@Override
 	public String toString() {
 		String query = "";
@@ -34,7 +36,6 @@ public enum MemberQuery {
 					// ?는 preparedstatement 사용한부분
 					+ "LIKE ? ";
 			break;
-		
 		case SELECT_BY_ID :
 			query = "SELECT " + ColumnFinder.find(Domain.MEMBER)
 					+ " FROM %s "
@@ -67,6 +68,14 @@ public enum MemberQuery {
 					+ "FROM %s M "
 					+ "ORDER BY SEQ DESC)T "
 					+ "WHERE T.SEQ BETWEEN ? AND ?";
+			break;
+		case SELECT_JOIN_WORD :
+			query = "SELECT " + ColumnFinder.find(Domain.MEMBER)
+					+ " FROM %s "
+					+ "WHERE TEAM_ID IN "
+					+ "(SELECT TEAM_ID "
+					+ "FROM RPROJECT_TEAM "
+					+ "WHERE %s LIKE ?)";
 			break;
 		default :
 			break;
