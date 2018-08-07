@@ -152,7 +152,6 @@ var admin = (() => {
 			/*if(x.endPage < x.totalPage && x.startPage != x.totalPage){
 				var next = document.getElementById('nextPage');
 				next.innerHTML = '다음';
-				
 				next.addEventListener('click', function(){
 				alert(x.endPage*1+1);
 					
