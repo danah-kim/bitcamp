@@ -7,19 +7,11 @@ import lombok.Data;
 
 @Data
 public class Pagination implements Proxy{
-	int totalRecode,
-	recodeSize,
-	totalPage,
-	pageSize,
-	pageNum,
-	startPage,
-	endPage,
-	startRow,
-	endRow,
-	prevBlock,
-	nextBlock;
-	boolean existPrev = false,
-	existNext = false;
+	int totalRecode, recodeSize, 
+	totalPage, pageSize, 
+	pageNum, startPage, endPage,
+	startRow, endRow;
+	boolean existPrev = false, existNext = false;
 	
 	@Override
 	public Map<?, ?> CarraryOut(Map<?, ?> param) {

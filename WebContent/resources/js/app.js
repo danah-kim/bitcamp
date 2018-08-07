@@ -135,8 +135,22 @@ var admin = (() => {
 				});
 			}
 			
-			if(x.endPage < x.totalPage && x.startPage !== x.totalPage){
-				var next = document.getElementById('nextPageBtn');
+			/*if(x.startPage != 1){
+				var pre = document.getElementById('prePage');
+				pre.innerHTML = '이전';
+				pre.addEventListener('click', function(){
+					alert(x.startPage-5);
+					
+					router.move({
+						context : x.context, 
+						domain : 'admin', 
+						action : 'list', 
+						page: 'main&pageNum='+(x.startPage*1-5)});
+				});
+			}*/
+			
+			/*if(x.endPage < x.totalPage && x.startPage != x.totalPage){
+				var next = document.getElementById('nextPage');
 				next.innerHTML = '다음';
 				
 				next.addEventListener('click', function(){
@@ -148,23 +162,30 @@ var admin = (() => {
 						action : 'list', 
 						page: 'main&pageNum='+(x.endPage*1+1)});
 				});
-			}
+			}*/
 			
-			if(x.startPage != 1){
-				var pre = document.getElementById('prePageBtn');
-				pre.innerHTML = '이전';
-				pre.addEventListener('click', function(){
-					/*alert(x.startPage-5);*/
+			document.getElementById('prePage').addEventListener('click', function(){
+				alert(x.startPage*1-5);
+				
+				router.move({
+							context : x.context, 
+							domain : 'admin', 
+							action : 'list', 
+							page: 'main&pageNum='+(x.startPage*1-5)});
+			});
+			
+			document.getElementById('nextPage').addEventListener('click', function(){
+				alert(x.endPage*1+1);
 					
-					router.move({
-						context : x.context, 
-						domain : 'admin', 
-						action : 'list', 
-						page: 'main&pageNum='+(x.startPage*1-5)});
-				});
-			}
-
-			for(var i of document.querySelectorAll('.pageNum')){
+				router.move({
+							context : x.context, 
+							domain : 'admin', 
+							action : 'list', 
+							page: 'main&pageNum='+(x.endPage*1+1)});
+			});
+			
+			
+						for(var i of document.querySelectorAll('.pageNum')){
 				i.style.cursor = 'pointer';
 				i.addEventListener('click', function(){
 					router.move({context : x.context, 

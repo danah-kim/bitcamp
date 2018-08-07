@@ -51,20 +51,14 @@ public class Stock {
 										: pageNum*(recodeSize);
 		map.put("startRow", String.valueOf(startRow));
 		map.put("endRow", String.valueOf(endRow));
+		
 		request.setAttribute("list", MemberServiceImpl.getInstance().getList(map));
 		
-		int prevBlock = startPage - pageSize;
-		int nextBlock = startPage + pageSize;
+		boolean existPrev = (startPage > 1) ? true : false;
+		boolean existNext = (endPage < totalPage && startPage != totalPage) ? true : false;
 		
-		boolean existPrev = false;
-		if(prevBlock >= 0) {
-			existPrev = true;
-		}
-		boolean existNext = false;
-		if(nextBlock <= recodeSize) {
-			existNext = true;
-		}
-		
+		request.setAttribute("existPrev", existPrev);
+		request.setAttribute("existNext", existNext);
 	}
 	
 	public void search(HttpServletRequest request) {

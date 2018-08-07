@@ -18,7 +18,6 @@ public class PageProxy implements Proxy{
 		request.setAttribute("totalPage", totalPage);
 		request.setAttribute("existPrev", existPrev);
 		request.setAttribute("existNext", existNext);
-		request.setAttribute("page", "page");*/
 		map.put("request", request);
 		
 		return null;

@@ -42,21 +42,21 @@
 					전체 회원수 : ${count}
 					<br />
 					<ul class="pageBox">
-						<%-- <c:if test="${existPre}">
-						</c:if> --%>
+						<c:if test="${existPrev}">
 						<li>
-							<a id='prePageBtn'></a>
+							<a id='prePage'>이전</a>
 						</li>
+						</c:if>
 						<c:forEach begin='${startPage}' end='${endPage}' step='1' varStatus='i'>
 							<li>
 								<a class= "pageNum" id = '${i.index}' style="cursor: pointer;">${i.index}</a>
 							</li>
 						</c:forEach>
-						<%-- <c:if test="${existNext}">
-						</c:if> --%>
+						<c:if test="${existNext}">
 						<li>
-							<a id='nextPageBtn'></a>
+							<a id='nextPage'>다음</a>
 						</li>
+						</c:if>
 					</ul>
 				</td>
 			</tr>
