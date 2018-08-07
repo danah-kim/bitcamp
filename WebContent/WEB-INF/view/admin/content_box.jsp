@@ -69,5 +69,4 @@
 				endPage : '${endPage}',
 				totalPage : '${totalPage}'
 	});
-	
 </script>
