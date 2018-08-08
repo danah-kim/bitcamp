@@ -6,6 +6,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import domain.MemberBean;
+import proxy.PageProxy;
+import proxy.Pagination;
+import proxy.Proxy;
 import service.MemberServiceImpl;
 
 public class Stock {
@@ -26,39 +29,18 @@ public class Stock {
 	}
 	
 	public void list(HttpServletRequest request) {
-		/*request.setAttribute("list", MemberServiceImpl.getInstance().memberList());*/
-		request.setAttribute("count", MemberServiceImpl.getInstance().countMember());
-		
-		int totalRecode = MemberServiceImpl.getInstance().countMember();
-		int recodeSize = 5;
-		int totalPage = (totalRecode-1)/recodeSize+1;
-		int pageSize = 5;
-		int pageNum = (request.getParameter("pageNum")==null) ? 1 : Integer.parseInt(request.getParameter("pageNum"));
-		int startPage = 1 + (int) (Math.ceil((pageNum-1)/pageSize)) * pageSize;
-		int endPage = (totalPage < startPage + pageSize  - 1) ? totalPage : (startPage + pageSize -1);
-		
-		request.setAttribute("startPage", startPage);
-		request.setAttribute("pageNum", pageNum);
-		request.setAttribute("endPage", endPage);
-		request.setAttribute("totalPage", totalPage);
-
-		System.out.println("**시작:"+startPage+"/총페이지수:" + totalPage+"/끝:" + endPage+"/현재페이지:" + pageNum+"****");	
-		
 		Map<String, Object> map = new HashMap<>();
-		int startRow = 1 + ((pageNum-1) * recodeSize);
-		int endRow = (totalRecode < startRow + recodeSize - 1) 
-										? totalRecode 
-										: pageNum*(recodeSize);
-		map.put("startRow", String.valueOf(startRow));
-		map.put("endRow", String.valueOf(endRow));
+		int pageNum = (request.getParameter("pageNum")==null) ? 1 : Integer.parseInt(request.getParameter("pageNum"));
+		
+		PageProxy pxy = new PageProxy();
+		pxy.carraryOut(pageNum);
+		Pagination page = pxy.getPagination();
+
+		map.put("startRow", String.valueOf(page.getStartRow()));
+		map.put("endRow", String.valueOf(page.getEndRow()));
+		request.setAttribute("page", page);
 		
 		request.setAttribute("list", MemberServiceImpl.getInstance().getList(map));
-		
-		boolean existPrev = (startPage > 1) ? true : false;
-		boolean existNext = (endPage < totalPage && startPage != totalPage) ? true : false;
-		
-		request.setAttribute("existPrev", existPrev);
-		request.setAttribute("existNext", existNext);
 	}
 	
 	public void search(HttpServletRequest request) {

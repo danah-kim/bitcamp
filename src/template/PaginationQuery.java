@@ -45,7 +45,6 @@ public class PaginationQuery extends QueryTemplate{
 				mem.setMemId(rs.getString("MEM_ID"));
 				mem.setTeamId(rs.getString("TEAM_ID"));
 				mem.setName(rs.getString("NAME"));
-				System.out.println(mem.getName());
 				mem.setAge(rs.getString("AGE"));
 				mem.setGender(rs.getString("GENDER"));
 				mem.setRoll(rs.getString("ROLL"));

@@ -102,7 +102,7 @@ var admin = (() => {
 				'adminListTableMeta '
 			);
 				
-			document.getElementById('adminSearchBtn').addEventListener('click', function(){
+			document.getElementById('adminSearchBtn').addEventListener('click', ()=>{
 				var form = document.getElementById('adminSearchFormBox');
 				var s = document.getElementById('adminSearchSelect');
 				var condition = s.options[s.selectedIndex].value;
@@ -126,44 +126,41 @@ var admin = (() => {
 				i.style.color = 'red';
 				i.style.cursor = 'pointer';
 				i.addEventListener('click', function(){
-					alert('클릭'+this.getAttribute('id'));
-					router.move({
-						context : x.context, 
-						domain : 'admin', 
-						action : 'retrive', 
-						page: 'memberDetail&condition='+ this.getAttribute('id')});
+					router.move({context : x.context, 
+									domain : 'admin', 
+									action : 'retrive', 
+									page: 'memberDetail&condition='+ this.getAttribute('id')});
 				});
 			}
 			
-			/*if(x.startPage != 1){
-				var pre = document.getElementById('prePage');
-				pre.innerHTML = '이전';
-				pre.addEventListener('click', function(){
-					alert(x.startPage-5);
-					
+			for(var i of document.querySelectorAll('.pageNum')){
+				i.style.cursor = 'pointer';
+				i.addEventListener('click', function(){
+					router.move({context : x.context, 
+									domain : 'admin', 
+									action : 'list', 
+									page: 'main&pageNum='+ this.getAttribute('id')});
+				});
+			}
+			
+			var paging = document.getElementById('paging');
+			
+			for(var i of document.querySelectorAll('.pageBtn')){
+				i.addEventListener('click', function(){
 					router.move({
 						context : x.context, 
 						domain : 'admin', 
 						action : 'list', 
-						page: 'main&pageNum='+(x.startPage*1-5)});
+						page : 'main&pageNum=' + 
+								(i.getAttribute('id') === 'prePage')? 
+								paging.getAttribute('begin')-5
+								: paging.getAttribute('end')+1
+					});
+						
 				});
 			}
 
-			if(x.endPage < x.totalPage && x.startPage != x.totalPage){
-				var next = document.getElementById('nextPage');
-				next.innerHTML = '다음';
-				next.addEventListener('click', function(){
-				alert(x.endPage*1+1);
-					
-					router.move({
-						context : x.context, 
-						domain : 'admin', 
-						action : 'list', 
-						page: 'main&pageNum='+(x.endPage*1+1)});
-				});
-			}*/
-			
-			document.getElementById('prePage').addEventListener('click', function(){
+			/*document.getElementById('prePage').addEventListener('click', function(){
 				alert(x.startPage*1-5);
 				
 				router.move({
@@ -181,18 +178,7 @@ var admin = (() => {
 							domain : 'admin', 
 							action : 'list', 
 							page: 'main&pageNum='+(x.endPage*1+1)});
-			});
-			
-			
-						for(var i of document.querySelectorAll('.pageNum')){
-				i.style.cursor = 'pointer';
-				i.addEventListener('click', function(){
-					router.move({context : x.context, 
-									domain : 'admin', 
-									action : 'list', 
-									page: 'main&pageNum='+ this.getAttribute('id')});
-				});
-			}
+			});*/
 			
 		}
 	};
@@ -258,7 +244,7 @@ let member = (()=>{
 		getRoll,
 		getSubject,
 		join : x => {
-			document.getElementById('joinFormBut').addEventListener('click',function(){
+			document.getElementById('joinFormBut').addEventListener('click',()=>{
 				var form = document.getElementById('joinFormBox');
 				var y = service.null_chk([
 					form.id.value,

@@ -39,23 +39,19 @@
 			</c:forEach>
 			<tr>
 				<td colspan="6">
-					전체 회원수 : ${count}
+					전체 회원수 : ${page.count}
 					<br />
 					<ul class="pageBox">
-						<c:if test="${existPrev}">
-						<li>
-							<a id='prePage'>이전</a>
-						</li>
+						<c:if test="${page.existPrev}">
+							<li class="pageBtn" id='prePage'>이전</li>
 						</c:if>
-						<c:forEach begin='${startPage}' end='${endPage}' step='1' varStatus='i'>
-							<li>
+						<li id="paging">
+							<c:forEach begin='${page.startPage}' end='${page.endPage}' step='1' varStatus='i'>
 								<a class= "pageNum" id = '${i.index}' style="cursor: pointer;">${i.index}</a>
-							</li>
-						</c:forEach>
-						<c:if test="${existNext}">
-						<li>
-							<a id='nextPage'>다음</a>
+							</c:forEach>
 						</li>
+						<c:if test="${page.existNext}">
+							<li class="pageBtn" id='nextPage'>다음	</li>
 						</c:if>
 					</ul>
 				</td>
@@ -64,9 +60,5 @@
 	</div>
 </div>
 <script>
-	admin.main({context : '${context}', 
-				startPage : '${startPage}',
-				endPage : '${endPage}',
-				totalPage : '${totalPage}'
-	});
+	admin.main('${context}');
 </script>
