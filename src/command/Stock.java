@@ -25,7 +25,7 @@ public class Stock {
 		member.setAge(request.getParameter("age"));
 		member.setGender(request.getParameter("gender"));
 		member.setSubject(ParamMap.getValues(request, "subject"));
-		MemberServiceImpl.getInstance().createMember(member);
+		MemberServiceImpl.getInstance().create(member);
 	}
 	
 	public void list(HttpServletRequest request) {
@@ -40,7 +40,7 @@ public class Stock {
 		map.put("endRow", String.valueOf(page.getEndRow()));
 		request.setAttribute("page", page);
 		
-		request.setAttribute("list", MemberServiceImpl.getInstance().getList(map));
+		request.setAttribute("list", MemberServiceImpl.getInstance().search(map));
 	}
 	
 	public void search(HttpServletRequest request) {
@@ -56,17 +56,17 @@ public class Stock {
 			word = " ";
 		}
 		
-		request.setAttribute("list", MemberServiceImpl.getInstance().findByWord(condtion.toUpperCase()+"/"+word.toUpperCase()));
+		//request.setAttribute("list", MemberServiceImpl.getInstance().search(condtion.toUpperCase()+"/"+word.toUpperCase()));
 	}
 	
 	public void retrive(HttpServletRequest request) {
 		member = new MemberBean();
 		member.setMemId(request.getParameter("condition").toUpperCase());
-		request.setAttribute("member", MemberServiceImpl.getInstance().findByID(member));
+		request.setAttribute("member", MemberServiceImpl.getInstance().retrieve(member));
 	}
 	
 	public void count(HttpServletRequest request) {
-		request.getSession().setAttribute("count", MemberServiceImpl.getInstance().countMember());
+		request.getSession().setAttribute("count", MemberServiceImpl.getInstance().count());
 	}
 	
 	public void update(HttpServletRequest request) {
@@ -76,15 +76,15 @@ public class Stock {
 		member.setPassWord(request.getParameter("new_pw"));
 		member.setTeamId(request.getParameter("teamid"));
 		member.setRoll(request.getParameter("roll"));
-		MemberServiceImpl.getInstance().modifyMember(member);
-		request.getSession().setAttribute("user", MemberServiceImpl.getInstance().findByID(member));
+		MemberServiceImpl.getInstance().modify(member);
+		request.getSession().setAttribute("user", MemberServiceImpl.getInstance().retrieve(member));
 	}
 	
 	public void delete(HttpServletRequest request) {
 		member = new MemberBean();
 		member.setMemId(((MemberBean)request.getSession().getAttribute("user")).getMemId());
 		member.setPassWord(request.getParameter("pw1"));
-		MemberServiceImpl.getInstance().removeMember(member);
+		MemberServiceImpl.getInstance().remove(member);
 		request.getSession().invalidate();
 	}
 	

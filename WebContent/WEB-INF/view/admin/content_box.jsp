@@ -43,7 +43,7 @@
 					<br />
 					<ul class="pageBox">
 						<c:if test="${page.existPrev}">
-							<li class="pageBtn" id='prePage'>이전</li>
+							<li class="pageBtn" id='${page.pre}'>이전</li>
 						</c:if>
 						<li id="paging">
 							<c:forEach begin='${page.startPage}' end='${page.endPage}' step='1' varStatus='i'>
@@ -51,7 +51,7 @@
 							</c:forEach>
 						</li>
 						<c:if test="${page.existNext}">
-							<li class="pageBtn" id='nextPage'>다음	</li>
+							<li class="pageBtn" id='${page.next}'>다음	</li>
 						</c:if>
 					</ul>
 				</td>
@@ -60,5 +60,5 @@
 	</div>
 </div>
 <script>
-	admin.main('${context}');
+	admin.main({context : '${context}'});
 </script>

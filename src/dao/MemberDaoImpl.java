@@ -26,7 +26,7 @@ public class MemberDaoImpl implements MemberDao{
 	private MemberDaoImpl () {		
 	}
 	@Override
-	public void insertMember(MemberBean member) {
+	public void insert(MemberBean member) {
 		QueryTemplate query = new InsertQuery();
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("table", Domain.MEMBER);
@@ -42,21 +42,7 @@ public class MemberDaoImpl implements MemberDao{
 		member = query.getMember();
 	}
 	@Override
-	public List<MemberBean> selectAllMember() {
-		List<MemberBean> list = new ArrayList<>();
-		QueryTemplate query = new ListQuery();
-		HashMap<String, Object> map = new HashMap<>();
-		map.put("table", Domain.MEMBER);
-		query.play(map);
-		
-		for(Object e: query.getList()) {
-			list.add((MemberBean)e);
-		}
-		
-		return list;
-	}
-	@Override
-	public List<MemberBean> selectList(Map<?, ?> param) {
+	public List<MemberBean> selectSome(Map<?, ?> param) {
 		List<MemberBean> list = new ArrayList<>();
 		QueryTemplate query= new PaginationQuery();
 		HashMap<String, Object> map = new HashMap<>();
@@ -74,21 +60,19 @@ public class MemberDaoImpl implements MemberDao{
 		return list;
 	}
 	@Override
-	public List<MemberBean> selectBySearchWord(String word) {
-		QueryTemplate q = (word.split("/")[0].equals("teamName")) ? new SearchJoinQuery() : new SearchQuery();
+	public MemberBean selectOne(String word) {
+		QueryTemplate query = (word.split("/")[0].equals("teamName")) ? new SearchJoinQuery() : new SearchQuery();
 		HashMap<String, Object> map = new HashMap<>();
-		List<MemberBean> list = new ArrayList<>();
+		MemberBean member = new MemberBean();
 		map.put("column", word.split("/")[0]);
 		map.put("value", word.split("/")[1]);
 		map.put("table", Domain.MEMBER);
-		q.play(map);
-		for(Object s: q.getList()) {
-			list.add((MemberBean)s);
-		}
+		query.play(map);
+		member = query.getMember();
 		
-		return list;
+		return member;
 	}
-	@Override
+/*	@Override
 	public MemberBean selectById(MemberBean id) {
 		QueryTemplate query = new RetriveQuery();
 		HashMap<String, Object> map = new HashMap<>();
@@ -98,9 +82,9 @@ public class MemberDaoImpl implements MemberDao{
 		id = query.getMember();
 
 		return id;
-	}
+	}*/
 	@Override
-	public int countMember() {
+	public int count() {
 		int count = 0;
 		QueryTemplate query = new CountQuery();
 		HashMap<String, Object> map = new HashMap<>();
@@ -111,18 +95,18 @@ public class MemberDaoImpl implements MemberDao{
 		return count;
 	}
 	@Override
-	public void updateMember(MemberBean member) {
+	public void update(Map<?, ?> param) {
 		QueryTemplate query = new UpdateQuery();
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("table", Domain.MEMBER);
-		map.put("passWord", member.getPassWord());
-		map.put("teamId", member.getTeamId());
-		map.put("roll", member.getRoll());
-		map.put("memId", member.getMemId());
+		map.put("passWord", param.get("passWord"));
+		map.put("teamId", param.get("TeamId"));
+		map.put("roll", param.get("Roll"));
+		map.put("memId", param.get("MemId"));
 		query.play(map);
 	}
 	@Override
-	public void deleteMember(MemberBean member) {
+	public void delete(MemberBean member) {
 		QueryTemplate query = new DeleteQuery();
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("table", Domain.MEMBER);
@@ -143,19 +127,5 @@ public class MemberDaoImpl implements MemberDao{
 
 		return flag;
 	}
-	@Override
-	public boolean iDDualCheck(String id) {
-		ResultSet rs = null;
-		try {
-			rs = DataBaseFactory.createDataBase(Vendor.ORACLE, DBConstant.USERNAME.toString(), DBConstant.PASSWORD.toString())
-					.getConnection()
-					.createStatement()
-					.executeQuery(
-							String.format(
-									MemberQuery.IDDUALCHECK.toString()
-									,id));
-		} catch (Exception e) {
-		}
-		return rs != null;
-	}
+
 }

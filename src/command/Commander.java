@@ -19,12 +19,12 @@ public class Commander{
 				break;
 			case LIST :
 				System.out.println("=== list 진입 ===");
-				cmd = new ListCommand(request);
-				break;
-			case SEARCH :
-				System.out.println("=== search 진입 ===");
 				cmd = new SearchCommand(request);
 				break;
+			/*case SEARCH :
+				System.out.println("=== search 진입 ===");
+				cmd = new SearchCommand(request);
+				break;*/
 			case RETRIVE :
 				System.out.println("=== retrive 진입 ===");
 				cmd = new RetriveCommand(request);

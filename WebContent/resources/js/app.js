@@ -151,10 +151,7 @@ var admin = (() => {
 						context : x.context, 
 						domain : 'admin', 
 						action : 'list', 
-						page : 'main&pageNum=' + 
-								(i.getAttribute('id') === 'prePage')? 
-								paging.getAttribute('begin')-5
-								: paging.getAttribute('end')+1
+						page : 'main&pageNum=' + this.getAttribute('id')
 					});
 						
 				});

@@ -8,7 +8,8 @@ public class Pagination implements Proxy{
 	int count, totalRecode, recodeSize, 
 	totalPage, pageSize, 
 	pageNum, startPage, endPage,
-	startRow, endRow;
+	startRow, endRow,
+	pre, next;
 	boolean existPrev = false, existNext = false;
 	
 	@Override
@@ -28,6 +29,8 @@ public class Pagination implements Proxy{
 										: pageNum*(recodeSize);
 		this.existPrev = (startPage != 1);
 		this.existNext = (endPage < totalPage && startPage != totalPage);
+		this.pre = startPage-5;
+		this.next= endPage+1;
 	}
 	
 	
