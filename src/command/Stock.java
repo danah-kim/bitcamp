@@ -54,9 +54,8 @@ public class Stock {
 		if(request.getParameter("condition").toString().equals("none")) {
 			condtion = " ";
 			word = " ";
-		}
-		
-		//request.setAttribute("list", MemberServiceImpl.getInstance().search(condtion.toUpperCase()+"/"+word.toUpperCase()));
+		}	
+		request.setAttribute("list", MemberServiceImpl.getInstance().search(condtion.toUpperCase()+"/"+word.toUpperCase()));
 	}
 	
 	public void retrive(HttpServletRequest request) {
