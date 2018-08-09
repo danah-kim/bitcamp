@@ -19,10 +19,10 @@
 	});
 	document.getElementById('moveMemberUpdate').addEventListener('click', function(){
 		alert('정보변경 이동');
-		router.move({context : '${context}', domain : 'member', action : 'move', page : 'update_form'});
+		router.move({context : '${context}', domain : 'member', action : 'move', page : 'modify'});
 	});
 	document.getElementById('moveMemberDelete').addEventListener('click', function(){
 		alert('회원탈퇴 이동')
-		router.move({context : '${context}', domain : 'member', action : 'move', page : 'delete_form'});
+		router.move({context : '${context}', domain : 'member', action : 'move', page : 'remove'});
 	});
 </script>

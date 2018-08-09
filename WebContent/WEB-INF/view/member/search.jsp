@@ -5,7 +5,7 @@
 		<form id="adminSearchFormBox">
 			<select id="adminSearchSelect" name="adminSearchSelect">
 				<option value="none">검색조건</option>
-				<option value="userid">아이디</option>
+				<option value="userId">아이디</option>
 				<option value="name">이  름</option>
 				<option value="teamName">팀  명</option>
 				<option value="gender">성  별</option>
@@ -43,7 +43,7 @@
 					<br />
 					<ul class="pageBox">
 						<c:if test="${page.existPrev}">
-							<li class="pageBtn" id='${page.pre}'>이전</li>
+							<li class="pageBtn" id='${page.pre}'></li>
 						</c:if>
 						<li id="paging">
 							<c:forEach begin='${page.startPage}' end='${page.endPage}' step='1' varStatus='i'>
@@ -60,5 +60,5 @@
 	</div>
 </div>
 <script>
-	admin.main({context : '${context}'});
+	admin.main('${context}');
 </script>

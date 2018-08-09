@@ -10,7 +10,7 @@ public enum Term {
 			result = "/WEB-INF/view/";
 			break;
 		case MAIN :
-			result = "main.jsp";
+			result = "/main.jsp";
 			break;
 		default:
 			break;

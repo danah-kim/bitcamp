@@ -15,8 +15,8 @@ public class Pagination implements Proxy{
 	@Override
 	public void carraryOut(Object o) {
 		this.pageNum = (int) o;
-		this.count = MemberServiceImpl.getInstance().countMember();
-		this.totalRecode = MemberServiceImpl.getInstance().countMember();
+		this.count = MemberServiceImpl.getInstance().count();
+		this.totalRecode = MemberServiceImpl.getInstance().count();
 		this.recodeSize = 5;
 		this.totalPage = (totalRecode-1)/recodeSize+1;
 		this.pageSize = 5;

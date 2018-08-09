@@ -10,20 +10,19 @@ public class RetriveQuery extends QueryTemplate{
 	@Override
 	void initialize() {
 		System.out.println("initialize override");
-		map.put("sql", String.format(MemberQuery.SELECT_BY_ID.toString(),
-							map.get("table"),
-							map.get("value")));
+		map.put("sql", String.format(MemberQuery.RETRIEVE.toString(),
+							map.get("table")));
 	}
-
 	@Override
 	void startPlay() {
 		System.out.println("=================");
 		System.out.println(map.get("sql"));
 		System.out.println("=================");
 		try {
-			stmt = DataBaseFactory.createDataBase2(map)
+			pstmt = DataBaseFactory.createDataBase2(map)
 					.getConnection()
-					.createStatement();
+					.prepareStatement((String)map.get("sql"));
+			pstmt.setString(1, map.get("value").toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -33,7 +32,7 @@ public class RetriveQuery extends QueryTemplate{
 	void endPlay() {
 		System.out.println("endPlay override");
 		try {
-			ResultSet rs = stmt.executeQuery((String)map.get("sql"));
+			ResultSet rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
 				do {

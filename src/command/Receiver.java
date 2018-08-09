@@ -7,7 +7,9 @@ public class Receiver {
 	public static Command cmd = new Command();
 	public static void init(HttpServletRequest request) {
 		System.out.println("Receiver 진입");
-		System.out.println("도메인 : " + request.getServletPath().substring(1, request.getServletPath().indexOf(".")));
+		System.out.println("도메인 : " + request.getServletPath()
+												.substring(1, request.getServletPath()
+												.indexOf(".")));
 		System.out.println("액션: " + request.getParameter("action"));
 		System.out.println("페이지: " + request.getParameter("page"));
 		// 스크립틀릿에서 받은 값을 저장하지 말고 바로 전달하여 commander에서 실행할 클래스를 선택

@@ -4,78 +4,66 @@ import template.ColumnFinder;
 
 public enum MemberQuery {
 	LOGIN,
-	INSERT_MEMBER,
-	SELECT_ALL_MEMBER, SELECT_BY_WORD, SELECT_JOIN_WORD, SELECT_BY_ID, COUNT_MEMBER, 
-	UPDATE_MEMBER, DELETE_MEMBER, 
-	IDDUALCHECK, PAGINATION;
+	INSERT,
+	LIST, SEARCH, RETRIEVE, COUNT, 
+	UPDATE,
+	DELETE;
 	
 	@Override
 	public String toString() {
 		String query = "";
 		switch(this) {
-		case LOGIN :
-			query = "SELECT " + ColumnFinder.find(Domain.MEMBER)
-					+ " FROM %s "
-					+ "WHERE MEM_ID LIKE '%s' " 
-					+ "AND PASS_WORD LIKE '%s' ";
-			break;
-		case INSERT_MEMBER :
-			query = "INSERT INTO %s "
-					+ "(MEM_ID, PASS_WORD, NAME, SSN, AGE, TEAM_ID, ROLL, gender) "
+		case INSERT :
+			query = " INSERT INTO %s "
+					+ ColumnFinder.find(Domain.MEMBER)
 					+ "VALUES "
-					+ "('%s','%s','%s','%s','%s','%s','%s','%s') ";
+					+ "(?, ?, ?, ?, ?, ?, ?, ?, ?) ";
 			break;
-		case SELECT_ALL_MEMBER :
-			query = "SELECT " + ColumnFinder.find(Domain.MEMBER)
-					+ " FROM %s";
-			break;
-		case SELECT_BY_WORD :
-			query = "SELECT " + ColumnFinder.find(Domain.MEMBER)
-					+ " FROM %s "
-					+ "WHERE %s "
-					// ?는 preparedstatement 사용한부분
-					+ "LIKE ? ";
-			break;
-		case SELECT_BY_ID :
-			query = "SELECT " + ColumnFinder.find(Domain.MEMBER)
-					+ " FROM %s "
-					+ "WHERE MEM_ID LIKE '%s'";
-			break;
-		case COUNT_MEMBER :
-			query = "SELECT COUNT(*) AS COUNT "
-					+ "FROM %s";
-			break;
-		case UPDATE_MEMBER :
-			query = "UPDATE %s "
-					+ "SET PASS_WORD = '%s', "
-					+ "TEAM_ID = '%s', "
-					+ "ROLL='%s' "
-					+ "WHERE MEM_ID LIKE '%s' ";
-			break;
-		case DELETE_MEMBER :
-			query = "DELETE %s "
-					+ "WHERE MEM_ID LIKE '%s' "
-					+ "AND PASS_WORD LIKE '%s'";
-			break;
-		case IDDUALCHECK :
-			query = "SELECT MEM_ID "
-					+ "FROM MEMBER "
-					+ "WHERE MEM_ID LIKE '%s'";
-			break;
-		case PAGINATION :
-			query = "SELECT T.* "
+		case LIST :
+			query = " SELECT T.* "
 					+ "FROM(SELECT ROWNUM SEQ, M.* "
 					+ "FROM %s M "
 					+ "ORDER BY SEQ DESC)T "
 					+ "WHERE T.SEQ BETWEEN ? AND ?";
 			break;
-		case SELECT_JOIN_WORD :
-			query = "SELECT " + ColumnFinder.find(Domain.MEMBER)
+		case SEARCH :
+			query = " SELECT T.* "
+					+ "FROM(SELECT ROWNUM SEQ, M.* "
+					+ "FROM %s M "
+					+ "WHERE %s LIKE ? "
+					+ "ORDER BY SEQ DESC)T "
+					+ "WHERE T.SEQ BETWEEN ? AND ?";
+			break;
+		case RETRIEVE :
+			query = " SELECT "
+					+ ColumnFinder.find(Domain.MEMBER)
 					+ " FROM %s "
-					+ "WHERE TEAM_ID IN "
-					+ "(SELECT TEAM_ID "
-					+ "FROM RPROJECT_TEAM "
-					+ "WHERE %s LIKE ?)";
+					+ "WHERE MEM_ID "
+					+ "LIKE ?";
+			break;
+		case COUNT :
+			query = " SELECT COUNT(*) AS count "
+					+ "FROM %s";
+			break;
+		case UPDATE :
+			query = " UPDATE "
+					+ "%s SET PASS_WORD LIKE ?, "
+					+ "TEAM_ID LIKE ?, "
+					+ "ROLL LIKE ? "
+					+ "WHERE MEM_ID LIKE ? ";
+			break;
+		case DELETE :
+			query = " DELETE "
+					+ "%s FROM MEMBER "
+					+ "WHERE MEM_ID LIKE ? "
+					+ "AND PASS_WORD LIKE ?";
+			break;
+		case LOGIN :
+			query = " SELECT "
+					+ ColumnFinder.find(Domain.MEMBER)
+					+ " FROM %s "
+					+ "WHERE MEM_ID LIKE ? " 
+					+ "AND PASS_WORD LIKE ? ";
 			break;
 		default :
 			break;

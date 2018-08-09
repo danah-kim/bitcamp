@@ -4,6 +4,5 @@ import lombok.Data;
 
 @Data
 public class MemberBean {
-	protected String memId, teamId, name, age, roll, passWord, ssn, gender, subject;
-	
+	protected String memId, passWord, name, ssn, age, teamId, roll, gender, subject;
 }

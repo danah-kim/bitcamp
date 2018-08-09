@@ -8,7 +8,7 @@ public class UpdateQuery extends QueryTemplate{
 	@Override
 	void initialize() {
 		System.out.println("initialize override");
-		map.put("sql", String.format(MemberQuery.UPDATE_MEMBER.toString(),
+		map.put("sql", String.format(MemberQuery.UPDATE.toString(),
 							map.get("table"),
 							map.get("passWord"),
 							map.get("teamId"),

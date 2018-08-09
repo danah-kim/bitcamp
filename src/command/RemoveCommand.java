@@ -4,9 +4,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import enums.Domain;
 
-public class DeleteCommand extends Command {
+public class RemoveCommand extends Command {
 	private Stock stock = new Stock();
-	public DeleteCommand(HttpServletRequest request) {
+	public RemoveCommand(HttpServletRequest request) {
 		setRequest(request);
 		setDomain(request.getServletPath().substring(1, request.getServletPath().indexOf(".")));
 		setAction(request.getParameter("action"));

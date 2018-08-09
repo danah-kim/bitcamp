@@ -20,18 +20,6 @@ public class AdminCotroller extends HttpServlet {
 		System.out.println("AdminController 진입");
 		Receiver.init(request);
 		switch (Action.valueOf(Receiver.cmd.getAction().toUpperCase())) {
-		case MOVE :
-			System.out.println("무브 안으로 진입");
-			if(Receiver.cmd.getAction().equals(Receiver.cmd.getPage())) {
-				Server.redirect(request, response, "");
-			}else {
-				Server.forward(request, response);
-			}
-			break;
-		case LIST :			
-			System.out.println("memberList 진입");
-			Server.forward(request, response);
-			break;
 		case SEARCH :
 			System.out.println("searchMemberByWord 진입");
 			Server.forward(request, response);
@@ -40,16 +28,15 @@ public class AdminCotroller extends HttpServlet {
 			System.out.println("searchMemberById 진입");
 			Server.forward(request, response);
 			break;
-		case UPDATE :
-			System.out.println("memberUpdate 진입");
-			Server.redirect(request, response, "/member.do?action=move&page=mypage");
+		case MOVE :
+			System.out.println("무브 안으로 진입");
+			if(Receiver.cmd.getAction().equals(Receiver.cmd.getPage())) {
+				Server.redirect(request, response, "");
+			}else {
+				Server.forward(request, response);
+			}
 			break;
-		case DELETE :
-			System.out.println("memberDelete 진입");
-			Server.redirect(request, response, "");
-			break;
-		default :
-			Server.redirect(request, response, "");
+		default:
 			break;
 		}
 	}

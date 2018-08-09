@@ -8,17 +8,8 @@ public class InsertQuery extends QueryTemplate{
 	@Override
 	void initialize() {
 		System.out.println("initialize override");
-		map.put("sql", String.format(MemberQuery.INSERT_MEMBER.toString(),
-							map.get("table"),
-							map.get("memId"),
-							map.get("passWord"),
-							map.get("name"),
-							map.get("ssn"),
-							map.get("age"),
-							map.get("teamId"),
-							map.get("roll"),
-							map.get("gender")
-							));
+		map.put("sql", String.format(MemberQuery.INSERT.toString(),
+				map.get("table")));
 	}
 
 	@Override
@@ -27,9 +18,18 @@ public class InsertQuery extends QueryTemplate{
 		System.out.println(map.get("sql"));
 		System.out.println("=================");
 		try {
-			stmt = DataBaseFactory.createDataBase2(map)
+			pstmt = DataBaseFactory.createDataBase2(map)
 					.getConnection()
-					.createStatement();
+					.prepareStatement((String)map.get("sql"));
+			pstmt.setString(1, member.getMemId());
+			pstmt.setString(2, member.getPassWord());
+			pstmt.setString(3, member.getName());
+			pstmt.setString(4, member.getSsn());
+			pstmt.setString(5, member.getAge());
+			pstmt.setString(6, member.getTeamId());
+			pstmt.setString(7, member.getRoll());
+			pstmt.setString(8, member.getGender());
+			pstmt.setString(9, member.getSubject());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -39,7 +39,7 @@ public class InsertQuery extends QueryTemplate{
 	void endPlay() {
 		System.out.println("endPlay override");
 		try {
-			int rs = stmt.executeUpdate((String)map.get("sql"));
+			int rs = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

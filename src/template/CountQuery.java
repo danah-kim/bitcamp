@@ -10,7 +10,7 @@ public class CountQuery extends QueryTemplate{
 	@Override
 	void initialize() {
 		System.out.println("initialize override");
-		map.put("sql", String.format(MemberQuery.COUNT_MEMBER.toString(),
+		map.put("sql", String.format(MemberQuery.COUNT.toString(),
 							map.get("table")));
 	}
 
@@ -20,9 +20,9 @@ public class CountQuery extends QueryTemplate{
 		System.out.println(map.get("sql"));
 		System.out.println("=================");
 		try {
-			stmt = DataBaseFactory.createDataBase2(map)
+			pstmt = DataBaseFactory.createDataBase2(map)
 					.getConnection()
-					.createStatement();
+					.prepareStatement((String)map.get("sql"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -32,7 +32,7 @@ public class CountQuery extends QueryTemplate{
 	void endPlay() {
 		System.out.println("endPlay override");
 		try {
-			ResultSet rs = stmt.executeQuery((String)map.get("sql"));
+			ResultSet rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
 					num = rs.getInt("COUNT");

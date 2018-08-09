@@ -20,7 +20,7 @@ public class SearchCommand extends Command {
 		switch (Domain.valueOf(domain.toUpperCase())) {
 		case MEMBER :
 		case ADMIN :
-			stock.list(request);
+			stock.search(request);
 			break;
 		default:
 			break;

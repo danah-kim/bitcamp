@@ -11,9 +11,7 @@ public class SearchJoinQuery extends QueryTemplate{
 	@Override
 	void initialize() {
 		System.out.println("SearchJoinQuery 진입");
-		map.put("sql", String.format(MemberQuery.SELECT_JOIN_WORD.toString(),
-										map.get("table"),
-										map.get("condition")));
+
 	}
 
 	@Override

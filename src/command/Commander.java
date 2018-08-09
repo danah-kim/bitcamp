@@ -13,11 +13,11 @@ public class Commander{
 				System.out.println("=== move 진입 ===");
 				cmd = new MoveCommand(request);
 				break;
-			case JOIN : 
+			case ADD : 
 				System.out.println("=== join 진입 ===");
 				cmd = new CreateCommand(request);
 				break;
-			case LIST :
+			case SEARCH :
 				System.out.println("=== list 진입 ===");
 				cmd = new SearchCommand(request);
 				break;
@@ -29,13 +29,13 @@ public class Commander{
 				System.out.println("=== retrive 진입 ===");
 				cmd = new RetriveCommand(request);
 				break;
-			case UPDATE :
+			case MODIFY :
 				System.out.println("=== update 진입 ===");
-				cmd = new UpdateCommand(request);
+				cmd = new ModifyCommand(request);
 				break;
-			case DELETE :
+			case REMOVE :
 				System.out.println("=== delete 진입 ===");
-				cmd = new DeleteCommand(request);
+				cmd = new RemoveCommand(request);
 				break;
 			case LOGIN :
 				System.out.println("=== login 진입 ===");

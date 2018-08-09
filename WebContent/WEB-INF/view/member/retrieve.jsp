@@ -5,8 +5,8 @@
 <body>
 	<div id="wrapper">
 		<div id="header">
-			<jsp:include page="../common/title_box.jsp"/>
-			<jsp:include page="menu_box.jsp"/>
+			<jsp:include page="../common/titleBox.jsp"/>
+			<jsp:include page="menuBox.jsp"/>
 		</div> 
 		<div id="mypage_content_box">
 			<table>
@@ -58,7 +58,7 @@
 			</table>
 		</div>
 		<div id="footer">
-			<jsp:include page="../common/footer_box.jsp"/>
+			<jsp:include page="../common/footerBox.jsp"/>
 		</div>
 	</div>
 </body>

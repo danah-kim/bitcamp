@@ -11,7 +11,7 @@ public class ListQuery extends QueryTemplate{
 	@Override
 	void initialize() {
 		System.out.println("initialize override");
-		map.put("sql", String.format(MemberQuery.SELECT_ALL_MEMBER.toString(),
+		map.put("sql", String.format(MemberQuery.LIST.toString(),
 							map.get("table")));
 	}
 
@@ -19,11 +19,15 @@ public class ListQuery extends QueryTemplate{
 	void startPlay() {
 		System.out.println("=================");
 		System.out.println(map.get("sql"));
+		System.out.println(map.get("startRow"));
+		System.out.println(map.get("endRow"));
 		System.out.println("=================");
 		try {
-			stmt = DataBaseFactory.createDataBase2(map)
+			pstmt = DataBaseFactory.createDataBase2(map)
 					.getConnection()
-					.createStatement();
+					.prepareStatement((String)map.get("sql"));
+			pstmt.setString(1, map.get("startRow").toString());
+			pstmt.setString(2, map.get("endRow").toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -33,8 +37,7 @@ public class ListQuery extends QueryTemplate{
 	void endPlay() {
 		System.out.println("endPlay override");
 		try {
-			ResultSet rs = stmt.executeQuery((String)map.get("sql"));
-			MemberBean member = null;
+			ResultSet rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
 				member = new MemberBean();

@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import domain.MemberBean;
 import proxy.PageProxy;
 import proxy.Pagination;
-import proxy.Proxy;
 import service.MemberServiceImpl;
 
 public class Stock {
@@ -25,10 +24,10 @@ public class Stock {
 		member.setAge(request.getParameter("age"));
 		member.setGender(request.getParameter("gender"));
 		member.setSubject(ParamMap.getValues(request, "subject"));
-		MemberServiceImpl.getInstance().create(member);
+		MemberServiceImpl.getInstance().add(member);
 	}
 	
-	public void list(HttpServletRequest request) {
+	public void search(HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<>();
 		int pageNum = (request.getParameter("pageNum")==null) ? 1 : Integer.parseInt(request.getParameter("pageNum"));
 		
@@ -38,30 +37,17 @@ public class Stock {
 
 		map.put("startRow", String.valueOf(page.getStartRow()));
 		map.put("endRow", String.valueOf(page.getEndRow()));
+		map.put("condtion", request.getParameter("condition"));
+		map.put("word", request.getParameter("word"));
 		request.setAttribute("page", page);
 		
-		request.setAttribute("list", MemberServiceImpl.getInstance().search(map));
-	}
-	
-	public void search(HttpServletRequest request) {
-		System.out.println("조건 : "+request.getParameter("condition")+" 내용 : "+request.getParameter("word"));
-		
-		String condtion = (request.getParameter("condition").toString().equals("teamName"))
-				? "TEAM_NAME"
-				: request.getParameter("condition");
-		String word = request.getParameter("word");
-		
-		if(request.getParameter("condition").toString().equals("none")) {
-			condtion = " ";
-			word = " ";
-		}	
-		request.setAttribute("list", MemberServiceImpl.getInstance().search(condtion.toUpperCase()+"/"+word.toUpperCase()));
+		request.setAttribute("list", MemberServiceImpl
+					.getInstance()
+					.search(map));
 	}
 	
 	public void retrive(HttpServletRequest request) {
-		member = new MemberBean();
-		member.setMemId(request.getParameter("condition").toUpperCase());
-		request.setAttribute("member", MemberServiceImpl.getInstance().retrieve(member));
+		request.setAttribute("member", MemberServiceImpl.getInstance().retrieve(request.getParameter("condition").toUpperCase()));
 	}
 	
 	public void count(HttpServletRequest request) {
@@ -69,14 +55,14 @@ public class Stock {
 	}
 	
 	public void update(HttpServletRequest request) {
-		member = new MemberBean();
-		member.setMemId(((MemberBean)request.getSession().getAttribute("user")).getMemId());
+		Map<String, Object> map = new HashMap<>();
+		map.put("memId", ((MemberBean) request.getSession().getAttribute("user")).getMemId());
 		System.out.println("stock ID:" + member.getMemId());
-		member.setPassWord(request.getParameter("new_pw"));
-		member.setTeamId(request.getParameter("teamid"));
-		member.setRoll(request.getParameter("roll"));
-		MemberServiceImpl.getInstance().modify(member);
-		request.getSession().setAttribute("user", MemberServiceImpl.getInstance().retrieve(member));
+		map.put("passWord",request.getParameter("new_pw"));
+		map.put("TeamId", request.getParameter("teamid"));
+		map.put("Roll", request.getParameter("roll"));
+		MemberServiceImpl.getInstance().modify(map);
+		request.getSession().setAttribute("user", MemberServiceImpl.getInstance().retrieve("###"));
 	}
 	
 	public void delete(HttpServletRequest request) {
@@ -88,13 +74,13 @@ public class Stock {
 	}
 	
 	public void login(HttpServletRequest request) {
-		member = new MemberBean();
-		member.setMemId(request.getParameter("id").toUpperCase());
-		member.setPassWord(request.getParameter("pw"));
+		String id="", pw="";
+		id = request.getParameter("id").toUpperCase();
+		pw = request.getParameter("pw");
 		
 		if(MemberServiceImpl.getInstance().login(member)) {
 			request.setAttribute("match", "TRUE");
-			request.getSession().setAttribute("user", MemberServiceImpl.getInstance().findByID(member));
+			request.getSession().setAttribute("user", MemberServiceImpl.getInstance().retrieve(id+"/"+pw));
 		}else {
 			request.setAttribute("match", "FALSE");
 		}

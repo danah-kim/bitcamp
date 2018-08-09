@@ -13,7 +13,7 @@ public class MemberServiceImpl implements MemberService{
 	private MemberServiceImpl() {}
 	
 	@Override
-	public void create(MemberBean member) {
+	public void add(MemberBean member) {
 		MemberDaoImpl.getInstance().insert(member);
 	}
 	@Override

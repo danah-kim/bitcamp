@@ -40,34 +40,42 @@ let service = (()=>{
 	};
 })();
 
+var common = (() => {
+	return{
+		main : x => {
+			document.getElementById('moveMain').addEventListener('click', function(){
+				router.move({context : x, 
+							domain : 'member', 
+							action : 'move', 
+							page : 'move'});
+			});
+			
+			document.getElementById('moveAdmin').addEventListener('click', function(){
+				var isAdmin = confirm('관리자입니까');
+				if(isAdmin){
+					var password = prompt('관리자비번을 입력바랍니다');
+					if(password == 1){
+							alert('관리자페이지 이동');
+							admin.check(x);
+					}
+				}else{
+					alert('관리자만 접근이 허용 됩니다.');
+				}
+			});
+		}
+	};
+})();
+
 var admin = (() => {
 	return{
-		check : x => {
+		check : x =>{
 			router.move({
-				context : x, 
-				domain : 'admin', 
-				action : 'list', 
-				page : 'main'});
-			/*router.move({
-				context : x, 
-				domain : 'admin', 
-				action : 'count', 
-				page : 'main'})*/
-			/*var isAdmin = confirm('관리자입니까');
-			if(isAdmin){
-				var password = prompt('관리자비번을 입력바랍니다');
-				if(password == 1){
-						alert('관리자페이지 이동');
-						router.move({
-							context : x, 
-							domain : 'admin', 
-							action : 'list', 
-							page : 'main'});
-				}
-			}else{
-				alert('관리자만 접근이 허용 됩니다.');
-			}*/
+					context : x, 
+					domain : 'admin', 
+					action : 'search', 
+					page : 'main'});
 		},
+		
 		main : x => {
 			service.addClass(
 				document.getElementById('admin_content_box'),
@@ -112,7 +120,7 @@ var admin = (() => {
 				form.submit();
 				
 				router.move({
-					context : x.context,
+					context : x,
 					domain : 'admin',
 					action : (condition === 'userid') ? 'retrive' : 'search',
 					page : ((condition === 'userid') ?
@@ -126,7 +134,7 @@ var admin = (() => {
 				i.style.color = 'red';
 				i.style.cursor = 'pointer';
 				i.addEventListener('click', function(){
-					router.move({context : x.context, 
+					router.move({context : x, 
 									domain : 'admin', 
 									action : 'retrive', 
 									page: 'memberDetail&condition='+ this.getAttribute('id')});
@@ -136,47 +144,24 @@ var admin = (() => {
 			for(var i of document.querySelectorAll('.pageNum')){
 				i.style.cursor = 'pointer';
 				i.addEventListener('click', function(){
-					router.move({context : x.context, 
+					router.move({context : x, 
 									domain : 'admin', 
-									action : 'list', 
+									action : 'search', 
 									page: 'main&pageNum='+ this.getAttribute('id')});
 				});
 			}
 			
-			var paging = document.getElementById('paging');
-			
 			for(var i of document.querySelectorAll('.pageBtn')){
 				i.addEventListener('click', function(){
 					router.move({
-						context : x.context, 
+						context : x, 
 						domain : 'admin', 
-						action : 'list', 
+						action : 'search', 
 						page : 'main&pageNum=' + this.getAttribute('id')
 					});
 						
 				});
 			}
-
-			/*document.getElementById('prePage').addEventListener('click', function(){
-				alert(x.startPage*1-5);
-				
-				router.move({
-							context : x.context, 
-							domain : 'admin', 
-							action : 'list', 
-							page: 'main&pageNum='+(x.startPage*1-5)});
-			});
-			
-			document.getElementById('nextPage').addEventListener('click', function(){
-				alert(x.endPage*1+1);
-					
-				router.move({
-							context : x.context, 
-							domain : 'admin', 
-							action : 'list', 
-							page: 'main&pageNum='+(x.endPage*1+1)});
-			});*/
-			
 		}
 	};
 })();

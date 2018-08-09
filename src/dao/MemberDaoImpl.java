@@ -1,24 +1,9 @@
 package dao;
 
-import java.sql.*;
 import java.util.*;
 import domain.*;
-import enums.DBConstant;
 import enums.Domain;
-import enums.MemberQuery;
-import enums.Vendor;
-import factory.DataBaseFactory;
-import template.SearchQuery;
-import template.UpdateQuery;
-import template.CountQuery;
-import template.DeleteQuery;
-import template.InsertQuery;
-import template.ListQuery;
-import template.LoginQuery;
-import template.PaginationQuery;
-import template.QueryTemplate;
-import template.RetriveQuery;
-import template.SearchJoinQuery;
+import template.*;
 
 public class MemberDaoImpl implements MemberDao{
 	private static MemberDao instance = new MemberDaoImpl ();
@@ -43,14 +28,22 @@ public class MemberDaoImpl implements MemberDao{
 	}
 	@Override
 	public List<MemberBean> selectSome(Map<?, ?> param) {
-		List<MemberBean> list = new ArrayList<>();
-		QueryTemplate query= new PaginationQuery();
 		HashMap<String, Object> map = new HashMap<>();
-		map.put("table", Domain.MEMBER);
+		List<MemberBean> list = new ArrayList<>();
+		map.put("colum", param.get("value"));
+		map.put("table", Domain.MEMBER);	
 		map.put("startRow", param.get("startRow"));
 		map.put("endRow", param.get("endRow"));
 		System.out.println("=====시작행========="+param.get("startRow"));
 		System.out.println("=====종료행========="+param.get("endRow"));
+		System.out.println(map.get("colum"));
+		
+		QueryTemplate query= new SearchQuery();
+		/*QueryTemplate query= (map.get("colum")==null) ?
+								new ListQuery() :
+								((map.get("colum")=="teamName") ?
+										new SearchJoinQuery() :
+										new SearchQuery());*/
 		query.play(map);
 		
 		for(Object e: query.getList()) {
@@ -64,7 +57,6 @@ public class MemberDaoImpl implements MemberDao{
 		QueryTemplate query = (word.split("/")[0].equals("teamName")) ? new SearchJoinQuery() : new SearchQuery();
 		HashMap<String, Object> map = new HashMap<>();
 		MemberBean member = new MemberBean();
-		map.put("column", word.split("/")[0]);
 		map.put("value", word.split("/")[1]);
 		map.put("table", Domain.MEMBER);
 		query.play(map);

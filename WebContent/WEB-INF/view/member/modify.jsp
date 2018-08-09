@@ -5,8 +5,8 @@
 <body>
 	<div id="wrapper">
 		<div id="header">
-			<jsp:include page="../common/title_box.jsp"/>
-			<jsp:include page="menu_box.jsp"/>
+			<jsp:include page="../common/titleBox.jsp"/>
+			<jsp:include page="menuBox.jsp"/>
 		</div> 
 		<div id="content">
 			<h3>개인정보 변경</h3>
@@ -58,7 +58,7 @@
 			</form>
 		</div>
 		<div id="footer">
-			<jsp:include page="../common/footer_box.jsp"/>
+			<jsp:include page="../common/footerBox.jsp"/>
 		</div>
 	</div>
 <script>

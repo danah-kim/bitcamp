@@ -8,7 +8,7 @@ public class DeleteQuery extends QueryTemplate{
 	@Override
 	void initialize() {
 		System.out.println("initialize override");
-		map.put("sql", String.format(MemberQuery.DELETE_MEMBER.toString(),
+		map.put("sql", String.format(MemberQuery.DELETE.toString(),
 							map.get("table"),
 							map.get("memId"),
 							map.get("passWord")

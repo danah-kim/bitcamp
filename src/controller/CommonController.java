@@ -19,18 +19,19 @@ public class CommonController extends HttpServlet {
 		int i=0;
 		for(Resources r : Resources.values()) {
 			request.getSession()
-			.setAttribute(r.toString().toLowerCase(),
+				.setAttribute(r.toString().toLowerCase(),
 					(i==0)?
-							request.getContextPath() :
-							request.getContextPath()+"/resources/"+r.toString().toLowerCase());
-			 i++;
+						request.getContextPath() :
+						request.getContextPath()
+						+"/resources/"+r.toString().toLowerCase());
+			i++;
 			}
-		// session정보를 context에 저장해서 request에 담음 각 페이지에서 선언 안해도 되도록 만듬
-		/*request.getSession().setAttribute(Domain.CONTEXT.toString(), request.getContextPath());*/
-		/*request.getSession().setAttribute("context", request.getContextPath());*/
-		/*HttpSession session = request.getSession();
-		session.setAttribute("context", request.getContextPath());*/
-		request.getRequestDispatcher(Term.WEBPATH.toString()+Term.MAIN.toString()).forward(request, response);
-		/*request.getRequestDispatcher("WEB-INF/view/main.jsp").forward(request, response);*/
+		request.getRequestDispatcher(
+					Term.WEBPATH.toString()
+					+request.getServletPath()
+						.split("/")[1]
+						.split("\\.")[0]
+					+Term.MAIN.toString())
+						.forward(request, response);
 	}
 }

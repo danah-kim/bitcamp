@@ -6,7 +6,7 @@ import java.util.Map;
 import domain.MemberBean;
 
 public interface MemberService {
-	public void create(MemberBean member);
+	public void add(MemberBean member);
 	public List<MemberBean> search(Map<?, ?> param);
 	public MemberBean retrieve(String word);
 	public int count();
