@@ -11,7 +11,6 @@ public class ColumnFinder {
 		Class<MemberBean> clazz = null;
 		switch (dom) {
 		case MEMBER :
-			// Class<MemberBean> clazz = MemberBean.class; 과 동일!
 			clazz = MemberBean.class;
 			break;
 		default :
@@ -28,15 +27,6 @@ public class ColumnFinder {
             }
             temp = (upper.equals(""))? f[i].getName().toUpperCase() : upper.toUpperCase();
             s += (i!=(f.length-1))? temp + " , " : temp;
-			/*s += (i != (f.length-1)) ? 
-					(f[i].getName().equals("teamId") ?
-							"TEAM_ID"
-							: (f[i].getName().equals("memId") ? "MEM_ID" 
-									: (f[i].getName().equals("passWord") ? "PASS_WORD" : f[i].getName().toUpperCase()))) + "," 
-					: (f[i].getName().equals("teamId") ?
-							"TEAM_ID"
-							: (f[i].getName().equals("memId") ? "MEM_ID" 
-									: (f[i].getName().equals("passWord") ? "PASS_WORD" : f[i].getName().toUpperCase())));*/
 		}
 		return s;
 	}

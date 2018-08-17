@@ -18,48 +18,35 @@ public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("MemberController Enter");
 		Receiver.init(request);
-		System.out.println("액션: " + Receiver.cmd.getAction());
 		switch (Action.valueOf(Receiver.cmd.getAction().toUpperCase())) {
-		
 		case ADD :
-			System.out.println("Join 들어옴");
-			Server.redirect(request, response, "/member.do?action=move&page=user_login_form");
+			Server.redirect(request, response, "/member.do?action=move&page=login");
 			break;
-		case SEARCH :
-			System.out.println("searchMemberByTeam 들어옴");
-			Server.forward(request, response);
-			break;
-		case RETRIVE :
-			System.out.println("searchMemberById 들어옴");
+		case RETRIEVE :
 			Server.forward(request, response);
 			break;
 		case MODIFY :
-			System.out.println("memberUpdate 들어옴");
-			Server.redirect(request, response, "/member.do?action=move&page=mypage");
+			Server.redirect(request, response, "/member.do?action=move&page=retrieve");
+			break;
+		case FILEUPLOAD :
+			Server.redirect(request, response, "/member.do?action=move&page=retrieve");
 			break;
 		case REMOVE :
-			System.out.println("memberDelete 들어옴");
-			Server.redirect(request, response, "");
+			Server.redirect(request, response, "/common.do?action=move&page=main");
 			break;
 		case MOVE :
-			System.out.println("무브 안으로 진입");
-			if(Receiver.cmd.getAction().equals(Receiver.cmd.getPage())) {
-				Server.redirect(request, response, "");
-			}else {
 				Server.forward(request, response);
-			}
 			break;
 		case LOGIN :
-			System.out.println("login 들어옴");
 			if(request.getAttribute("match").equals("TRUE")) {
-				System.out.println("로그인성공");
 				Server.forward(request, response);
 			}else {
-				System.out.println("로그인실패");
-				Server.redirect(request, response, "/member.do?action=move&page=user_login_form");
+				Server.redirect(request, response, "/member.do?action=move&page=login");
 			}
+			break;
+		case LOGOUT :
+			Server.redirect(request, response, "/common.do?action=move&page=main");
 			break;
 		default :
 			Server.redirect(request, response, "");

@@ -1,8 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<div id="menu_box">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<div id="menuBox">
 	<ul id="menu">
-		<li><a id="moveMain">HOME</a></li>
-		<!-- <li><a href="">ABOUT</a></li> -->
-		<li><a id="moveAdmin">ADMIN</a></li>
+	<c:choose>
+		<c:when test="${user ne null}">
+			<li><a class="menuBtn" id="moveMeberMain">HOME</a></li>
+			<li><a class="menuBtn" id="moveMemberModify">정보변경</a></li>
+			<li><a class="menuBtn" id="moveMemberRemove">회원탈퇴</a></li>
+		</c:when>
+		<c:otherwise>
+			<li><a class="menuBtn" id="moveMain">HOME</a></li>
+			<li><a class="menuBtn" id="moveAdmin">ADMIN</a></li>
+		</c:otherwise>
+	</c:choose>
 	</ul>
 </div>

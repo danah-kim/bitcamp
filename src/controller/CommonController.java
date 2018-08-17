@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import enums.Term;
+import enums.Path;
 
 @WebServlet("/common.do")
 public class CommonController extends HttpServlet {
@@ -27,11 +27,9 @@ public class CommonController extends HttpServlet {
 			i++;
 			}
 		request.getRequestDispatcher(
-					Term.WEBPATH.toString()
-					+request.getServletPath()
-						.split("/")[1]
-						.split("\\.")[0]
-					+Term.MAIN.toString())
+					Path.WEBPATH.toString()
+					+request.getServletPath().split("/")[1].split("\\.")[0]
+					+Path.MAIN.toString())
 						.forward(request, response);
 	}
 }

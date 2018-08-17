@@ -1,7 +1,7 @@
 package enums;
 
-public enum Term {
-	WEBPATH, MAIN;
+public enum Path {
+	WEBPATH, MAIN, UPLOADPATH;
 	@Override
 	public String toString() {
 		String result = "";
@@ -11,6 +11,9 @@ public enum Term {
 			break;
 		case MAIN :
 			result = "/main.jsp";
+			break;
+		case UPLOADPATH :
+			result = "/Users/danah/MVCWorkspace/GMS-Model2/WebContent/resources/img/upload/";
 			break;
 		default:
 			break;

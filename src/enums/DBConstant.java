@@ -10,10 +10,10 @@ public enum DBConstant{
 			db = "oracle.jdbc.driver.OracleDriver";
 			break;
 		case MYSQL_DRIVER :
-			db = "";
+			db = "com.mysql.jdbc.Driver";
 			break;
 		case MARIADB_DRIVER :
-			db = "";
+			db = "org.mariadb.jdbc.Driver";
 			break;
 		case MSSQL_DRIVER :
 			db = "";
@@ -22,10 +22,10 @@ public enum DBConstant{
 			db = "jdbc:oracle:thin:@localhost:1521:xe";
 			break;
 		case MYSQL_URL :
-			db = "";
+			db = "jdbc:mysql://localhost:3306/DBNAME";
 			break;
 		case MARIADB_URL :
-			db = "";
+			db = "jdbc:mariadb://localhost:3306/xe";
 			break;
 		case MSSQL_URL :
 			db = "";

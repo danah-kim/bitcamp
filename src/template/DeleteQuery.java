@@ -1,29 +1,40 @@
 package template;
 
+import enums.ImageQuery;
 import enums.MemberQuery;
-import factory.DataBaseFactory;
 
 public class DeleteQuery extends QueryTemplate{
 
 	@Override
 	void initialize() {
-		System.out.println("initialize override");
-		map.put("sql", String.format(MemberQuery.DELETE.toString(),
-							map.get("table"),
-							map.get("memId"),
-							map.get("passWord")
-							));
+		switch (map.get("table").toString()) {
+		case "MEMBER" :
+			map.put("sql", String.format(MemberQuery.DELETE.toString(),
+					map.get("table")));
+			break;
+		case "IMAGE" :
+			map.put("sql", String.format(ImageQuery.DELETE.toString(),
+					 map.get("table")));
+			break;
+		default:
+			break;
+		}
 	}
 
 	@Override
 	void startPlay() {
-		System.out.println("=================");
-		System.out.println(map.get("sql"));
-		System.out.println("=================");
 		try {
-			stmt = DataBaseFactory.createDataBase2(map)
-					.getConnection()
-					.createStatement();
+			switch (map.get("table").toString()) {
+			case "MEMBER" :
+				pstmt.setString(1, (String) map.get("memId"));
+				pstmt.setString(2, (String) map.get("passWord"));
+				break;
+			case "IMAGE" :
+				pstmt.setString(1, (String) map.get("memId"));
+				break;
+			default:
+				break;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -31,9 +42,8 @@ public class DeleteQuery extends QueryTemplate{
 
 	@Override
 	void endPlay() {
-		System.out.println("endPlay override");
 		try {
-			int rs = stmt.executeUpdate((String)map.get("sql"));
+			int rs = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

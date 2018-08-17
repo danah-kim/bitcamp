@@ -1,40 +1,89 @@
-/*(function() {
-	
-}());*/
-
-// 에러나면 바로 보여주겠음
 "use strict";
 
-let router = (()=>{
-	return {move : x => {
-		location.href = 
-			x.context + '/' 
-			+ x.domain
-			+ '.do?action=' + x.action 
-			+ '&page=' + x.page;
+var router = (()=>{
+	return {
+		move : x => {
+			for(var i of document.querySelectorAll('.menuBtn')){
+				i.addEventListener('click', function(){
+					switch (this.getAttribute('id')) {
+						case 'moveMain':
+							location.href = 
+								location.href = x
+									+ '/common.do?action=move&page=main';
+							break;
+						case 'moveAdminMain':
+							location.href = 
+								location.href = x
+									+ '/admin.do?action=search&page=main';
+							break;
+						case 'moveMeberMain':
+							location.href = 
+								location.href = x
+									+ '/member.do?action=move&page=main';
+							break;
+						case 'moveAdmin':
+							if(confirm('관리자입니까')){
+								var password = prompt('관리자비번을 입력바랍니다');
+								if(password == 1){
+									alert('관리자페이지 이동');
+									location.href = x + '/admin.do?action=search&page=search';
+								}
+							}else{
+								alert('관리자만 접근이 허용 됩니다.');
+							}
+							break;
+						case 'moveJoin':
+							location.href = 
+								location.href = x
+									+ '/member.do?action=move&page=add';
+							break;
+						case 'moveMemberModify':
+							location.href = 
+								location.href = x
+									+ '/member.do?action=move&page=modify';
+							break;
+						case 'moveMemberRemove':
+							location.href = 
+								location.href = x
+									+ '/member.do?action=move&page=remove';
+							break;
+						case 'moveLogin':
+							location.href = x
+								+ '/member.do?action=move&page=login';
+							break;
+						case 'moveLogout':
+							location.href = 
+								location.href = x
+									+ '/member.do?action=logout&page=main';
+							break;
+						default:
+							break;
+					}
+				})
+			}
 		}
 	};
 })();
 
-let service = (()=>{
+var service = (()=>{
 	return {
-		null_chk : x =>{
-			let i = 0;
-			let json = {
+		nullChk : x =>{
+			var i = 0;
+			var json = {
 					checker : true,
 					text : '필수입력값이 입력되지 않았습니다.'
 			};
-			
 			for (i in x){
 				if(x[i] === '') json.checker = false;
 			}
-			
 			return json;
 		},
-		addClass : (dom,cName) => {
-			var arr = cName.split(" ");
-			if (arr.indexOf(cName) == -1) {
-				dom.className += " " + cName;
+		addClass : (dom, cName) => {
+			if(document.getElementById(searchBtn)){
+				var arr = cName.split(" ");
+				if (arr.indexOf(cName) == -1) {
+					dom.className += " " + cName;
+				}
 			}
 		}
 	};
@@ -43,123 +92,83 @@ let service = (()=>{
 var common = (() => {
 	return{
 		main : x => {
-			document.getElementById('moveMain').addEventListener('click', function(){
-				router.move({context : x, 
-							domain : 'member', 
-							action : 'move', 
-							page : 'move'});
-			});
-			
-			document.getElementById('moveAdmin').addEventListener('click', function(){
-				var isAdmin = confirm('관리자입니까');
-				if(isAdmin){
-					var password = prompt('관리자비번을 입력바랍니다');
-					if(password == 1){
-							alert('관리자페이지 이동');
-							admin.check(x);
-					}
-				}else{
-					alert('관리자만 접근이 허용 됩니다.');
-				}
-			});
-		}
+			router.move(x);
+		}	
 	};
 })();
 
 var admin = (() => {
 	return{
-		check : x =>{
-			router.move({
-					context : x, 
-					domain : 'admin', 
-					action : 'search', 
-					page : 'main'});
-		},
-		
 		main : x => {
+			router.move(x);
 			service.addClass(
-				document.getElementById('admin_content_box'),
-				'admin_content '
+				document.getElementById('searchSelect'),
+				'searchSelect '
 			);
 			service.addClass(
-				document.getElementById('adminSearchSelect'),
-				'adminSelect '
+				document.getElementById('searchText'),
+				'searchText '
 			);
 			service.addClass(
-				document.getElementById('adminSearchFormBox'),
-				'adminSearchForm '
+				document.getElementById('searchBtn'),
+				'searchBtn '
 			);
 			service.addClass(
-				document.getElementById('adminSearchFormBox').word,
-				'adminSearchFormText '
+				document.getElementById('contextBoxTable'),
+				'searchList '
 			);
 			service.addClass(
-				document.getElementById('adminSearchBtn'),
-				'adminSearchBtn '
+				document.getElementById('searchListTabBox'),
+				'searchListTable '
 			);
 			service.addClass(
-				document.getElementById('admin_context_box_table'),
-				'adminList '
+				document.getElementById('searchListTabMeta'),
+				'searchListTableMeta '
 			);
-			service.addClass(
-				document.getElementById('admin_list_tab_box'),
-				'adminListTable '
-			);
-			service.addClass(
-				document.getElementById('admin_list_tab_meta'),
-				'adminListTableMeta '
-			);
-				
-			document.getElementById('adminSearchBtn').addEventListener('click', ()=>{
-				var form = document.getElementById('adminSearchFormBox');
-				var s = document.getElementById('adminSearchSelect');
-				var condition = s.options[s.selectedIndex].value;
-				alert(condition);
-				alert(form.word.value);
-				form.method = "get"; 
-				form.submit();
-				
-				router.move({
-					context : x,
-					domain : 'admin',
-					action : (condition === 'userid') ? 'retrive' : 'search',
-					page : ((condition === 'userid') ?
-						'memberDetail&condition='
-						: 'main&condition=' + condition+ '&word=') + form.word.value
+			var search = document.querySelectorAll('.searchInfo');
+			for(var i of document.querySelectorAll('.formBtn')){
+				i.addEventListener('click', function() {
+					switch (this.getAttribute('id')) {
+						case 'searchBtn':
+							var form = document.getElementById('searchFormBox');
+							form.method = "get"; 
+							form.submit();
+							location.href = x
+								+ '/admin.do?action=search&page=main'
+								+ '&condition=' + search[0].value 
+								+ '&word=' + search[1].value;
+							break;
+						default:
+							break;
+					}
 				});
-
-			});
-
-			for(var i of document.querySelectorAll('.userName')){				
+			}
+			for(var i of document.querySelectorAll('.userName')){
 				i.style.color = 'red';
 				i.style.cursor = 'pointer';
 				i.addEventListener('click', function(){
-					router.move({context : x, 
-									domain : 'admin', 
-									action : 'retrive', 
-									page: 'memberDetail&condition='+ this.getAttribute('id')});
+					location.href = x
+						+ '/member.do?action=retrieve&page=retrieve'
+						+ '&condition=' + this.getAttribute('id');
 				});
 			}
-			
 			for(var i of document.querySelectorAll('.pageNum')){
 				i.style.cursor = 'pointer';
 				i.addEventListener('click', function(){
-					router.move({context : x, 
-									domain : 'admin', 
-									action : 'search', 
-									page: 'main&pageNum='+ this.getAttribute('id')});
+					location.href = x
+						+ '/admin.do?action=search&page=main'
+						+ '&pageNum=' + this.getAttribute('id')
+						+ '&condition=' + search[0].getAttribute('id')
+						+ '&word=' + search[1].getAttribute('id');
 				});
 			}
-			
 			for(var i of document.querySelectorAll('.pageBtn')){
 				i.addEventListener('click', function(){
-					router.move({
-						context : x, 
-						domain : 'admin', 
-						action : 'search', 
-						page : 'main&pageNum=' + this.getAttribute('id')
-					});
-						
+					location.href = x
+					+ '/admin.do?action=search&page=main'
+					+ '&pageNum=' + this.getAttribute('id')
+					+ '&condition=' + search[0].getAttribute('id')
+					+ '&word=' + search[1].getAttribute('id');
 				});
 			}
 		}
@@ -173,7 +182,6 @@ let member = (()=>{
 	let setName = x => {this._name = x;}
 	let setGender = x => {
 		var rs;
-		
 		switch (x) {
 			case '1':
 			case '3':
@@ -189,7 +197,6 @@ let member = (()=>{
 				rs = "?";
 				break;
 		}
-		
 		this._gender = rs;}
 	let setSsn = x => {this._ssn = x;}
 	let setAge = x => {this._age = new Date().getFullYear() - +(19 + x.substring(0, 2)) + 1;}
@@ -225,146 +232,126 @@ let member = (()=>{
 		getTeamid,
 		getRoll,
 		getSubject,
-		join : x => {
-			document.getElementById('joinFormBut').addEventListener('click',()=>{
-				var form = document.getElementById('joinFormBox');
-				var y = service.null_chk([
-					form.id.value,
-					form.pw.value,
-					form.name.value,
-					form.birth.value,
-					form.gender.value
-					]);
-				
-/*				중복체크 기능
-				document.getElementById('joinIdChkBtn').addEventListener('click', function(){
-					document.getElementById(joinIDChkText);
-				});*/
-				
-				if(y.checker){
-					setSsn(form.birth.value+'-'+form.gender.value);
-					setGender(form.gender.value);
-					setAge(form.birth.value);
-					form.gender.value = getGender();
-
-					var arr = [{type : 'hidden', name : 'age', value : member.getAge()},
-							{type : 'hidden', name : 'ssn', value : member.getSsn()},
-							{type : 'hidden', name : 'action', value : 'join'}];
-					
-					for(var i in arr){
-						var node = document.createElement('input');
-						node.setAttribute('type', arr[i].type);
-						node.setAttribute('name', arr[i].name);
-						node.setAttribute('value', arr[i].value);
-						form.appendChild(node);
+		main : x => {
+			router.move(x);
+			if(document.getElementById('loginBtn') || document.getElementById('addBtn')){
+				document.getElementById('content').style.background = "transparent";
+			}else if(document.getElementById('modifyBtn')){
+				var info = document.querySelectorAll('.modifyInfo');
+				for(var i of document.querySelectorAll('.teamId')){
+					if(i.value === info[2].getAttribute('id')){
+						i.checked = true;
 					}
-					
-					form.action = x+"/member.do";
-					form.method = "post";
-					form.submit(); 
-				}else{alert(y.text);}
-			});
-		},
-		login : x => {
-			document.getElementById('loginFormBtn').addEventListener('click',function(){
-				var form = document.getElementById('loginFormBox');
-				var y = service.null_chk([form.id.value, form.pw.value]);
-				var node
-				
-				if (y.checker) {
-					alert('유효성 체크 통과!');
-					
-					node = document.createElement('p');
-					node.innerHTML = '<input type="hidden" name="action" value="login"/>';
-					form.appendChild(node);
-					
-					form.action = x+"/member.do";
-					form.method = "post";
-					form.submit();
-				} else {
-					alert(y.text);
 				}
-			});
-		},
-		update : x => {
-			for(var i of document.querySelectorAll('.teamid')){
-				if(i.value === x[2]){
-					i.checked = true;
+				for(var i of document.getElementById('roll')){
+					if(i.value === info[3].getAttribute('id')){
+						i.setAttribute("selected", "selected");
+					}
 				}
+			}else{
 			}
-			
-			/*for(var i=1; i<=4; i++){
-				if(document.getElementById('teamid_'+i).value === x[1]){
-					document.getElementById('teamid_'+i).checked = true;
-				}
-			}*/
-			
-			for(var i of document.getElementById('roll')){
-				if(i.value === x[3]){
-					i.setAttribute("selected", "selected");
-				}
+			for(var i of document.querySelectorAll('.formBtn')){
+				i.addEventListener('click', function(){
+					switch(this.getAttribute('id')){
+						case 'loginBtn':
+							var form = document.getElementById('loginBox');
+							var y = service.nullChk([form.userId.value, form.passWord.value]);
+							var node
+							if (y.checker) {
+								node = document.createElement('p');
+								node.innerHTML = '<input type="hidden" name="action" value="login"/>';
+								form.appendChild(node);
+								
+								form.action = x+"/member.do";
+								form.method = "post";
+								form.submit();
+							} else {
+								alert(y.text);
+							}
+							break;
+						case 'addBtn' :
+							var form = document.getElementById('addBox');
+							var y = service.nullChk([
+										form.id.value,
+										form.pw.value,
+										form.name.value,
+										form.birth.value,
+										form.gender.value]);
+							/*중복체크 기능
+							document.getElementById('joinIdChkBtn').addEventListener('click', function(){
+								document.getElementById(joinIDChkText);
+							});*/
+							if(y.checker){
+								setSsn(form.birth.value+'-'+form.gender.value);
+								setGender(form.gender.value);
+								setAge(form.birth.value);
+								form.gender.value = getGender();
+								var arr = [{type : 'hidden', name : 'age', value : member.getAge()},
+											{type : 'hidden', name : 'ssn', value : member.getSsn()},
+											{type : 'hidden', name : 'action', value : 'add'}];
+								for(var i in arr){
+									var node = document.createElement('input');
+												node.setAttribute('type', arr[i].type);
+												node.setAttribute('name', arr[i].name);
+												node.setAttribute('value', arr[i].value);
+												form.appendChild(node);
+								}
+								form.action = x+"/member.do";
+								form.method = "post";
+								form.submit(); 
+							}else{alert(y.text);
+							}
+							break;
+						case 'modifyBtn' :
+							var form = document.getElementById('modifyBox');
+							var info = document.querySelectorAll('.modifyInfo');
+							var y = {action : 'modify'};
+							
+							if(form.oldPw.value === ''){
+								alert('기존 비밀번호를 입력해 주세요.');
+							}else if(info[1].getAttribute('id') !== form.oldPw.value){
+									alert('기존 비밀번호가 일치하지 않습니다.');
+							}else if(form.newPw.value === form.oldPw.value) {
+								alert('기존 비밀번호와 변경 비밀번호가 동일합니다.');
+							}else{
+								form.newPw.value = form.newPw.value || form.oldPw.value;
+								for(var key in y){
+									var node = document.createElement('input');
+									node.setAttribute('type', 'hidden');
+									node.setAttribute('name', key);
+									node.setAttribute('value', y[key]);
+									form.appendChild(node);
+								}
+								form.action = x+"/member.do";
+								form.method = "post";
+								form.submit();
+							}
+							break;
+						case 'removeBtn' :
+							var info = document.querySelectorAll('.deleteInfo');
+							var form = document.getElementById('removeBox');
+							var y = service.nullChk([form.pw1.value, form.pw2.value]);
+							if(!y.checker){
+								alert(y.text);
+							}else if(form.pw1.value !== form.pw2.value){
+								alert('기존비밀번호와 확인 비밀번호가 일치하지 않습니다.');
+							}else if(info[0].getAttribute('id') !== form.pw1.value){
+								alert('기존비밀번호가 일치하지 않습니다.');
+							}else{
+								alert('탈퇴완료');
+								var node = document.createElement('input');
+								node.innerHTML = '<input type="hidden" name="action" value="remove"/>';
+								form.appendChild(node);
+								form.action = x+"/member.do";
+								form.method = "post";
+								form.submit();
+							}
+							break;
+						default:
+							break;
+					}
+				});
 			}
-			
-			/*var roll = document.getElementById('roll');
-			for(var i=0; i<roll.options.length; i++){
-				if(roll.options[i].value === x[1]){
-					roll.options[i].setAttribute("selected", "selected");
-				}
-			}*/
-			
-			document.getElementById('updateFormBut').addEventListener('click', function(){
-				var form = document.getElementById('updateFormBox');
-				var y = {action : 'update'};
-				
-				if(form.old_pw.value === ''){
-					alert('기존 비밀번호를 입력해 주세요.');
-				}else if(x[1] !== form.old_pw.value){
-					alert('기존 비밀번호가 일치하지 않습니다.');
-				}else if(form.new_pw.value === form.old_pw.value) {
-					alert('기존 비밀번호와 변경 비밀번호가 동일합니다.');
-				}else{
-					form.new_pw.value 
-						= form.new_pw.value 
-						|| form.old_pw.value;
-
-				for(var key in y){
-					var node = document.createElement('input');
-					node.setAttribute('type', 'hidden');
-					node.setAttribute('name', key);
-					node.setAttribute('value', y[key]);
-					form.appendChild(node);
-				}
-				
-				form.action = x[0]+"/member.do";
-				form.method = "post";
-				form.submit();
-				}
-			});
-		},
-		delete : x => {
-			document.getElementById('deleteFormBut').addEventListener('click', function() {
-				alert('삭제버튼 클릭');
-				var form = document.getElementById('deleteFormBox');
-				var y = service.null_chk([form.pw1.value, form.pw2.value]);
-
-				if(!y.checker){
-					alert(y.text);
-				}else if(form.pw1.value !== form.pw2.value){
-					alert('기존비밀번호와 확인 비밀번호가 일치하지 않습니다.');
-				}else if(x[1] !== form.pw1.value){
-					alert('기존비밀번호가 일치하지 않습니다.');
-				}else{
-					alert('탈퇴완료');
-					
-					var node = document.createElement('input');
-					node.innerHTML = '<input type="hidden" name="action" value="delete"/>';
-					form.appendChild(node);
-					
-					form.action = x[0]+"/member.do";
-					form.method = "post";
-					form.submit();
-				}
-			});
 		}
 	};
 })();

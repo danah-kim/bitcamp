@@ -9,22 +9,18 @@ public class LoginQuery extends QueryTemplate{
 
 	@Override
 	void initialize() {
-		System.out.println("initialize override");
 		map.put("sql", String.format(MemberQuery.LOGIN.toString(),
-							map.get("table"),
-							map.get("memId"),
-							map.get("passWord")));
+										map.get("table")));
 	}
 
 	@Override
 	void startPlay() {
-		System.out.println("=================");
-		System.out.println(map.get("sql"));
-		System.out.println("=================");
 		try {
-			stmt = DataBaseFactory.createDataBase2(map)
-					.getConnection()
-					.createStatement();
+			pstmt = DataBaseFactory.createDataBase2(map)
+						.getConnection()
+						.prepareStatement((String)map.get("sql"));
+			pstmt.setString(1, (String) map.get("memId"));
+			pstmt.setString(2, (String) map.get("passWord"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -32,9 +28,8 @@ public class LoginQuery extends QueryTemplate{
 
 	@Override
 	void endPlay() {
-		System.out.println("endPlay override");
 		try {
-			ResultSet rs = stmt.executeQuery((String)map.get("sql"));
+			ResultSet rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
 				flag = true;
@@ -43,5 +38,4 @@ public class LoginQuery extends QueryTemplate{
 			e.printStackTrace();
 		}
 	}
-	
 }

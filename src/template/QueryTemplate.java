@@ -1,41 +1,55 @@
 package template;
 
 import java.sql.PreparedStatement;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
-import domain.MemberBean;
 import enums.DBConstant;
 import enums.Vendor;
+import factory.DataBaseFactory;
 import lombok.Data;
 
 @Data
 public abstract class QueryTemplate {
-	protected HashMap<String, Object>map;
+	protected HashMap<String, Object> map;
+	protected PreparedStatement pstmt;
 	protected List<Object> list;
-	protected MemberBean member;
+	protected Object o;
 	protected int num;
 	protected boolean flag;
-	protected PreparedStatement pstmt;
-	protected Statement stmt;
 	
-	public final void play(HashMap<String, Object> map) {
-		System.out.println("Query Template 진입");
-		this.pstmt = null;
-		this.stmt = null;
+	
+	
+	public final void play(HashMap<?, ?> param) {
+		this.map = new HashMap<>();
 		this.list = new ArrayList<>();
-		this.member = new MemberBean();
+		this.o = null;
 		this.num = 0;
 		this.flag = false;
-		this.map = map;
-		this.map.put("vendor", Vendor.ORACLE);
+		this.map.put("vendor", Vendor.MARIADB);
 		this.map.put("username", DBConstant.USERNAME.toString());
 		this.map.put("password", DBConstant.PASSWORD.toString());
+		Iterator<?> keys = param.keySet().iterator();
+		while (keys.hasNext()) {
+			String key = (String) keys.next();
+			this.map.put(key, param.get(key));
+		}
 		initialize();
+		pstmtInit();
 		startPlay();
 		endPlay();
+	}
+	
+	public void pstmtInit() {
+		try {
+			this.pstmt = DataBaseFactory.createDataBase2(map)
+					.getConnection()
+					.prepareStatement((String)map.get("sql"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	abstract void initialize();

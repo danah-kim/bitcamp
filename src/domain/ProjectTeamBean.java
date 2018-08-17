@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class ProjectTeamBean {
-	protected String teamId, teamName;
+	private String teamId, teamName;
 
 }

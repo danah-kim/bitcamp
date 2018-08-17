@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 
 public class Server {
 	public static void forward(HttpServletRequest request,	HttpServletResponse response) {
-		System.out.println("뷰 : " + Receiver.cmd.getView());
 		try {
 			request.getRequestDispatcher(Receiver.cmd.getView()).forward(request, response);
 		} catch (Exception e) {
@@ -13,7 +12,6 @@ public class Server {
 		}		
 	}
 	public static void redirect(HttpServletRequest request,	HttpServletResponse response, String url) {
-		System.out.println("뷰 : " + Receiver.cmd.getView());
 		try {
 			response.sendRedirect(request.getContextPath() + url);
 		} catch (Exception e) {

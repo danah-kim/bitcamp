@@ -12,6 +12,7 @@ public class ExamServiceImpl implements ExamService{
 	private static ExamService instance = new ExamServiceImpl();
 	public static ExamService getInstance () {return instance;}
 	private ExamServiceImpl() {}
+	
 	@Override
 	public void createExam(ExamBean exam) {
 		System.out.println(exam);
@@ -28,21 +29,15 @@ public class ExamServiceImpl implements ExamService{
 		
 		exam = null;
 		for(int i=0; i<5; i++) {
-			// EXAM SEQ = null
 			exam = new ExamBean();
-			// SUBJECT SEQ
-			exam.setSubjectSeq(SubjectDaoImpl.getInstance().
-				selectBySearchWord(subName[i]).
-				get(0).getSubjectSeq());
-			//RECORD SEQ
+			exam.setSubjectSeq(
+					SubjectDaoImpl.getInstance().
+					selectBySearchWord(subName[i]).get(0)
+					.getSubjectSeq());
 			exam.setRecordSeq(RecordDaoImpl.getInstance().selectFistRowNum());
-			// MEM_ID
 			exam.setMemId(basic[0]);
-			// MONTH
 			exam.setMonth(basic[1]);
-			// SCORE
 			exam.setScore(score[i]);
-			// DAO 입력
 			ExamDaoImpl.getInstance().insertExam(exam);		
 		}
 

@@ -4,7 +4,8 @@ import lombok.Data;
 
 @Data
 public class ExamBean {
-	protected String examSeq, memId, subjectSeq, score, month, recordSeq;
+	private String examSeq, memId, subjectSeq, score, month, recordSeq;
+	public static final String TEST="TEST";
 
 	@Override
 	public String toString() {

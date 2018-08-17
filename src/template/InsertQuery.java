@@ -1,35 +1,49 @@
 package template;
 
+import enums.ImageQuery;
 import enums.MemberQuery;
-import factory.DataBaseFactory;
 
 public class InsertQuery extends QueryTemplate{
 
 	@Override
 	void initialize() {
-		System.out.println("initialize override");
-		map.put("sql", String.format(MemberQuery.INSERT.toString(),
-				map.get("table")));
+		switch (map.get("table").toString()) {
+			case "MEMBER" :
+				map.put("sql", String.format(MemberQuery.INSERT.toString(),
+						map.get("table")));
+				break;
+			case "IMAGE" :
+				map.put("sql", String.format(ImageQuery.INSERT.toString(),
+						 map.get("table")));
+				break;
+			default:
+				break;
+		}
 	}
 
 	@Override
 	void startPlay() {
-		System.out.println("=================");
-		System.out.println(map.get("sql"));
-		System.out.println("=================");
 		try {
-			pstmt = DataBaseFactory.createDataBase2(map)
-					.getConnection()
-					.prepareStatement((String)map.get("sql"));
-			pstmt.setString(1, member.getMemId());
-			pstmt.setString(2, member.getPassWord());
-			pstmt.setString(3, member.getName());
-			pstmt.setString(4, member.getSsn());
-			pstmt.setString(5, member.getAge());
-			pstmt.setString(6, member.getTeamId());
-			pstmt.setString(7, member.getRoll());
-			pstmt.setString(8, member.getGender());
-			pstmt.setString(9, member.getSubject());
+			switch (map.get("table").toString()) {
+				case "MEMBER" :
+					pstmt.setString(1, (String) map.get("memId"));
+					pstmt.setString(2, (String) map.get("passWord"));
+					pstmt.setString(3, (String) map.get("name"));
+					pstmt.setString(4, (String) map.get("ssn"));
+					pstmt.setString(5, (String) map.get("age"));
+					pstmt.setString(6, (String) map.get("teamId"));
+					pstmt.setString(7, (String) map.get("roll"));
+					pstmt.setString(8, (String) map.get("gender"));
+					pstmt.setString(9, (String) map.get("subject"));
+					break;
+				case "IMAGE" :
+					pstmt.setString(1, (String) map.get("imgname"));
+					pstmt.setString(2, (String) map.get("extension"));
+					pstmt.setString(3, (String) map.get("memId"));
+					break;
+				default:
+					break;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -37,7 +51,6 @@ public class InsertQuery extends QueryTemplate{
 
 	@Override
 	void endPlay() {
-		System.out.println("endPlay override");
 		try {
 			int rs = pstmt.executeUpdate();
 		} catch (Exception e) {

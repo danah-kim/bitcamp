@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="en">
 <jsp:include page="../common/head.jsp"/>
@@ -6,13 +7,11 @@
 	<div id="wrapper">
 		<div id="header">
 			<jsp:include page="../common/titleBox.jsp"/>
-			<jsp:include page="../common/menuBox.jsp"/>
+			<jsp:include page="menuBox.jsp"/>
 		</div> 
-<!-- End Header -->
 		<div id="content">
 			<jsp:include page="../member/search.jsp"/>
 		</div>
-<!-- End Content -->
 		<div id="footer">
 			<jsp:include page="../common/footerBox.jsp"/>
 		</div>
