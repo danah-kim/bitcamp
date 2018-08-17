@@ -5,60 +5,47 @@ var router = (()=>{
 		move : x => {
 			for(var i of document.querySelectorAll('.menuBtn')){
 				i.addEventListener('click', function(){
+					var y;
 					switch (this.getAttribute('id')) {
 						case 'moveMain':
-							location.href = 
-								location.href = x
-									+ '/common.do?action=move&page=main';
+							y = '/common.do?action=move&page=main';
 							break;
 						case 'moveAdminMain':
-							location.href = 
-								location.href = x
-									+ '/admin.do?action=search&page=main';
+							y = '/admin.do?action=search&page=main';
 							break;
 						case 'moveMeberMain':
-							location.href = 
-								location.href = x
-									+ '/member.do?action=move&page=main';
+							y = '/member.do?action=move&page=main';
 							break;
 						case 'moveAdmin':
 							if(confirm('관리자입니까')){
 								var password = prompt('관리자비번을 입력바랍니다');
 								if(password == 1){
 									alert('관리자페이지 이동');
-									location.href = x + '/admin.do?action=search&page=search';
+									y = '/admin.do?action=search&page=search';
 								}
 							}else{
 								alert('관리자만 접근이 허용 됩니다.');
 							}
 							break;
 						case 'moveJoin':
-							location.href = 
-								location.href = x
-									+ '/member.do?action=move&page=add';
+							y = '/member.do?action=move&page=add';
 							break;
 						case 'moveMemberModify':
-							location.href = 
-								location.href = x
-									+ '/member.do?action=move&page=modify';
+							y = '/member.do?action=move&page=modify';
 							break;
 						case 'moveMemberRemove':
-							location.href = 
-								location.href = x
-									+ '/member.do?action=move&page=remove';
+							y = '/member.do?action=move&page=remove';
 							break;
 						case 'moveLogin':
-							location.href = x
-								+ '/member.do?action=move&page=login';
+							y = '/member.do?action=move&page=login';
 							break;
 						case 'moveLogout':
-							location.href = 
-								location.href = x
-									+ '/member.do?action=logout&page=main';
+							y = '/member.do?action=logout&page=main';
 							break;
 						default:
 							break;
 					}
+					location.href = x + y;
 				})
 			}
 		}
@@ -165,10 +152,10 @@ var admin = (() => {
 			for(var i of document.querySelectorAll('.pageBtn')){
 				i.addEventListener('click', function(){
 					location.href = x
-					+ '/admin.do?action=search&page=main'
-					+ '&pageNum=' + this.getAttribute('id')
-					+ '&condition=' + search[0].getAttribute('id')
-					+ '&word=' + search[1].getAttribute('id');
+						+ '/admin.do?action=search&page=main'
+						+ '&pageNum=' + this.getAttribute('id')
+						+ '&condition=' + search[0].getAttribute('id')
+						+ '&word=' + search[1].getAttribute('id');
 				});
 			}
 		}
@@ -291,10 +278,10 @@ let member = (()=>{
 											{type : 'hidden', name : 'action', value : 'add'}];
 								for(var i in arr){
 									var node = document.createElement('input');
-												node.setAttribute('type', arr[i].type);
-												node.setAttribute('name', arr[i].name);
-												node.setAttribute('value', arr[i].value);
-												form.appendChild(node);
+													node.setAttribute('type', arr[i].type);
+													node.setAttribute('name', arr[i].name);
+													node.setAttribute('value', arr[i].value);
+													form.appendChild(node);
 								}
 								form.action = x+"/member.do";
 								form.method = "post";
