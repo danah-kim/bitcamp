@@ -33,8 +33,6 @@ public class SearchQuery extends QueryTemplate{
 	void startPlay() {
 		try {
 			int j = 0;
-			switch (map.get("table").toString()) {
-			case "MEMBER" :
 				if(map.get("column").equals("")){
 					j++;
 					pstmt.setString(j, map.get("startRow").toString());
@@ -50,25 +48,6 @@ public class SearchQuery extends QueryTemplate{
 					j++;
 					pstmt.setString(j, map.get("endRow").toString());
 				}
-				break;
-			case "IMAGE" :
-				if(map.get("column").equals("")){
-					j++;
-					pstmt.setString(j, map.get("startRow").toString());
-					j++;
-					pstmt.setString(j, map.get("endRow").toString());
-				}else {
-					j++;
-					pstmt.setString(j, map.get("value").toString());
-					j++;
-					pstmt.setString(j, map.get("startRow").toString());
-					j++;
-					pstmt.setString(j, map.get("endRow").toString());
-				}
-				break;
-			default:
-				break;
-		}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

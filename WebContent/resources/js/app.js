@@ -221,23 +221,28 @@ let member = (()=>{
 		getSubject,
 		main : x => {
 			router.move(x);
-			if(document.getElementById('loginBtn') || document.getElementById('addBtn')){
-				document.getElementById('content').style.background = "transparent";
-			}else if(document.getElementById('modifyBtn')){
-				var info = document.querySelectorAll('.modifyInfo');
-				for(var i of document.querySelectorAll('.teamId')){
-					if(i.value === info[2].getAttribute('id')){
-						i.checked = true;
-					}
-				}
-				for(var i of document.getElementById('roll')){
-					if(i.value === info[3].getAttribute('id')){
-						i.setAttribute("selected", "selected");
-					}
-				}
-			}else{
-			}
 			for(var i of document.querySelectorAll('.formBtn')){
+				switch (this.getAttribute('id')) {
+					case 'loginBtn':
+					case 'addBtn':
+						document.getElementById('content').style.background = "transparent";
+						break;
+					case 'modifyBtn':
+						var info = document.querySelectorAll('.modifyInfo');
+						for(var i of document.querySelectorAll('.teamId')){
+							if(i.value === info[2].getAttribute('id')){
+								i.checked = true;
+							}
+						}
+						for(var i of document.getElementById('roll')){
+							if(i.value === info[3].getAttribute('id')){
+								i.setAttribute("selected", "selected");
+							}
+						}
+						break;
+					default:
+						break;
+				}
 				i.addEventListener('click', function(){
 					switch(this.getAttribute('id')){
 						case 'loginBtn':
