@@ -79,6 +79,7 @@ var service = (()=>{
 var common = (() => {
 	return{
 		main : x => {
+			alert("텍스트 : "+x)
 			router.move(x);
 		}	
 	};

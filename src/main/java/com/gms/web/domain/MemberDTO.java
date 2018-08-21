@@ -6,6 +6,6 @@ import lombok.Data;
 
 @Component
 @Data
-public class Image {
-	private String imgseq, imgname, extension, memId;
+public class MemberDTO {
+	protected String memId, passWord, name, ssn, age, teamId, roll, gender, subject;
 }
