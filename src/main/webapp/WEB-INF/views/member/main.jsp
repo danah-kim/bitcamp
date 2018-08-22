@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="en">
-<jsp:include page="../common/head.jsp"/>
+<jsp:include page="../common/header.jsp"/>
 <body>
 	<div id="wrapper">
 		<div id="header">
@@ -43,7 +43,7 @@
 				<c:when test="${pageName eq 'login'}">
 				</c:when>
 				<c:otherwise>
-					<jsp:include page="../common/footerBox.jsp"/>
+					<jsp:include page="../common/footer.jsp"/>
 				</c:otherwise>
 			</c:choose>
 		</div>
