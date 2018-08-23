@@ -2,32 +2,61 @@
 var app = app || {};
 app = {
 	init : x => {
-		alert('step1');
+		console.log('step1');
 		app.session.context(x);
 		app.onCreate();
 	},
 	onCreate : ()=>{
-		alert('step3');
+		console.log('step3');
 		app.setContentView();
-		$('#loginBtn').on('click', function( ){
-			alert('step4'+ app.session.path('js'));
+		$('#addMenu').click (() => {
+			location.href = app.x() + '/move/auth/member/add';
 		});
+		$('#loginMenu').click (() => {
+			location.href = app.x() + '/move/auth/member/login';
+		});
+		$('#logoutMenu').click (() => {
+			location.href = app.x() + '/member/logout';
+		});
+		$('#myMenu').click (() => {
+			location.href = app.x() + '/move/member/member/retrieve';
+		});
+		$('#addBtn').click (() => {
+			location.href = app.x() + '/member/add';
+		});
+		$('#loginBtn').click (() => {
+			location.href = app.x() + '/member/login';
+		});
+		$('#logoutBtn').click (() => {
+			location.href = app.x() + '/member/logout';
+		});
+
 	},
 	setContentView : ()=>{
-		alert('step4'+ app.session.path('js'));
+		console.log('step4'+ app.session.path('js'));
 	}
 };
 app.session = {
 	context : x => {
-		alert('step2 : ' + x);
+		console.log('step2 : ' + x);
 		sessionStorage.setItem('context', x);
 		sessionStorage.setItem('js', '/resources/js');
 		sessionStorage.setItem('css', '/resources/css');
 		sessionStorage.setItem('img', '/resources/img');
-		
-		
 	},
 	path : x => {
 		return sessionStorage.getItem(x);
 	}
+};
+app.x = ()=>{
+	return app.session.path('context');
+};
+app.j = ()=>{
+	return app.session.path('js');
+};
+app.c = ()=>{
+	return app.session.path('css');
+};
+app.i = ()=>{
+	return app.session.path('img');
 };

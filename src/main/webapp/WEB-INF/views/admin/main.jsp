@@ -13,7 +13,7 @@
 			<jsp:include page="../member/search.jsp"/>
 		</div>
 		<div id="footer">
-			<jsp:include page="../common/footer.jsp"/>
+			<jsp:include page="../common/footerBar.jsp"/>
 		</div>
 	</div>
 <script>

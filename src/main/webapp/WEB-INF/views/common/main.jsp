@@ -23,21 +23,21 @@
 </head>
 <body>
 	<div id="wrapper">
-		<div id="content">
-			<div id="header">
-				<tiles:insertAttribute name="header"/>
-			</div>
-			<div class="outer-container">
-				<tiles:insertAttribute name="hero"/>
-				<tiles:insertAttribute name="content"/>
-			</div>
+		<div id="header">
+			<tiles:insertAttribute name="header"/>
+			<tiles:insertAttribute name="nav"/>
 		</div>
-			<div id="footer">
-				<tiles:insertAttribute name="footer"/>
-			</div>
+		<div id="content">
+			<tiles:insertAttribute name="fluid"/>
+			<tiles:insertAttribute name="content"/>
+		</div>
+		<div id="footer">
+			<tiles:insertAttribute name="footerImg"/>
+			<tiles:insertAttribute name="footerBar"/>
+		</div>
 	</div>
-<script>
-	app.init('${context}');
-</script>
+	<script>
+		app.init('${context}');
+	</script>
 </body>
 </html>

@@ -1,21 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!doctype html>
-<html lang="en">
-<jsp:include page="../common/header.jsp"/>
-<body>
-	<div id="wrapper">
-		<div id="header">
-			<jsp:include page="../common/titleBox.jsp"/>
-			<c:choose>
-				<c:when test="${pageName eq 'login' || pageName eq 'add'}">
-				</c:when>	
-				<c:otherwise>
-					<jsp:include page="loginBox.jsp"/>
-					<jsp:include page="../common/menuBox.jsp"/>
-				</c:otherwise>
-			</c:choose>
-		</div>
 		<div id="content">
 			<c:choose>
 				<c:when test="${pageName eq 'add'}">
@@ -43,7 +27,7 @@
 				<c:when test="${pageName eq 'login'}">
 				</c:when>
 				<c:otherwise>
-					<jsp:include page="../common/footer.jsp"/>
+					<jsp:include page="../common/footerBar.jsp"/>
 				</c:otherwise>
 			</c:choose>
 		</div>

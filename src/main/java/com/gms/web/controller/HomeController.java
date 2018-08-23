@@ -6,30 +6,32 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-/**
- * Handles requests for the application home page.
- */
 @Controller
 @SessionAttributes("context")
 public class HomeController {
+	static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	enum Resources{
-		CONTEXT, CSS, JS, IMG
-	}
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpSession session, HttpServletRequest request) {
 		String context = request.getContextPath();
-		logger.info("Welcome home! The client locale is {}.", context);
+		logger.info("HomeController : ", context);
 		session.setAttribute("context", context);
-		//model.addAttribute("serverTime", formattedDate );
-		
 		return "public:common/content.tiles";
 	}
-	
+	@RequestMapping("/move/{prefix}/{dir}/{page}")
+	public String move(
+			@PathVariable String prefix,
+			@PathVariable String dir,
+			@PathVariable String page) {
+		logger.info("homeContoller move :: prefix : ", prefix);
+		logger.info("homeContoller move :: dir : ", dir);
+		logger.info("homeContoller move :: page : ", page);
+		return prefix+":" + dir + "/" + page + ".tiles";
+	}
 }

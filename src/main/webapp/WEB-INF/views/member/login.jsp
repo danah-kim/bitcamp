@@ -2,7 +2,7 @@
 <div class="loginContent">
 	<form id="loginBox">
 	  <div class="loginImgcontainer">
-	    <img src="resources/img/home/profileImg.png" alt="profileImg">
+	    <img src="resources/img/profileImg.png" alt="profileImg">
 	  </div>
 	
 	  <div class="loginContainer">
