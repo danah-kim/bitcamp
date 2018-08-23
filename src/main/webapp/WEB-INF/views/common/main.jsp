@@ -19,30 +19,25 @@
 	<script type='text/javascript' src='${context}/resources/js/custom.js'></script>
 	<script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type='text/javascript' src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-	<script type='text/javascript' src="${context}/resources/js/app.js"></script>
+	<script src="${context}/resources/js/app.js"></script>
 </head>
 <body>
 	<div id="wrapper">
+		<div id="content">
 			<div id="header">
 				<tiles:insertAttribute name="header"/>
 			</div>
-			<div id="content">
-				<div class="outer-container">
-					<tiles:insertAttribute name="hero"/>
-					<tiles:insertAttribute name="content"/>
-				</div>
+			<div class="outer-container">
+				<tiles:insertAttribute name="hero"/>
+				<tiles:insertAttribute name="content"/>
 			</div>
+		</div>
 			<div id="footer">
 				<tiles:insertAttribute name="footer"/>
 			</div>
 	</div>
 <script>
-	$('#loginBtn').on('click', function( ){
-		alert("login2")
-	});
 	app.init('${context}');
-</script>
-
 </script>
 </body>
 </html>

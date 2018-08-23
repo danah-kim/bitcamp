@@ -8,90 +8,6 @@
                             January 30, 2018
                         </div><!-- .posted-date -->
 
-                        <h2 class="entry-title">Why I love Winter: A short story</h2>
-
-                        <div class="tags-links">
-                            <a href="#">#winter</a>
-                            <a href="#">#love</a>
-                            <a href="#">#snow</a>
-                            <a href="#">#january</a>
-                        </div><!-- .tags-links -->
-                    </header><!-- .entry-header -->
-
-                    <figure class="featured-image">
-                        <img src="${context}/resources/img/1.jpg" alt="">
-                    </figure><!-- .featured-image -->
-
-                    <div class="entry-content">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel tortor facilisis, volutpat nulla placerat, tincidunt mi. Nullam vel orci dui. Suspendisse sit amet laoreet neque. Fusce sagittis suscipit sem a consequat. Proin nec interdum sem. Quisque in porttitor magna, a imperdiet est. </p>
-                    </div><!-- .entry-content -->
-
-                    <footer class="entry-footer flex flex-column flex-lg-row justify-content-between align-content-start align-lg-items-center">
-                        <ul class="post-share flex align-items-center order-3 order-lg-1">
-                            <label>Share</label>
-                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        </ul><!-- .post-share -->
-
-                        <a class="read-more order-2" href="#">Read more</a>
-
-                        <div class="comments-count order-1 order-lg-3">
-                            <a href="#">2 Comments</a>
-                        </div><!-- .comments-count -->
-                    </footer><!-- .entry-footer -->
-                </div><!-- .content-wrap -->
-
-                <div class="content-wrap">
-                    <header class="entry-header">
-                        <div class="posted-date">
-                            January 30, 2018
-                        </div><!-- .posted-date -->
-
-                        <h2 class="entry-title">Travel tips for nature loversy</h2>
-
-                        <div class="tags-links">
-                            <a href="#">#winter</a>
-                            <a href="#">#love</a>
-                            <a href="#">#snow</a>
-                            <a href="#">#january</a>
-                        </div><!-- .tags-links -->
-                    </header><!-- .entry-header -->
-
-                    <figure class="featured-image">
-                        <img src="${context}/resources/img/2.jpg" alt="">
-                    </figure><!-- .featured-image -->
-
-                    <div class="entry-content">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel tortor facilisis, volutpat nulla placerat, tincidunt mi. Nullam vel orci dui. Suspendisse sit amet laoreet neque. Fusce sagittis suscipit sem a consequat. Proin nec interdum sem. Quisque in porttitor magna, a imperdiet est. </p>
-                    </div><!-- .entry-content -->
-
-                    <footer class="entry-footer flex flex-column flex-lg-row justify-content-between align-content-start align-lg-items-center">
-                        <ul class="post-share flex align-items-center order-3 order-lg-1">
-                            <label>Share</label>
-                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        </ul><!-- .post-share -->
-
-                        <a class="read-more order-2" href="#">Read more</a>
-
-                        <div class="comments-count order-1 order-lg-3">
-                            <a href="#">2 Comments</a>
-                        </div><!-- .comments-count -->
-                    </footer><!-- .entry-footer -->
-                </div><!-- .content-wrap -->
-
-                <div class="content-wrap">
-                    <header class="entry-header">
-                        <div class="posted-date">
-                            January 30, 2018
-                        </div><!-- .posted-date -->
-
                         <h2 class="entry-title">How to get dress on a hiking trip</h2>
 
                         <div class="tags-links">
@@ -158,92 +74,11 @@
 
                                 <h3><a href="#">My fall in love story</a></h3>
 
-                                <div class="tags-links">
-                                    <a href="#">#winter</a>
-                                    <a href="#">#love</a>
-                                    <a href="#">#snow</a>
-                                    <a href="#">#january</a>
-                                </div><!-- .tags-links -->
                             </header><!-- .entry-header -->
                         </div><!-- .recent-post-wrap -->
 
-                        <div class="recent-post-wrap">
-                            <figure>
-                                <img src="${context}/resources/img/thumb-2.jpg" alt="">
-                            </figure>
-
-                            <header class="entry-header">
-                                <div class="posted-date">
-                                    January 30, 2018
-                                </div><!-- .entry-header -->
-
-                                <h3><a href="#">My fall in love story</a></h3>
-
-                                <div class="tags-links">
-                                    <a href="#">#winter</a>
-                                    <a href="#">#love</a>
-                                    <a href="#">#snow</a>
-                                    <a href="#">#january</a>
-                                </div><!-- .tags-links -->
-                            </header><!-- .entry-header -->
-                        </div><!-- .recent-post-wrap -->
-
-                        <div class="recent-post-wrap">
-                            <figure>
-                                <img src="${context}/resources/img/thumb-3.jpg" alt="">
-                            </figure>
-
-                            <header class="entry-header">
-                                <div class="posted-date">
-                                    January 30, 2018
-                                </div><!-- .entry-header -->
-
-                                <h3><a href="#">My fall in love story</a></h3>
-
-                                <div class="tags-links">
-                                    <a href="#">#winter</a>
-                                    <a href="#">#love</a>
-                                    <a href="#">#snow</a>
-                                    <a href="#">#january</a>
-                                </div><!-- .tags-links -->
-                            </header><!-- .entry-header -->
-                        </div><!-- .recent-post-wrap -->
-
-                        <div class="recent-post-wrap">
-                            <figure>
-                                <img src="${context}/resources/img/thumb-4.jpg" alt="">
-                            </figure>
-
-                            <header class="entry-header">
-                                <div class="posted-date">
-                                    January 30, 2018
-                                </div><!-- .entry-header -->
-
-                                <h3><a href="#">My fall in love story</a></h3>
-
-                                <div class="tags-links">
-                                    <a href="#">#winter</a>
-                                    <a href="#">#love</a>
-                                    <a href="#">#snow</a>
-                                    <a href="#">#january</a>
-                                </div><!-- .tags-links -->
-                            </header><!-- .entry-header -->
-                        </div><!-- .recent-post-wrap -->
                     </div><!-- .recent-posts -->
 
-                    <div class="tags-list">
-                        <a href="#">Music</a>
-                        <a href="#">Love</a>
-                        <a href="#">Car</a>
-                        <a href="#">Stories</a>
-                        <a href="#">Photography</a>
-                        <a href="#">Music</a>
-                        <a href="#">Car</a>
-                    </div><!-- .tags-list -->
-
-                    <div class="sidebar-ads">
-                        <img src="${context}/resources/img/ads.jpg" alt="ads">
-                    </div>
                 </div><!-- .sidebar -->
             </div><!-- .col -->
         </div><!-- .row -->

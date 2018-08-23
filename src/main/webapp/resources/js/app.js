@@ -1,8 +1,35 @@
 "use strict";
-var app = (()=>{
-	return{
-		init : x => {
-			alert('컨텍스트:' + x);
-		}
-	};
-})();
+var app = app || {};
+app = {
+	init : x => {
+		alert('step1');
+		app.session.context(x);
+		app.onCreate();
+	},
+	onCreate : ()=>{
+		alert('step3');
+		app.setContentView();
+		$('#loginBtn').on('click', function( ){
+			alert('step4'+ app.session.path('js'));
+		});
+	},
+	setContentView : ()=>{
+		alert('step4'+ app.session.path('js'));
+	}
+	,
+	
+};
+app.session = {
+	context : x => {
+		alert('step2 : ' + x);
+		sessionStorage.setItem('context', x);
+		sessionStorage.setItem('js', '/resources/js');
+		sessionStorage.setItem('css', '/resources/css');
+		sessionStorage.setItem('img', '/resources/img');
+		
+		
+	},
+	path : x => {
+		return sessionStorage.getItem(x);
+	}
+};
