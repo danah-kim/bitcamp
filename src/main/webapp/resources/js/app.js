@@ -16,8 +16,6 @@ app = {
 	setContentView : ()=>{
 		alert('step4'+ app.session.path('js'));
 	}
-	,
-	
 };
 app.session = {
 	context : x => {
