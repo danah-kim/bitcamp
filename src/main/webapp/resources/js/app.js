@@ -21,6 +21,12 @@ app = {
 		$('#myMenu').click (() => {
 			location.href = app.x() + '/move/member/member/retrieve';
 		});
+		$('#modifyMenu').click (()=>{
+			location.href = app.x() + '/move/memver/member/modify';
+		});
+		$('#removeMenu').click (()=>{
+			location.href = app.x() + '/move/memver/member/remove';
+		});
 		$('#addBtn').click (() => {
 			location.href = app.x() + '/member/add';
 		});

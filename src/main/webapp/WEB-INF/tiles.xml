@@ -15,7 +15,6 @@
 		</definition>
 		<definition name="auth:*/*.tiles" extends="public">
 			<put-attribute name="header" value=""/>
-			<put-attribute name="nav" value=""/>
 			<put-attribute name="fluid" value=""/>
 			<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp"></put-attribute>
 		</definition>

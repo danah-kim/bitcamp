@@ -1238,3 +1238,78 @@ a:hover, a:active {
         margin: 0 0 0 30px;
     }
 }
+
+/* start user_login */
+.loginContent{
+	width: 90%; 
+	margin: 0 auto; 
+	text-align: -webkit-center;
+	color: #ffffff;}
+
+form#loginBox {
+	border: 3px solid #f1f1f1; 
+	width: 50%; 
+	background-color: #ffffff;}
+
+.loginImgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+}
+
+.loginImgcontainer img.avatar {
+    width: 40%;
+    border-radius: 50%;
+}
+
+.loginContainer {
+    padding: 16px;
+    background-color:#f1f1f1;
+    text-align: left;
+    color: black;
+}
+
+.loginContainer input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+#loginBtn {
+    background-color: #2196F3;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+#loginBtn:hover {
+    opacity: 0.8;
+}
+
+#loginCancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+}
+
+.loginContainer span.pw {
+    float: right;
+    padding-top: 16px;
+}
+
+@media screen and (max-width: 300px) {
+		div.loginContainer span.pw {
+	       display: block;
+	       float: none;
+	    }
+		div.loginContainer button#loginCancelbtn {
+	       width: 100%;
+	    }
+	}
+
+/* end user_login */
