@@ -7,5 +7,14 @@ import lombok.Data;
 @Component
 @Data
 public class MemberDTO {
-	protected String memId, passWord, name, ssn, age, teamId, roll, gender, subject;
+	protected String userid,
+						ssn, 
+						name,
+						gender,
+						age,
+						roll, 
+						teamid,
+						password,
+						email,
+						phone;
 }

@@ -15,10 +15,12 @@ public class MariadbConn {
             conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/mariadb", "mariadb", "mariadb");
             stmt = conn.createStatement();
  
-            String sql = "SELECT * FROM MEMBER";
+            String sql = " SELECT * "
+            			+ "FROM MEMBER "
+            			+ "WHERE USERID LIKE 'H5'";
             ResultSet rs = stmt.executeQuery(sql);
             if(rs.next()) {
-                result = rs.getString("USERID");
+                result = rs.getString("NAME");
             }else {
             	result = "연결실패";
             }

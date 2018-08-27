@@ -9,7 +9,7 @@ import com.gms.web.domain.MemberDTO;
 import com.gms.web.repository.MemberDAO;
 
 @Repository
-public class MemberDAOImpl implements MemberDAO{
+public class MemberMapper implements MemberDAO{
 
 	@Override
 	public void insert(MemberDTO p) {
