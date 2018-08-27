@@ -1,5 +1,8 @@
 package com.gms.web.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gms.web.domain.MemberDTO;
+import com.gms.web.service.MemberService;
 
 @Controller
 @RequestMapping("/member")
 public class MemberController {
 	static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	@Autowired  MemberDTO member;
+	@Autowired MemberDTO member;
+	@Autowired MemberService memberService;
 	@RequestMapping("/add")
 	public String add() {
 		logger.info("MemberContoller add");
@@ -52,6 +57,12 @@ public class MemberController {
 	@RequestMapping("/login")
 	public String login() {
 		logger.info("MemberContoller login");
+		Map<String, String> map = new HashMap<>();
+		map.put("userid", "H5");
+		MemberDTO m = memberService.retrieve(map);
+		System.out.println("-----------");
+		System.out.println(m.getName());
+		System.out.println("-----------");
 		return "member:common/content.tiles";
 	}
 	@RequestMapping("/logout")
