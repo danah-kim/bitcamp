@@ -14,30 +14,40 @@
     <link rel="stylesheet" href="${context}/resources/css/font-awesome.min.css">
     <link rel="stylesheet" href="${context}/resources/css/swiper.min.css">
 	<link rel="stylesheet" href="${context}/resources/css/style.css">
-	<script type='text/javascript' src='${context}/resources/js/jquery.js'></script>
-	<script type='text/javascript' src='${context}/resources/js/swiper.min.js'></script>
-	<script type='text/javascript' src='${context}/resources/js/custom.js'></script>
-	<script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script type='text/javascript' src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-	<script src="${context}/resources/js/app.js"></script>
 </head>
 <body>
 	<div id="wrapper">
 		<div id="header">
-			<tiles:insertAttribute name="header"/>
-			<tiles:insertAttribute name="nav"/>
+				<tiles:insertAttribute name="header"/>
+				<tiles:insertAttribute name="nav"/>
 		</div>
 		<div id="content">
 			<tiles:insertAttribute name="fluid"/>
 			<tiles:insertAttribute name="content"/>
 		</div>
 		<div id="footer">
-			<tiles:insertAttribute name="footerImg"/>
-			<tiles:insertAttribute name="footerBar"/>
+			<footer class="sit-footer">
+				<tiles:insertAttribute name="footerImg"/>
+				<tiles:insertAttribute name="footerBar"/>
+			</footer>
 		</div>
 	</div>
+	<script type='text/javascript' src='${context}/resources/js/jquery.js'></script>
+	<script type='text/javascript' src='${context}/resources/js/swiper.min.js'></script>
+	<script type='text/javascript' src='${context}/resources/js/custom.js'></script>
+	<script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type='text/javascript' src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<script src="${context}/resources/js/app.js"></script>
 	<script>
 		app.init('${context}');
+		user.init({
+			userid : '${user.userid}',
+			name : '${user.name}',
+			age : '${user.age}',
+			gender : '${user.gender}',
+			teamid : '${user.teamid}',
+			roll : '${user.roll}'
+		});
 	</script>
 </body>
 </html>

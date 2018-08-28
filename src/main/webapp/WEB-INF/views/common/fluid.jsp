@@ -10,20 +10,20 @@
 	                            <img src="${context}/resources/img/slider.jpg" alt="">
 	                        </div><!-- .hero-content -->
 	                    </div><!-- .swiper-slide -->
-	
+		
 	                    <div class="swiper-slide">
 	                        <div class="hero-content flex justify-content-center align-items-center flex-column">
 	                            <img src="${context}/resources/img/slider.jpg" alt="">
 	                        </div><!-- .hero-content -->
 	                    </div><!-- .swiper-slide -->
-	
+		
 	                    <div class="swiper-slide">
 	                        <div class="hero-content flex justify-content-center align-items-center flex-column">
 	                            <img src="${context}/resources/img/slider.jpg" alt="">
 	                        </div><!-- .hero-content -->
 	                    </div><!-- .swiper-slide -->
 	                </div><!-- .swiper-wrapper -->
-	
+		
 	                <!-- Add Pagination -->
 	                <div class="swiper-pagination"></div>
 	
@@ -37,7 +37,7 @@
 	            </div><!-- .swiper-container -->
 	        </div><!-- .col -->
 	    </div><!-- .row -->
-	
+		
 	    <div class="container">
 	        <div class="row">
 	            <div class="offset-lg-9 col-12 col-lg-3">

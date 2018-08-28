@@ -19,12 +19,12 @@
 					<img src="${img}/${profile}" alt="profileImg">
 				</c:when>
 				<c:otherwise>
-					<img src="resources/img/home/profileImg.png" alt="profileImg">
+					<img src="${context}/resources/img/profileImg.png" alt="profileImg">
 				</c:otherwise>
 			</c:choose>
 	    </td>
 	    <td rowspan="2" >
-			<img src="resources/img/home/test.jpg" alt="기본이미지">
+			<img src="${context}/resources/img/1.jpg" alt="기본이미지">
 		</td>
 	  </tr>
 	  <tr>
@@ -43,13 +43,13 @@
 		</td>
 	    <td>
 			<ul id="retrieveInfoList">
-				<li>${user.memId}<br/></li>
+				<li>${user.userid}<br/></li>
 				<li>**** <br/></li>
 				<li>${user.name}<br/></li>
 				<li>${user.ssn}<br/></li>
 				<li>${user.gender}<br/></li>
 				<li>${user.age}<br/></li>
-				<li>${user.teamId}<br/></li>
+				<li>${user.teamid}<br/></li>
 				<li>${user.roll}<br/></li>
 				<li>${user.subject}<br/></li>
 			</ul>
@@ -57,3 +57,6 @@
 	  </tr>
 	</table>
 </div>
+<script>
+	app.user.set('${user}');
+</script>

@@ -12,31 +12,79 @@ app = {
 		$('#addMenu').click (() => {
 			location.href = app.x() + '/move/auth/member/add';
 		});
+		$('#myMenu').click (() => {
+			location.href = app.x() + '/move/member/member/retrieve';
+		});
+		$('#modifyMenu').click (()=>{
+			location.href = app.x() + '/move/member/member/modify';
+		});
+		$('#removeMenu').click (()=>{
+			location.href = app.x() + '/move/member/member/remove';
+		});
 		$('#loginMenu').click (() => {
 			location.href = app.x() + '/move/auth/member/login';
 		});
 		$('#logoutMenu').click (() => {
 			location.href = app.x() + '/member/logout';
 		});
-		$('#myMenu').click (() => {
-			location.href = app.x() + '/move/member/member/retrieve';
-		});
-		$('#modifyMenu').click (()=>{
-			location.href = app.x() + '/move/memver/member/modify';
-		});
-		$('#removeMenu').click (()=>{
-			location.href = app.x() + '/move/memver/member/remove';
-		});
 		$('#addBtn').click (() => {
-			location.href = app.x() + '/member/add';
+			alert('가입버튼클릭');
+			/*var form = document.getElementById('addBox');
+			form.action = app.x() +"/member/add";
+			form.method = "post";
+			form.submit();*/
+			$('#addForm')
+			.attr({
+				action : app.x()+"/member/add", 
+				method : "POST"})
+			.submit();
+		});
+		$('#searchBtn').click (() => {
+			var search = document.querySelectorAll('.searchInfo');
+			$('#searchForm')
+			.attr({
+				action : app.x()+ '/member/serach'
+					+ '/condition=' + search[0].value 
+					+ '/word=' + search[1].value,
+				method : "GET"})
+			.submit();
+		});
+		$('#modifyBtn').click (() => {
+			var info = document.querySelectorAll('.modifyInfo');
+			$('#newPw').val($('#newPw').val() || $('#oldPw').val());
+			$('#modifyForm')
+			.attr({
+				action : app.x()+"/member/modify",
+				method : "POST"})
+			.submit();
+		});
+		$('#removeBtn').click (() => {
+			var info = document.querySelectorAll('.removeInfo');
+			if($('#pw1').val() !== $('#pw2').val()){
+				alert('기존비밀번호와 확인 비밀번호가 일치하지 않습니다.');
+			}else if(info[0].getAttribute('id') !== $('#pw1').val()){
+				alert('기존비밀번호가 일치하지 않습니다.');
+			}else{
+				alert('탈퇴완료');
+				$('removeForm')
+				.attr({
+					action : app.x() + "/member/remove",
+					method : "POST"
+				})
+				.submit();
+			}
 		});
 		$('#loginBtn').click (() => {
-			location.href = app.x() + '/member/login';
+			$('#loginForm')
+			.attr({
+				action : app.x() + "/member/login",
+				method : "POST"
+			})
+			.submit();
 		});
-		$('#logoutBtn').click (() => {
+		$('#logoutMenu').click (() => {
 			location.href = app.x() + '/member/logout';
 		});
-
 	},
 	setContentView : ()=>{
 		console.log('step4'+ app.session.path('js'));
@@ -66,3 +114,15 @@ app.c = ()=>{
 app.i = ()=>{
 	return app.session.path('img');
 };
+
+var user = user || {};
+user = {
+	init : x =>{
+		sessionStorage.setItem('userid', x.userid);
+		sessionStorage.setItem('name', x.name);
+		sessionStorage.setItem('age', x.age);
+		sessionStorage.setItem('gender', x.gender);
+		sessionStorage.setItem('teamId', x.teamid);
+		sessionStorage.setItem('roll', x.roll);
+	}
+}

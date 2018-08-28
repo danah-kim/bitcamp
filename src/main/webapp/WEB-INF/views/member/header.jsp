@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+		<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div class="outer-container">
 	<header class="site-header">
 		<div class="top-header-bar">
@@ -10,7 +10,7 @@
 		                </div><!-- .header-bar-text -->
 		            </div><!-- .col -->
 		
-		            <div cls="col-12 col-lg-6 flex justify-content-between justify-content-lg-end align-items-center">
+		            <div class="col-12 col-lg-6 flex justify-content-between justify-content-lg-end align-items-center">
 		                <div class="header-bar-social d-none d-md-block">
 		                    <ul class="flex align-items-center">
 		                        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
@@ -18,7 +18,12 @@
 		                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
 		                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
 		                        <li><a id="logoutMenu"><i class="fa fa-sign-out"></i></a></li>
-		                        <li><a id="myMenu"><i class="fa fa-user"></i></a></li>
+		                        <li><a id="myMenu"><i class="fa fa-user"></i></a>
+		                        	<ul>
+		                        		<li><a id="modifyMenu">정보수정</a></li>
+		                        		<li><a id="removeMenu">탈퇴</a></li>
+		                        	</ul>
+		                        </li>
 		                    </ul>
 		                </div><!-- .header-bar-social -->
 		

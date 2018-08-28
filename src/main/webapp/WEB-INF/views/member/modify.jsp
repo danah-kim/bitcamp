@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div id="content">
 	<h3>개인정보 변경</h3>
-	<form id="modifyBox">
+	<form id="modifyForm">
 		<table>
 			<tr>
 				<td class="modifyInfo" id='${user.memId}' >아이디</td>

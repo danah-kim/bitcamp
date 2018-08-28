@@ -16,5 +16,6 @@ public class MemberDTO {
 						teamid,
 						password,
 						email,
-						phone;
+						phone,
+						subject;
 }

@@ -1,37 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div>
-	<form id="addBox">
+	<form id="addForm">
 	<h1>회원가입</h1>
 	<table id="addTable">
 		<tr>
 			<td id="addId"> 아이디</td>
 			<td>
-				<input id="addIDChkText" type="text" name="id">
+				<input id="addIDChkText" type="text" name="userid" required/>
 				<input id="addIdChkBtn" type="button" value="중복확인">
 			</td>
 		</tr>
 		<tr>
 			<td id="addPassWord">비밀번호</td>
 			<td>
-				<input type="text" name="pw">
+				<input type="text" name="password" required>
 			</td>
 		</tr>
 		<tr>
 			<td id="addName"> 이름</td>
 			<td>
-				<input type="text" name="name">
+				<input type="text" name="name" required/>
 			</td>
 		</tr>
 		<tr>
 			<td id="addBirth"> 생년월일</td>
 			<td>
 				<input type="text" 
-					   name="birth"
+					   name="age"
 					   placeholder="생년월일(6자)" 
 					   maxlength="6"
-                          title = "990101 형식으로 입력해주세요" >
+                          title = "990101 형식으로 입력해주세요" required/>
                           -
-                   <input type="text" name="gender" maxlength="1" />
+                   <input type="text" name="gender" maxlength="1" required/>
 			</td>
 		</tr>
 		<tr>

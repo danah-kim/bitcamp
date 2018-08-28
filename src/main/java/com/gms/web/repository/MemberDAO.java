@@ -13,5 +13,5 @@ public interface MemberDAO {
 	public int count(Map<?, ?> p);
 	public void update(Map<?, ?> p);
 	public void delete(Map<?, ?> p);
-	public boolean login(Map<?, ?> p);
+	public boolean login(MemberDTO p);
 }

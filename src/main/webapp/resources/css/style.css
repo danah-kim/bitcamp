@@ -1246,7 +1246,7 @@ a:hover, a:active {
 	text-align: -webkit-center;
 	color: #ffffff;}
 
-form#loginBox {
+form#loginForm {
 	border: 3px solid #f1f1f1; 
 	width: 50%; 
 	background-color: #ffffff;}

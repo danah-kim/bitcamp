@@ -10,7 +10,7 @@
 		                </div><!-- .header-bar-text -->
 		            </div><!-- .col -->
 		
-		            <div cls="col-12 col-lg-6 flex justify-content-between justify-content-lg-end align-items-center">
+		            <div class="col-12 col-lg-6 flex justify-content-between justify-content-lg-end align-items-center">
 		                <div class="header-bar-social d-none d-md-block">
 		                    <ul class="flex align-items-center">
 		                        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>

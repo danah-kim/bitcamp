@@ -3,15 +3,23 @@ package com.gms.web.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.gms.web.domain.MemberDTO;
 import com.gms.web.service.MemberService;
+import com.gms.web.service.impl.MemberServiceImpl;
+import com.sun.javafx.sg.prism.NGShape.Mode;
 
 @Controller
 @RequestMapping("/member")
@@ -19,53 +27,71 @@ public class MemberController {
 	static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	@Autowired MemberDTO member;
 	@Autowired MemberService memberService;
-	@RequestMapping("/add")
-	public String add() {
+	@RequestMapping(value="/add", method=RequestMethod.POST)
+	public String add(@ModelAttribute("member") MemberDTO member) {
 		logger.info("MemberContoller add");
+		memberService.add(member);
 		return "redirect:/move/auth/member/login";
 	}
-	@RequestMapping("/list")
+	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public String list() {
 		logger.info("MemberContoller list");
 		return "member:member/list.tiles";
 	}
-	@RequestMapping("/search")
+	@RequestMapping(value="/search", method=RequestMethod.GET)
 	public String search() {
 		logger.info("MemberContoller search");
 		return "member:member/search.tiles";
 	}
-	@RequestMapping("/retrieve")
+	@RequestMapping(value="/retrieve", method=RequestMethod.GET)
 	public String retrieve() {
 		logger.info("MemberContoller retrieve");
 		return "member:member/retrieve.tiles";
 	}
-	@RequestMapping("/count")
-	public String count() {
+	@RequestMapping(value="/count", method=RequestMethod.GET)
+	public String count(Model model) {
 		logger.info("MemberContoller count");
+		Map<String, String> map = new HashMap<>();
+		map.put("column", "MEMBER");
+		model.addAttribute("count", memberService.count(map));
 		return "member:member/count.tiles";
 	}
-	@RequestMapping("/modify")
-	public String modify() {
+	@RequestMapping(value="/modify", method=RequestMethod.POST)
+	public String modify(@ModelAttribute("member") MemberDTO member, Model model) {
 		logger.info("MemberContoller modify");
+		Map<String, Object> map = new HashMap<>();
+		String[] arr1 = {"userid", "passWord", "teamId", "roll"};
+		String[] arr2 = {member.getUserid(), member.getPassword(), member.getTeamid(), member.getRoll()};
+		for(int i = 0; i < arr1.length; i++){
+			map.put(arr1[i],arr2[i]);
+		}
+		memberService.modify(map);
+		model.addAttribute("user", memberService.retrieve(map));
 		return "redirect:/move/member/member/retrieve";
 	}
-	@RequestMapping("/remove")
-	public String remove() {
+	@RequestMapping(value="/remove", method=RequestMethod.POST)
+	public String remove(@ModelAttribute("member") MemberDTO member) {
 		logger.info("MemberContoller remove");
+		Map<String, String> map = new HashMap<>();
+		map.put("member", member.getUserid());
+		map.put("password", member.getPassword());
+		memberService.remove(map);
 		return "redirect:/move/member/common/main";
 	}
-	@RequestMapping("/login")
-	public String login() {
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public String login(@ModelAttribute("member") MemberDTO member, Model model) {
 		logger.info("MemberContoller login");
-		Map<String, String> map = new HashMap<>();
-		map.put("userid", "H5");
-		MemberDTO m = memberService.retrieve(map);
-		System.out.println("-----------");
-		System.out.println(m.getName());
-		System.out.println("-----------");
-		return "member:common/content.tiles";
+		if(memberService.login(member)) {
+			Map<String, String> map = new HashMap<>();
+			map.put("userid", member.getUserid());
+			member = memberService.retrieve(map);
+			model.addAttribute("user", memberService.retrieve(map));
+			return "member:member/retrieve.tiles";
+		}else {
+			return "redirect:/move/auth/member/login";
+		}
 	}
-	@RequestMapping("/logout")
+	@RequestMapping(value="/logout")
 	public String logout() {
 		logger.info("MemberContoller logout");
 		return "redirect:/";

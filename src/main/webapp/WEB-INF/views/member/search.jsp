@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div id="contentBox" >
 	<div id="contextBoxSearch">
-		<form id="searchFormBox">
+		<form id="searchForm">
 			<select class="searchInfo" id="${column}" name="searchSelect">
 				<option value="">검색조건</option>
 				<option value="MEM_ID">아이디</option>
