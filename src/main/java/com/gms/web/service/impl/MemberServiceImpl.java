@@ -10,14 +10,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gms.web.controller.HomeController;
 import com.gms.web.domain.MemberDTO;
-import com.gms.web.repository.MemberDAO;
+import com.gms.web.mapper.MemberMapper;
 import com.gms.web.service.MemberService;
 @Service
 public class MemberServiceImpl implements MemberService{
-	static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	@Autowired MemberDAO memberDAO;
+	static final Logger logger = LoggerFactory.getLogger(MemberService.class);
+	@Autowired MemberMapper memberDAO;
 	@Override
 	public void add(MemberDTO p) {
 		logger.info("MemberService add");
@@ -34,9 +33,6 @@ public class MemberServiceImpl implements MemberService{
 		}
 		String year = new SimpleDateFormat("yyyy").format(new Date());
 		p.setAge(String.valueOf(Integer.parseInt(year) - Integer.parseInt(19 + p.getAge().substring(0, 2)) + 1));
-		logger.info("주민번호 확인 : " + p.getSsn());
-		logger.info("성별확인 : " + p.getGender());
-		logger.info("나이확인 : " + p.getAge());
 		memberDAO.insert(p);
 	}
 
@@ -75,6 +71,6 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public boolean login(MemberDTO p) {
 		logger.info("MemberService login");
-		return memberDAO.login(p);
+		return memberDAO.login(p)==1;
 	}
 }

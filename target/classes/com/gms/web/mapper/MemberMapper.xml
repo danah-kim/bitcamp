@@ -8,7 +8,7 @@
 		(USERID, TEAMID, NAME, AGE, ROLL, PASSWORD, SSN, GENDER, SUBJECT, PHONE, EMAIL)
 		VALUES(#{userid}, #{teamid}, #{name}, #{age}, #{roll}, #{password}, #{ssn}, #{gender}, #{subject}, #{phone}, #{email});
 	</insert>
-	<select id="selectList" >
+	<select id="selectList">
 		SELECT * 
 		FROM MEMBER
 		
@@ -24,15 +24,15 @@
   		FROM MEMBER
     	WHERE USERID LIKE #{userid}
 	</select>
-	<select id="count" resultType="int">
-  		SELECT COUNT(*) AS count 
+	<select id="count" resultType="integer">
+  		SELECT COUNT(*) AS count
   		FROM #{column}
 	</select>
 	<update id="update">
   		UPDATE MEMBER SET
    		PASSWORD = #{password},
     	TEAMID = #{teamid},
-    	ROLL = #{roll},
+    	ROLL = #{roll}
   		WHERE USERID LIKE #{userid}
 	</update>
 	<delete id="delete">
@@ -41,9 +41,9 @@
   		WHERE USERID LIKE #{userid}
   		AND PASSWORD LIKE #{password}
 	</delete>
-	<select id="login" >
+	<select id="login" resultType="java.lang.Integer">
     	SELECT
-    	USERID, TEAMID, NAME, AGE, ROLL, PASSWORD, SSN, GENDER, SUBJECT, PHONE, EMAIL
+    	COUNT(*) AS count 
     	FROM MEMBER
     	WHERE USERID LIKE #{userid}
     	AND PASSWORD LIKE #{password}

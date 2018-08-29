@@ -5,35 +5,29 @@
 		<table>
 			<tr>
 				<td>아이디</td>
-				<td id='id' name="userid"></td>
+				<td id='userid'></td>
 			</tr>
 			<tr>
 				<td>이름</td>
 				<td id='name'></td>
 			</tr>
 			<tr>
-				<td>기존 비밀번호</td>
-				<td>
-					<input type="text" name="oldPw" placeholder="****"/>
-				</td>
-			</tr>
-			<tr>
 				<td>변경 비밀번호</td>
 				<td>
-					<input type="text" name="newPw"/>
+					<input type="text" id="password" name="password" />
 				</td>
 			</tr>
 			<tr>
-				<td class="modifyInfo" id='teamid' ></td>
+				<td class="modifyInfo" id="infoTeamid">팀 변경 / 현재팀 : </td>
 				<td>
-					<input class= "teamId" type="radio" name="teamid" value="ATEAM"/>걍놀자
-					<input class= "teamId" type="radio" name="teamid" value="HTEAM"/>지은이네
-					<input class= "teamId" type="radio" name="teamid" value="STEAM"/>왕거북이
-					<input class= "teamId" type="radio" name="teamid" value="CTEAM"/>코딩짱
+					<input class="teamid" type="radio" name="teamid" value="ATEAM"/>걍놀자
+					<input class="teamid" type="radio" name="teamid" value="HTEAM"/>지은이네
+					<input class="teamid" type="radio" name="teamid" value="STEAM"/>왕거북이
+					<input class="teamid" type="radio" name="teamid" value="CTEAM"/>코딩짱
 				</td>
 			</tr>
 			<tr>
-				<td class="modifyInfo" id='roll' ></td>
+				<td class="modifyInfo" id="infoRoll">역할 변경 / 현재역할 : </td>
 				<td>
 					<select id="roll" name="roll">
 						<option value="Leader">팀장</option>

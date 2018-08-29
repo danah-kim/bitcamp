@@ -5,18 +5,12 @@
 		<table>
 			<tr>
 				<td >아이디</td>
-				<td id='id' name="userid"></td>
+				<td id='userid'></td>
 			</tr>
 			<tr>
-				<td class="removeInfo" id='${password}' >비밀번호</td>
+				<td class="removeInfo" id='password' >비밀번호</td>
 				<td>
-					<input type="text" name="pw1"/>
-				</td>
-			</tr>
-			<tr>
-				<td>비밀번호 확인</td>
-				<td>
-					<input type="text" name="pw2"/>
+					<input type="text" name="password"/>
 				</td>
 			</tr>
 		</table>

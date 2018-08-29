@@ -40,14 +40,17 @@
 	<script src="${context}/resources/js/app.js"></script>
 	<script>
 		app.init('${context}');
-		user.session({
-			userid : '${user.userid}',
-			name : '${user.name}',
-			age : '${user.age}',
-			gender : '${user.gender}',
-			teamid : '${user.teamid}',
-			roll : '${user.roll}'
-		});
+		alert('DB체크'+'${user}');
+		if('${user}'!=''){
+			user.session({
+				userid : '${user.userid}',
+				name : '${user.name}',
+				age : '${user.age}',
+				gender : '${user.gender}',
+				teamid : '${user.teamid}',
+				roll : '${user.roll}'
+			});
+		}
 	</script>
 </body>
 </html>

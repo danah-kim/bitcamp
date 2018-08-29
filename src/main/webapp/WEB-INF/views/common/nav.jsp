@@ -31,7 +31,7 @@
                         <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                         <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
                         <li><a id="loginMenu"><i class="fa fa-sign-in"></i></a></li>
-		                        <li><a id="addMenu"><i class="fa fa-user-plus"></i></a></li>
+		                <li><a id="addMenu"><i class="fa fa-user-plus"></i></a></li>
                     </ul>
                 </div><!-- .header-bar-social -->
 

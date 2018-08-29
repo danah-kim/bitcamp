@@ -3,28 +3,22 @@ package com.gms.web.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.gms.web.domain.MemberDTO;
 import com.gms.web.service.MemberService;
-import com.gms.web.service.impl.MemberServiceImpl;
-import com.sun.javafx.sg.prism.NGShape.Mode;
 
 @Controller
 @RequestMapping("/member")
 public class MemberController {
-	static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	@Autowired MemberDTO member;
 	@Autowired MemberService memberService;
 	@RequestMapping(value="/add", method=RequestMethod.POST)
@@ -60,7 +54,7 @@ public class MemberController {
 	public String modify(@ModelAttribute("member") MemberDTO member, Model model) {
 		logger.info("MemberContoller modify");
 		Map<String, Object> map = new HashMap<>();
-		String[] arr1 = {"userid", "passWord", "teamId", "roll"};
+		String[] arr1 = {"userid", "password", "teamid", "roll"};
 		String[] arr2 = {member.getUserid(), member.getPassword(), member.getTeamid(), member.getRoll()};
 		for(int i = 0; i < arr1.length; i++){
 			map.put(arr1[i],arr2[i]);
@@ -68,13 +62,13 @@ public class MemberController {
 		logger.info("확인중" + map);
 		memberService.modify(map);
 		model.addAttribute("user", memberService.retrieve(map));
-		return "redirect:/move/member/member/retrieve";
+		return "member:member/modify.tiles";
 	}
 	@RequestMapping(value="/remove", method=RequestMethod.POST)
 	public String remove(@ModelAttribute("member") MemberDTO member) {
 		logger.info("MemberContoller remove");
 		Map<String, String> map = new HashMap<>();
-		map.put("member", member.getUserid());
+		map.put("userid", member.getUserid());
 		map.put("password", member.getPassword());
 		memberService.remove(map);
 		return "redirect:/move/member/common/main";
@@ -85,7 +79,6 @@ public class MemberController {
 		if(memberService.login(member)) {
 			Map<String, String> map = new HashMap<>();
 			map.put("userid", member.getUserid());
-			member = memberService.retrieve(map);
 			model.addAttribute("user", memberService.retrieve(map));
 			return "member:member/retrieve.tiles";
 		}else {
@@ -95,7 +88,7 @@ public class MemberController {
 	@RequestMapping(value="/logout")
 	public String logout() {
 		logger.info("MemberContoller logout");
-		return "redirect:/";
+		return "redirect:/move/public/common/content";
 	}
 	@RequestMapping("/fileupload")
 	public void fileupload() {}
