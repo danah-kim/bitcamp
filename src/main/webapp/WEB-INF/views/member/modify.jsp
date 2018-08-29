@@ -4,15 +4,15 @@
 	<form id="modifyForm">
 		<table>
 			<tr>
-				<td class="modifyInfo" id='${user.memId}' >아이디</td>
-				<td>${user.memId}</td>
+				<td>아이디</td>
+				<td id='id' name="userid"></td>
 			</tr>
 			<tr>
 				<td>이름</td>
-				<td>${user.name}</td>
+				<td id='name'></td>
 			</tr>
 			<tr>
-				<td class="modifyInfo" id='${user.passWord}' >기존 비밀번호</td>
+				<td>기존 비밀번호</td>
 				<td>
 					<input type="text" name="oldPw" placeholder="****"/>
 				</td>
@@ -24,16 +24,16 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="modifyInfo" id='${user.teamId}' >팀 변경(현재팀 : ${user.teamId})</td>
+				<td class="modifyInfo" id='teamid' ></td>
 				<td>
-					<input class= "teamId" type="radio" name="teamId" value="ATEAM"/>걍놀자
-					<input class= "teamId" type="radio" name="teamId" value="HTEAM"/>지은이네
-					<input class= "teamId" type="radio" name="teamId" value="STEAM"/>왕거북이
-					<input class= "teamId" type="radio" name="teamId" value="CTEAM"/>코딩짱
+					<input class= "teamId" type="radio" name="teamid" value="ATEAM"/>걍놀자
+					<input class= "teamId" type="radio" name="teamid" value="HTEAM"/>지은이네
+					<input class= "teamId" type="radio" name="teamid" value="STEAM"/>왕거북이
+					<input class= "teamId" type="radio" name="teamid" value="CTEAM"/>코딩짱
 				</td>
 			</tr>
 			<tr>
-				<td class="modifyInfo" id='${user.roll}' >역할 변경(현재역할 : ${user.roll})</td>
+				<td class="modifyInfo" id='roll' ></td>
 				<td>
 					<select id="roll" name="roll">
 						<option value="Leader">팀장</option>

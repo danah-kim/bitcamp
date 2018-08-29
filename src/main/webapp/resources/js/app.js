@@ -12,9 +12,6 @@ app = {
 		$('#addMenu').click (() => {
 			location.href = app.x() + '/move/auth/member/add';
 		});
-		$('#myMenu').click (() => {
-			location.href = app.x() + '/move/member/member/retrieve';
-		});
 		$('#modifyMenu').click (()=>{
 			location.href = app.x() + '/move/member/member/modify';
 		});
@@ -40,7 +37,7 @@ app = {
 			.submit();
 		});
 		$('#searchBtn').click (() => {
-			var search = document.querySelectorAll('.searchInfo');
+			var search = $('.searchInfo');
 			$('#searchForm')
 			.attr({
 				action : app.x()+ '/member/serach'
@@ -50,7 +47,6 @@ app = {
 			.submit();
 		});
 		$('#modifyBtn').click (() => {
-			var info = document.querySelectorAll('.modifyInfo');
 			$('#newPw').val($('#newPw').val() || $('#oldPw').val());
 			$('#modifyForm')
 			.attr({
@@ -59,7 +55,7 @@ app = {
 			.submit();
 		});
 		$('#removeBtn').click (() => {
-			var info = document.querySelectorAll('.removeInfo');
+			var info = $('.removeInfo');
 			if($('#pw1').val() !== $('#pw2').val()){
 				alert('기존비밀번호와 확인 비밀번호가 일치하지 않습니다.');
 			}else if(info[0].getAttribute('id') !== $('#pw1').val()){
@@ -88,6 +84,20 @@ app = {
 	},
 	setContentView : ()=>{
 		console.log('step4'+ app.session.path('js'));
+		$('#id').text(sessionStorage.getItem('userid'));
+		$('#name').text(sessionStorage.getItem('name'));
+		$('#teamid').text('팀 변경(현재팀 : ' + sessionStorage.getItem('teamid')+' )');
+		$('#roll').text('역할 변경(현재역할 : ' + sessionStorage.getItem('roll') + ' )');
+		for(var i of $('.teamId')){
+			if(i.value === sessionStorage.getItem('teamid')){
+				i.checked = true;
+			}
+		}
+		for(var i of $('roll')){
+			if(i.value === sessionStorage.getItem('roll')){
+				i.setAttribute("selected", "selected");
+			}
+		}
 	}
 };
 app.session = {
@@ -117,12 +127,17 @@ app.i = ()=>{
 
 var user = user || {};
 user = {
-	init : x =>{
-		sessionStorage.setItem('userid', x.userid);
-		sessionStorage.setItem('name', x.name);
-		sessionStorage.setItem('age', x.age);
-		sessionStorage.setItem('gender', x.gender);
-		sessionStorage.setItem('teamId', x.teamid);
-		sessionStorage.setItem('roll', x.roll);
+		
+	session : x => {
+		if (x.userid != null) {
+			sessionStorage.setItem('userid', x.userid);
+			sessionStorage.setItem('name', x.name);
+			sessionStorage.setItem('age', x.age);
+			sessionStorage.setItem('gender', x.gender);
+			sessionStorage.setItem('teamid', x.teamid);
+			sessionStorage.setItem('roll', x.roll);
+		} else {
+			session.remove("userId");
+		}
 	}
 }

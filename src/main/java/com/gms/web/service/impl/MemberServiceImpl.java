@@ -63,6 +63,7 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public void modify(Map<?, ?> p) {
+		logger.info("MemberService modify");
 		memberDAO.update(p);
 	}
 

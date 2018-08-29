@@ -18,10 +18,13 @@
 		                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
 		                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
 		                        <li><a id="logoutMenu"><i class="fa fa-sign-out"></i></a></li>
-		                        <li><a id="myMenu"><i class="fa fa-user"></i></a>
-		                        	<ul>
-		                        		<li><a id="modifyMenu">정보수정</a></li>
-		                        		<li><a id="removeMenu">탈퇴</a></li>
+		                        <li class="dropdown">
+		                        	<a id="myMenu" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+		                        		<i class="fa fa-user"></i>
+		                        	</a>
+		                        	<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+		                        		<li role="presentation"><a id="modifyMenu" role="menuitem" tabindex="-1">정보수정</a></li>
+		                        		<li role="presentation"><a id="removeMenu" role="menuitem" tabindex="-1">탈퇴</a></li>
 		                        	</ul>
 		                        </li>
 		                    </ul>

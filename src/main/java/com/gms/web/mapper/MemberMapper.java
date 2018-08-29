@@ -53,6 +53,7 @@ public class MemberMapper implements MemberDAO{
 
 	@Override
 	public void update(Map<?, ?> p) {
+		logger.info("MemberMapper update");
 		SqlSession sqlSession = factory.openSession();
 		sqlSession.selectOne(ns + ".update", p);
 	}

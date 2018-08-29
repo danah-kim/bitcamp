@@ -37,19 +37,5 @@
 	            </div><!-- .swiper-container -->
 	        </div><!-- .col -->
 	    </div><!-- .row -->
-		
-	    <div class="container">
-	        <div class="row">
-	            <div class="offset-lg-9 col-12 col-lg-3">
-	                <a href="#">
-	                    <div class="yt-subscribe">
-	                        <img src="${context}/resources/img/yt-subscribe.png" alt="Youtube Subscribe">
-	                        <h3>Subscribe</h3>
-	                        <p>To my Youtube Channel</p>
-	                    </div><!-- .yt-subscribe -->
-	                </a>
-	            </div><!-- .col -->
-	        </div><!-- .row -->
-	    </div><!-- .container -->
 	</div><!-- .hero-section -->
 </div>

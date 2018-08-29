@@ -57,6 +57,3 @@
 	  </tr>
 	</table>
 </div>
-<script>
-	app.user.set('${user}');
-</script>

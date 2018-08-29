@@ -40,7 +40,7 @@
 	<script src="${context}/resources/js/app.js"></script>
 	<script>
 		app.init('${context}');
-		user.init({
+		user.session({
 			userid : '${user.userid}',
 			name : '${user.name}',
 			age : '${user.age}',

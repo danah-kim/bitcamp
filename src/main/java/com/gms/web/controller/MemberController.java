@@ -65,6 +65,7 @@ public class MemberController {
 		for(int i = 0; i < arr1.length; i++){
 			map.put(arr1[i],arr2[i]);
 		}
+		logger.info("확인중" + map);
 		memberService.modify(map);
 		model.addAttribute("user", memberService.retrieve(map));
 		return "redirect:/move/member/member/retrieve";
