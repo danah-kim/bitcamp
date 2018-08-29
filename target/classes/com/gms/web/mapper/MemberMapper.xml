@@ -8,7 +8,7 @@
 		(USERID, TEAMID, NAME, AGE, ROLL, PASSWORD, SSN, GENDER, SUBJECT, PHONE, EMAIL)
 		VALUES(#{userid}, #{teamid}, #{name}, #{age}, #{roll}, #{password}, #{ssn}, #{gender}, #{subject}, #{phone}, #{email});
 	</insert>
-	<select id="selectList">
+	<select id="selectList" >
 		SELECT * 
 		FROM MEMBER
 		
@@ -19,11 +19,12 @@
   		
 	</select>
 	<select id="selectOne" resultType="com.gms.web.domain.MemberDTO">
-  		SELECT * 
+  		SELECT 
+  		USERID, TEAMID, NAME, AGE, ROLL, PASSWORD, SSN, GENDER, SUBJECT, PHONE, EMAIL
   		FROM MEMBER
     	WHERE USERID LIKE #{userid}
 	</select>
-	<select id="count" resultType="com.gms.web.domain.MemberDTO">
+	<select id="count" resultType="int">
   		SELECT COUNT(*) AS count 
   		FROM #{column}
 	</select>
@@ -40,8 +41,9 @@
   		WHERE USERID LIKE #{userid}
   		AND PASSWORD LIKE #{password}
 	</delete>
-	<select id="login" resultType="boolean">
-    	SELECT * 
+	<select id="login" >
+    	SELECT
+    	USERID, TEAMID, NAME, AGE, ROLL, PASSWORD, SSN, GENDER, SUBJECT, PHONE, EMAIL
     	FROM MEMBER
     	WHERE USERID LIKE #{userid}
     	AND PASSWORD LIKE #{password}

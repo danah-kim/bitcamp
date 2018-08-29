@@ -88,15 +88,19 @@ app = {
 		$('#name').text(sessionStorage.getItem('name'));
 		$('#teamid').text('팀 변경(현재팀 : ' + sessionStorage.getItem('teamid')+' )');
 		$('#roll').text('역할 변경(현재역할 : ' + sessionStorage.getItem('roll') + ' )');
-		for(var i of $('.teamId')){
-			if(i.value === sessionStorage.getItem('teamid')){
-				i.checked = true;
+		$('.teamId').each(() => {
+			if($(this) === sessionStorage.getItem('teamid')){
+				$(this).prop("checked", true);
 			}
-		}
+		})
+		$('roll').each(() => {
+			if($(this) === sessionStorage.getItem('roll')){
+				$(this).attr("selected", "selected");
+			}
+		})
+		
 		for(var i of $('roll')){
-			if(i.value === sessionStorage.getItem('roll')){
-				i.setAttribute("selected", "selected");
-			}
+			
 		}
 	}
 };
@@ -129,7 +133,7 @@ var user = user || {};
 user = {
 		
 	session : x => {
-		if (x.userid != null) {
+		if ($('#user') != null) {
 			sessionStorage.setItem('userid', x.userid);
 			sessionStorage.setItem('name', x.name);
 			sessionStorage.setItem('age', x.age);

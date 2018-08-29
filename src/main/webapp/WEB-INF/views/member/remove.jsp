@@ -5,12 +5,12 @@
 		<table>
 			<tr>
 				<td >아이디</td>
-				<td id='id'></td>
+				<td id='id' name="userid"></td>
 			</tr>
 			<tr>
 				<td class="removeInfo" id='${password}' >비밀번호</td>
 				<td>
-					<input id="${password}" type="text" name="pw1"/>
+					<input type="text" name="pw1"/>
 				</td>
 			</tr>
 			<tr>
