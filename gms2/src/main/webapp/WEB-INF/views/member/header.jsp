@@ -50,23 +50,3 @@
 		</div><!-- .top-header-bar -->
 	</header>
 </div>
-<script>
-$('#boardWriteMenu').click (function(){
-	alert('게시글쓰기');
-	location.href = '${context}/move/member/member/register';
-});
-$('#boardListMenu').click (function(){
-	alert('게시글목록');
-	location.href = '${context}/move/member/member/listAll';
-});
-$('#modifyMenu').click (function(){
-	location.href = '${context}/move/member/member/modify';
-});
-$('#removeMenu').click (function(){
-	location.href = '${context}/move/member/member/remove';
-});
-$('#logoutMenu').click (function(){
-	location.href = '${context}/member/logout';
-	sessionStorage.clear();
-});
-</script>

@@ -33,11 +33,3 @@
 		</div><!-- .top-header-bar -->
 	</header>
 </div>
-<script >
-$('#addMenu').click(function(){
-	location.href = '${context}/move/auth/member/add';
-});
-$('#loginMenu').click(function(){
-	location.href = '${context}/move/auth/member/login';
-});
-</script>

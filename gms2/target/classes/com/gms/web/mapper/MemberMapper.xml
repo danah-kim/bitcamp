@@ -24,7 +24,7 @@
   		FROM MEMBER
     	WHERE USERID LIKE #{userid}
 	</select>
-	<select id="count" resultType="integer">
+	<select id="count" resultType="int">
   		SELECT COUNT(*) AS count
   		FROM #{column}
 	</select>
@@ -41,7 +41,7 @@
   		WHERE USERID LIKE #{userid}
   		AND PASSWORD LIKE #{password}
 	</delete>
-	<select id="login" resultType="java.lang.Integer">
+	<select id="login" resultType="int">
     	SELECT
     	COUNT(*) AS count 
     	FROM MEMBER

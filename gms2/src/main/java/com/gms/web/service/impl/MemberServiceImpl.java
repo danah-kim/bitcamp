@@ -17,7 +17,7 @@ import com.gms.web.service.MemberService;
 @Service
 public class MemberServiceImpl implements MemberService{
 	static final Logger logger = LoggerFactory.getLogger(MemberService.class);
-	@Autowired MemberMapper memberDAO;
+	@Autowired MemberMapper mapper;
 	@Override
 	public void add(MemberDTO p) {
 		logger.info("MemberService add");
@@ -34,45 +34,46 @@ public class MemberServiceImpl implements MemberService{
 		}
 		String year = new SimpleDateFormat("yyyy").format(new Date());
 		p.setAge(String.valueOf(Integer.parseInt(year) - Integer.parseInt(19 + p.getAge().substring(0, 2)) + 1));
-		memberDAO.insert(p);
+		mapper.insert(p);
 	}
 
 	@Override
 	public List<?> list(Map<?, ?> p) {
-		return memberDAO.selectList(p);
+		return mapper.selectList(p);
 	}
 
 	@Override
 	public List<?> search(Map<?, ?> p) {
-		return memberDAO.selectSome(p);
+		return mapper.selectSome(p);
 	}
 
 	@Override
 	public MemberDTO retrieve(Map<?, ?> p) {
 		logger.info("MemberService retrieve");
-		return memberDAO.selectOne(p);
+		return mapper.selectOne(p);
 	}
 
 	@Override
 	public int count(Map<?, ?> p) {
-		return memberDAO.count(p);
+		return mapper.count(p);
 	}
 
 	@Override
 	public void modify(Map<?, ?> p) {
 		logger.info("MemberService modify");
-		memberDAO.update(p);
+		mapper.update(p);
 	}
 
 	@Override
 	public void remove(Map<?, ?> p) {
-		memberDAO.delete(p);
+		mapper.delete(p);
 	}
 
 	@Override
 	public boolean login(MemberDTO p) {
 		logger.info("MemberService login");
-		return memberDAO.login(p)==1;
+		System.out.println(mapper.login(p));
+		return mapper.login(p)==1;
 	}
 	
 }

@@ -44,23 +44,11 @@
         </div><!-- .col -->
     </div><!-- .row -->
 </div><!-- .container -->
-<script>
-$('#boardWriteMenu').click(function(){
-	alert('게시글쓰기');
-	location.href = '${context}/move/member/member/register';
+<script >
+$('#addMenu').click(function(){
+	location.href = '${context}/move/auth/member/add';
 });
-$('#boardListMenu').click(function(){
-	alert('게시글목록');
-	location.href = '${context}/move/member/member/listAll';
-});
-$('#modifyMenu').click(function(){
-	location.href = '${context}/move/member/member/modify';
-});
-$('#removeMenu').click(function(){
-	location.href = '${context}/move/member/member/remove';
-});
-$('#logoutMenu').click(function(){
-	location.href = '${context}/member/logout';
-	sessionStorage.clear();
+$('#loginMenu').click(function(){
+	location.href = '${context}/move/auth/member/login';
 });
 </script>
