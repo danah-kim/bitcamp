@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div id="content">
 	<h3>개인정보 변경</h3>
-	<form id="modifyBox">
+	<form id="modifyForm">
 		<table>
 			<tr>
 				<td class="modifyInfo" id='${user.userid}' >아이디</td>
@@ -12,6 +12,12 @@
 				<td>${user.name}</td>
 			</tr>
 			<tr>
+				<td>기존 비밀번호</td>
+				<td>
+					<input type="text" id="oldPw" placeholder="****"/>
+				</td>
+			</tr>
+			<tr>
 				<td>변경 비밀번호</td>
 				<td>
 					<input type="text" name="password"/>
@@ -20,10 +26,10 @@
 			<tr>
 				<td class="modifyInfo" id='${user.teamid}' >팀 변경(현재팀 : ${user.teamid})</td>
 				<td>
-					<input class= "teamid" type="radio" name="teamid" value="ATEAM"/>걍놀자
-					<input class= "teamid" type="radio" name="teamid" value="HTEAM"/>지은이네
-					<input class= "teamid" type="radio" name="teamid" value="STEAM"/>왕거북이
-					<input class= "teamid" type="radio" name="teamid" value="CTEAM"/>코딩짱
+					<input type="radio" name="teamid" value="ATEAM"/>걍놀자
+					<input type="radio" name="teamid" value="HTEAM"/>지은이네
+					<input type="radio" name="teamid" value="STEAM"/>왕거북이
+					<input type="radio" name="teamid" value="CTEAM"/>코딩짱
 				</td>
 			</tr>
 			<tr>
@@ -47,16 +53,30 @@
   <input type="submit" value="파일업로드">
 </form>
 <script>
-	$('input[name="teamid"]').val([user.get('teamid')]);
-	$('#roll').val(user.get('roll')).prop('selected', true);
-	$('#modifyBtn').click (function () {
+	$('input[name="teamid"]').val(['${user.teamid}']);
+	$('#roll').val('${user.roll}').prop('selected', true);
+	/* $('#modifyBtn').click (function () {
 		alert('버튼클릭');
 		$('#modifyForm')
-		.append('<input type="hidden" name="userid" value="' + user.get('userid') + '"/>')
 		.attr({
 			action : '${context}' +"/member/modify",
 			method : "POST"})
 		.submit();
+	}); */
+	$('#modifyBtn').click (function () {
+		if($('#oldPw').val() === ''){
+			alert('기존 비밀번호를 입력해 주세요.');
+		}else if('${user.password}' !== $('#oldPw').val()){
+				alert('기존 비밀번호가 일치하지 않습니다.');
+		}else if($('input[name="password"]').val() === $('#oldPw').val()) {
+			alert('기존 비밀번호와 변경 비밀번호가 동일합니다.');
+		}else{
+			$('input[name="password"]').val($('input[name="password"]').val() || $('#oldPw').val());
+			$('#modifyForm')
+			.attr({
+				action : '${context}/member/modify',
+				method : 'POST'})
+			.submit();
+		}
 	});
-	
 </script>

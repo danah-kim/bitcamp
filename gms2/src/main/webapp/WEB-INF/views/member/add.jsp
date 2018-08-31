@@ -79,8 +79,8 @@
 $('#addBtn').click (function () {
 	$('#addForm')
 	.attr({
-		action : '${context}'+"/member/add", 
-		method : "POST"})
+		action : '${context}/member/add', 
+		method : 'POST'})
 	.submit();
 });
 </script>

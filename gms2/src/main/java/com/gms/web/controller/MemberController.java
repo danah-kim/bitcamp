@@ -52,31 +52,37 @@ public class MemberController {
 		model.addAttribute("count", memberService.count(map));
 		return "member:member/count.tiles";
 	}
+	
 	@RequestMapping(value="/modify", method=RequestMethod.POST)
-	public String modify(@ModelAttribute("member") MemberDTO member, Model model) {
+	public String modify(@ModelAttribute("user") MemberDTO user,
+							@ModelAttribute("member") MemberDTO member,
+							Model model) {
 		logger.info("MemberContoller modify");
 		Map<String, Object> map = new HashMap<>();
 		String[] arr1 = {"userid", "password", "teamid", "roll"};
-		String[] arr2 = {member.getUserid(), member.getPassword(), member.getTeamid(), member.getRoll()};
+		String[] arr2 = {user.getUserid(), member.getPassword(), member.getTeamid(), member.getRoll()};
 		for(int i = 0; i < arr1.length; i++){
 			map.put(arr1[i],arr2[i]);
 		}
 		logger.info("확인중" + map);
 		memberService.modify(map);
 		model.addAttribute("user", memberService.retrieve(map));
-		return "redirect:/move/member/member/modify";
+		return "redirect:/move/member/member/retrieve";
 	}
 	@RequestMapping(value="/remove", method=RequestMethod.POST)
-	public String remove(@ModelAttribute("member") MemberDTO member) {
+	public String remove(@ModelAttribute("user") MemberDTO user,
+							@ModelAttribute("member") MemberDTO member,
+							Model model) {
 		logger.info("MemberContoller remove");
 		Map<String, String> map = new HashMap<>();
-		map.put("userid", member.getUserid());
+		map.put("userid", user.getUserid());
 		map.put("password", member.getPassword());
 		memberService.remove(map);
-		return "redirect:/move/member/common/main";
+		model.addAttribute("user", member);
+		return "redirect:/move/public/common/content";
 	}
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(@ModelAttribute("member") MemberDTO member, Model model) {
+	public String login(MemberDTO member, Model model) {
 		logger.info("MemberContoller login");
 		if(memberService.login(member)) {
 			Map<String, String> map = new HashMap<>();
@@ -88,8 +94,9 @@ public class MemberController {
 		}
 	}
 	@RequestMapping(value="/logout")
-	public String logout() {
+	public String logout(Model model) {
 		logger.info("MemberContoller logout");
+		model.addAttribute("user", member);
 		return "redirect:/move/public/common/content";
 	}
 	@RequestMapping("/fileupload")

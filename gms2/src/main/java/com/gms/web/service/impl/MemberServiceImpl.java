@@ -66,13 +66,13 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public void remove(Map<?, ?> p) {
+		logger.info("MemberService remove");
 		mapper.delete(p);
 	}
 
 	@Override
 	public boolean login(MemberDTO p) {
 		logger.info("MemberService login");
-		System.out.println(mapper.login(p));
 		return mapper.login(p)==1;
 	}
 	

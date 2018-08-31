@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-12">
             <div class="site-branding flex flex-column align-items-center">
-                <h1 class="site-title"><a href="index.html" rel="home">Danah</a></h1>
+                <h1 class="site-title"><a rel="home">Danah</a></h1>
                 <p class="site-description">Personal Portfolio</p>
             </div><!-- .site-branding -->
  
@@ -62,6 +62,9 @@
     </div><!-- .row -->
 </div><!-- .container -->
 <script>
+$('.site-title').click (function(){
+	location.href = '${context}/move/member/member/retrieve';
+});
 $('#boardWriteMenu').click (function(){
 	alert('게시글쓰기');
 	location.href = '${context}/move/member/member/register';
@@ -78,6 +81,5 @@ $('#removeMenu').click (function(){
 });
 $('#logoutMenu').click (function(){
 	location.href = '${context}/member/logout';
-	sessionStorage.clear();
 });
 </script>
