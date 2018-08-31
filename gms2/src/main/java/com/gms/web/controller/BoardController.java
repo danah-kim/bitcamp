@@ -16,17 +16,16 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.gms.web.domain.ArticleDTO;
 import com.gms.web.domain.MemberDTO;
 import com.gms.web.service.BoardService;
-import com.gms.web.service.MemberService;
 
 @Controller
 @RequestMapping("/board")
-@SessionAttributes("user")
+@SessionAttributes("article")
 public class BoardController {
 	static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	@Autowired ArticleDTO article;
 	@Autowired BoardService boardService;
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String add(@ModelAttribute("board") MemberDTO member) {
+	public String add(@ModelAttribute("article") ArticleDTO article) {
 		logger.info("BoardController add");
 		return "redirect:/move/auth/member/login";
 	}
@@ -51,12 +50,12 @@ public class BoardController {
 		return ":";
 	}
 	@RequestMapping(value="/modify", method=RequestMethod.POST)
-	public String modify(@ModelAttribute("board") ArticleDTO member, Model model) {
+	public String modify(@ModelAttribute("article") ArticleDTO member, Model model) {
 		logger.info("BoardController modify");
 		return "redirect:";
 	}
 	@RequestMapping(value="/remove", method=RequestMethod.POST)
-	public String remove(@ModelAttribute("board") ArticleDTO member) {
+	public String remove(@ModelAttribute("article") ArticleDTO member) {
 		logger.info("BoardController remove");
 		return "redirect:";
 	}

@@ -1,7 +1,5 @@
 package com.gms.web.service.impl;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gms.web.common.Calc;
 import com.gms.web.domain.MemberDTO;
 import com.gms.web.mapper.MemberMapper;
 import com.gms.web.service.MemberService;
@@ -18,21 +17,13 @@ import com.gms.web.service.MemberService;
 public class MemberServiceImpl implements MemberService{
 	static final Logger logger = LoggerFactory.getLogger(MemberService.class);
 	@Autowired MemberMapper mapper;
+	@Autowired Calc calc;
 	@Override
 	public void add(MemberDTO p) {
 		logger.info("MemberService add");
 		p.setSsn(p.getAge()+"-"+p.getGender());
-		switch (p.getGender()) {
-		case "1" : case "3" : case "5" :
-			p.setGender("남자");
-			break;
-		case "2" : case "4" : case "6" :
-			p.setGender("여자");
-			break;
-		default:
-			break;
-		}
-		p.setAge(String.valueOf(Integer.parseInt(new SimpleDateFormat("yyyy").format(new Date())) - Integer.parseInt(19 + p.getAge().substring(0, 2)) + 1));
+		p.setGender(calc.gender(p.getGender()));
+		p.setAge(calc.age(p.getAge()));
 		mapper.insert(p);
 	}
 
