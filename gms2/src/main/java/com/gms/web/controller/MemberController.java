@@ -11,7 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.gms.web.domain.MemberDTO;
 import com.gms.web.service.MemberService;
@@ -24,7 +26,7 @@ public class MemberController {
 	@Autowired MemberDTO member;
 	@Autowired MemberService memberService;
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String add(@ModelAttribute("member") MemberDTO member) {
+	public String add(@ModelAttribute MemberDTO member) {
 		logger.info("MemberContoller add");
 		memberService.add(member);
 		return "redirect:/move/auth/member/login";
@@ -55,15 +57,10 @@ public class MemberController {
 	
 	@RequestMapping(value="/modify", method=RequestMethod.POST)
 	public String modify(@ModelAttribute("user") MemberDTO user,
-							@ModelAttribute("member") MemberDTO member,
+							@RequestParam Map<String, String> map,
 							Model model) {
 		logger.info("MemberContoller modify");
-		Map<String, Object> map = new HashMap<>();
-		String[] arr1 = {"userid", "password", "teamid", "roll"};
-		String[] arr2 = {user.getUserid(), member.getPassword(), member.getTeamid(), member.getRoll()};
-		for(int i = 0; i < arr1.length; i++){
-			map.put(arr1[i],arr2[i]);
-		}
+		map.put("userid", user.getUserid());
 		logger.info("확인중" + map);
 		memberService.modify(map);
 		model.addAttribute("user", memberService.retrieve(map));
@@ -71,14 +68,13 @@ public class MemberController {
 	}
 	@RequestMapping(value="/remove", method=RequestMethod.POST)
 	public String remove(@ModelAttribute("user") MemberDTO user,
-							@ModelAttribute("member") MemberDTO member,
-							Model model) {
+							SessionStatus sessionStatus) {
 		logger.info("MemberContoller remove");
 		Map<String, String> map = new HashMap<>();
 		map.put("userid", user.getUserid());
-		map.put("password", member.getPassword());
+		map.put("password", user.getPassword());
 		memberService.remove(map);
-		model.addAttribute("user", member);
+		sessionStatus.setComplete();
 		return "redirect:/move/public/common/content";
 	}
 	@RequestMapping(value="/login", method=RequestMethod.POST)

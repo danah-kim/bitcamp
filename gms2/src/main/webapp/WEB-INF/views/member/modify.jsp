@@ -4,7 +4,7 @@
 	<form id="modifyForm">
 		<table>
 			<tr>
-				<td class="modifyInfo" id='${user.userid}' >아이디</td>
+				<td>아이디</td>
 				<td>${user.userid}</td>
 			</tr>
 			<tr>
@@ -24,7 +24,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="modifyInfo" id='${user.teamid}' >팀 변경(현재팀 : ${user.teamid})</td>
+				<td>팀 변경(현재팀 : ${user.teamid})</td>
 				<td>
 					<input type="radio" name="teamid" value="ATEAM"/>걍놀자
 					<input type="radio" name="teamid" value="HTEAM"/>지은이네
@@ -33,7 +33,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="modifyInfo" id='${user.roll}' >역할 변경(현재역할 : ${user.roll})</td>
+				<td>역할 변경(현재역할 : ${user.roll})</td>
 				<td>
 					<select id="roll" name="roll">
 						<option value="Leader">팀장</option>
@@ -54,15 +54,7 @@
 </form>
 <script>
 	$('input[name="teamid"]').val(['${user.teamid}']);
-	$('#roll').val('${user.roll}').prop('selected', true);
-	/* $('#modifyBtn').click (function () {
-		alert('버튼클릭');
-		$('#modifyForm')
-		.attr({
-			action : '${context}' +"/member/modify",
-			method : "POST"})
-		.submit();
-	}); */
+	$('#roll').val(['${user.roll}']);
 	$('#modifyBtn').click (function () {
 		if($('#oldPw').val() === ''){
 			alert('기존 비밀번호를 입력해 주세요.');

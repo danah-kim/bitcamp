@@ -32,8 +32,7 @@ public class MemberServiceImpl implements MemberService{
 		default:
 			break;
 		}
-		String year = new SimpleDateFormat("yyyy").format(new Date());
-		p.setAge(String.valueOf(Integer.parseInt(year) - Integer.parseInt(19 + p.getAge().substring(0, 2)) + 1));
+		p.setAge(String.valueOf(Integer.parseInt(new SimpleDateFormat("yyyy").format(new Date())) - Integer.parseInt(19 + p.getAge().substring(0, 2)) + 1));
 		mapper.insert(p);
 	}
 
