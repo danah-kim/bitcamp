@@ -1,5 +1,6 @@
 package app.rstone.com.myappbmi;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,20 +14,16 @@ public class Bmi extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bmi);
+        final Context ctx = Bmi.this;
         final EditText name = findViewById(R.id.name);
         final EditText height = findViewById(R.id.height);
         final EditText weight = findViewById(R.id.weight);
         final TextView result = findViewById(R.id.result);
 
-        class Clac{
+        final class Calc{
             String name, result;
             double height, weight;
-
-
-            public void setName(String name) { this.name = name; }
-            public void setHeight(Double height) { this.height = height; }
-            public void setWeight(Double weight) { this.weight = weight; }
-            public void setResult() {
+            public void execute(){
                 double bmi = weight / ((height / 100) * (height / 100));
                 if (bmi >= 35.0) {
                     result = "3단계 비만";
@@ -42,21 +39,18 @@ public class Bmi extends AppCompatActivity {
                     result = "저체중";
                 }
             }
-            public String getName() { return name; }
-            public double getHeight() { return height; }
-            public double getWeight() { return weight; }
-            public String getResult() { return result; }
 
         }
 
-        final Clac bmi = new Clac();
-        
         findViewById(R.id.resultBtn).setOnClickListener((View v)->{
-            bmi.setName(name.getText().toString());
-            bmi.setHeight(Double.parseDouble(height.getText().toString()));
-            bmi.setWeight(Double.parseDouble(weight.getText().toString()));
-            bmi.setResult();
-            result.setText(result.getText()+bmi.getResult());
+            Calc bmi = new Calc();
+            double h = Double.parseDouble(height.getText().toString());
+            double w = Double.parseDouble(weight.getText().toString());
+            bmi.name = name.getText().toString();
+            bmi.height = h;
+            bmi.weight= w;
+            bmi.execute();
+            result.setText(bmi.name+"님의 BMI 결과"+bmi.result);
         });
     }
 }

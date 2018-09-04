@@ -46,5 +46,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:textSize="20dp"
+        android:text=""
         />
 </LinearLayout>
