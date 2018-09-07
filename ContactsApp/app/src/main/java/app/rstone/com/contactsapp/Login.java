@@ -21,17 +21,16 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         Context ctx = Login.this;
-        findViewById(R.id.loginBtn).setOnClickListener((View v)->{
-            ItemExist exist = new ItemExist(ctx);
-            EditText x = findViewById(R.id.inputId);
-            EditText y = findViewById(R.id.inputPw);
-            exist.id = x.getText().toString();
-            exist.pw = y.getText().toString();
+        findViewById(R.id.login_btn).setOnClickListener((View v)->{
+            ItemExist query = new ItemExist(ctx);
+            EditText x = findViewById(R.id.userid);
+            EditText y = findViewById(R.id.password);
+            query.id = x.getText().toString();
+            query.pw = y.getText().toString();
             new Main.StatusService (){
-
                 @Override
                 public void perform() {
-                    if(exist.execute()){
+                    if(query.execute()){
                         Toast.makeText(ctx, "Login 성공",Toast.LENGTH_LONG).show();
                         startActivity(new Intent(ctx, MemberList.class));
                     }else{
@@ -59,7 +58,7 @@ public class Login extends AppCompatActivity {
         public ItemExist(Context ctx) {
             super(ctx);
         }
-        public boolean execute(){
+        public boolean execute() {
             return super.getDatabase().rawQuery(String.format(
                                                     " SELECT * FROM %s " +
                                                     " WHERE %s LIKE '%s' " +

@@ -18,10 +18,8 @@ public class Main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         Context ctx = Main.this;
-        findViewById(R.id.createDBBtn).setOnClickListener((View v)->{
+        findViewById(R.id.moveLogin).setOnClickListener((View v)->{
             SQLiteHelper helper = new SQLiteHelper(ctx);
-        });
-        findViewById(R.id.loginMenuBtn).setOnClickListener((View v)->{
             startActivity(new Intent(ctx, Login.class));
         });
     }
@@ -64,12 +62,13 @@ public class Main extends AppCompatActivity {
             Log.d("실행할 쿼리 :",sql);
             db.execSQL(sql);
             Log.d("=========","insert 쿼리실행전");
+            String[] names = {"ryan", "apeach", "frodo", "neo", "tube"};
             for (int i=1; i<=5; i++){
                 db.execSQL(String.format(
                             " INSERT INTO %s (%s, %s, %s, %s, %s, %s) " +
                             " VALUES ('%s', '%s', '%s', '%s', '%s', '%s')",
                             MTAB, MNAME, MPW, MEMAIL, MPHONE, MADDR, MPHOTO,
-                            "홍길동"+i,"1","hong"+i+"@test.com","010-1234-567"+i,"신촌"+i+"길","hong"+i+".jpg"
+                            names[i-1],"1",names[i-1]+"@test.com","010-1234-567"+i,"신촌"+i+"길","profile_"+i
                 ));
             }
             Log.d("=========","insert 쿼리실행완료");
