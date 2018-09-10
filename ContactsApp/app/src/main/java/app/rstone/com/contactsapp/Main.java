@@ -24,7 +24,7 @@ public class Main extends AppCompatActivity {
         });
     }
     static class Member{int seq; String name, pw, email, phone, addr, photo;}
-    static interface CreateService{public void perform();}
+    static interface InsertService{public void perform();}
     static interface ListService{public List<?> perform();}
     static interface RetrieveService{public Object perform();}
     static interface UpdateService{public void perform();}

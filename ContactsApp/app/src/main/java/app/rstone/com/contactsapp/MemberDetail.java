@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,11 +21,10 @@ public class MemberDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.member_detail);
         Context ctx = MemberDetail.this;
-        Intent intent = this.getIntent();
-        String seq = intent.getExtras().getString("seq");
+        String seq = getIntent().getExtras().getString("seq");
         Log.d("넘어온 seq 값",seq);
         ItemRetrieve query = new ItemRetrieve(ctx);
-        query.seq = intent.getExtras().getString("seq");
+        query.seq = getIntent().getExtras().getString("seq");
         Member member = (Member) new RetrieveService(){
             @Override
             public Object perform() {
@@ -35,8 +35,10 @@ public class MemberDetail extends AppCompatActivity {
         ImageView profile = findViewById(R.id.profile);
         profile.setImageDrawable(getResources()
                                     .getDrawable(getResources()
-                                    .getIdentifier(this.getPackageName()+":drawable/"+member.photo, null, null),
-                                            ctx.getTheme()));
+                                    .getIdentifier(
+                                        getPackageName()+":drawable/" +member.photo,
+                                        null, null),
+                                        ctx.getTheme()));
         TextView name = findViewById(R.id.name);
         name.setText(member.name);
         TextView phone = findViewById(R.id.phone);
@@ -45,7 +47,34 @@ public class MemberDetail extends AppCompatActivity {
         email.setText(member.email);
         TextView addr = findViewById(R.id.addr);
         addr.setText(member.addr);
-
+        findViewById(R.id.callBtn).setOnClickListener((View v)->{});
+        findViewById(R.id.dialBtn).setOnClickListener((View v)->{});
+        findViewById(R.id.smsBtn).setOnClickListener((View v)->{});
+        findViewById(R.id.emailBtn).setOnClickListener((View v)->{});
+        findViewById(R.id.albumBtn).setOnClickListener((View v)->{});
+        findViewById(R.id.movieBtn).setOnClickListener((View v)->{});
+        findViewById(R.id.mapBtn).setOnClickListener((View v)->{});
+        findViewById(R.id.musicBtn).setOnClickListener((View v)->{});
+        findViewById(R.id.updateBtn).setOnClickListener((View v)->{
+            Intent intent = new Intent(ctx, MemberUpdate.class);
+            /*intent.putExtra("spec",
+                            member.seq+","+
+                                    member.name+","+
+                                    member.email+","+
+                                    member.phone+","+
+                                    member.addr+","+
+                                    member.photo);*/
+            intent.putExtra("seq", member.seq+"");
+            intent.putExtra("name", member.name);
+            intent.putExtra("email", member.email);
+            intent.putExtra("phone", member.phone);
+            intent.putExtra("addr", member.addr);
+            intent.putExtra("photo", member.photo);
+            startActivity(intent);
+        });
+        findViewById(R.id.listBtn).setOnClickListener((View v)->{
+            startActivity(new Intent(ctx, MemberList.class));
+        });
     }
     private class MemberRetrieveQuery extends Main.QueryFactory {
         SQLiteOpenHelper helper;
@@ -61,12 +90,12 @@ public class MemberDetail extends AppCompatActivity {
     }
     private class ItemRetrieve extends MemberRetrieveQuery {
         String seq;
+        Member member;
         public ItemRetrieve(Context ctx) {
             super(ctx);
         }
         public Member execute(){
-            Member member = null;
-            Cursor cursor = this.getDatabase()
+            Cursor cursor = getDatabase()
                     .rawQuery(String.format(
                                 " SELECT * FROM %s " +
                                 " WHERE %s LIKE '%s' ",

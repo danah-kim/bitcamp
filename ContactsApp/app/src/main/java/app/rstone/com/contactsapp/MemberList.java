@@ -1,10 +1,12 @@
 package app.rstone.com.contactsapp;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +18,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,12 +32,12 @@ public class MemberList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.member_list);
         Context ctx = MemberList.this;
-        ItemList query = new ItemList(ctx);
+        ItemList list = new ItemList(ctx);
         ListView memberList = findViewById(R.id.memberList);
         memberList.setAdapter(new MemberAdapter(ctx, (ArrayList<Member>) new ListService(){
             @Override
             public List<?> perform() {
-                return query.execute();
+                return list.execute();
             }
         }.perform()));
         memberList.setOnItemClickListener((AdapterView<?> p, View v, int i, long l)->{
@@ -42,6 +45,33 @@ public class MemberList extends AppCompatActivity {
             Member m = (Member) memberList.getItemAtPosition(i);
             intent.putExtra("seq",m.seq+"");
             startActivity(intent);
+        });
+        memberList.setOnItemLongClickListener((AdapterView<?> p, View v, int i, long l)->{
+            new AlertDialog.Builder(ctx)
+                    .setTitle("DELETE")
+                    .setMessage("정말로 삭제할까요?")
+                    .setPositiveButton(android.R.string.yes,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ItemDelete delete = new ItemDelete(ctx);
+                                    delete.member.seq = ((Member) memberList.getItemAtPosition(i)).seq;
+                                    new DeleteService(){
+                                        @Override
+                                        public void perform() { delete.execute(); }
+                                    }.perform();
+                                    Toast.makeText(ctx, "삭제완료",Toast.LENGTH_LONG).show();
+                                    startActivity(new Intent(ctx, MemberList.class));
+                                }
+                            })
+                    .setNegativeButton(android.R.string.no,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Toast.makeText(ctx, "삭제취소",Toast.LENGTH_LONG).show();
+                                }
+                            }).show();
+            return true;
         });
         /*for(Member m :list){
             Log.d("회원이름", m.name);
@@ -66,7 +96,7 @@ public class MemberList extends AppCompatActivity {
         public ArrayList<Member> execute() {
             ArrayList<Member> list = new ArrayList<>();
             Member member = null;
-            Cursor cursor = this.getDatabase()
+            Cursor cursor = getDatabase()
                     .rawQuery(String.format(
                             " SELECT * FROM %s ",
                             MTAB),null);
@@ -143,5 +173,30 @@ public class MemberList extends AppCompatActivity {
     static class ViewHolder{
         ImageView profile;
         TextView name, phone;
+    }
+    private class MemberDeleteQuery extends QueryFactory{
+        SQLiteHelper helper;
+        public MemberDeleteQuery(Context ctx) {
+            super(ctx);
+            helper = new SQLiteHelper(ctx);
+        }
+
+        @Override
+        public SQLiteDatabase getDatabase() {
+            return helper.getWritableDatabase();
+        }
+    }
+    private class ItemDelete extends MemberDeleteQuery{
+        Member member;
+        public ItemDelete(Context ctx) {
+            super(ctx);
+            member = new Member();
+        }
+        public void execute(){
+            getDatabase().execSQL(String .format(
+                                    " DELETE FROM %s "
+                                    +" WHERE %s LIKE '%s' ",
+                                    MTAB, MSEQ, member.seq));
+        }
     }
 }
