@@ -2,6 +2,8 @@ package com.spring5.web.mbr;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,12 +23,17 @@ import org.springframework.web.bind.support.SessionStatus;
 public class MemberCtrl {
 	static final Logger logger = LoggerFactory.getLogger(MemberCtrl.class);
 	@Autowired Member member;
-	@Autowired MemberService memberService;
+	@Autowired MemberMapper mapper;
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public String add(@ModelAttribute Member member) {
 		logger.info("MemberContoller add");
-		memberService.add(member);
-		return "redirect:/move/auth/member/login";
+		Predicate<String> p = s -> !s.equals("");
+		if(p.test(mapper.exist(member))) {
+			mapper.insert(member);
+			return "redirect:/move/auth/member/login";
+		}else {
+			return "";
+		}
 	}
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public String list() {
@@ -48,7 +55,7 @@ public class MemberCtrl {
 		logger.info("MemberContoller count");
 		Map<String, String> map = new HashMap<>();
 		map.put("column", "MEMBER");
-		model.addAttribute("count", memberService.count(map));
+		model.addAttribute("count", mapper.count(map));
 		return "member:member/count.tiles";
 	}
 	
@@ -59,8 +66,8 @@ public class MemberCtrl {
 		logger.info("MemberContoller modify");
 		map.put("userid", user.getUserid());
 		logger.info("확인중" + map);
-		memberService.modify(map);
-		model.addAttribute("user", memberService.retrieve(map));
+		mapper.update(map);
+		model.addAttribute("user", mapper.selectOne(map));
 		return "redirect:/move/member/member/retrieve";
 	}
 	@RequestMapping(value="/remove", method=RequestMethod.POST)
@@ -70,21 +77,26 @@ public class MemberCtrl {
 		Map<String, String> map = new HashMap<>();
 		map.put("userid", user.getUserid());
 		map.put("password", user.getPassword());
-		memberService.remove(map);
+		mapper.delete(map);
 		sessionStatus.setComplete();
 		return "redirect:/move/public/common/content";
 	}
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(Member member, Model model) {
 		logger.info("MemberContoller login");
-		if(memberService.login(member)) {
+		Function<Member, String> f = (t) -> {
+			return mapper.login(member);
+		};
+		;
+		if(f.apply(member).equals("1")) {
 			Map<String, String> map = new HashMap<>();
 			map.put("userid", member.getUserid());
-			model.addAttribute("user", memberService.retrieve(map));
+			model.addAttribute("user", mapper.selectOne(map));
 			return "member:member/retrieve.tiles";
 		}else {
 			return "redirect:/move/auth/member/login";
 		}
+
 	}
 	@RequestMapping(value="/logout")
 	public String logout(Model model) {
