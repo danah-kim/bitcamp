@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.spring5.web.cmm.Calc;
+
 @Controller
 @RequestMapping("/member")
 @SessionAttributes("user")
@@ -24,11 +26,15 @@ public class MemberCtrl {
 	static final Logger logger = LoggerFactory.getLogger(MemberCtrl.class);
 	@Autowired Member member;
 	@Autowired MemberMapper mapper;
+	@Autowired Calc calc;
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public String add(@ModelAttribute Member member) {
 		logger.info("MemberContoller add");
 		Predicate<String> p = s -> !s.equals("");
 		if(p.test(mapper.exist(member))) {
+			member.setSsn(member.getAge()+"-"+member.getGender());
+			member.setGender(calc.gender(member.getGender()));
+			member.setAge(calc.age(member.getAge()));
 			mapper.insert(member);
 			return "redirect:/move/auth/member/login";
 		}else {
@@ -84,18 +90,20 @@ public class MemberCtrl {
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(Member member, Model model) {
 		logger.info("MemberContoller login");
-		Function<Member, String> f = (t) -> {
-			return mapper.login(member);
-		};
-		;
-		if(f.apply(member).equals("1")) {
-			Map<String, String> map = new HashMap<>();
-			map.put("userid", member.getUserid());
-			model.addAttribute("user", mapper.selectOne(map));
-			return "member:member/retrieve.tiles";
-		}else {
-			return "redirect:/move/auth/member/login";
+		Predicate<String> p = s -> !s.equals("");
+		String view = "redirect:/move/auth/member/login";
+		if(p.test(mapper.exist(member))) {
+			Function<Member, String> f = (t) -> {
+				return mapper.login(member);
+			};
+			if(f.apply(member).equals("1")) {
+				Map<String, String> map = new HashMap<>();
+				map.put("userid", member.getUserid());
+				model.addAttribute("user", mapper.selectOne(map));
+				view = "member:member/retrieve.tiles";
+			}
 		}
+		return view;
 
 	}
 	@RequestMapping(value="/logout")

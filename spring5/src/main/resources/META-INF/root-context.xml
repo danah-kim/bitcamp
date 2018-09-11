@@ -46,10 +46,6 @@
         <property name="username" value="mariadb"></property>
         <property name="password" value="mariadb"></property>
     </bean>
-    <!-- <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="configLocation" value="classpath:config/mybatis-config.xml"/>
-    </bean> -->
     <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations" value="classpath:com/spring5/web/**/*Mapper.xml"></property>
