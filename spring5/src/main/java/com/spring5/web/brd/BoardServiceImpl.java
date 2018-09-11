@@ -8,11 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spring5.web.mbr.MemberService;
-
 @Service
 public class BoardServiceImpl implements BoardService{
-	static final Logger logger = LoggerFactory.getLogger(MemberService.class);
+	static final Logger logger = LoggerFactory.getLogger(BoardService.class);
 	@Autowired BoardMapper mapper;
 	@Override
 	public void add(Article p) {
