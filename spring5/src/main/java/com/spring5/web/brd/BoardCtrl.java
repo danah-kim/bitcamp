@@ -8,13 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.spring5.web.mbr.MemberCtrl;
 
 @Controller
 @RequestMapping("/board")
-@SessionAttributes("article")
 public class BoardCtrl {
 	static final Logger logger = LoggerFactory.getLogger(MemberCtrl.class);
 	@Autowired Article article;
@@ -27,17 +25,17 @@ public class BoardCtrl {
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public String list() {
 		logger.info("BoardController list");
-		return "member:member/list.tiles";
+		return "";
 	}
 	@RequestMapping(value="/search", method=RequestMethod.GET)
 	public String search() {
 		logger.info("BoardController search");
-		return "member:member/search.tiles";
+		return "";
 	}
 	@RequestMapping(value="/retrieve", method=RequestMethod.GET)
 	public String retrieve() {
 		logger.info("BoardController retrieve");
-		return ":member/retrieve.tiles";
+		return "";
 	}
 	@RequestMapping(value="/count", method=RequestMethod.GET)
 	public String count(Model model) {

@@ -29,10 +29,6 @@ app = {
 		});
 		$('#addBtn').click (() => {
 			alert('가입버튼클릭');
-			/*var form = document.getElementById('addBox');
-			form.action = app.x() +"/member/add";
-			form.method = "post";
-			form.submit();*/
 			$('#addForm')
 			.attr({
 				action : app.x()+"/member/add", 
@@ -40,6 +36,7 @@ app = {
 			.submit();
 		});
 		$('#searchBtn').click (() => {
+			alert('검색버튼클릭');
 			var search = $('.searchInfo');
 			$('#searchForm')
 			.attr({
@@ -50,7 +47,7 @@ app = {
 			.submit();
 		});
 		$('#modifyBtn').click (() => {
-			alert('버튼클릭');
+			alert('수정버튼클릭');
 			$('#modifyForm')
 			.append('<input type="hidden" name="userid" value="' + user.get('userid') + '"/>')
 			.attr({
@@ -59,6 +56,7 @@ app = {
 			.submit();
 		});
 		$('#removeBtn').click (() => {
+			alert('삭제버튼클릭');
 			$('removeForm')
 			.append('<input type="hidden" name="userid" value="' + user.get('userid') + '"/>')
 			.attr({
@@ -79,30 +77,6 @@ app = {
 	setContentView : ()=>{
 		console.log('step4'+ app.session.path('js'));
 	}
-};
-app.session = {
-	context : x => {
-		console.log('step2 : ' + x);
-		sessionStorage.setItem('context', x);
-		sessionStorage.setItem('js', '/resources/js');
-		sessionStorage.setItem('css', '/resources/css');
-		sessionStorage.setItem('img', '/resources/img');
-	},
-	path : x => {
-		return sessionStorage.getItem(x);
-	}
-};
-app.x = ()=>{
-	return app.session.path('context');
-};
-app.j = ()=>{
-	return app.session.path('js');
-};
-app.c = ()=>{
-	return app.session.path('css');
-};
-app.i = ()=>{
-	return app.session.path('img');
 };
 
 user = {

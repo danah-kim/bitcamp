@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -31,27 +30,16 @@
 </head>
 <body>
 	<div id="wrapper">
-		<div id="header">
-				<tiles:insertAttribute name="header"/>
-				<tiles:insertAttribute name="nav"/>
-		</div>
-		<div id="content">
-			<tiles:insertAttribute name="fluid"/>
-			<tiles:insertAttribute name="content"/>
-		</div>
-		<div id="footer">
-			<footer class="sit-footer">
-				<tiles:insertAttribute name="footerImg"/>
-				<tiles:insertAttribute name="footerBar"/>
-			</footer>
-		</div>
+		안녕
 	</div>
 	<script type='text/javascript' src='${context}/resources/js/swiper.min.js'></script>
 	<script type='text/javascript' src='${context}/resources/js/custom.js'></script>
 	<%-- <script src="${context}/resources/js/app.js"></script> --%>
+	<script src="${context}/resources/js/algo.js"></script>
 	<script>
-		/* app.init('${context}');
-		alert('DB체크'+'${user}');
+		//app.init('${context}');
+		algo.init('${context}');
+		/* alert('DB체크'+'${user}');
 		if('${user}'!=''){
 			user.session({
 				userid : '${user.userid}',
