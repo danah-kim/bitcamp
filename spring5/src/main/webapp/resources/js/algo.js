@@ -29,50 +29,20 @@ algo.main = {
 		);
 		let $tl = $('#tl');
 		let $tr = $('#tr');
-		$('<ul/>')
-		.attr({id : 'sideMenu'})
-		.addClass('listGroup')
-		.appendTo($tl);
-		$('<li/>')
-		.attr({id : 'arith'})
-		.addClass('listGroupItem')
-		.appendTo($('#sideMenu'));
-		$('<a/>')
-		.attr({href : '#'})
-		.html('등차수열의 합')
-		.appendTo($('#arith'))
+		$('<ul/>').attr({id : 'sideMenu'}).addClass('listGroup').appendTo($tl);
+		$('<li/>').attr({id : 'arith'}).addClass('listGroupItem').appendTo($('#sideMenu'));
+		$('<a/>').html('등차수열의 합').appendTo($('#arith'))
 		.click(e=>{
 			$('#tr').empty();
-			$('<div/>')
-			.attr({id : 'quest'})
-			.appendTo($tr);
-			$('<h4>')
-			.html('등차수열에 대하여 시작값 x로부터 y번째항까지의 합을 구하시오')
-			.appendTo($('#quest'));
-			$('<label/>')
-			.html('시작값')
-			.appendTo($('#quest'));
-			$('<input/>')
-			.attr({id : 'start', type : 'text'})
-			.appendTo($('#quest'));
-			$('<br/>')
-			.appendTo($('#quest'));
-			$('<label/>')
-			.html('항값')
-			.appendTo($('#quest'));
-			$('<input/>')
-			.attr({id : 'end', type : 'text'})
-			.appendTo($('#quest'));
-			$('<br/>')
-			.appendTo($('#quest'));
-			$('<label/>')
-			.html('공차')
-			.appendTo($('#quest'));
-			$('<input/>')
-			.attr({id : 'diff', type : 'text'})
-			.appendTo($('#quest'));
-			$('<br/>')
-			.appendTo($('#quest'));
+			$('<div/>').attr({id : 'quest'}).appendTo($tr);
+			$('<h4>').html('등차수열에 대하여 시작값 x로부터 y번째항까지의 합을 구하시오').appendTo($('#quest'));
+			let arr = [{t1 : '시작값', t2 : 'start'}, {t1 : '종료값', t2 : 'end'}, {t1 : '공차', t2 : 'diff'}]; 
+			$(arr)
+			.each( function() {
+				$('<label/>').html(this.t1).appendTo($('#quest'));
+				$('<input/>').attr({id: this.t2, type: 'text', placeholder: '숫자를 입력하세요'}).appendTo($('#quest'));
+				$('<br/>').appendTo($('#quest'));			 
+			  });
 			$('<button/>')
 			.addClass('btn btn-primary')
 			.attr({type : 'button'})
@@ -92,49 +62,27 @@ algo.main = {
 						sum += s + (i-1) * d;
 						i++;
 					}
-					$('#tr').text(a+sum);
+					$('#res').text(a+sum);
 				}
 			});
+			$('<h6/>').attr({id:'res'}).appendTo($('#quest'));
 		});
+		$('<li/>').attr({id : 'fibonacci'}).addClass('listGroupItem').appendTo($('#sideMenu'));
+		$('<a/>').html('피보나치수열').appendTo($('#fibonacci')).click(e=>{algo.series.fibonacci(e);});
+		$('<li/>').attr({id : 'swit'}).addClass('listGroupItem').appendTo($('#sideMenu'));
+		$('<a/>').html('스위치수열').appendTo($('#swit')).click(e=>{algo.series.swit(e);});
+		$('<li/>').attr({id : 'factorial'}).addClass('listGroupItem').appendTo($('#sideMenu'));
+		$('<a/>').html('팩토리얼수열').appendTo($('#factorial')).click(e=>{algo.series.factorial(e);});
 	}
 };
 algo.series = {
-	arith : x => {
-		let q = '<h3>등차수열에 대하여 시작값 x로부터 y번째항까지의 합을 구하시오</h3>'
-				+ '<label for="시작값">시작값</label><input id="start" type="text"><br>'
-				+ '<label for="항값">항값</label><input id="end" type="text"><br>'
-				+ '<label for="공차">공차</label><input id="diff" type="text"><br>'
-				+ '<button id="btn">결과보기</button>'
-		
-		$('#tr').empty();
-		$('#tr').append(q);
-		$('#btn').click(e=>{
-			alert($('#start').val()*1);
-			if($.fn.zeroChk([+$('#start').val(), +$('#end').val(), +$('#diff').val()])) {
-				alert('빈칸을채우세요');
-			}else {
-				let a = '답 : ';
-				let s = +$('#start').val();
-				let en = +$('#end').val();
-				let d = +$('#diff').val();
-				let i = s;
-				let sum = 0;
-				while(i<=en){
-					sum += s + (i-1) * d;
-					i++;
-				}
-				$('#tr').text(a+sum);
-			}
-		});
-	},
 	fibonacci : x => {
 		let q = '<h3>피보나치수열에 대하여 시작값 x로부터, y번째항까지의 합을 구하시오</h3>'
 				+ '<label for="시작값">시작값</label><input id="start" type="text"><br>'
 				+ '<label for="항">항값</label><input id="diff" type="text"><br>'
-				+ '<button id="btn">결과보기</button>'
+				+ '<button id="btn">결과보기</button>';
 		$('#tr').empty();
 		$('#tr').append(q);
-		$('#tr').append('<button type="button" id="btn" >실행</button>');
 		$('#btn').click(e=>{
 			if($.fn.zeroChk([$('#start').val()*1, $('#end').val()*1, $('#diff').val()*1])) {
 				alert('빈칸을채우세요');
@@ -161,10 +109,9 @@ algo.series = {
 		let q = '<h3>시작값 x, 마지막값 y인 값인 교행 자연수 수열의 합을 구하시오</h3>'
 				+ '<label for="시작값">시작값</label><input id="start" type="text"><br>'
 				+ '<label for="마지막값">마지막값</label><input id="end" type="text"><br>'
-				+ '<button id="btn>결과보기</button>'
+				+ '<button id="btn">결과보기</button>';
 		$('#tr').empty();
 		$('#tr').append(q);
-		$('#tr').append('<button type="button" id="btn" >실행</button>');
 		$('#btn').click(e=>{
 			let a = '답 : ';
 			let n = +$('#start').val();
@@ -184,10 +131,9 @@ algo.series = {
 		let q = '<h3>시작값 x, 마지막값 y인 누승의 합을 구하시오</h3>'
 				+ '<label for="시작값">시작값</label><input id="start" type="text"><br>'
 				+ '<label for="마지막값">마지막값</label><input id="end" type="text"><br>'
-				+ '<button id="btn">결과보기</button>'
+				+ '<button id="btn">결과보기</button>';
 		$('#tr').empty();
 		$('#tr').append(q);
-		$('#tr').append('<button type="button" id="btn" >실행</button>');
 		$('#btn').click(e=>{
 			let a = '답 : ';
 			let n = +$('#start').val();;
@@ -210,7 +156,6 @@ algo.array = {
 			+ '<button id="btn">결과보기</button>'
 	$('#tr').empty();
 	$('#tr').append(q);
-	$('#tr').append('<button type="button" id="btn" >실행</button>');
 	$('#btn').click(e=>{
 		let a = '답 : ';
 		let n = +$('#start').val();;
