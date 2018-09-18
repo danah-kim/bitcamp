@@ -86,12 +86,31 @@ algo.main = (()=>{
 			$('#tl').empty();
 			$('#tr').empty();
 			$.getScript(compo, ()=>{
-				ui.ul({len : '3', id: 'menu'}).appendTo($tl);
+				ui.ul({len : 3, id: 'menu'}).appendTo($tl);
 				ui.anchor({txt:'화폐문제'}).appendTo($('#menu-0'))
 				.click(x=>{
-				$('<h6>화폐문제</h6>').appendTo($tr);
-				ui.input({id: 'money', type: 'text', val : '입금액'})
-				.appendTo($tr);
+					$('<h6>화폐문제</h6>').appendTo($tr);
+					ui.input({id: 'money', type: 'text', txt : '입금액', holder : '입금액'})
+					.appendTo($tr);
+					ui.button({clazz: 'primary', txt: '전송'})
+					.appendTo($tr)
+					.click(e=>{
+						alert('화폐금액 : '+$('#money').val());
+						$.ajax({
+							url : ctx + '/algo/money/',
+							method : 'POST',
+							contentType : 'application/json',
+							data : JSON.stringify({money : $('#money').val()}),
+							success : d => {
+								alert('성공'+d.test);
+							},
+							error : (m1, m2, m3)=>{
+								alert('에러발생1'+m1);
+								alert('에러발생2'+m2);
+								alert('에러발생3'+m3);
+							}
+						});
+					});
 				});
 			});
 		});

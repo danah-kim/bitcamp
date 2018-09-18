@@ -30,15 +30,12 @@
 </head>
 <body>
 	<div id="wrapper">
-		안녕
 	</div>
 	<script type='text/javascript' src='${context}/resources/js/swiper.min.js'></script>
 	<script type='text/javascript' src='${context}/resources/js/custom.js'></script>
-	<%-- <script src="${context}/resources/js/app.js"></script> --%>
-	<script src="${context}/resources/js/algo.js"></script>
+	<script src="${context}/resources/js/app.js"></script>
 	<script>
-		//app.init('${context}');
-		algo.init('${context}');
+		app.init('${context}');
 		/* alert('DB체크'+'${user}');
 		if('${user}'!=''){
 			user.session({
