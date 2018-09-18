@@ -7,6 +7,7 @@ $.prototype.nullChk = x =>{
 	}
 	return flag;		
 }
+
 $.prototype.zeroChk = x =>{
 	let flag = false;
 	let i = 0;

@@ -11,13 +11,18 @@ algo = {
 		$('#wrapper').empty();
 	}
 };
-algo.main = {
-	onCreate:() => {
-		algo.main.setContextView();
-	},
-	setContextView : () => {
-		$('#wrapper')
-		.html('<h1>알고리즘</h1><div id="ctn"></div>'
+algo.main = (()=>{
+	let $wrapper, ctx, img, script, style, compo, json, $tl, $tr;
+	let onCreate = () => {
+		ctx = $.ctx();
+		img = $.img();
+		script = $.script();
+		style = $.style();
+		compo = script + '/compo.js'
+		setContextView();
+	};
+	let setContextView = () => {
+		$('#wrapper').html('<h1>알고리즘</h1><div id="ctn"></div><span id="seq">수열</span><span id="appl">응용</span>'
 			+ '<table id="tbl" style="width:800px; height: 300px;'		
 			+ 'border-collapse: collapse; border: 1px solid black; margin: 0 auto">'
 			+ '<tr style="border: 1px solid black;">'
@@ -27,54 +32,75 @@ algo.main = {
 			+ '</table>'
 			+'</div>'
 		);
-		let $tl = $('#tl');
-		let $tr = $('#tr');
-		$('<ul/>').attr({id : 'sideMenu'}).addClass('listGroup').appendTo($tl);
-		$('<li/>').attr({id : 'arith'}).addClass('listGroupItem').appendTo($('#sideMenu'));
-		$('<a/>').html('등차수열의 합').appendTo($('#arith'))
-		.click(e=>{
+		$tl = $('#tl');
+		$tr = $('#tr');
+		$('#seq').click( x => {
+			$('#tl').empty();
 			$('#tr').empty();
-			$('<div/>').attr({id : 'quest'}).appendTo($tr);
-			$('<h4>').html('등차수열에 대하여 시작값 x로부터 y번째항까지의 합을 구하시오').appendTo($('#quest'));
-			let arr = [{t1 : '시작값', t2 : 'start'}, {t1 : '종료값', t2 : 'end'}, {t1 : '공차', t2 : 'diff'}]; 
-			$(arr)
-			.each( function() {
-				$('<label/>').html(this.t1).appendTo($('#quest'));
-				$('<input/>').attr({id: this.t2, type: 'text', placeholder: '숫자를 입력하세요'}).appendTo($('#quest'));
-				$('<br/>').appendTo($('#quest'));			 
-			  });
-			$('<button/>')
-			.addClass('btn btn-primary')
-			.attr({type : 'button'})
-			.text('결과보기')
-			.appendTo($('#quest'))
+			$('<ul/>').attr({id : 'sideMenu'}).addClass('listGroup').appendTo($tl);
+			$('<li/>').attr({id : 'arith'}).addClass('listGroupItem').appendTo($('#sideMenu'));
+			$('<a/>').attr({href: '#'}).html('등차수열의합')
+			.appendTo($('#arith'))
 			.click(e=>{
-				if($.fn.zeroChk([+$('#start').val(), +$('#end').val(), +$('#diff').val()])) {
-					alert('빈칸을채우세요');
-				}else {
-					let a = '답 : ';
-					let s = +$('#start').val();
-					let en = +$('#end').val();
-					let d = +$('#diff').val();
-					let i = s;
-					let sum = 0;
-					while(i<=en){
-						sum += s + (i-1) * d;
-						i++;
+				$('#tr').empty();
+				$('<div/>').attr({id : 'quest'}).appendTo($tr);
+				$('<h4>').html('등차수열에 대하여 시작값 x로부터 y번째항까지의 합을 구하시오').appendTo($('#quest'));
+				$([{t1 : '시작값', t2 : 'start'}, {t1 : '종료값', t2 : 'end'}, {t1 : '공차', t2 : 'diff'}])
+				.each(function() {
+					$('<label/>').html(this.t1).appendTo($('#quest'));
+					$('<input/>').attr({id: this.t2, type: 'text', placeholder: '숫자를 입력하세요'}).appendTo($('#quest'));
+					$('<br/>').appendTo($('#quest'));			 
+				  });
+				$('<button/>')
+				.addClass('btn btn-primary')
+				.attr({type : 'button'})
+				.text('결과보기')
+				.appendTo($('#quest'))
+				.click(e=>{
+					if($.fn.zeroChk([+$('#start').val(), +$('#end').val(), +$('#diff').val()])) {
+						alert('빈칸을채우세요');
+					}else {
+						let a = '답 : ';
+						let s = +$('#start').val();
+						let en = +$('#end').val();
+						let d = +$('#diff').val();
+						let i = s;
+						let sum = 0;
+						while(i<=en){
+							sum += s + (i-1) * d;
+							i++;
+						}
+						$('#res').text(a+sum);
 					}
-					$('#res').text(a+sum);
-				}
+				});
+				$('<h6/>').attr({id:'res'}).appendTo($('#quest'));
 			});
-			$('<h6/>').attr({id:'res'}).appendTo($('#quest'));
+			$('<li/>').attr({id : 'fibonacci'}).addClass('listGroupItem').appendTo($('#sideMenu'));
+			$('<a/>').html('피보나치수열').appendTo($('#fibonacci')).click(e=>{algo.series.fibonacci(e);});
+			$('<li/>').attr({id : 'swit'}).addClass('listGroupItem').appendTo($('#sideMenu'));
+			$('<a/>').html('스위치수열').appendTo($('#swit')).click(e=>{algo.series.swit(e);});
+			$('<li/>').attr({id : 'factorial'}).addClass('listGroupItem').appendTo($('#sideMenu'));
+			$('<a/>').html('팩토리얼수열').appendTo($('#factorial')).click(e=>{algo.series.factorial(e);});
 		});
-		$('<li/>').attr({id : 'fibonacci'}).addClass('listGroupItem').appendTo($('#sideMenu'));
-		$('<a/>').html('피보나치수열').appendTo($('#fibonacci')).click(e=>{algo.series.fibonacci(e);});
-		$('<li/>').attr({id : 'swit'}).addClass('listGroupItem').appendTo($('#sideMenu'));
-		$('<a/>').html('스위치수열').appendTo($('#swit')).click(e=>{algo.series.swit(e);});
-		$('<li/>').attr({id : 'factorial'}).addClass('listGroupItem').appendTo($('#sideMenu'));
-		$('<a/>').html('팩토리얼수열').appendTo($('#factorial')).click(e=>{algo.series.factorial(e);});
-	}
-};
+		$('#appl').click( x => {
+			$('#tl').empty();
+			$('#tr').empty();
+			$.getScript(compo, ()=>{
+				ui.ul({len : '3', id: 'menu'}).appendTo($tl);
+				ui.anchor({txt:'화폐문제'}).appendTo($('#menu-0'))
+				.click(x=>{
+				$('<h6>화폐문제</h6>').appendTo($tr);
+				ui.input({id: 'money', type: 'text', val : '입금액'})
+				.appendTo($tr);
+				});
+			});
+		});
+	};
+	return{
+		onCreate : onCreate,
+		setContextView : setContextView
+	};
+})();
 algo.series = {
 	fibonacci : x => {
 		let q = '<h3>피보나치수열에 대하여 시작값 x로부터, y번째항까지의 합을 구하시오</h3>'
@@ -192,7 +218,7 @@ algo.router = {
 		$.getScript(x + '/resources/js/router.js',
 			() => {
 					$.extend(new Session(x));
-					$.getScript(x + '/resources/js/util.js')
+					$.getScript($.ctx() + '/resources/js/util.js')
 						.done(x=>{console.log('실행');})
 						.fail(x=>{console.log('실패');})
 					;
