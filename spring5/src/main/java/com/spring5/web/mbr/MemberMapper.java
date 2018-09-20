@@ -7,13 +7,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MemberMapper {
-	public void insert(Member p);
-	public List<?> selectList(Map<?, ?> p);
-	public List<?> selectSome(Map<?, ?> p);
-	public Member selectOne(Member p);
-	public int count(Map<?, ?> p);
-	public void update(Map<?, ?> p);
-	public void delete(Map<?, ?> p);
-	public String login(Member p);
-	public String exist(Member p);
+	public void post(Member p);
+	public List<?> list(Map<?, ?> p);
+	public Member get(Member p);
+	public Integer count(Member p);
+	public void put(Member p);
+	public void delete(Member p);
 }

@@ -83,7 +83,6 @@ var user = user || {};
 //})();
 app = (()=>{
 	var init =x=>{
-		console.log('step1'+x);
 		app.router.init(x);
 		onCreate();
 	};
@@ -94,6 +93,7 @@ app = (()=>{
 	};
 	return{init: init};
 })();
+
 app.main = (()=>{
 	var ctx, script, style, img, w, header, nav, fluid, content, footerImg, footerBar, login;
 	var init =()=>{
@@ -115,38 +115,11 @@ app.main = (()=>{
 		setContentView();
 	};
 	var setContentView =()=>{
-		$.when(
-	            $.getScript(header),
-	            $.getScript(nav),
-	            $.getScript(fluid),
-	            $.getScript(content),
-	            $.getScript(footerImg),
-	            $.getScript(footerBar),
-	            $.Deferred(x=>{
-	                $(x.resolve);
-	            })
-	    ).done(x=>{
-	    	w.html(
-	    			headerUi()
-	    			+ navUi()
-			    	+ fluidUi(ctx)
-			    	+ contentUi(ctx)
-			    	+ footerImgUi(ctx)
-//			    	+ footerBarUi()
-			    	);
-	    	$('#loginMenu').click(x=>{
-	    		x.preventDefault();
-	    		alert(login);
-	    		app.permission.login({login:login, ctx:ctx});
-	    	});
-	    	$('#blogMenu').click(()=>{
-				app.board.init();
-			});
-	    }).fail(x=>{
-	    });
+		app.router.home();
 	};
 	return{init: init};
 })();
+
 app.board = (()=>{
 	var ctx, script, style, img, w, header, nav, fluid, content, footerImg, footerBar;
 	var init = ()=>{
@@ -162,35 +135,80 @@ app.board = (()=>{
 	};
 	return{init:init, onCreate:onCreate, setContentView:setContentView};
 })();
+
 app.permission = (()=>{
 	var login =x=>{
 		alert('log');
 		$('#nav1').remove();
 		$('#fluid1').remove();
-		$('#content1').empty();
-		$.getScript(x.login,()=>{$('#content1').html(loginUi(x.ctx))});
+		$.getScript('',()=>{});
+		$.getScript($.script() + '/login.js',()=>{
+			$('#content1').html(loginUi($.ctx()));
+			$('#loginBtn').click (x => {
+				x.preventDefault();
+				let y = app.service.nullChk([$('#id').val(), $('#pw').val()]);
+				if(y.checker){
+					$.ajax({
+						url : $.ctx() + '/mbr/login',
+						method : 'POST',
+						contentType : 'application/json',
+						data : JSON.stringify({userid : $('#id').val(), password : $('#pw').val()}),
+						success : x => {
+							if(typeof x.msg !== "undefined") {
+								alert(x.msg)
+								}else{
+									user.session({
+										userid : x.userid,
+										name : x.name,
+										age : x.age,
+										gender : x.gender,
+										teamid : x.teamid,
+										roll : x.roll
+									});
+									
+									$('#menu1').html('<a id="myMenu" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">'
+														+ '<i class="fa fa-list-alt"></i>'
+														+ '</a>'
+														+ '<ul class="dropdown-menu" role="menu">'
+														+ '<li role="presentation"><a id="boardWriteMenu" role="menuitem" tabindex="-1">게시글쓰기</a></li>'
+														+ '<li role="presentation"><a id="boardListMenu" role="menuitem" tabindex="-1">게시글목록</a></li>'
+														+ '</ul>'
+														+ '</li>'
+														+ '<li class="dropdown">'
+														+ '<a id="myMenu" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">'
+														+ '<i class="fa fa-user"></i>'
+														+ '</a>'
+														+ '<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">'
+														+ '<li role="presentation"><a id="modifyMenu" role="menuitem" tabindex="-1">정보수정</a></li>'
+														+ '<li role="presentation"><a id="removeMenu" role="menuitem" tabindex="-1">탈퇴</a></li>'
+														+ '</ul>');
+									$('#menu2').html('<a id="logoutMenu"><i class="fa fa-sign-out"></i></a>');
+									$.getScript($.script() + '/nav2.js', ()=>{
+										$('#wrapper').after(navUi());
+									});
+									$.getScript($.script() + '/fluid.js', ()=>{
+										$('#nav1').append(fluidUi($.ctx()));
+									});
+									$('#content1').html(contentUi($.ctx()));
+								}
+							//$('#menuBar').children('#loginMenu').html('<a id="logoutMenu"><i class="fa fa-sign-out"></i></a>');
+							//$('#menu1').html('<a id="logoutMenu"><i class="fa fa-sign-out"></i></a>');
+						},
+						error : (m1, m2, m3)=>{
+							alert('에러발생1'+m1);
+							alert('에러발생2'+m2);
+							alert('에러발생3'+m3);
+						}
+					});
+				}else{
+					alert(y.msg);
+				}
+				
+			});
+		});
 	};
 	return{login: login};
 })();
-user = {
-	session : x => {
-		$.each(x, (k, v)=>{
-			sessionStorage.setItem(k, v);
-		});
-	},
-	get : x =>{
-		return sessionStorage.getItem(x);
-	},
-	onCreate : () => {
-		alert('세션확인'+user.get('userid'));
-		$('#userid').text(user.get('userid'));
-		$('#name').text(user.get('name'));
-		$('#infoTeamid').append(user.get('teamid'));
-		$('#infoRoll').append(user.get('roll'));
-		$('input[name="teamid"]').val([user.get('teamid')]);
-		$('#roll').val(user.get('roll')).prop('selected', true);
-	}
-}
 
 app.router = {
 	init : x => {
@@ -199,10 +217,109 @@ app.router = {
 					$.extend(new Session(x));
 					$.getScript($.script() + '/util.js')
 						.done(x=>{console.log('실행');})
-						.fail(x=>{console.log('실패');})
-					;
+						.fail(x=>{console.log('실패');});
 					app.main.init();
 				}
 		);
+	},
+	home : x => {
+		$.when(
+	            $.getScript($.script() + '/header.js'),
+	            $.getScript($.script() + '/nav.js'),
+	            $.getScript($.script() + '/fluid.js'),
+	            $.getScript($.script() + '/content.js'),
+	            $.getScript($.script() + '/footerImg.js'),
+	            $.getScript($.script() + '/footerBar.js'),
+	            $.Deferred(x=>{
+	                $(x.resolve);
+	            })
+	    ).done(x=>{
+	    	$('#wrapper').html(
+	    			headerUi()
+	    			+ navUi()
+			    	+ fluidUi($.ctx())
+			    	+ contentUi($.ctx())
+			    	+ footerImgUi($.ctx())
+			    	+ footerBarUi()
+			    	);
+	    	$('#loginMenu').click(x=>{
+	    		x.preventDefault();
+	    		app.permission.login();
+	    	});
+	    	$('#addMenu').click (x=>{
+	    		x.preventDefault();
+	    		$.getScript($.script() + '/add.js', ()=>{
+	    			$('#nav1').remove();
+		    		$('#fluid1').remove();
+		    		$('#content1').empty();
+	    			$('#content1').html(addUi($.ctx()))
+	    			$('#addBtn').click (x => {
+	    				let y = app.service.nullChk([$('#id').val(), $('#pw').val()]);
+	    				if(y.checker){
+		    				$.ajax({
+		    					url : $.ctx() + '/mbr/add',
+		    					method : 'POST',
+		    					contentType : 'application/json',
+		    					data : JSON.stringify({
+		    									userid : $('#userid').val(),
+		    									teamid : $('input[name="teamid"]:checked').val(),
+		    									name : $('#name').val(),
+		    									age : $('#age').val(),
+		    									roll : $('#roll').val(),
+		    									password : $('#password').val(),
+		    									gender : $('#gender').val()
+		    									}),
+		    					success : x =>{
+		    						alert("성공");
+		    					},
+		    					error : (m1, m2, m3)=>{
+		    						alert('에러발생1'+m1);
+		    						alert('에러발생2'+m2);
+		    						alert('에러발생3'+m3);
+		    					}
+		    				});
+	    				}else{
+	    					alert(y.msg);
+	    				}
+	    			});
+	    		});
+	    	});
+	    	$('#blogMenu').click(()=>{
+				app.board.init();
+			});
+	    })
+	    .fail(x=>{
+	    });
+	}
+};
+
+user = {
+		session : x => {
+			$.each(x, (k, v)=>{
+				sessionStorage.setItem(k, v);
+			});
+		},
+		get : x =>{
+			return sessionStorage.getItem(x);
+		},
+		onCreate : () => {
+			alert('세션확인'+user.get('userid'));
+			$('#userid').text(user.get('userid'));
+			$('#name').text(user.get('name'));
+			$('#infoTeamid').append(user.get('teamid'));
+			$('#infoRoll').append(user.get('roll'));
+			$('input[name="teamid"]').val([user.get('teamid')]);
+			$('#roll').val(user.get('roll')).prop('selected', true);
+		}
+	};
+
+app.service = {
+	nullChk : x =>{
+		let rs = {
+			checker : true,
+			msg : '필수입력값이 입력되지 않았습니다.'
+		};
+		$(x).each(function(){ if(this === '') rs.checker = false; });
+		return rs;
 	}
 };

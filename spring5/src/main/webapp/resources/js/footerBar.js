@@ -6,7 +6,7 @@ function footerBarUi(){
 		+ '            <div class="col-12 col-md-6">'
 		+ '                <div class="footer-section">'
 		+ '                	<h2>Wanna Start Work With Me? <a href="sweetmilky.dev@gmail.com" target="_blank"> sweetmilky@gmail.com</a></h2>'
-		+ '                    <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="#" target="_blank">Danah</a></p>'
+		+ '                    <p>Copyright &copy; 2018 All rights reserved <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="#" target="_blank">Danah</a></p>'
 		+ '                </div><!-- .footer-section -->'
 		+ '            </div><!-- .col-xl-4 -->'
 		+ ''

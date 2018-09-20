@@ -7,57 +7,62 @@ import java.util.function.Predicate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring5.web.cmm.Calc;
 import com.spring5.web.cmm.Util;
+import com.spring5.web.cmm.Util2;
 
 @RestController
-@RequestMapping("/member")
+@RequestMapping("/mbr")
 public class MemberCtrl {
 	@Autowired Member member;
 	@Autowired MemberMapper mapper;
-	@Autowired Calc calc;
-	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String add(@ModelAttribute Member member) {
+	@Autowired Util2 util2;
+	
+	@PostMapping("/add")
+	public @ResponseBody void add(@RequestBody Member param) {
 		Util.log.accept("MemberContoller add");
-		if(Util.chkNull.negate().test(mapper.exist(member))) {
-			member.setSsn(member.getAge()+"-"+member.getGender());
-			member.setGender(calc.gender(member.getGender()));
-			member.setAge(calc.age(member.getAge()));
-			mapper.insert(member);
-			return "redirect:/move/auth/member/login";
+		if(mapper.count(param)==0) {
+			param.setSsn(param.getAge()+"-"+param.getGender());
+			param.setGender(util2.gender.apply(param));
+			param.setAge(util2.age.apply(param));
+			Util.log.accept(param.ssn);
+			Util.log.accept(param.gender);
+			Util.log.accept(param.age);
+			mapper.post(param);
 		}else {
-			return "";
 		}
 	}
-	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public String list() {
+	@GetMapping("/list")
+	public Map<String, Object> list(@RequestBody Map param) {
 		Util.log.accept("MemberContoller list");
-		return "";
+		return param;
 	}
-	@RequestMapping(value="/search", method=RequestMethod.GET)
-	public String search() {
+	@GetMapping("/search")
+	public Map<String, Object> search(@RequestBody Map param) {
 		Util.log.accept("MemberContoller search");
-		return "";
+		return param;
 	}
-	@RequestMapping(value="/retrieve", method=RequestMethod.GET)
-	public String retrieve() {
+	@GetMapping("/retrieve")
+	public Map<String, Object> retrieve(@RequestBody Member param) {
 		Util.log.accept("MemberContoller retrieve");
-		return "";
+		Map<String, Object> map = new HashMap<>();
+		return map;
 	}
-	@RequestMapping(value="/count", method=RequestMethod.GET)
-	public String count(Model model) {
+	@GetMapping("/count")
+	public Map<String, Object> count(@RequestBody Member param) {
 		Util.log.accept("MemberContoller count");
-		Map<String, String> map = new HashMap<>();
-		map.put("column", "MEMBER");
-		model.addAttribute("count", mapper.count(map));
-		return "";
+		Map<String, Object> map = new HashMap<>();
+		map.put("count", mapper.count(param)+"");
+		return map;
 	}
 	
 	@RequestMapping(value="/modify", method=RequestMethod.POST)
@@ -67,8 +72,8 @@ public class MemberCtrl {
 		Util.log.accept("MemberContoller modify");
 		map.put("userid", user.getUserid());
 		Util.log.accept("확인중" + map);
-		mapper.update(map);
-		model.addAttribute("user", mapper.selectOne(user));
+		//mapper.put(map);
+		//model.addAttribute("user", mapper.selectOne(user));
 		return "redirect:/move/member/member/retrieve";
 	}
 	@RequestMapping(value="/remove", method=RequestMethod.POST)
@@ -77,33 +82,27 @@ public class MemberCtrl {
 		Map<String, String> map = new HashMap<>();
 		map.put("userid", user.getUserid());
 		map.put("password", user.getPassword());
-		mapper.delete(map);
+		//mapper.delete(map);
 		return "redirect:/move/public/common/content";
 	}
 	@PostMapping("/login")
-	public String login(Member member, Model model) {
+	public @ResponseBody Map<String, Object> login(@RequestBody Member param){
 		Util.log.accept("MemberContoller login");
-		String view = "redirect:/move/auth/member/login";
-		if(Util.chkNull.negate().test(mapper.exist(member))) {
-			Function<Member, String> f1 = (t) -> {
-				return mapper.login(t);
+		Map<String, Object> map = new HashMap<>();
+		if(mapper.count(param)!=0) {
+			Function<Member, Member> f = (t) -> {
+				return mapper.get(t);
 			};
-			if(Predicate.isEqual(f1.apply(member)).test("1")) {
-				Function<Member, String> f2 = (t) -> {
-					model.addAttribute("user", mapper.selectOne(t));
-					return "";
-				};
-				view = f2.apply(member);
+			member = f.apply(param);
+			if(member != null) {
+				map.put("user", member);
+			}else {
+				map.put("msg","비밀번호가 일치하지 않음");
 			}
+		}else {
+			map.put("msg","아이디가 존재하지 않음");	
 		}
-		Util.log.accept(view);
-		return view;
-	}
-	@RequestMapping(value="/logout")
-	public String logout(Model model) {
-		Util.log.accept("MemberContoller logout");
-		model.addAttribute("user", member);
-		return "redirect:/move/public/common/content";
+		return map;
 	}
 	@RequestMapping("/fileupload")
 	public void fileupload() {}

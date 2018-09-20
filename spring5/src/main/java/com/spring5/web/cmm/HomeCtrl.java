@@ -23,14 +23,4 @@ public class HomeCtrl {
 		model.addAttribute("context", Util.ctx.apply(request));
 		return "main";
 	}
-	@RequestMapping("/move/{prefix}/{dir}/{page}")
-	public String move(
-			@PathVariable String prefix,
-			@PathVariable String dir,
-			@PathVariable String page) {
-		logger.info("homeContoller move :: prefix : " + prefix);
-		logger.info("homeContoller move :: dir : " + dir);
-		logger.info("homeContoller move :: page : " + page);
-		return prefix+":" + dir + "/" + page + ".tiles";
-	}
 }
