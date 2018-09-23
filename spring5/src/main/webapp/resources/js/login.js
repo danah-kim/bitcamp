@@ -1,6 +1,6 @@
 function loginUi(x){
 	return '<div class="loginContent" id="login1">'
-+ '	<form id="loginForm">'
+//+ '	<form id="loginForm">'
 + '	  <div class="loginImgcontainer">'
 + '	    <img src="'+x+'/resources/img/profileImg.png" alt="profileImg">'
 + '	  </div>'
@@ -13,12 +13,7 @@ function loginUi(x){
 + '	    <input required class="loginInfo" type="text" placeholder="Enter Password" id="pw">'
 	        + ''
 //+ '	    <button type="button" class="formBtn" id="loginBtn" >Login</button>'
-+ '	    <!-- <label>'
-+ '	      <input type="checkbox" checked="checked" name="remember"> Remember me'
-+ '	    </label> -->'
-+ '	    <button type="button" id="loginCancelbtn">Cancel</button>'
-+ '	    <!-- <span class="psw">Forgot <a href="#">password?</a></span> -->'
 + '	  </div>'
-+ '	</form>'
+//+ '	</form>'
 + '</div>';
 }

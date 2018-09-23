@@ -133,7 +133,7 @@ app.board = (()=>{
 		$('#nav1').remove();
 		$('#content1').empty();
 	};
-	return{init:init, onCreate:onCreate, setContentView:setContentView};
+	return{init:init};
 })();
 
 app.permission = (()=>{
@@ -141,73 +141,134 @@ app.permission = (()=>{
 		alert('log');
 		$('#nav1').remove();
 		$('#fluid1').remove();
-		$.getScript('',()=>{});
-		$.getScript($.script() + '/login.js',()=>{
-			$('#content1').html(loginUi($.ctx()));
-			$('#loginBtn').click (x => {
-				x.preventDefault();
-				let y = app.service.nullChk([$('#id').val(), $('#pw').val()]);
-				if(y.checker){
-					$.ajax({
-						url : $.ctx() + '/mbr/login',
-						method : 'POST',
-						contentType : 'application/json',
-						data : JSON.stringify({userid : $('#id').val(), password : $('#pw').val()}),
-						success : x => {
-							if(typeof x.msg !== "undefined") {
-								alert(x.msg)
-								}else{
-									user.session({
-										userid : x.userid,
-										name : x.name,
-										age : x.age,
-										gender : x.gender,
-										teamid : x.teamid,
-										roll : x.roll
-									});
-									
-									$('#menu1').html('<a id="myMenu" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">'
-														+ '<i class="fa fa-list-alt"></i>'
-														+ '</a>'
-														+ '<ul class="dropdown-menu" role="menu">'
-														+ '<li role="presentation"><a id="boardWriteMenu" role="menuitem" tabindex="-1">게시글쓰기</a></li>'
-														+ '<li role="presentation"><a id="boardListMenu" role="menuitem" tabindex="-1">게시글목록</a></li>'
-														+ '</ul>'
-														+ '</li>'
-														+ '<li class="dropdown">'
-														+ '<a id="myMenu" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">'
-														+ '<i class="fa fa-user"></i>'
-														+ '</a>'
-														+ '<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">'
-														+ '<li role="presentation"><a id="modifyMenu" role="menuitem" tabindex="-1">정보수정</a></li>'
-														+ '<li role="presentation"><a id="removeMenu" role="menuitem" tabindex="-1">탈퇴</a></li>'
-														+ '</ul>');
-									$('#menu2').html('<a id="logoutMenu"><i class="fa fa-sign-out"></i></a>');
-									$.getScript($.script() + '/nav2.js', ()=>{
-										$('#wrapper').after(navUi());
-									});
-									$.getScript($.script() + '/fluid.js', ()=>{
-										$('#nav1').append(fluidUi($.ctx()));
-									});
-									$('#content1').html(contentUi($.ctx()));
-								}
-							//$('#menuBar').children('#loginMenu').html('<a id="logoutMenu"><i class="fa fa-sign-out"></i></a>');
-							//$('#menu1').html('<a id="logoutMenu"><i class="fa fa-sign-out"></i></a>');
-						},
-						error : (m1, m2, m3)=>{
-							alert('에러발생1'+m1);
-							alert('에러발생2'+m2);
-							alert('에러발생3'+m3);
-						}
-					});
-				}else{
-					alert(y.msg);
-				}
-				
+		$.getScript($.script()+'/compo.js',()=>{
+			$.getScript($.script() + '/login.js',()=>{
+				$('#content1').html(loginUi($.ctx()));
+				$('#login1')
+				.children().last()
+				.append(ui.anchor({id:'loginBtn', txt:'Login'})
+				.addClass('formBtn'));
+				$('#loginBtn')
+				.click (x => {
+					x.preventDefault();
+					let y = app.service.nullChk([$('#id').val(), $('#pw').val()]);
+					if(y.checker){
+						$.ajax({
+							url : $.ctx() + '/mbr/login',
+							method : 'POST',
+							contentType : 'application/json',
+							data : JSON.stringify({userid : $('#id').val(), password : $('#pw').val()}),
+							success : x => {
+								if(typeof x.msg !== "undefined") {
+									alert(x.msg)
+									}else{
+										user.session({
+											userid : x.userid,
+											name : x.name,
+											age : x.age,
+											gender : x.gender,
+											teamid : x.teamid,
+											roll : x.roll
+										});
+										$('#menu1').html('<a id="myMenu" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">'
+															+ '<i class="fa fa-list-alt"></i>'
+															+ '</a>'
+															+ '<ul class="dropdown-menu" role="menu">'
+															+ '<li role="presentation"><a id="boardWriteMenu" role="menuitem" tabindex="-1">게시글쓰기</a></li>'
+															+ '<li role="presentation"><a id="boardListMenu" role="menuitem" tabindex="-1">게시글목록</a></li>'
+															+ '</ul>'
+															+ '</li>'
+															+ '<li class="dropdown">'
+															+ '<a id="myMenu" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">'
+															+ '<i class="fa fa-user"></i>'
+															+ '</a>'
+															+ '<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">'
+															+ '<li role="presentation"><a id="modifyMenu" role="menuitem" tabindex="-1">정보수정</a></li>'
+															+ '<li role="presentation"><a id="removeMenu" role="menuitem" tabindex="-1">탈퇴</a></li>'
+															+ '</ul>');
+										$('#menu2').html('<a id="logoutMenu"><i class="fa fa-sign-out"></i></a>');
+										$.getScript($.script() + '/nav2.js', ()=>{
+											$('#wrapper').after(navUi());
+										});
+										$.getScript($.script() + '/fluid.js', ()=>{
+											$('#nav1').append(fluidUi($.ctx()));
+										});
+										$('#content1').html(contentUi($.ctx()));
+									}
+								//$('#menuBar').children('#loginMenu').html('<a id="logoutMenu"><i class="fa fa-sign-out"></i></a>');
+							},
+							error : (m1, m2, m3)=>{
+								alert('에러발생1'+m1);
+								alert('에러발생2'+m2);
+								alert('에러발생3'+m3);
+							}
+						});
+					}else{
+						alert(y.msg);
+					}
+					
+				});
 			});
 		});
 	};
-	return{login: login};
+	var join =x=>{
+		alert('add');
+		$.getScript($.script()+'/compo.js',()=>{
+			$.getScript($.script() + '/add.js', ()=>{
+				$('#nav1').remove();
+	    		$('#fluid1').remove();
+	    		$('#content1').empty();
+				$('#content1').html(addUi($.ctx()));
+				$('#addTable')
+				.append(ui.anchor({id:'addBtn', txt:'가입하기'}));
+				$('#addBtn')
+				.click (x => {
+					var a ='';
+					$('[name="subject"]:checked').each(()=> {
+						a += $(this).val() + ",";
+					});
+					x.preventDefault();
+					let y = app.service.nullChk([$('#userid').val(), 
+													$('[name="teamid"]:checked').val(),
+													$('[name="subject"]:checked').val(),
+													$('#name').val(),
+													$('#age').val(),
+													$('#roll').val(),
+													$('#password').val(),
+													$('#gender').val()
+					]);
+					//if(y.checker){
+	    				$.ajax({
+	    					url : $.ctx() + '/mbr/add',
+	    					method : 'POST',
+	    					contentType : 'application/json',
+	    					data : JSON.stringify({
+	    									userid : $('#userid').val(),
+	    									teamid : $('[name="teamid"]:checked').val(),
+	    									subject : a,
+	    									name : $('#name').val(),
+	    									age : $('#age').val(),
+	    									roll : $('#roll').val(),
+	    									password : $('#password').val(),
+	    									gender : $('#gender').val()
+	    									}),
+	    					success : x =>{
+	    						//app.permission.login();
+	    					},
+	    					error : (m1, m2, m3)=>{
+	    						alert('에러발생1'+m1);
+	    						alert('에러발생2'+m2);
+	    						alert('에러발생3'+m3);
+	    					}
+	    				});
+					//}else{
+					//	alert(y.msg);
+					//}
+				});
+			});
+		});
+	};
+	return{login: login, join:join};
 })();
 
 app.router = {
@@ -248,41 +309,7 @@ app.router = {
 	    	});
 	    	$('#addMenu').click (x=>{
 	    		x.preventDefault();
-	    		$.getScript($.script() + '/add.js', ()=>{
-	    			$('#nav1').remove();
-		    		$('#fluid1').remove();
-		    		$('#content1').empty();
-	    			$('#content1').html(addUi($.ctx()))
-	    			$('#addBtn').click (x => {
-	    				let y = app.service.nullChk([$('#id').val(), $('#pw').val()]);
-	    				if(y.checker){
-		    				$.ajax({
-		    					url : $.ctx() + '/mbr/add',
-		    					method : 'POST',
-		    					contentType : 'application/json',
-		    					data : JSON.stringify({
-		    									userid : $('#userid').val(),
-		    									teamid : $('input[name="teamid"]:checked').val(),
-		    									name : $('#name').val(),
-		    									age : $('#age').val(),
-		    									roll : $('#roll').val(),
-		    									password : $('#password').val(),
-		    									gender : $('#gender').val()
-		    									}),
-		    					success : x =>{
-		    						alert("성공");
-		    					},
-		    					error : (m1, m2, m3)=>{
-		    						alert('에러발생1'+m1);
-		    						alert('에러발생2'+m2);
-		    						alert('에러발생3'+m3);
-		    					}
-		    				});
-	    				}else{
-	    					alert(y.msg);
-	    				}
-	    			});
-	    		});
+	    		app.permission.join();
 	    	});
 	    	$('#blogMenu').click(()=>{
 				app.board.init();

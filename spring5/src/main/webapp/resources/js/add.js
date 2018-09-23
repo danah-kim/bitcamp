@@ -1,6 +1,6 @@
 function addUi(){
 	return ' <div>'
-		+ ' <form id="addForm">'
+//		+ ' <form id="addForm">'
 		+ ' <h1>회원가입</h1>'
 		+ ' <table id="addTable">'
 		+ ' 	<tr>'
@@ -71,8 +71,8 @@ function addUi(){
 		+ ' 	</tr>'
 		+ ' </table>'
 		+ ' <br>'
-		+ ' 	<input type="button" class="formBtn" id="addBtn" value="가입하기">'
+//		+ ' 	<input type="button" class="formBtn" id="addBtn" value="가입하기">'
 		+ ' 	<p></p>'
-		+ ' </form>'
+//		+ ' </form>'
 		+ ' </div>';
 }

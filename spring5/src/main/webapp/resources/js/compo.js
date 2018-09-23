@@ -4,7 +4,7 @@ var ui = {
 		return $('<div/>').attr(x);
 	},
 	anchor : x => { 
-		return $('<a/>').attr({href: '#'}).html(x.txt);
+		return $('<a/>').attr({href: '#', id: x.id}).html(x.txt);
 	},
 	ul : x => {
 		let y = $('<ul/>');

@@ -30,14 +30,13 @@ public class MemberCtrl {
 	@PostMapping("/add")
 	public @ResponseBody void add(@RequestBody Member param) {
 		Util.log.accept("MemberContoller add");
+		Util.log.accept(param.toString());
+		String[] s = param.subject.split(",");
 		if(mapper.count(param)==0) {
 			param.setSsn(param.getAge()+"-"+param.getGender());
 			param.setGender(util2.gender.apply(param));
 			param.setAge(util2.age.apply(param));
-			Util.log.accept(param.ssn);
-			Util.log.accept(param.gender);
-			Util.log.accept(param.age);
-			mapper.post(param);
+			//mapper.post(param);
 		}else {
 		}
 	}
