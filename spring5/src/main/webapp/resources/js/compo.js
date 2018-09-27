@@ -36,5 +36,26 @@ var ui = {
 	},
 	button : x => {
 		return $('<button/>').attr('type', 'button').addClass("btn btn-"+x.clazz).html(x.txt);
+	},
+	table : x => {
+		let pp = $('<div class="panel panel-'+x.type+'"/>').attr({style:'margin: 50px auto; text-align: center;'});
+		let ph = $('<div class="panel-heading">');
+		let pb = $('<div class="panel-body">');
+		ph.html(x.head).appendTo(pp);
+		pb.appendTo(pp);
+		$('<p/>').html(x.body).appendTo(pb);
+		let t = $('<table/>');
+		let thead = $('<thead/>');
+		let th = $('<th/>');
+		let tr = $('<tr/>');
+		$(x.list)
+		.each(function() {
+			$('<th/>').html(this).appendTo(tr);
+		});
+		tr.appendTo(thead);
+		thead.appendTo(t);
+		$('<tbody/>').appendTo(t);
+		t.attr({id:x.id}).addClass(x.clazz).appendTo(pp);
+		return pp;
 	}
 }

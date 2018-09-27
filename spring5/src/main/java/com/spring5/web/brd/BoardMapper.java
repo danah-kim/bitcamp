@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 
 import com.spring5.web.cmm.Criteria;
 import com.spring5.web.cmm.SearchCriteria;
+import com.spring5.web.page.Pagination;
+
 
 @Repository
 public interface BoardMapper {
@@ -17,7 +19,8 @@ public interface BoardMapper {
 
 	  public void delete(Integer bno) throws Exception;
 
-	  public List<Board> listAll() throws Exception;
+	  public List<Board> listAll(Pagination p);
+	  public int count();
 
 	  public List<Board> listPage(int page) throws Exception;
 

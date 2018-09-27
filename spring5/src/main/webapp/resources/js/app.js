@@ -123,15 +123,41 @@ app.main = (()=>{
 app.board = (()=>{
 	var ctx, script, style, img, w, header, nav, fluid, content, footerImg, footerBar;
 	var init = ()=>{
+		ctx = $.ctx();
+		script = $.script();
+		style = $.style();
+		img = $.img();
 		onCreate();
 	};
 	var onCreate =()=>{
 		setContentView();
 	};
 	var setContentView = ()=>{
-		alert('게시판');
-		$('#nav1').remove();
+		$('#fluid1').remove();
 		$('#content1').empty();
+		$.getJSON(ctx+'/boards/1',d=>{
+			$.getScript(script + '/compo.js',()=>{
+				(ui.table({
+					type : 'primary',
+					id: 'table',
+					head: '게시판',
+					body: '오픈게시판...누구든지사용가능',
+					list:['No', '제목', '내용', '작성일','작성자', '조회수'],
+					clazz : 'table table-bordered'
+				})).appendTo($('#content1'));
+				$(d).each(function() {
+					$('<tr/>').append(
+						$('<td/>').attr({style:'width:5%'}).html(this.bno),
+						$('<td/>').attr({style:'width:10%'}).html(this.title),
+						$('<td/>').attr({style:'width:50%'}).html(this.content),
+						$('<td/>').attr({style:'width:10%'}).html(this.regdate),
+						$('<td/>').attr({style:'width:10%'}).html(this.writer),
+						$('<td/>').attr({style:'width:5%'}).html(this.viewcnt)
+					).appendTo($('tbody'));
+				});
+			});
+			//d.each(function(){});
+		});
 	};
 	return{init:init};
 })();
@@ -171,15 +197,6 @@ app.permission = (()=>{
 											roll : x.roll
 										});
 										$('#menu1').html('<a id="myMenu" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">'
-															+ '<i class="fa fa-list-alt"></i>'
-															+ '</a>'
-															+ '<ul class="dropdown-menu" role="menu">'
-															+ '<li role="presentation"><a id="boardWriteMenu" role="menuitem" tabindex="-1">게시글쓰기</a></li>'
-															+ '<li role="presentation"><a id="boardListMenu" role="menuitem" tabindex="-1">게시글목록</a></li>'
-															+ '</ul>'
-															+ '</li>'
-															+ '<li class="dropdown">'
-															+ '<a id="myMenu" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">'
 															+ '<i class="fa fa-user"></i>'
 															+ '</a>'
 															+ '<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">'
@@ -187,15 +204,15 @@ app.permission = (()=>{
 															+ '<li role="presentation"><a id="removeMenu" role="menuitem" tabindex="-1">탈퇴</a></li>'
 															+ '</ul>');
 										$('#menu2').html('<a id="logoutMenu"><i class="fa fa-sign-out"></i></a>');
-										$.getScript($.script() + '/nav2.js', ()=>{
-											$('#wrapper').after(navUi());
-										});
 										$.getScript($.script() + '/fluid.js', ()=>{
-											$('#nav1').append(fluidUi($.ctx()));
+											$('#header1').after(fluidUi($.ctx()));
+										});
+										$.getScript($.script() + '/nav.js', ()=>{
+											$('#header1').after(navUi());
 										});
 										$('#content1').html(contentUi($.ctx()));
+										
 									}
-								//$('#menuBar').children('#loginMenu').html('<a id="logoutMenu"><i class="fa fa-sign-out"></i></a>');
 							},
 							error : (m1, m2, m3)=>{
 								alert('에러발생1'+m1);
@@ -311,7 +328,8 @@ app.router = {
 	    		x.preventDefault();
 	    		app.permission.join();
 	    	});
-	    	$('#blogMenu').click(()=>{
+	    	$('#boardMenu').click(x=>{
+	    		x.preventDefault();
 				app.board.init();
 			});
 	    })

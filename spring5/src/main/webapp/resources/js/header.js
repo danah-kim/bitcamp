@@ -17,6 +17,7 @@ function headerUi(){
 		+ '	                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>'
 		+ '	                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>'
 		+ '	                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>'
+		+ '                    		<li><a id="boardMenu" href="#"><i class="fa fa-list-alt"></i></a></li>'
 		+ '	                        <li class="dropdown" id="menu1"><a id="loginMenu"><i class="fa fa-sign-in"></i></a></li>'
 		+ '	                        <li id="menu2"><a id="addMenu"><i class="fa fa-user-plus"></i></a></li>'
 		+ '	                    </ul>'

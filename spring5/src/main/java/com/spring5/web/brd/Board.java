@@ -1,6 +1,5 @@
 package com.spring5.web.brd;
 
-import java.util.Date;
 
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -15,7 +14,7 @@ public class Board {
 	private String title;
 	private String content;
 	private String writer;
-	private Date regdate;
+	private String regdate;
 	private int viewcnt;
 	private int replycnt;
 	
