@@ -28,8 +28,8 @@ public class BoardCtrl {
 	
 	@RequestMapping("/boards/{pageNo}")
 	public @ResponseBody Map<String, Object> list(@PathVariable String pageNo) {
-		logger.info("BoardContoller :","list..");
-		Util.log.accept("page:"+pageNo);
+		//logger.info("BoardContoller :","list..");
+		//Util.log.accept("page:"+pageNo);
 		PageProxy pxy = new PageProxy();
 		map.clear();
 		map.put("pageNum", (pageNo.equals("undefined"))? 1 : Integer.parseInt(pageNo));
@@ -38,6 +38,26 @@ public class BoardCtrl {
 		page = pxy.getPagination();
 		map.clear();
 		map.put("list", brdmapper.listAll(page));
+		map.put("page", page);
+		return map;
+	}
+	
+	@RequestMapping("/boards/{id}/{pageNo}")
+	public @ResponseBody Map<String, Object> mylist(@PathVariable String id, @PathVariable String pageNo) {
+		PageProxy pxy = new PageProxy();
+		map.clear();
+		map.put("pageNum", (pageNo.equals("undefined"))? 1 : Integer.parseInt(pageNo));
+		map.put("userid", id);
+		map.put("startRow", 1);
+		map.put("endRow", brdmapper.countAll());
+		map.put("totalRecode", brdmapper.listOne(map).size());
+		pxy.carraryOut(map);
+		page = pxy.getPagination();
+		map.clear();
+		map.put("userid", id);
+		map.put("startRow", page.getStartRow());
+		map.put("endRow", page.getEndRow());
+		map.put("list", brdmapper.listOne(map));
 		map.put("page", page);
 		return map;
 	}

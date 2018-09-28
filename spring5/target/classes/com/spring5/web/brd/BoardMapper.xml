@@ -8,6 +8,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT COUNT(*)
 		FROM board
 	</select>
+	<select id="listOne" resultType="com.spring5.web.brd.Board">
+		SELECT *
+		FROM (
+			SELECT
+				ROW_NUMBER() OVER(ORDER BY BNO DESC) AS NUM,
+				A.*
+			FROM
+               BOARD A
+			WHERE writer LIKE #{userid}
+		)B
+		WHERE B.NUM BETWEEN #{startRow} AND #{endRow}
+		ORDER BY B.NUM
+		
+		<!--
+		SELECT * 
+		FROM board 
+		ORDER BY bno DESC
+		LIMIT #{startRow}, #{recodeSize}
+		-->
+	</select>
 <!--	<insert id="create">
 		insert into tbl_board (title, content, writer)
 		values(#{title},#{content}, #{writer})

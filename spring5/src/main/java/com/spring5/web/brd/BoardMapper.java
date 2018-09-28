@@ -1,6 +1,7 @@
 package com.spring5.web.brd;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -21,6 +22,7 @@ public interface BoardMapper {
 
 	  public List<Board> listAll(Pagination p);
 	  public int countAll();
+	  public List<Board> listOne(Map p);
 
 	  public List<Board> listPage(int page) throws Exception;
 

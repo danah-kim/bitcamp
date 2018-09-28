@@ -134,7 +134,6 @@ app.board = (()=>{
 	};
 	var setContentView = ()=>{
 		$('#fluid1').remove();
-		$('#content1').empty();
 		app.service.boards(1);
 	};
 	return{init:init};
@@ -167,21 +166,34 @@ app.permission = (()=>{
 									alert(x.msg)
 									}else{
 										user.session({
-											userid : x.userid,
-											name : x.name,
-											age : x.age,
-											gender : x.gender,
-											teamid : x.teamid,
-											roll : x.roll
+											userid : x.user.userid,
+											name : x.user.name,
+											age : x.user.age,
+											gender : x.user.gender,
+											teamid : x.user.teamid,
+											roll : x.user.roll
 										});
 										$('#menu1').html('<a id="myMenu" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">'
 															+ '<i class="fa fa-user"></i>'
 															+ '</a>'
 															+ '<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">'
+															+ '<li role="presentation"><a id="myBoard" role="menuitem" tabindex="-1">내게시물</a></li>'
 															+ '<li role="presentation"><a id="modifyMenu" role="menuitem" tabindex="-1">정보수정</a></li>'
 															+ '<li role="presentation"><a id="removeMenu" role="menuitem" tabindex="-1">탈퇴</a></li>'
 															+ '</ul>');
 										$('#menu2').html('<a id="logoutMenu"><i class="fa fa-sign-out"></i></a>');
+										$('#logoutMenu').click (e => {
+											app.init($.ctx());
+											sessionStorage.clear();
+											alert('로그아웃'+user.get('userid'));
+										});
+										$('#myBoard').click(()=>{
+											alert('확인'+user.get('userid'))
+											app.service.myBoard({
+												id: user.get('userid'),
+												pageNo: 1
+											});
+										});
 										$.getScript($.script() + '/fluid.js', ()=>{
 											$('#header1').after(fluidUi($.ctx()));
 										});
@@ -217,12 +229,12 @@ app.permission = (()=>{
 				$('#addTable')
 				.append(ui.anchor({id:'addBtn', txt:'가입하기'}));
 				$('#addBtn')
-				.click (x => {
+				.click (e => {
+					e.preventDefault();
 					var a ='';
 					$('[name="subject"]:checked').each(()=> {
 						a += $(this).val() + ",";
 					});
-					x.preventDefault();
 					let y = app.service.nullChk([$('#userid').val(), 
 													$('[name="teamid"]:checked').val(),
 													$('[name="subject"]:checked').val(),
@@ -232,7 +244,7 @@ app.permission = (()=>{
 													$('#password').val(),
 													$('#gender').val()
 					]);
-					//if(y.checker){
+					if(y.checker){
 	    				$.ajax({
 	    					url : $.ctx() + '/mbr/add',
 	    					method : 'POST',
@@ -248,7 +260,7 @@ app.permission = (()=>{
 	    									gender : $('#gender').val()
 	    									}),
 	    					success : x =>{
-	    						//app.permission.login();
+	    						app.permission.login();
 	    					},
 	    					error : (m1, m2, m3)=>{
 	    						alert('에러발생1'+m1);
@@ -256,9 +268,9 @@ app.permission = (()=>{
 	    						alert('에러발생3'+m3);
 	    					}
 	    				});
-					//}else{
-					//	alert(y.msg);
-					//}
+					}else{
+						alert(y.msg);
+					}
 				});
 			});
 		});
@@ -312,6 +324,7 @@ app.router = {
 			});
 	    })
 	    .fail(x=>{
+	    	alert('실패?');
 	    });
 	}
 };
@@ -348,6 +361,7 @@ app.service = {
 	boards : x =>{
 		$.getJSON($.ctx()+'/boards/'+x,d=>{
 			$.getScript($.script() + '/compo.js',()=>{
+				$('#content1').empty();
 				(ui.table({
 					type : 'primary',
 					id: 'table',
@@ -367,20 +381,19 @@ app.service = {
 					).appendTo($('tbody'));
 				});
 				ui.page().appendTo($('#content1'));
+				$('<li/>')
+					.addClass('page-item ' + ((d.page.existPre) ? '' : 'disabled'))
+					.append(
+						$('<span/>')
+							.html('◀︎')
+							.addClass('page-link')
+							.attr({style:'cursor: pointer'})
+					)
+					.appendTo($('.pagination'))
+					.click(function(){
+						app.service.boards(d.page.pre);
+					});
 				for (let i = d.page.startPage; i <= d.page.endPage; i++) {
-					if(i==d.page.startPage){
-						$('<li/>').addClass('page-item ' + ((d.page.existPre) ? '' : 'disabled')).append(
-								$('<span/>')
-									.html('◀︎')
-									.addClass('page-link')
-									.attr({style:'cursor: pointer'})
-							)
-							.appendTo($('.pagination'))
-							.click(function(){
-								$('#content1').empty();
-								app.service.boards(d.page.pre);
-							});
-					}
 					$('<li/>').addClass('page-item ' + ((d.page.pageNum == i)? 'active' : '')).append(
 							$('<span/>')
 								.addClass('page-link')
@@ -388,25 +401,95 @@ app.service = {
 								.html(i)
 								.click(function(){
 									//console.log($(this).text());
-									$('#content1').empty();
 									app.service.boards($(this).text());
 								})
 					).appendTo($('.pagination'));
-					if(i==d.page.endPage){
-						$('<li/>').addClass('page-item ' + ((d.page.existNext) ? '' : 'disabled')).append(
-							$('<span/>')
-								.html('▶︎')
-								.addClass('page-link')
-								.attr({style: 'cursor: pointer'})
-							)
-							.appendTo($('.pagination'))
-							.click(function(){
-								$('#content1').empty();
-								app.service.boards(d.page.next);
-							});
-					}
 		        }
-			});
+				$('<li/>')
+					.addClass('page-item ' + ((d.page.existNext) ? '' : 'disabled'))
+					.append(
+						$('<span/>')
+							.html('▶︎')
+							.addClass('page-link')
+							.attr({style: 'cursor: pointer'})
+					)
+					.appendTo($('.pagination'))
+					.click(function(){
+						app.service.boards(d.page.next);
+					});
+				});
+		});
+	},
+	myBoard : x=>{
+		$.getJSON($.ctx()+'/boards/'+x.id+'/'+x.pageNo, d=>{
+			$.getScript($.script() + '/compo.js',()=>{
+				$('#fluid1').remove();
+				$('#content1').empty();
+				(ui.table({
+					type : 'primary',
+					id: 'table',
+					head: '게시판',
+					body: '오픈게시판...누구든지사용가능',
+					list:['No', '제목', '내용', '작성일','작성자', '조회수'],
+					clazz : 'table table-bordered'
+				})).appendTo($('#content1'));
+				$(d.list).each(function() {
+					$('<tr/>').append(
+						$('<td/>').attr({style:'width:5%'}).html(this.bno),
+						$('<td/>').attr({style:'width:10%'}).html(this.title),
+						$('<td/>').attr({style:'width:50%'}).html(this.content),
+						$('<td/>').attr({style:'width:10%'}).html(this.regdate),
+						$('<td/>').attr({style:'width:10%'}).html(this.writer),
+						$('<td/>').attr({style:'width:5%'}).html(this.viewcnt)
+					).appendTo($('tbody'));
+				});
+				ui.page().appendTo($('#content1'));
+				$('<li/>')
+					.addClass('page-item ' + ((d.page.existPre) ? '' : 'disabled'))
+					.append(
+						$('<span/>')
+							.html('◀︎')
+							.addClass('page-link')
+							.attr({style:'cursor: pointer'})
+					)
+					.appendTo($('.pagination'))
+					.click(function(){
+						app.service.myBoard({
+							id: user.get('userid'),
+							pageNo: d.page.pre
+						});
+					});
+				for (let i = d.page.startPage; i <= d.page.endPage; i++) {
+					$('<li/>').addClass('page-item ' + ((d.page.pageNum == i)? 'active' : '')).append(
+							$('<span/>')
+								.addClass('page-link')
+								.attr({style:'cursor: pointer'})
+								.html(i)
+								.click(function(){
+									//console.log($(this).text());
+									app.service.myBoard({
+										id: user.get('userid'),
+										pageNo: $(this).text()
+									});
+								})
+					).appendTo($('.pagination'));
+		        }
+				$('<li/>')
+					.addClass('page-item ' + ((d.page.existNext) ? '' : 'disabled'))
+					.append(
+						$('<span/>')
+							.html('▶︎')
+							.addClass('page-link')
+							.attr({style: 'cursor: pointer'})
+					)
+					.appendTo($('.pagination'))
+					.click(function(){
+						app.service.myBoard({
+							id: user.get('userid'),
+							pageNo: d.page.next
+						});
+					});
+				});
 		});
 	}
 };
