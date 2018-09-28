@@ -4,8 +4,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.spring5.web.brd.BoardMapper">
-	<select id="count" resultType="int">
-		SELECT COUNT(*) AS count
+	<select id="countAll" resultType="int">
+		SELECT COUNT(*)
 		FROM board
 	</select>
 <!--	<insert id="create">
@@ -23,10 +23,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 -->
 
 	<select id="listAll" resultType="com.spring5.web.brd.Board">
+		SELECT *
+		FROM (
+           SELECT
+               ROW_NUMBER() OVER(ORDER BY BNO DESC) AS NUM,
+               A.*
+           FROM
+               BOARD A
+		)B
+		WHERE B.NUM BETWEEN #{startRow} AND #{endRow}
+		ORDER BY B.NUM
+		
+		<!--
 		SELECT * 
 		FROM board 
 		ORDER BY bno DESC
 		LIMIT #{startRow}, #{recodeSize}
+		-->
 	</select>
 	
 	

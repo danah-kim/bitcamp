@@ -135,29 +135,7 @@ app.board = (()=>{
 	var setContentView = ()=>{
 		$('#fluid1').remove();
 		$('#content1').empty();
-		$.getJSON(ctx+'/boards/1',d=>{
-			$.getScript(script + '/compo.js',()=>{
-				(ui.table({
-					type : 'primary',
-					id: 'table',
-					head: '게시판',
-					body: '오픈게시판...누구든지사용가능',
-					list:['No', '제목', '내용', '작성일','작성자', '조회수'],
-					clazz : 'table table-bordered'
-				})).appendTo($('#content1'));
-				$(d).each(function() {
-					$('<tr/>').append(
-						$('<td/>').attr({style:'width:5%'}).html(this.bno),
-						$('<td/>').attr({style:'width:10%'}).html(this.title),
-						$('<td/>').attr({style:'width:50%'}).html(this.content),
-						$('<td/>').attr({style:'width:10%'}).html(this.regdate),
-						$('<td/>').attr({style:'width:10%'}).html(this.writer),
-						$('<td/>').attr({style:'width:5%'}).html(this.viewcnt)
-					).appendTo($('tbody'));
-				});
-			});
-			//d.each(function(){});
-		});
+		app.service.boards(1);
 	};
 	return{init:init};
 })();
@@ -366,5 +344,69 @@ app.service = {
 		};
 		$(x).each(function(){ if(this === '') rs.checker = false; });
 		return rs;
+	},
+	boards : x =>{
+		$.getJSON($.ctx()+'/boards/'+x,d=>{
+			$.getScript($.script() + '/compo.js',()=>{
+				(ui.table({
+					type : 'primary',
+					id: 'table',
+					head: '게시판',
+					body: '오픈게시판...누구든지사용가능',
+					list:['No', '제목', '내용', '작성일','작성자', '조회수'],
+					clazz : 'table table-bordered'
+				})).appendTo($('#content1'));
+				$(d.list).each(function() {
+					$('<tr/>').append(
+						$('<td/>').attr({style:'width:5%'}).html(this.bno),
+						$('<td/>').attr({style:'width:10%'}).html(this.title),
+						$('<td/>').attr({style:'width:50%'}).html(this.content),
+						$('<td/>').attr({style:'width:10%'}).html(this.regdate),
+						$('<td/>').attr({style:'width:10%'}).html(this.writer),
+						$('<td/>').attr({style:'width:5%'}).html(this.viewcnt)
+					).appendTo($('tbody'));
+				});
+				ui.page().appendTo($('#content1'));
+				for (let i = d.page.startPage; i <= d.page.endPage; i++) {
+					if(i==d.page.startPage){
+						$('<li/>').addClass('page-item ' + ((d.page.existPre) ? '' : 'disabled')).append(
+								$('<span/>')
+									.html('◀︎')
+									.addClass('page-link')
+									.attr({style:'cursor: pointer'})
+							)
+							.appendTo($('.pagination'))
+							.click(function(){
+								$('#content1').empty();
+								app.service.boards(d.page.pre);
+							});
+					}
+					$('<li/>').addClass('page-item ' + ((d.page.pageNum == i)? 'active' : '')).append(
+							$('<span/>')
+								.addClass('page-link')
+								.attr({style:'cursor: pointer'})
+								.html(i)
+								.click(function(){
+									//console.log($(this).text());
+									$('#content1').empty();
+									app.service.boards($(this).text());
+								})
+					).appendTo($('.pagination'));
+					if(i==d.page.endPage){
+						$('<li/>').addClass('page-item ' + ((d.page.existNext) ? '' : 'disabled')).append(
+							$('<span/>')
+								.html('▶︎')
+								.addClass('page-link')
+								.attr({style: 'cursor: pointer'})
+							)
+							.appendTo($('.pagination'))
+							.click(function(){
+								$('#content1').empty();
+								app.service.boards(d.page.next);
+							});
+					}
+		        }
+			});
+		});
 	}
 };

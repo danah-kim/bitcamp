@@ -18,10 +18,6 @@ var ui = {
 		(ui.div({id:'input-group-prepend'})
 				.addClass("input-group-prepend"))
 				.html('<span class="input-group-text" id="basic-addon1">'+ x.txt+'</span>').appendTo(y);
-		/*ui.span({
-			id: "basic-addon1",
-			value: x.div__val
-		}).appendTo($('#input-group-prepend'));*/
 		$("<input/>").attr({
 			id : x.id,
 			type: x.type,
@@ -57,5 +53,8 @@ var ui = {
 		$('<tbody/>').appendTo(t);
 		t.attr({id:x.id}).addClass(x.clazz).appendTo(pp);
 		return pp;
+	},
+	page : x=>{
+		return $('<nav/>').attr({style:'text-align: center;'}).append($('<ul/>').addClass('pagination'));
 	}
 }

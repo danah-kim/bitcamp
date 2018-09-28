@@ -1,8 +1,6 @@
 package com.spring5.web.brd;
 
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -26,20 +24,21 @@ public class BoardCtrl {
 	@Autowired BoardMapper brdmapper;
 	@Autowired Util2 util2;
 	@Autowired Pagination page;
+	@Autowired Map<String, Object> map;
 	
 	@RequestMapping("/boards/{pageNo}")
-	public @ResponseBody List<Board> list(@PathVariable int pageNo) {
+	public @ResponseBody Map<String, Object> list(@PathVariable String pageNo) {
 		logger.info("BoardContoller :","list..");
 		Util.log.accept("page:"+pageNo);
 		PageProxy pxy = new PageProxy();
-		Map<String, Object> map = new HashMap<>();
-		map.put("pageNum", (pageNo==1)? 1 : pageNo);
-		map.put("totalRecode", brdmapper.count());
-//		map.put("totalRecode", (column.equals("")) ? 
-//					brdmapper.count()
-//					: brdmapper.listAll(page).size());
+		map.clear();
+		map.put("pageNum", (pageNo.equals("undefined"))? 1 : Integer.parseInt(pageNo));
+		map.put("totalRecode", brdmapper.countAll());
 		pxy.carraryOut(map);
 		page = pxy.getPagination();
-		return brdmapper.listAll(page);
+		map.clear();
+		map.put("list", brdmapper.listAll(page));
+		map.put("page", page);
+		return map;
 	}
 }

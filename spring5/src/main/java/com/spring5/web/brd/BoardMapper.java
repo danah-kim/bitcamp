@@ -20,7 +20,7 @@ public interface BoardMapper {
 	  public void delete(Integer bno) throws Exception;
 
 	  public List<Board> listAll(Pagination p);
-	  public int count();
+	  public int countAll();
 
 	  public List<Board> listPage(int page) throws Exception;
 
