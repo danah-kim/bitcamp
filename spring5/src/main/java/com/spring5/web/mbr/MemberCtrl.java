@@ -36,7 +36,7 @@ public class MemberCtrl {
 			param.setSsn(param.getAge()+"-"+param.getGender());
 			param.setGender(util2.gender.apply(param));
 			param.setAge(util2.age.apply(param));
-			//mapper.post(param);
+			mapper.post(param);
 		}else {
 		}
 	}

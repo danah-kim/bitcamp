@@ -141,7 +141,7 @@ app.board = (()=>{
 
 app.permission = (()=>{
 	var login =x=>{
-		alert('log');
+		alert('로그인');
 		$('#nav1').remove();
 		$('#fluid1').remove();
 		$.getScript($.script()+'/compo.js',()=>{
@@ -154,8 +154,9 @@ app.permission = (()=>{
 				$('#loginBtn')
 				.click (x => {
 					x.preventDefault();
-					let y = app.service.nullChk([$('#id').val(), $('#pw').val()]);
-					if(y.checker){
+					if($.fn.nullChk([$('#id').val(), $('#pw').val()])){
+						alert('필수 입력값이 입력되지 않았습니다.');
+					}else{
 						$.ajax({
 							url : $.ctx() + '/mbr/login',
 							method : 'POST',
@@ -163,45 +164,39 @@ app.permission = (()=>{
 							data : JSON.stringify({userid : $('#id').val(), password : $('#pw').val()}),
 							success : x => {
 								if(typeof x.msg !== "undefined") {
-									alert(x.msg)
 									}else{
-										user.session({
-											userid : x.user.userid,
-											name : x.user.name,
-											age : x.user.age,
-											gender : x.user.gender,
-											teamid : x.user.teamid,
-											roll : x.user.roll
+										$.getScript($.script() + '/router.js', () => {
+											$.extend(new User(x.user));
+											$('#menu1').html('<a id="myMenu" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">'
+													+ '<i class="fa fa-user"></i>'
+													+ '</a>'
+													+ '<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">'
+													+ '<li role="presentation"><a id="myBoard" role="menuitem" tabindex="-1">내게시물</a></li>'
+													+ '<li role="presentation"><a id="modifyMenu" role="menuitem" tabindex="-1">정보수정</a></li>'
+													+ '<li role="presentation"><a id="removeMenu" role="menuitem" tabindex="-1">탈퇴</a></li>'
+													+ '</ul>');
+								$('#menu2').html('<a id="logoutMenu"><i class="fa fa-sign-out"></i></a>');
+								$('#logoutMenu').click (e => {
+									app.init($.ctx());
+									sessionStorage.clear();
+									alert('로그아웃'+$.userid());
+								});
+								$('#myBoard').click(()=>{
+									alert('내게시물'+$.userid())
+									app.service.myBoard({
+										id: $.userid(),
+										pageNo: 1
+									});
+								});
+								$.getScript($.script() + '/fluid.js', ()=>{
+									$('#header1').after(fluidUi($.ctx()));
+								});
+								$.getScript($.script() + '/nav.js', ()=>{
+									$('#header1').after(navUi());
+								});
+								$('#content1').html(contentUi($.ctx()));
+								
 										});
-										$('#menu1').html('<a id="myMenu" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">'
-															+ '<i class="fa fa-user"></i>'
-															+ '</a>'
-															+ '<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">'
-															+ '<li role="presentation"><a id="myBoard" role="menuitem" tabindex="-1">내게시물</a></li>'
-															+ '<li role="presentation"><a id="modifyMenu" role="menuitem" tabindex="-1">정보수정</a></li>'
-															+ '<li role="presentation"><a id="removeMenu" role="menuitem" tabindex="-1">탈퇴</a></li>'
-															+ '</ul>');
-										$('#menu2').html('<a id="logoutMenu"><i class="fa fa-sign-out"></i></a>');
-										$('#logoutMenu').click (e => {
-											app.init($.ctx());
-											sessionStorage.clear();
-											alert('로그아웃'+user.get('userid'));
-										});
-										$('#myBoard').click(()=>{
-											alert('확인'+user.get('userid'))
-											app.service.myBoard({
-												id: user.get('userid'),
-												pageNo: 1
-											});
-										});
-										$.getScript($.script() + '/fluid.js', ()=>{
-											$('#header1').after(fluidUi($.ctx()));
-										});
-										$.getScript($.script() + '/nav.js', ()=>{
-											$('#header1').after(navUi());
-										});
-										$('#content1').html(contentUi($.ctx()));
-										
 									}
 							},
 							error : (m1, m2, m3)=>{
@@ -210,8 +205,6 @@ app.permission = (()=>{
 								alert('에러발생3'+m3);
 							}
 						});
-					}else{
-						alert(y.msg);
 					}
 					
 				});
@@ -219,7 +212,7 @@ app.permission = (()=>{
 		});
 	};
 	var join =x=>{
-		alert('add');
+		alert('가입하기');
 		$.getScript($.script()+'/compo.js',()=>{
 			$.getScript($.script() + '/add.js', ()=>{
 				$('#nav1').remove();
@@ -231,21 +224,22 @@ app.permission = (()=>{
 				$('#addBtn')
 				.click (e => {
 					e.preventDefault();
-					var a ='';
-					$('[name="subject"]:checked').each(()=> {
-						a += $(this).val() + ",";
-					});
-					let y = app.service.nullChk([$('#userid').val(), 
-													$('[name="teamid"]:checked').val(),
-													$('[name="subject"]:checked').val(),
-													$('#name').val(),
-													$('#age').val(),
-													$('#roll').val(),
-													$('#password').val(),
-													$('#gender').val()
-					]);
-					if(y.checker){
-	    				$.ajax({
+					if($.fn.nullChk([$('#userid').val(), 
+						$('[name="teamid"]:checked').val(),
+						$('[name="subject"]:checked').val(),
+						$('#name').val(),
+						$('#age').val(),
+						$('#roll').val(),
+						$('#password').val(),
+						$('#gender').val()])
+					){
+						alert('필수 입력값이 입력되지 않았습니다.');
+					}else{
+						let a ='';
+						$('[name="subject"]:checked').each(function() {
+							a += $(this).val() + ",";
+						});
+						$.ajax({
 	    					url : $.ctx() + '/mbr/add',
 	    					method : 'POST',
 	    					contentType : 'application/json',
@@ -268,8 +262,6 @@ app.permission = (()=>{
 	    						alert('에러발생3'+m3);
 	    					}
 	    				});
-					}else{
-						alert(y.msg);
 					}
 				});
 			});
@@ -329,35 +321,7 @@ app.router = {
 	}
 };
 
-user = {
-		session : x => {
-			$.each(x, (k, v)=>{
-				sessionStorage.setItem(k, v);
-			});
-		},
-		get : x =>{
-			return sessionStorage.getItem(x);
-		},
-		onCreate : () => {
-			alert('세션확인'+user.get('userid'));
-			$('#userid').text(user.get('userid'));
-			$('#name').text(user.get('name'));
-			$('#infoTeamid').append(user.get('teamid'));
-			$('#infoRoll').append(user.get('roll'));
-			$('input[name="teamid"]').val([user.get('teamid')]);
-			$('#roll').val(user.get('roll')).prop('selected', true);
-		}
-	};
-
 app.service = {
-	nullChk : x =>{
-		let rs = {
-			checker : true,
-			msg : '필수입력값이 입력되지 않았습니다.'
-		};
-		$(x).each(function(){ if(this === '') rs.checker = false; });
-		return rs;
-	},
 	boards : x =>{
 		$.getJSON($.ctx()+'/boards/'+x,d=>{
 			$.getScript($.script() + '/compo.js',()=>{
@@ -381,43 +345,26 @@ app.service = {
 					).appendTo($('tbody'));
 				});
 				ui.page().appendTo($('#content1'));
-				$('<li/>')
-					.addClass('page-item ' + ((d.page.existPre) ? '' : 'disabled'))
+				for (let i = d.page.startPage-1; i <= d.page.endPage+1; i++) {
+					$('<li/>')
+					.addClass('page-item ' + ((((d.page.startPage-1 == i) && !d.page.existPre) || ((d.page.endPage+1 == i) && !d.page.existNext)) ? 
+												'disabled' :
+												(d.page.pageNum == i) ? 
+												'active' 
+												: ''))
 					.append(
 						$('<span/>')
-							.html('◀︎')
 							.addClass('page-link')
 							.attr({style:'cursor: pointer'})
+							.html((d.page.startPage-1 == i) ? '◀︎' : (d.page.endPage+1 == i) ? '▶︎︎' : i)
 					)
 					.appendTo($('.pagination'))
 					.click(function(){
-						app.service.boards(d.page.pre);
+						//console.log($(this).text());
+						app.service.boards((d.page.startPage-1 == i) ? d.page.pre : (d.page.endPage+1 == i) ? d.page.next : $(this).text());
 					});
-				for (let i = d.page.startPage; i <= d.page.endPage; i++) {
-					$('<li/>').addClass('page-item ' + ((d.page.pageNum == i)? 'active' : '')).append(
-							$('<span/>')
-								.addClass('page-link')
-								.attr({style:'cursor: pointer'})
-								.html(i)
-								.click(function(){
-									//console.log($(this).text());
-									app.service.boards($(this).text());
-								})
-					).appendTo($('.pagination'));
 		        }
-				$('<li/>')
-					.addClass('page-item ' + ((d.page.existNext) ? '' : 'disabled'))
-					.append(
-						$('<span/>')
-							.html('▶︎')
-							.addClass('page-link')
-							.attr({style: 'cursor: pointer'})
-					)
-					.appendTo($('.pagination'))
-					.click(function(){
-						app.service.boards(d.page.next);
-					});
-				});
+			});
 		});
 	},
 	myBoard : x=>{
@@ -444,52 +391,28 @@ app.service = {
 					).appendTo($('tbody'));
 				});
 				ui.page().appendTo($('#content1'));
-				$('<li/>')
-					.addClass('page-item ' + ((d.page.existPre) ? '' : 'disabled'))
+				for (let i = d.page.startPage-1; i <= d.page.endPage+1; i++) {
+					$('<li/>')
+					.addClass('page-item ' + ((((d.page.startPage-1 == i) && !d.page.existPre) || ((d.page.endPage+1 == i) && !d.page.existNext)) ? 
+												'disabled' :
+												(d.page.pageNum == i) ? 
+												'active' 
+												: ''))
 					.append(
 						$('<span/>')
-							.html('◀︎')
 							.addClass('page-link')
 							.attr({style:'cursor: pointer'})
+							.html((d.page.startPage-1 == i) ? '◀︎' : (d.page.endPage+1 == i) ? '▶︎︎' : i)
 					)
 					.appendTo($('.pagination'))
 					.click(function(){
 						app.service.myBoard({
-							id: user.get('userid'),
-							pageNo: d.page.pre
+							id: $.userid(),
+							pageNo : (d.page.startPage-1 == i) ? d.page.pre : (d.page.endPage+1 == i) ? d.page.next : $(this).text()
 						});
 					});
-				for (let i = d.page.startPage; i <= d.page.endPage; i++) {
-					$('<li/>').addClass('page-item ' + ((d.page.pageNum == i)? 'active' : '')).append(
-							$('<span/>')
-								.addClass('page-link')
-								.attr({style:'cursor: pointer'})
-								.html(i)
-								.click(function(){
-									//console.log($(this).text());
-									app.service.myBoard({
-										id: user.get('userid'),
-										pageNo: $(this).text()
-									});
-								})
-					).appendTo($('.pagination'));
 		        }
-				$('<li/>')
-					.addClass('page-item ' + ((d.page.existNext) ? '' : 'disabled'))
-					.append(
-						$('<span/>')
-							.html('▶︎')
-							.addClass('page-link')
-							.attr({style: 'cursor: pointer'})
-					)
-					.appendTo($('.pagination'))
-					.click(function(){
-						app.service.myBoard({
-							id: user.get('userid'),
-							pageNo: d.page.next
-						});
-					});
-				});
+			});
 		});
 	}
 };

@@ -1,8 +1,11 @@
 package com.spring5.web.brd;
 
 
+import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
+import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,18 +49,19 @@ public class BoardCtrl {
 	public @ResponseBody Map<String, Object> mylist(@PathVariable String id, @PathVariable String pageNo) {
 		PageProxy pxy = new PageProxy();
 		map.clear();
+		Function<String[], Object> f = (x) -> {
+			String[] arr = {"startRow", "endRow", "userid"};
+			for(int i = 0; i < arr.length; i++){
+				map.put(arr[i],(i==2) ? x[i] : Integer.parseInt(x[i]));
+			}
+			return (x[3].equals("total")) ? brdmapper.listOne(map).size() : brdmapper.listOne(map);
+		};
 		map.put("pageNum", (pageNo.equals("undefined"))? 1 : Integer.parseInt(pageNo));
-		map.put("userid", id);
-		map.put("startRow", 1);
-		map.put("endRow", brdmapper.countAll());
-		map.put("totalRecode", brdmapper.listOne(map).size());
+		map.put("totalRecode", f.apply(new String[] {"1", String.valueOf(brdmapper.countAll()), id, "total"}));
 		pxy.carraryOut(map);
 		page = pxy.getPagination();
 		map.clear();
-		map.put("userid", id);
-		map.put("startRow", page.getStartRow());
-		map.put("endRow", page.getEndRow());
-		map.put("list", brdmapper.listOne(map));
+		map.put("list", f.apply(new String[] {String.valueOf(page.getStartRow()), String.valueOf(page.getEndRow()), id, ""}));
 		map.put("page", page);
 		return map;
 	}
