@@ -18,7 +18,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                BOARD A
 			WHERE writer LIKE #{userid}
 		)B
-		WHERE B.NUM BETWEEN #{startRow} AND #{endRow}
+		<where>
+  			<if test=" startRow != null and startRow != '' ">
+  				B.NUM BETWEEN #{startRow} AND #{endRow}
+  			</if>
+  		</where>
 		ORDER BY B.NUM
 		
 		<!--
@@ -45,11 +49,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="listAll" resultType="com.spring5.web.brd.Board">
 		SELECT *
 		FROM (
-           SELECT
-               ROW_NUMBER() OVER(ORDER BY BNO DESC) AS NUM,
-               A.*
-           FROM
-               BOARD A
+			SELECT
+				ROW_NUMBER() OVER(ORDER BY BNO DESC) AS NUM,
+				A.*
+			FROM
+				BOARD A
 		)B
 		WHERE B.NUM BETWEEN #{startRow} AND #{endRow}
 		ORDER BY B.NUM

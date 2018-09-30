@@ -52,16 +52,16 @@ public class BoardCtrl {
 		Function<String[], Object> f = (x) -> {
 			String[] arr = {"startRow", "endRow", "userid"};
 			for(int i = 0; i < arr.length; i++){
-				map.put(arr[i],(i==2) ? x[i] : Integer.parseInt(x[i]));
+				map.put(arr[i],(x[i].equals(""))? "" : (i==2) ? x[i] : Integer.parseInt(x[i]));
 			}
-			return (x[3].equals("total")) ? brdmapper.listOne(map).size() : brdmapper.listOne(map);
+			return (x[0].equals("")) ? brdmapper.listOne(map).size() : brdmapper.listOne(map);
 		};
 		map.put("pageNum", (pageNo.equals("undefined"))? 1 : Integer.parseInt(pageNo));
-		map.put("totalRecode", f.apply(new String[] {"1", String.valueOf(brdmapper.countAll()), id, "total"}));
+		map.put("totalRecode", f.apply(new String[] {"", "", id}));
 		pxy.carraryOut(map);
 		page = pxy.getPagination();
 		map.clear();
-		map.put("list", f.apply(new String[] {String.valueOf(page.getStartRow()), String.valueOf(page.getEndRow()), id, ""}));
+		map.put("list", f.apply(new String[] {String.valueOf(page.getStartRow()), String.valueOf(page.getEndRow()), id}));
 		map.put("page", page);
 		return map;
 	}
