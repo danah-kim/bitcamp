@@ -164,40 +164,39 @@ app.permission = (()=>{
 							data : JSON.stringify({userid : $('#id').val(), password : $('#pw').val()}),
 							success : x => {
 								if(typeof x.msg !== "undefined") {
-									}else{
-										$.getScript($.script() + '/router.js', () => {
-											$.extend(new User(x.user));
-											$('#menu1').html('<a id="myMenu" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">'
-													+ '<i class="fa fa-user"></i>'
-													+ '</a>'
-													+ '<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">'
-													+ '<li role="presentation"><a id="myBoard" role="menuitem" tabindex="-1">내게시물</a></li>'
-													+ '<li role="presentation"><a id="modifyMenu" role="menuitem" tabindex="-1">정보수정</a></li>'
-													+ '<li role="presentation"><a id="removeMenu" role="menuitem" tabindex="-1">탈퇴</a></li>'
-													+ '</ul>');
-								$('#menu2').html('<a id="logoutMenu"><i class="fa fa-sign-out"></i></a>');
-								$('#logoutMenu').click (e => {
-									app.init($.ctx());
-									sessionStorage.clear();
-									alert('로그아웃'+$.userid());
-								});
-								$('#myBoard').click(()=>{
-									alert('내게시물'+$.userid())
-									app.service.myBoard({
-										id: $.userid(),
-										pageNo: 1
-									});
-								});
-								$.getScript($.script() + '/fluid.js', ()=>{
-									$('#header1').after(fluidUi($.ctx()));
-								});
-								$.getScript($.script() + '/nav.js', ()=>{
-									$('#header1').after(navUi());
-								});
-								$('#content1').html(contentUi($.ctx()));
-								
+									alert(x.msg);
+								}else{
+									$.getScript($.script() + '/router.js', () => {
+										$.extend(new User(x.user));
+										$('#menu1').html('<a id="myMenu" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">'
+												+ '<i class="fa fa-user"></i>'
+												+ '</a>'
+												+ '<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">'
+												+ '<li role="presentation"><a id="myBoard" role="menuitem" tabindex="-1">내게시물</a></li>'
+												+ '<li role="presentation"><a id="modifyMenu" role="menuitem" tabindex="-1">정보수정</a></li>'
+												+ '<li role="presentation"><a id="removeMenu" role="menuitem" tabindex="-1">탈퇴</a></li>'
+												+ '</ul>');
+										$('#menu2').html('<a id="logoutMenu"><i class="fa fa-sign-out"></i></a>');
+										$('#logoutMenu').click (e => {
+											app.init($.ctx());
+											sessionStorage.clear();
+											alert('로그아웃'+$.userid());
 										});
-									}
+										$('#myBoard').click(()=>{
+											app.service.myBoard({
+												id: $.userid(),
+												pageNo: 1
+											});
+										});
+										$.getScript($.script() + '/fluid.js', ()=>{
+											$('#header1').after(fluidUi($.ctx()));
+										});
+										$.getScript($.script() + '/nav.js', ()=>{
+											$('#header1').after(navUi());
+										});
+										$('#content1').html(contentUi($.ctx()));
+									});
+								}
 							},
 							error : (m1, m2, m3)=>{
 								alert('에러발생1'+m1);
@@ -206,7 +205,6 @@ app.permission = (()=>{
 							}
 						});
 					}
-					
 				});
 			});
 		});
@@ -323,8 +321,8 @@ app.router = {
 
 app.service = {
 	boards : x =>{
-		$.getJSON($.ctx()+'/boards/'+x,d=>{
-			$.getScript($.script() + '/compo.js',()=>{
+		$.getJSON($.ctx()+'/boards/'+x, d=>{
+			$.getScript($.script() + '/compo.js', ()=>{
 				$('#content1').empty();
 				(ui.table({
 					type : 'primary',
@@ -368,7 +366,7 @@ app.service = {
 		});
 	},
 	myBoard : x=>{
-		$.getJSON($.ctx()+'/boards/'+x.id+'/'+x.pageNo, d=>{
+		$.getJSON($.ctx()+'/boards/'+x.id+'/'+x.pageNo+'/'+x.boardNo, d=>{
 			$.getScript($.script() + '/compo.js',()=>{
 				$('#fluid1').remove();
 				$('#content1').empty();
@@ -377,17 +375,43 @@ app.service = {
 					id: 'table',
 					head: '게시판',
 					body: '오픈게시판...누구든지사용가능',
-					list:['No', '제목', '내용', '작성일','작성자', '조회수'],
+					list:['No', '제목', '내용', '작성일','작성자', '조회수', '삭제'],
 					clazz : 'table table-bordered'
 				})).appendTo($('#content1'));
 				$(d.list).each(function() {
 					$('<tr/>').append(
 						$('<td/>').attr({style:'width:5%'}).html(this.bno),
-						$('<td/>').attr({style:'width:10%'}).html(this.title),
+						$('<td/>')
+						.attr({style:'width:10%; cursor: pointer'})
+						.html(this.title)
+						.click(()=>{
+							app.service.updateBoard({
+								id: $.userid(),
+								boardNo: $(this)[0].bno
+							});
+						}),
 						$('<td/>').attr({style:'width:50%'}).html(this.content),
 						$('<td/>').attr({style:'width:10%'}).html(this.regdate),
 						$('<td/>').attr({style:'width:10%'}).html(this.writer),
-						$('<td/>').attr({style:'width:5%'}).html(this.viewcnt)
+						$('<td/>').attr({style:'width:5%'}).html(this.viewcnt),
+						$('<td/>').attr({style:'width:5%'})
+						.append(
+							$('<input/>')
+							.attr({type: 'checkbox', name: 'boardChk', value: this.bno}
+							)
+							.click(()=>{
+								if(confirm('삭제하시겠습니까?')){
+									alert('삭제완료');
+									$.getJSON($.ctx()+'/boards/remove/'+$(this).val(),d=>{
+										app.service.myBoard({
+											id: $.userid(),
+										});
+									});
+								}else{
+									$(this).prop('checked', false);
+								}
+							})
+						)
 					).appendTo($('tbody'));
 				});
 				ui.page().appendTo($('#content1'));
@@ -412,6 +436,128 @@ app.service = {
 						});
 					});
 		        }
+				$('<div/>')
+				.addClass('btn-group')
+				.attr({role: 'group', style: 'float: right;'})
+				.append(
+					$('<button/>')
+					.addClass('btn btn-default')
+					.attr({id: 'boardUpdate', type: 'button'})
+					.html('등록')
+					.click(()=>{
+						app.service.addBoard();
+					})
+				)
+				.appendTo($('#content1'));
+			});
+		});
+	},
+	addBoard : x=>{
+			$.getScript($.script() + '/compo.js',()=>{
+				$('#content1').empty();
+				(ui.table({
+					type : 'primary',
+					id: 'table',
+					head: '게시글 작성하기',
+					list:['제목', '내용', '작성일','작성자'],
+					clazz : 'table table-bordered'
+				})).appendTo($('#content1'));
+				$('<tr/>').append(
+					$('<td/>').attr({style:'width:5%'}).append($('<input/>').attr({type: 'text', id: 'title'})),
+					$('<td/>').attr({style:'width:50%'}).append($('<input/>').attr({type: 'text', id: 'content'})),
+					$('<td/>').attr({style:'width:10%', type: 'text', id: 'regdate'}).html(new Date().getFullYear()+'-'+(new Date().getMonth()+1)+'-'+new Date().getDate()),
+					$('<td/>').attr({style:'width:10%', type: 'text', id: 'writer'}).html($.userid())
+				).appendTo($('tbody'));
+				$('<div/>')
+				.addClass('btn-group')
+				.attr({role: 'group', style: 'float: right;'})
+				.append(
+					$('<button/>')
+					.addClass('btn btn-default')
+					.attr({id: 'boardUpdate', type: 'button'})
+					.html('저장')
+					.click(x=>{
+						x.preventDefault();
+						if($.fn.nullChk([$('#title').val(), $('#content').val()])){
+							alert('필수 입력값이 입력되지 않았습니다.');
+						}else{
+							$.ajax({
+								url : $.ctx() + '/boards/add',
+								method : 'POST',
+								contentType : 'application/json',
+								data : JSON.stringify({title : $('#title').val(), 
+														content : $('#content').val(),
+														writer : $.userid()}),
+								success : x => {
+									app.service.myBoard({
+										id: $.userid()
+									});
+								},
+								error : (m1, m2, m3)=>{
+									alert('에러발생1'+m1);
+									alert('에러발생2'+m2);
+									alert('에러발생3'+m3);
+								}
+							});
+						}
+					})
+				)
+				.appendTo($('#content1'));
+			});
+	},
+	updateBoard : x=>{
+		$.getJSON($.ctx()+'/boards/'+x.id+'/'+x.pageNo+'/'+x.boardNo, d=>{
+			$.getScript($.script() + '/compo.js',()=>{
+				$('#fluid1').remove();
+				$('#content1').empty();
+				(ui.table({
+					type : 'primary',
+					id: 'table',
+					head: '수정하기',
+					list:['제목', '내용', '작성일','작성자'],
+					clazz : 'table table-bordered'
+				})).appendTo($('#content1'));
+				$('<tr/>').append(
+					$('<td/>').attr({style:'width:10%'}).append($('<input/>').attr({type: 'text', id: 'title'}).val(d.list[0].title)),
+					$('<td/>').attr({style:'width:50%'}).append($('<input/>').attr({type: 'text', id: 'content'}).val(d.list[0].content)),
+					$('<td/>').attr({style:'width:10%'}).html(d.list[0].regdate),
+					$('<td/>').attr({style:'width:10%'}).html(d.list[0].writer)
+				).appendTo($('tbody'));
+				$('<div/>')
+				.addClass('btn-group')
+				.attr({role: 'group', style: 'float: right;'})
+				.append(
+					$('<button/>')
+					.addClass('btn btn-default')
+					.attr({id: 'boardUpdate', type: 'button', value: d.list[0].bno})
+					.html('저장')
+					.click(function(){
+						if($.fn.nullChk([$('#title').val(), $('#content').val()])){
+							alert('필수 입력값이 입력되지 않았습니다.');
+						}else{
+							$.ajax({
+								url : $.ctx() + '/boards/update',
+								method : 'POST',
+								contentType : 'application/json',
+								data : JSON.stringify({bno : $(this).val(),
+														title : $('#title').val(), 
+														content : $('#content').val()}
+								),
+								success : x => {
+									app.service.myBoard({
+										id: $.userid()
+									});
+								},
+								error : (m1, m2, m3)=>{
+									alert('에러발생1'+m1);
+									alert('에러발생2'+m2);
+									alert('에러발생3'+m3);
+								}
+							});
+						}
+					})
+				)
+				.appendTo($('#content1'));
 			});
 		});
 	}

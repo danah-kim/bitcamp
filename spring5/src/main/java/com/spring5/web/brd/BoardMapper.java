@@ -12,17 +12,15 @@ import com.spring5.web.page.Pagination;
 
 @Repository
 public interface BoardMapper {
-	public void create(Board vo) throws Exception;
-
+	public void create(Board p);
+	public List<Board> listAll(Pagination p);
+	public List<Board> listOne(Map p);
+	public int countAll();
+	public void update(Board p) ;
+	public void delete(Board p) ;
+	  
+	  
 	  public Board read(Integer bno) throws Exception;
-
-	  public void update(Board vo) throws Exception;
-
-	  public void delete(Integer bno) throws Exception;
-
-	  public List<Board> listAll(Pagination p);
-	  public int countAll();
-	  public List<Board> listOne(Map p);
 
 	  public List<Board> listPage(int page) throws Exception;
 
