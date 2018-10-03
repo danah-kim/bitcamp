@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<update id="update">
 		UPDATE board 
-		SET title =#{title}, content =#{content}
+		SET title = #{title}, content = #{content}
 		WHERE bno = #{bno}
 	</update>
 

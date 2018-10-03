@@ -27,12 +27,14 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins 
          folder instead of downloading all of them to reduce the load. -->
     <link href="${context}/resources/other_resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+    
 </head>
 <body>
 	<div id="wrapper">
 	</div>
 	<script type='text/javascript' src='${context}/resources/js/swiper.min.js'></script>
 	<script type='text/javascript' src='${context}/resources/js/custom.js'></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 	<script src="${context}/resources/js/app.js"></script>
 	<script>
 		app.init('${context}');

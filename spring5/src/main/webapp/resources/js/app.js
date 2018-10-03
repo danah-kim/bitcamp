@@ -1,86 +1,6 @@
 "use strict";
 var app = app || {};
 var user = user || {};
-//app.init = (()=>{
-//	var init = x => {
-//		console.log('step1');
-//		app.session.context(x);
-//		app.onCreate();
-//		user.onCreate();
-//	};
-//	var onCreate = ()=>{
-//		console.log('step3');
-//		app.setContentView();
-//		$('#addMenu').click (() => {
-//			location.href = app.x() + '/move/auth/member/add';
-//		});
-//		$('#modifyMenu').click (()=>{
-//			location.href = app.x() + '/move/member/member/modify';
-//		});
-//		$('#removeMenu').click (()=>{
-//			location.href = app.x() + '/move/member/member/remove';
-//		});
-//		$('#loginMenu').click (() => {
-//			location.href = app.x() + '/move/auth/member/login';
-//		});
-//		$('#logoutMenu').click (() => {
-//			location.href = app.x() + '/member/logout';
-//			sessionStorage.clear();
-//		});
-//		$('#addBtn').click (() => {
-//			alert('가입버튼클릭');
-//			$('#addForm')
-//			.attr({
-//				action : app.x()+"/member/add", 
-//				method : "POST"})
-//			.submit();
-//		});
-//		$('#searchBtn').click (() => {
-//			alert('검색버튼클릭');
-//			var search = $('.searchInfo');
-//			$('#searchForm')
-//			.attr({
-//				action : app.x()+ '/member/serach'
-//					+ '/condition=' + search[0].value 
-//					+ '/word=' + search[1].value,
-//				method : "GET"})
-//			.submit();
-//		});
-//		$('#modifyBtn').click (() => {
-//			alert('수정버튼클릭');
-//			$('#modifyForm')
-//			.append('<input type="hidden" name="userid" value="' + user.get('userid') + '"/>')
-//			.attr({
-//				action : app.x()+"/member/modify",
-//				method : "POST"})
-//			.submit();
-//		});
-//		$('#removeBtn').click (() => {
-//			alert('삭제버튼클릭');
-//			$('removeForm')
-//			.append('<input type="hidden" name="userid" value="' + user.get('userid') + '"/>')
-//			.attr({
-//				action : app.x() + "/member/remove",
-//				method : "POST"
-//			})
-//			.submit();
-//		});
-//		$('#loginBtn').click (() => {
-//			$('#loginForm')
-//			.attr({
-//				action : app.x() + "/member/login",
-//				method : "POST"
-//			})
-//			.submit();
-//		});
-//	};
-//	var setContentView = ()=>{
-//		console.log('step4'+ app.session.path('js'));
-//	};
-//	return{
-//		init : init,
-//	};
-//})();
 app = (()=>{
 	var init =x=>{
 		app.router.init(x);
@@ -168,6 +88,7 @@ app.permission = (()=>{
 								}else{
 									$.getScript($.script() + '/router.js', () => {
 										$.extend(new User(x.user));
+										$.cookie("logID", x.user.userid);
 										$('#menu1').html('<a id="myMenu" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">'
 												+ '<i class="fa fa-user"></i>'
 												+ '</a>'
@@ -180,7 +101,9 @@ app.permission = (()=>{
 										$('#logoutMenu').click (e => {
 											app.init($.ctx());
 											sessionStorage.clear();
+											$.removeCookie("logID");
 											alert('로그아웃'+$.userid());
+											alert($.cookie("logID"));
 										});
 										$('#myBoard').click(()=>{
 											app.service.myBoard({
@@ -312,6 +235,39 @@ app.router = {
 	    		x.preventDefault();
 				app.board.init();
 			});
+	    	$('#dragMenu').click(x=>{
+	    		alert('클릭');
+	    		x.preventDefault();
+	    		$('#content1').html(
+	    			'<h3>Ajax File Upload</h3>'
+	    			+'<div class="fileDrop"></div>'
+	    			+'<div class="uploadedList"></div>'
+	    		);
+	    		$(".fileDrop")
+                .attr('style','width:100%;height:200px;border:1px dotted blue')
+                .on('dragenter dragover',e=>{
+                    e.preventDefault();
+                })
+                $(".fileDrop").on('drop',e=>{
+                    e.preventDefault();
+                    var files = e.originalEvent.dataTransfer.files;
+                    var file = files[0];
+                    console.log(file);
+                    var formData = new FormData();
+                    formData.append('file',file);
+                    $.ajax({
+                        url:$.ctx()+'/uploadAjax',
+                        data : formData,
+                        dataType:'text',
+                        processData:false,
+                        contentType:false,
+                        type:'post',
+                        success:d=>{
+                            alert(d);
+                        }
+                    })
+                })
+			});
 	    })
 	    .fail(x=>{
 	    	alert('실패?');
@@ -387,7 +343,7 @@ app.service = {
 						.click(()=>{
 							app.service.updateBoard({
 								id: $.userid(),
-								boardNo: $(this)[0].bno
+								boardNo: this.bno
 							});
 						}),
 						$('<td/>').attr({style:'width:50%'}).html(this.content),
@@ -397,15 +353,28 @@ app.service = {
 						$('<td/>').attr({style:'width:5%'})
 						.append(
 							$('<input/>')
-							.attr({type: 'checkbox', name: 'boardChk', value: this.bno}
+							.attr({type: 'checkbox', name: 'boardChk'}
 							)
 							.click(()=>{
 								if(confirm('삭제하시겠습니까?')){
 									alert('삭제완료');
-									$.getJSON($.ctx()+'/boards/remove/'+$(this).val(),d=>{
-										app.service.myBoard({
-											id: $.userid(),
-										});
+									console.log(this.bno);
+									$.ajax({
+										url : $.ctx() + '/boards/remove',
+										method : 'POST',
+										contentType : 'application/json',
+										data : JSON.stringify({boardNo : this.bno,
+																userid : $.userid()}),
+										success : x => {
+											app.service.myBoard({
+												id: $.userid()
+											});
+										},
+										error : (m1, m2, m3)=>{
+											alert('에러발생1'+m1);
+											alert('에러발생2'+m2);
+											alert('에러발생3'+m3);
+										}
 									});
 								}else{
 									$(this).prop('checked', false);
@@ -472,6 +441,25 @@ app.service = {
 				.addClass('btn-group')
 				.attr({role: 'group', style: 'float: right;'})
 				.append(
+						$('<form id = "frm" action = "uploadForm" '
+								+' method="post" enctype="multipart/form-data"  />'
+								+'<input type = "file" name="file">'
+								+'<input type = "submit">'
+								+'</form>')
+							.click(e=>{
+								    $.ajax({
+								        url:$.ctx()+'/boards/fileupload',
+								        type:'POST',
+								        data:new FormData($('frm')),
+								        async:false,
+								        cache:false,
+								        contentType:false,
+								        processData:false
+								    }).done(function(response){
+								        alert(response);
+								    });
+							}),
+							$('<br/>'),
 					$('<button/>')
 					.addClass('btn btn-default')
 					.attr({id: 'boardUpdate', type: 'button'})
