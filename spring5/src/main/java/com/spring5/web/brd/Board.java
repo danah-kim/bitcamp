@@ -1,8 +1,12 @@
 package com.spring5.web.brd;
 
 
+import java.util.List;
+
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+
+import com.spring5.web.mbr.Member;
 
 import lombok.Data;
 
@@ -17,7 +21,6 @@ public class Board {
 	private String regdate;
 	private int viewcnt;
 	private int replycnt;
-	
-	private String[] files;
-			
+	private Member mbr;
+	private List<Attach> attachs;
 }

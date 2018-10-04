@@ -73,14 +73,13 @@
 			</props>
 		</property>
 	</bean>
-	<!-- 
+	<bean id="sampleInterceptor" class="com.spring5.web.interceptors.LoginInterceptor"></bean>
     <mvc:interceptors>
-			<mvc:interceptor>
-				<mvc:mapping path="/"/>
-				<bean class="com.spring5.web.interceptors.LoginInterceptor" />
-			</mvc:interceptor>
+    	<mvc:interceptor>
+			<mvc:mapping path="/mbr/login"/>
+			<ref bean="sampleInterceptor" />
+		</mvc:interceptor>
 	</mvc:interceptors>
-	 -->
 	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManager">
         <constructor-arg>
             <bean class="org.springframework.web.accept.PathExtensionContentNegotiationStrategy">

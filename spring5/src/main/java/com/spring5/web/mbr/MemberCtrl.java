@@ -64,7 +64,7 @@ public class MemberCtrl {
 		return map;
 	}
 	
-	@RequestMapping(value="/modify", method=RequestMethod.POST)
+	@PostMapping("/modify")
 	public String modify(@ModelAttribute("user") Member user,
 						@RequestParam Map<String, String> map,
 							Model model) {
@@ -75,7 +75,7 @@ public class MemberCtrl {
 		//model.addAttribute("user", mapper.selectOne(user));
 		return "redirect:/move/member/member/retrieve";
 	}
-	@RequestMapping(value="/remove", method=RequestMethod.POST)
+	@PostMapping("/remove")
 	public String remove(@ModelAttribute("user") Member user) {
 		Util.log.accept("MemberContoller remove");
 		Map<String, String> map = new HashMap<>();
@@ -84,6 +84,26 @@ public class MemberCtrl {
 		//mapper.delete(map);
 		return "redirect:/move/public/common/content";
 	}
+	@GetMapping("/auth")
+	public @ResponseBody Map<String,Object> auth(@RequestBody Member param){
+		Util.log.accept("MemberContoller login");
+		Map<String, Object> map = new HashMap<>();
+		if(mapper.count(param)!=0) {
+			Function<Member, Member> f = (t) -> {
+				return mapper.get(t);
+			};
+			member = f.apply(param);
+			if(member != null) {
+				map.put("user", member);
+			}else {
+				map.put("msg","비밀번호가 일치하지 않음");
+			}
+		}else {
+			map.put("msg","아이디가 존재하지 않음");	
+		}
+		return map;
+	}
+	
 	@PostMapping("/login")
 	public @ResponseBody Map<String, Object> login(@RequestBody Member param){
 		Util.log.accept("MemberContoller login");
