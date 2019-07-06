@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+<<<<<<< HEAD
     <wb-module deploy-name="GMS">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <property name="java-output-path" value="/GMS/build/classes"/>
         <property name="context-root" value="GMS"/>
+=======
+    <wb-module deploy-name="GMS-Model1">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <property name="context-root" value="GMS-Model1"/>
+        <property name="java-output-path" value="/GMS-Model1/build/classes"/>
+>>>>>>> 2ebeae245fd4181f68eeb9c5e47707ab23d4be8d
     </wb-module>
 </project-modules>
