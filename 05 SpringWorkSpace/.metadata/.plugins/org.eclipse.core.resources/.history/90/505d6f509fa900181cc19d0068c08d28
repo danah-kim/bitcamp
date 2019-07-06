@@ -1,0 +1,7 @@
+package com.gms.web.test;
+
+public class MariadbConn {
+	public static void main(String[] args) {
+		
+	}
+}

@@ -1,0 +1,29 @@
+"use strict";
+var app = app || {};
+app = {
+	init : x => {
+		alert('step1');
+		app.session.context(x);
+		onCreate();
+	},
+	onCreate : ()=>{
+		alert('step3');
+		setContentView();
+	},
+	setContentView : ()=>{
+		alert('step4'+ app.session.path('js'));
+	}
+};
+app.session = {
+	context : x => {
+		alert('step2 : ' + x);
+		sessionSrotage.setItem('context', x);
+		sessionSrotage.setItem('js', x + '/resources/js');
+		sessionSrotage.setItem('css', x + '/resources/css');
+		sessionSrotage.setItem('img', x + '/resources/img');
+		
+	},
+	path : x => {
+		return sessionSrotage.getItem(x);
+	}
+};

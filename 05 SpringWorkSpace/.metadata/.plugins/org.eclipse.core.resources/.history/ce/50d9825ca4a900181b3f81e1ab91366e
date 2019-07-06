@@ -1,0 +1,14 @@
+package com.gms.web.test;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class MariadbCon {
+
+	@Test
+	public void test() {
+		fail("Not yet implemented");
+	}
+
+}

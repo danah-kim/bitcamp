@@ -1,0 +1,31 @@
+package com.gms.web.test;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class MariadbConn {
+	public static void main(String[] args) {
+		class JDBCTest {
+		        try {
+		            Class.forName("oracle.jdbc.driver.OracleDriver");
+		            Connection con = DriverManager.getConnection("jdbc:oracle:thin:@호스트:포트번호:DB이름", "아이디", "비밀번호");
+		            Statement stmt = con.createStatement();
+		 
+		            String sql = "SELECT COUNT(*) AS count FROM TAB";
+		            ResultSet rs = stmt.executeQuery(sql);
+		            String count = "";
+		            while(rs.next()) {
+		                count = rs.getString("count");
+		            }
+		 
+		            System.out.println("테이블갯수"+count);
+		 
+		            con.close( );
+		         } catch (Exception e) {
+		            e.printStackTrace();
+		            }
+		}
+	}
+}

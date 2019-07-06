@@ -1,0 +1,79 @@
+package com.gms.web.service.impl;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.gms.web.controller.HomeController;
+import com.gms.web.domain.MemberDTO;
+import com.gms.web.repository.MemberDAO;
+import com.gms.web.service.MemberService;
+@Service
+public class MemberServiceImpl implements MemberService{
+	static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	@Autowired MemberDAO memberDAO;
+	@Override
+	public void add(MemberDTO p) {
+		logger.info("MemberService add");
+		p.setSsn(p.getAge()+"-"+p.getGender());
+		switch (p.getGender()) {
+		case "1" : case "3" : case "5" :
+			p.setGender("남자");
+			break;
+		case "2" : case "4" : case "6" :
+			p.setGender("여자");
+			break;
+		default:
+			break;
+		}
+		String year = new SimpleDateFormat("yyyy").format(new Date());
+		p.setAge(String.valueOf(Integer.parseInt(year) - Integer.parseInt(19 + p.getAge().substring(0, 2)) + 1));
+		logger.info("주민번호 확인 : " + p.getSsn());
+		logger.info("성별확인 : " + p.getGender());
+		logger.info("나이확인 : " + p.getAge());
+		memberDAO.insert(p);
+	}
+
+	@Override
+	public List<?> list(Map<?, ?> p) {
+		return memberDAO.selectList(p);
+	}
+
+	@Override
+	public List<?> search(Map<?, ?> p) {
+		return memberDAO.selectSome(p);
+	}
+
+	@Override
+	public MemberDTO retrieve(Map<?, ?> p) {
+		logger.info("MemberService retrieve");
+		return memberDAO.selectOne(p);
+	}
+
+	@Override
+	public int count(Map<?, ?> p) {
+		return memberDAO.count(p);
+	}
+
+	@Override
+	public void modify(Map<?, ?> p) {
+		memberDAO.update(p);
+	}
+
+	@Override
+	public void remove(Map<?, ?> p) {
+		memberDAO.delete(p);
+	}
+
+	@Override
+	public boolean login(MemberDTO p) {
+		logger.info("MemberService login");
+		return (Boolean) memberDAO.login(p);
+	}
+}

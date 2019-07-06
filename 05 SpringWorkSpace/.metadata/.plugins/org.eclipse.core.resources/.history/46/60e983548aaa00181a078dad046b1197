@@ -1,0 +1,71 @@
+package com.gms.web.service.impl;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.gms.web.domain.MemberDTO;
+import com.gms.web.repository.MemberDAO;
+import com.gms.web.service.MemberService;
+@Service
+public class MemberServiceImpl implements MemberService{
+	@Autowired MemberDAO memberDAO;
+	@Override
+	public void add(MemberDTO p) {
+		String rs = "";
+		switch (p.getGender()) {
+		case "1" : case "3" : case "5" :
+			rs = "남자";
+			break;
+		case "2" : case "4" : case "6" :
+			rs = "여자";
+			break;
+		default:
+			rs = "?";
+			break;
+		}
+		
+		p.setSsn(p.getAge()+"-"+p.getGender());
+		p.setGender(rs);
+		p.setAge("");
+		
+		memberDAO.insert(p);
+	}
+
+	@Override
+	public List<?> list(Map<?, ?> p) {
+		return memberDAO.selectList(p);
+	}
+
+	@Override
+	public List<?> search(Map<?, ?> p) {
+		return memberDAO.selectSome(p);
+	}
+
+	@Override
+	public MemberDTO retrieve(Map<?, ?> p) {
+		return memberDAO.selectOne(p);
+	}
+
+	@Override
+	public int count(Map<?, ?> p) {
+		return memberDAO.count(p);
+	}
+
+	@Override
+	public void modify(Map<?, ?> p) {
+		memberDAO.update(p);
+	}
+
+	@Override
+	public void remove(Map<?, ?> p) {
+		memberDAO.delete(p);
+	}
+
+	@Override
+	public boolean login(Map<?, ?> p) {
+		return memberDAO.login(p);
+	}
+}

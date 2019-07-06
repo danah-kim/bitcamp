@@ -1,0 +1,12 @@
+defaultTernModules=ecma6,jquery
+eclipse.preferences.version=1
+hashBang=0
+importExportOutsideOfTopBlock=2
+loadingLocalPlugin=false
+pebbleSyntax=2
+repositories=
+reservedWordsInPropNames=1
+returnOutsideOfFunction=1
+syntaxErrors=2
+traceOnConsole=false
+used-repository-name=default

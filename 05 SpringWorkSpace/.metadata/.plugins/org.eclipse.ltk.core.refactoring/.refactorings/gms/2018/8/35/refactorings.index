@@ -1,0 +1,29 @@
+1535332688867	Rename type 'Conn'
+1535338397973	Rename type 'DataSourceTest'
+1535338402668	Delete element
+1535338420674	Delete element
+1535339098920	Rename package 'com.gms.web'
+1535339272604	Rename package 'com.gms.web.test'
+1535339439358	Delete element
+1535355556549	Delete element
+1535355740949	Delete element
+1535355804094	Rename resource 'Member.Mapper.xml'
+1535355816534	Rename resource 'Member.apper.xml'
+1535355916359	Rename resource 'com.gms.web'
+1535356026424	Delete elements
+1535356033137	Delete elements
+1535356114240	Delete elements
+1535358857996	Rename type 'MemberDAOImpl'
+1535359565669	Delete element
+1535360403915	Rename package 'com.gms.web.repository.impl'
+1535360477146	Rename package 'com.gms.web.repository.impl'
+1535416729617	Delete element
+1535416818757	Delete element
+1535462556245	Delete element
+1535507609825	Delete element
+1535525005502	Delete element
+1535525019795	Rename package 'com.gms.web.repository'
+1535525041664	Rename type 'MemberDAO'
+1535525052806	Rename type 'ImageDAO'
+1535528612849	Delete element
+1535588730516	Copy file

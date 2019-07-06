@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring5.web.mbr.MemberMapper">
+	<resultMap type="com.spring5.web.mbr.Member" id="mbr">
+		<id property="userid" column="USERID"></id>
+		<result property="teamid" column="TEAMID"></result>
+		<result property="name" column="NAME"></result>
+		<result property="age" column="AGE"></result>
+		<result property="roll" column="ROLL"></result>
+		<result property="password" column="PASSWORD"></result>
+		<result property="ssn" column="SSN"></result>
+		<result property="gender" column="GENDER"></result>
+		<result property="subject" column="SUBJECT"></result>
+		<result property="phone" column="PHONE"></result>
+		<result property="email" column="EMAIL"></result>
+	</resultMap>
+	<insert id="post">
+		INSERT INTO MEMBER
+		(USERID, TEAMID, NAME, AGE, ROLL, PASSWORD, SSN, GENDER, SUBJECT, PHONE, EMAIL)
+		VALUES(#{userid}, #{teamid}, #{name}, #{age}, #{roll}, #{password}, #{ssn}, #{gender}, #{subject}, #{phone}, #{email});
+	</insert>
+	<select id="list" resultType="mbr">
+		SELECT * 
+		FROM MEMBER
+		
+	</select>
+	<select id="get" resultType="mbr">
+  		SELECT 
+  		USERID, TEAMID, NAME, AGE, ROLL, PASSWORD, SSN, GENDER, SUBJECT, PHONE, EMAIL
+  		FROM MEMBER
+  		<where>
+  			<if test=" userid != null and userid != '' ">
+  				USERID LIKE #{userid}
+  			</if>
+  			<if test=" password != null and password != '' ">
+  				AND PASSWORD LIKE #{password}
+  			</if>
+  		</where>
+	</select>
+	<select id="count" resultType="int">
+  		SELECT COUNT(*) FROM MEMBER
+  		<where>
+  			<if test=" userid != null and userid != '' ">
+  				USERID LIKE #{userid}
+  			</if>
+  		</where>
+	</select>
+	<update id="update">
+  		UPDATE MEMBER SET
+   		PASSWORD = #{password},
+    	TEAMID = #{teamid},
+    	ROLL = #{roll}
+  		WHERE USERID LIKE #{userid}
+	</update>
+	<delete id="delete">
+  		DELETE 
+  		FROM MEMBER
+  		WHERE USERID LIKE #{userid}
+  		AND PASSWORD LIKE #{password}
+	</delete>
+</mapper>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring5.web.brd.BoardMapper">
+	<insert id="create">
+		INSERT INTO board (title, content, writer)
+		values(#{title}, #{content}, #{writer})
+	</insert>
+	
+	<update id="update">
+		UPDATE board 
+		SET title = #{title}, content = #{content}
+		WHERE bno = #{bno}
+	</update>
+
+	<select id="listAll" resultType="com.spring5.web.brd.Board">
+		SELECT *
+		FROM (
+			SELECT
+				ROW_NUMBER() OVER(ORDER BY BNO DESC) AS NUM,
+				A.*
+			FROM
+				BOARD A
+		)B
+		WHERE B.NUM BETWEEN #{startRow} AND #{endRow}
+		ORDER BY B.NUM
+		
+		<!--
+		SELECT * 
+		FROM board 
+		ORDER BY bno DESC
+		LIMIT #{startRow}, #{recodeSize}
+		-->
+	</select>
+	
+		<select id="listOne" resultType="com.spring5.web.brd.Board">
+		SELECT *
+		FROM (
+			SELECT
+				ROW_NUMBER() OVER(ORDER BY BNO DESC) AS NUM,
+				A.*
+			FROM
+               BOARD A
+		<where>
+			<if test=" userid != null and userid != '' ">
+  				writer LIKE #{userid}
+  			</if>
+  			<if test=" boardNo != null and boardNo != '' ">
+  				AND bno LIKE #{boardNo}
+  			</if>
+  		</where>   
+		)B
+		<where>
+  			<if test=" startRow != null and startRow != '' ">
+  				B.NUM BETWEEN #{startRow} AND #{endRow}
+  			</if>
+  		</where>
+		ORDER BY B.NUM
+	</select>
+	
+	<select id="countAll" resultType="int">
+		SELECT COUNT(*)
+		FROM board
+	</select>
+	
+	<delete id="delete">
+		DELETE 
+		FROM board 
+		WHERE bno LIKE #{bno}
+	</delete>
+	
+<!-- 
+	<select id="read" resultType="org.zerock.domain.BoardVO">
+		select
+		bno, title, content, writer, regdate, viewcnt , replycnt
+		from
+		tbl_board
+		where bno = #{bno}
+	</select>
+	<select id="listPage" resultType="BoardVO">
+ <![CDATA[
+ select 
+   bno, title, content, writer, regdate, viewcnt , replycnt
+ from 
+   tbl_board 
+ where bno > 0 
+ order by bno desc, regdate desc
+ limit #{page}, 10
+ ]]>
+	</select>
+
+	<select id="listCriteria" resultType="BoardVO">
+ <![CDATA[
+ select 
+   bno, title, content, writer, regdate, viewcnt , replycnt
+ from 
+   tbl_board 
+ where bno > 0 
+ order by bno desc, regdate desc
+ limit #{pageStart}, #{perPageNum}
+ ]]>
+	</select>
+
+
+	<select id="countPaging" resultType="int">
+ <![CDATA[
+ select 
+   count(bno) 
+ from 
+   tbl_board 
+ where 
+   bno > 0 
+ ]]>
+	</select>
+
+
+
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				and title like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'c'.toString()">
+				and content like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'w'.toString()">
+				and writer like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'tc'.toString()">
+				and ( title like CONCAT('%', #{keyword}, '%') OR content like
+				CONCAT('%', #{keyword}, '%'))
+			</if>
+			<if test="searchType == 'cw'.toString()">
+				and ( content like CONCAT('%', #{keyword}, '%') OR writer like
+				CONCAT('%', #{keyword}, '%'))
+			</if>
+			<if test="searchType == 'tcw'.toString()">
+				and ( title like CONCAT('%', #{keyword}, '%')
+				OR
+				content like CONCAT('%', #{keyword}, '%')
+				OR
+				writer like CONCAT('%', #{keyword}, '%'))
+			</if>
+		</if>
+	</sql>
+
+	<select id="listSearch" resultType="BoardVO">
+<![CDATA[  
+  select * 
+  from tbl_board 
+  where bno > 0 
+]]>
+
+		<include refid="search"></include>
+  
+<![CDATA[    
+  order by bno desc
+  limit #{pageStart}, #{perPageNum}
+]]>
+	</select>
+
+	<select id="listSearchCount" resultType="int">
+<![CDATA[  
+  select count(bno) 
+  from tbl_board 
+  where bno > 0 
+]]>
+		<include refid="search"></include>
+
+	</select>
+
+
+ 
+<update id="updateReplyCnt">
+  update tbl_board set replycnt = replycnt + #{amount} where bno = #{bno}
+</update>
+
+
+<update id="updateViewCnt">
+  update tbl_board set viewcnt = viewcnt +1 where bno = #{bno}
+</update>
+
+
+ 
+<insert id="addAttach">
+insert into tbl_attach(fullname, bno) values (#{fullName}, LAST_INSERT_ID())
+</insert> 
+
+
+<select id="getAttach" resultType="string">
+select fullname from tbl_attach where bno = #{bno} order by regdate
+</select> 
+
+ 
+<delete id="deleteAttach">
+delete from tbl_attach where bno = #{bno}
+</delete>
+
+<insert id="replaceAttach">
+insert into tbl_attach(fullname, bno) values (#{fullName}, #{bno})
+</insert>-->
+  
+ 
+</mapper>

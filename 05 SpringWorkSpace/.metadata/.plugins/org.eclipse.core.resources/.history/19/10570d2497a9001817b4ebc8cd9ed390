@@ -1,0 +1,5 @@
+package com.gms.web.test;
+
+public class MariadbConn {
+
+}

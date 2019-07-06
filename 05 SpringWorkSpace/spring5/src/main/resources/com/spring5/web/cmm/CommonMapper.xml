@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring5.web.brd.CommonMapper">
+	<resultMap id="attach" type="com.spring5.web.brd.Attach">
+		<id property="seq" column="seq"/>
+		<result property="name" column="name"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+	</resultMap>
+	<resultMap id="boardDetail" type="com.spring5.web.brd.Board">
+		<id property="bno" column="bno"></id>
+		<result property="title" column="title"></result>
+		<result property="content" column="content"></result>
+		<result property="writer" column="writer"></result>
+		<result property="regdate" column="regdate"></result>
+		<result property="viewcnt" column="viewcnt"></result>
+		<result property="replycnt" column="replycnt"></result>
+		<association property="mbr" javaType="Member">
+			<id property="userid" column="USERID"></id>
+			<result property="teamid" column="TEAMID"></result>
+			<result property="name" column="NAME"></result>
+			<result property="age" column="AGE"></result>
+			<result property="roll" column="ROLL"></result>
+			<result property="password" column="PASSWORD"></result>
+			<result property="ssn" column="SSN"></result>
+			<result property="gender" column="GENDER"></result>
+			<result property="subject" column="SUBJECT"></result>
+			<result property="phone" column="PHONE"></result>
+			<result property="email" column="EMAIL"></result>
+		</association>
+		<collection property="attachs" ofType="attach">
+			<id property="seq" column="seq"/>
+			<result property="name" column="name"/>
+			<result property="title" column="title"/>
+			<result property="content" column="content"/>
+		</collection>
+		<collection property=""></collection>
+	</resultMap>
+	<resultMap id="info" type="map">
+		<id property="seq" column="seq"/>
+		<result property="name" column="name"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="teamid" column="TEAMID"></result>
+		<result property="name" column="NAME"></result>
+		<result property="age" column="AGE"></result>
+		<result property="roll" column="ROLL"></result>
+		<result property="password" column="PASSWORD"></result>
+		<result property="ssn" column="SSN"></result>
+		<result property="gender" column="GENDER"></result>
+		<result property="subject" column="SUBJECT"></result>
+		<result property="phone" column="PHONE"></result>
+		<result property="email" column="EMAIL"></result>
+		<result property="attachSeq" column="attachSeq"></result>
+</resultMap>
+</mapper>

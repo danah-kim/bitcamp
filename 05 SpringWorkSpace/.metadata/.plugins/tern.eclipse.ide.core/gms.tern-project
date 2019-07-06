@@ -1,0 +1,8 @@
+{
+  "libs": [
+    "ecma6",
+    "ecma5",
+    "browser",
+    "jquery"
+  ]
+}

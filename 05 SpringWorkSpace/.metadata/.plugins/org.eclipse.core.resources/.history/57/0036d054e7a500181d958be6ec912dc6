@@ -1,0 +1,22 @@
+"use strict";
+var app = app || {};
+app = {
+	init : x => {
+		var a = x;
+		$('#loginBtn').on('click', function( ){
+			alert("컨텍스트 : "+a);
+		});
+	}
+};
+app.session = {
+	context : x => {
+		sessionSrotage.setItem('context', x);
+		sessionSrotage.setItem('js', x + '/resources/js');
+		sessionSrotage.setItem('css', x + '/resources/css');
+		sessionSrotage.setItem('img', x + '/resources/img');
+		
+	},
+	path : x => {
+		return sessionSrotage.getItem(x);
+	}
+};

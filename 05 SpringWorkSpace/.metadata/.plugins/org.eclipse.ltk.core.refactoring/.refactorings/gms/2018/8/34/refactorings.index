@@ -1,0 +1,58 @@
+1534767233619	Rename package 'com.gms.web'
+1534771310474	Rename resource 'webapp'
+1534771357164	Rename resource 'web'
+1534812054734	Delete element
+1534812706908	Move file
+1534812733542	Move file
+1534822783196	Move file
+1534822785837	Move file
+1534822799466	Delete element
+1534823760882	Rename type 'Image'
+1534823772298	Rename type 'Member'
+1534824055236	Rename type 'MemberVO'
+1534824060757	Rename type 'ImageVO'
+1534824092295	Rename type 'MemberDA'
+1534824148591	Rename package 'com.gms.web.repository.Impl'
+1534824749177	Delete element
+1534829634908	Delete elements
+1534832303178	Delete element
+1534835950920	Delete elements
+1534836305538	Delete elements
+1534836403089	Delete element
+1534837561406	Delete element
+1534837765348	Delete element
+1534840520106	Delete element
+1534840525297	Delete elements
+1534840530804	Delete element
+1534840538034	Delete elements
+1534840543436	Delete element
+1534840551380	Delete elements
+1534840559341	Delete elements
+1534841996036	Move file
+1534842275633	Move file
+1534857411728	Delete elements
+1534857423847	Delete element
+1534857433655	Delete elements
+1534857441471	Delete elements
+1534857452473	Delete element
+1534857460942	Delete elements
+1534857466500	Delete element
+1534859867849	Rename resource 'icon'
+1534864142050	Delete element
+1534905806456	Delete element
+1534916297557	Rename resource 'head.jsp'
+1534916497230	Rename resource 'footerBox.jsp'
+1534917024917	Rename resource 'contentBox.jsp'
+1534918959178	Rename resource 'tiles3.xml'
+1534925667817	Delete element
+1534925672287	Delete element
+1534925676682	Delete element
+1534992642030	Move file
+1534993704707	Move file
+1535005792833	Rename resource 'cotentFooter.jsp'
+1535005811276	Rename resource 'footer.jsp'
+1535006097232	Rename resource 'hero.jsp'
+1535007140122	Copy file
+1535008083866	Delete element
+1535008087403	Copy file
+1535101440469	Rename type 'DataWourceTest'

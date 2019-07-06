@@ -1,0 +1,15 @@
+"use strict";
+var app = app || {};
+app = {
+	init : x => {
+		var a = x;
+		$('#loginBtn').on('click', function( ){
+			alert("컨텍스트 : "+a);
+		});
+	}
+};
+app.session = {
+	context : x => {
+		sessionSrotage.setItem();
+	}
+};

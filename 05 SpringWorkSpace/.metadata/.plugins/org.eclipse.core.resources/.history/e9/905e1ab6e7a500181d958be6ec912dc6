@@ -1,0 +1,25 @@
+"use strict";
+var app = app || {};
+app = {
+	init : x => {
+		app.session.context(x);
+	},
+	onCreate : ()=>{
+		
+	},
+	setContentView : ()=>{
+		
+	}
+};
+app.session = {
+	context : x => {
+		sessionSrotage.setItem('context', x);
+		sessionSrotage.setItem('js', x + '/resources/js');
+		sessionSrotage.setItem('css', x + '/resources/css');
+		sessionSrotage.setItem('img', x + '/resources/img');
+		
+	},
+	path : x => {
+		return sessionSrotage.getItem(x);
+	}
+};
