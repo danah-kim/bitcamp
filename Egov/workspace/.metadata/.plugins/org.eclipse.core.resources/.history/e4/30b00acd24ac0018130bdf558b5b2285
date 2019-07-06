@@ -1,0 +1,56 @@
+package com.gms.web.controller;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import com.gms.web.domain.MemberDTO;
+
+@Controller
+@RequestMapping("/board")
+@SessionAttributes("user")
+public class BoardController {
+	static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+	@RequestMapping(value="/add", method=RequestMethod.POST)
+	public String add(@ModelAttribute("member") MemberDTO member) {
+		logger.info("MemberContoller add");
+		return "redirect:/move/auth/member/login";
+	}
+	@RequestMapping(value="/list", method=RequestMethod.GET)
+	public String list() {
+		logger.info("MemberContoller list");
+		return "member:member/list.tiles";
+	}
+	@RequestMapping(value="/search", method=RequestMethod.GET)
+	public String search() {
+		logger.info("MemberContoller search");
+		return "member:member/search.tiles";
+	}
+	@RequestMapping(value="/retrieve", method=RequestMethod.GET)
+	public String retrieve() {
+		logger.info("MemberContoller retrieve");
+		return "member:member/retrieve.tiles";
+	}
+	@RequestMapping(value="/count", method=RequestMethod.GET)
+	public String count(Model model) {
+		logger.info("MemberContoller count");
+		return "member:member/count.tiles";
+	}
+	@RequestMapping(value="/modify", method=RequestMethod.POST)
+	public String modify(@ModelAttribute("member") MemberDTO member, Model model) {
+		logger.info("MemberContoller modify");
+		return "member:member/modify.tiles";
+	}
+	@RequestMapping(value="/remove", method=RequestMethod.POST)
+	public String remove(@ModelAttribute("member") MemberDTO member) {
+		return "redirect:/move/member/common/main";
+	}
+}

@@ -1,0 +1,58 @@
+package com.gms.service.impl;
+
+import com.gms.service.List;
+import com.gms.service.Map;
+import com.gms.service.MemberDTO;
+import com.gms.service.MemberService;
+
+public class MemberServiceImpl implements MemberService{
+
+	@Override
+	public void add(MemberDTO p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<?> list(Map<?, ?> p) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<?> search(Map<?, ?> p) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public MemberDTO retrieve(Map<?, ?> p) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int count(Map<?, ?> p) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void modify(Map<?, ?> p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void remove(Map<?, ?> p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean login(MemberDTO p) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+}

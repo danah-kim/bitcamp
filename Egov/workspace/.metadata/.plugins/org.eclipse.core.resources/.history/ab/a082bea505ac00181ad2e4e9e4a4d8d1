@@ -1,0 +1,5 @@
+package com.gms.domain;
+
+public class ImageDTO {
+
+}

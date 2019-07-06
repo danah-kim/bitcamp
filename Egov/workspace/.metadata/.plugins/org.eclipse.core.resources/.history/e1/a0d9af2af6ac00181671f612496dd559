@@ -1,0 +1,25 @@
+package com.gms.web.common;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class CalcAge {
+	public String age(String ssn){
+		String res = "";
+		int ssnBegin = Integer.parseInt(ssn.substring(0, 2));
+		logger.info("\n CALC  STEP 1 :: SSN BEGIN is {} ",ssnBegin);
+		String thisYear = new SimpleDateFormat("yyyy").format(new Date());
+		logger.info("\n CALC  STEP 2 :: THIS YEAR is {} ",thisYear);
+		int iThisYear = Integer.parseInt(thisYear.substring(2));
+		logger.info("\n CALC  STEP 3 :: THIS YEAR is {} ",iThisYear);
+		int nextYear = Integer.parseInt(thisYear)+1;
+		logger.info("\n CALC  STEP 4 :: NEXT YEAR is {} ",nextYear);
+		int birthYear1 = (ssnBegin > iThisYear)? 19:20; 
+		String birthYear = birthYear1+""+ssnBegin;
+		logger.info("\n CALC  STEP 5 :: BIRTH YEAR is {} ",birthYear);
+		int age = nextYear - Integer.parseInt(birthYear);
+		logger.info("\n CALC  STEP 6 :: AGE is {} ",age);
+		return res;
+
+	}
+}

@@ -1,0 +1,63 @@
+package com.gms.service.impl;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.gms.domain.MemberDTO;
+import com.gms.service.MemberService;
+
+@Service
+public class MemberServiceImpl implements MemberService{
+	static final Logger logger = LoggerFactory.getLogger(MemberService.class);
+	@Autowired MemberMapper memberDAO;
+	@Override
+	public void add(MemberDTO p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<?> list(Map<?, ?> p) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<?> search(Map<?, ?> p) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public MemberDTO retrieve(Map<?, ?> p) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int count(Map<?, ?> p) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void modify(Map<?, ?> p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void remove(Map<?, ?> p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean login(MemberDTO p) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+}

@@ -1,0 +1,64 @@
+package com.gms.service.impl;
+
+import com.gms.service.MemberService;
+
+public class MemberServiceImpl implements MemberService{
+	static final Logger logger = LoggerFactory.getLogger(MemberService.class);
+	@Autowired MemberMapper memberDAO;
+	@Override
+	public void add(MemberDTO p) {
+		logger.info("MemberService add");
+		p.setSsn(p.getAge()+"-"+p.getGender());
+		switch (p.getGender()) {
+		case "1" : case "3" : case "5" :
+			p.setGender("남자");
+			break;
+		case "2" : case "4" : case "6" :
+			p.setGender("여자");
+			break;
+		default:
+			break;
+		}
+		String year = new SimpleDateFormat("yyyy").format(new Date());
+		p.setAge(String.valueOf(Integer.parseInt(year) - Integer.parseInt(19 + p.getAge().substring(0, 2)) + 1));
+		memberDAO.insert(p);
+	}
+
+	@Override
+	public List<?> list(Map<?, ?> p) {
+		return memberDAO.selectList(p);
+	}
+
+	@Override
+	public List<?> search(Map<?, ?> p) {
+		return memberDAO.selectSome(p);
+	}
+
+	@Override
+	public MemberDTO retrieve(Map<?, ?> p) {
+		logger.info("MemberService retrieve");
+		return memberDAO.selectOne(p);
+	}
+
+	@Override
+	public int count(Map<?, ?> p) {
+		return memberDAO.count(p);
+	}
+
+	@Override
+	public void modify(Map<?, ?> p) {
+		logger.info("MemberService modify");
+		memberDAO.update(p);
+	}
+
+	@Override
+	public void remove(Map<?, ?> p) {
+		memberDAO.delete(p);
+	}
+
+	@Override
+	public boolean login(MemberDTO p) {
+		logger.info("MemberService login");
+		return memberDAO.login(p)==1;
+	}
+}

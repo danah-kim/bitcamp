@@ -1,0 +1,44 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<div id="content">
+	<h3>회원 탈퇴</h3>
+	<form id="removeForm">
+		<table>
+			<tr>
+				<td >아이디</td>
+				<td>${user.userid}</td>
+			</tr>
+			<tr>
+				<td>비밀번호</td>
+				<td>
+					<input type="text" id="pw" name="pw"/>
+				</td>
+			</tr>
+			<tr>
+				<td>비밀번호 확인</td>
+				<td>
+					<input type="text" id="password" name="password"/>
+				</td>
+			</tr>
+		</table>
+		<br />
+		<input class="formBtn" id="removeBtn" type="button" value="회원탈퇴"/>
+	</form>
+</div>
+<script>
+$('#removeBtn').click (function () {
+	if($('#removeForm').pw !== $('#removeForm').password){
+		alert('기존비밀번호와 확인 비밀번호가 일치하지 않습니다.');
+	}else if('${user.password}' !== $('#removeForm').pw){
+		alert('기존비밀번호가 일치하지 않습니다.');
+	}else{
+		alert('탈퇴완료');
+			$('removeForm')
+			.append('<input type="hidden" name="userid" value="${user.userid}"/>')
+			.attr({
+				action : '${context}' + "/member/remove",
+				method : "POST"
+			})
+			.submit();
+	}
+});
+</script>

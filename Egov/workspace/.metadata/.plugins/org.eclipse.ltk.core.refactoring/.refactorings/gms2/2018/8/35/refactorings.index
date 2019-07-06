@@ -1,0 +1,28 @@
+1535598137398	Move 'root-context.xml' to 'META-INF'
+1535598215695	Delete element
+1535599718749	Rename package 'com.gms.web'
+1535600845815	Delete element
+1535600890680	Delete elements
+1535600895910	Delete elements
+1535601600820	Delete element
+1535601679314	Rename package 'com.gms.controller'
+1535601685980	Rename package 'com.gms.domain'
+1535601694309	Rename package 'com.gms.mapper'
+1535601703966	Rename package 'com.gms.exam'
+1535601711253	Rename package 'com.gms.service.impl'
+1535601716831	Rename package 'com.gms.service'
+1535602281236	Delete element
+1535608500786	Rename package 'com.gms.web'
+1535611363274	Delete element
+1535612591037	Copy file
+1535612596367	Copy file
+1535613479423	Copy compilation unit
+1535613523011	Rename type 'ArticleService'
+1535614200914	Delete element
+1535615696665	Copy compilation unit
+1535703147895	Rename type 'CalculationAge'
+1535703158318	Rename type 'Age'
+1535703164543	Rename type 'CalGnder'
+1535703220499	Rename type 'CalcGnder'
+1535703488465	Rename type 'CalcAge'
+1535703491790	Delete element
