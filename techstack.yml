@@ -1,0 +1,253 @@
+repo_name: danah-kim/bitcamp
+report_id: b0b8dc2598c318a091270d833738c4ea
+repo_type: Public
+timestamp: '2023-11-12T11:59:23+00:00'
+requested_by: danah-kim
+provider: github
+branch: master
+detected_tools_count: 22
+tools:
+- name: CSS 3
+  description: The latest evolution of the Cascading Style Sheets language
+  website_url: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS3
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/6727/css.png
+  detection_source: Repo Metadata
+- name: Java
+  description: A concurrent, class-based, object-oriented, language specifically designed
+    to have as few implementation dependencies as possible
+  website_url: https://www.java.com
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/995/K85ZWV2F.png
+  detection_source: Repo Metadata
+- name: JavaScript
+  description: Lightweight, interpreted, object-oriented language with first-class
+    functions
+  website_url: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/1209/javascript.jpeg
+  detection_source: Repo Metadata
+- name: Kotlin
+  description: Statically typed Programming Language targeting JVM and JavaScript
+  website_url: https://kotlinlang.org/
+  open_source: true
+  hosted_saas: true
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/3750/pCfEzr6L.png
+  detection_source: Repo Metadata
+- name: PHP
+  description: A popular general-purpose scripting language that is especially suited
+    to web development
+  website_url: http://www.php.net/
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/991/hwUcGZ41_400x400.jpg
+  detection_source: Repo Metadata
+- name: R Language
+  description: A language and environment for statistical computing and graphics
+  website_url: http://www.r-project.org/
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/1213/r-logo.png
+  detection_source: Repo Metadata
+- name: SQL
+  description: It is a domain-specific language used in programming
+  website_url: https://en.wikipedia.org/wiki/SQL
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/2271/default_068d33483bba6b81ee13fbd4dc7aab9780896a54.png
+  detection_source: 05 SpringWorkSpace/spring5/target/classes/com/spring5/web/sql/view.sql
+  last_updated_by: sweetmilkys
+  last_updated_on: 2018-06-25 09:15:45.000000000 Z
+- name: Android SDK
+  description: An SDK that provides you the API libraries and developer tools necessary
+    to build, test, and debug apps for Android.
+  website_url: http://developer.android.com
+  version: '28.0'
+  open_source: false
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Frameworks (Full Stack)
+  image_url: https://img.stackshare.io/service/1010/m8jf0po4imu8t5eemjdd.png
+  detection_source_url: 07 AndroidWorkSpace/MySchedule/app/build.gradle
+  detection_source: 07 AndroidWorkSpace/MySchedule/app/build.gradle
+  last_updated_by: sweetmilkys
+  last_updated_on: 2018-09-04 09:16:50.000000000 Z
+- name: Spring Framework
+  description: An application framework and inversion of control container for the
+    Java platform
+  website_url: https://spring.io/projects/spring-framework
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Frameworks (Full Stack)
+  image_url: https://img.stackshare.io/service/2006/spring-framework-project-logo.png
+  detection_source: 06 EgovWorkSpace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/gms2/META-INF/maven/com.gms/web/pom.xml
+  last_updated_by: sweetmilkys
+  last_updated_on: 2019-07-06 05:40:29.000000000 Z
+- name: MariaDB
+  description: An enhanced, drop-in replacement for MySQL
+  website_url: https://mariadb.com/
+  license: GPL-2.0
+  open_source: true
+  hosted_saas: false
+  category: Data Stores
+  sub_category: Databases
+  image_url: https://img.stackshare.io/service/1615/mariadb-logo-400x400.png
+  detection_source: 06 EgovWorkSpace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/gms2/META-INF/maven/com.gms/web/pom.xml
+  last_updated_by: sweetmilkys
+  last_updated_on: 2019-07-06 05:40:29.000000000 Z
+- name: MyBatis
+  description: SQL Mapper Framework for Java
+  website_url: http://www.mybatis.org/mybatis-3/
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Data Stores
+  sub_category: Object Relational Mapper (ORM)
+  image_url: https://img.stackshare.io/service/5582/1483254.png
+  detection_source: 06 EgovWorkSpace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/gms2/META-INF/maven/com.gms/web/pom.xml
+  last_updated_by: sweetmilkys
+  last_updated_on: 2019-07-06 05:40:29.000000000 Z
+- name: Git
+  description: Fast, scalable, distributed revision control system
+  website_url: http://git-scm.com/
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Version Control System
+  image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source: Repo Metadata
+- name: Gradle
+  description: A powerful build system for the JVM
+  website_url: https://www.gradle.org/
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Java Build Tools
+  image_url: https://img.stackshare.io/service/975/gradlephant-social-black-bg.png
+  detection_source: 07 AndroidWorkSpace/MySchedule/gradlew.bat
+  last_updated_by: sweetmilkys
+  last_updated_on: 2018-09-05 08:16:59.000000000 Z
+- name: JUnit
+  description: A programmer-oriented testing framework for Java
+  website_url: http://junit.org/
+  version: '4.7'
+  license: EPL-1.0
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Testing Frameworks
+  image_url: https://img.stackshare.io/service/2020/874086.png
+  detection_source_url: 05 SpringWorkSpace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/gms/META-INF/maven/com.gms/web/pom.xml
+  detection_source: 06 EgovWorkSpace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/gms2/META-INF/maven/com.gms/web/pom.xml
+  last_updated_by: sweetmilkys
+  last_updated_on: 2018-09-11 01:49:53.000000000 Z
+- name: Log4j
+  description: A Java-based logging utility
+  website_url: https://logging.apache.org/log4j/2.x/
+  version: 1.7.7
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Monitoring
+  sub_category: Logging Tools
+  image_url: https://img.stackshare.io/service/2804/Coralogix-log4j-integration.jpg
+  detection_source_url: 05 SpringWorkSpace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/gms/META-INF/maven/com.gms/web/pom.xml
+  detection_source: 06 EgovWorkSpace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/gms2/META-INF/maven/com.gms/web/pom.xml
+  last_updated_by: sweetmilkys
+  last_updated_on: 2018-09-11 01:49:53.000000000 Z
+- name: Logback
+  description: A logging framework for Java applications
+  website_url: https://logback.qos.ch/
+  open_source: false
+  hosted_saas: false
+  category: Monitoring
+  sub_category: Log Management
+  image_url: https://img.stackshare.io/service/2923/05518ecaa42841e834421e9d6987b04f_400x400.png
+  detection_source: 05 SpringWorkSpace/spring5/target/classes/logback.xml
+  last_updated_by: sweetmilkys
+  last_updated_on: 2018-09-23 08:52:44.000000000 Z
+- name: SLF4J
+  description: Simple logging facade for Java
+  website_url: http://slf4j.org/
+  open_source: false
+  hosted_saas: false
+  category: Monitoring
+  sub_category: Log Management
+  image_url: https://img.stackshare.io/service/2805/05518ecaa42841e834421e9d6987b04f_400x400.png
+  detection_source: 06 EgovWorkSpace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/gms2/META-INF/maven/com.gms/web/pom.xml
+  last_updated_by: sweetmilkys
+  last_updated_on: 2018-09-11 01:49:53.000000000 Z
+- name: Scalr
+  description: 'Scalr is a remote state &amp; operations backend for Terraform with
+    access controls and policy as code '
+  website_url: http://scalr.com
+  open_source: false
+  hosted_saas: true
+  category: Build, Test, Deploy
+  sub_category: Cloud Management
+  image_url: https://img.stackshare.io/service/222/default_6522a9e0a115f2414dbf9653e22087a2ec20e2a2.png
+  detection_source: 05 SpringWorkSpace/spring5/target/m2e-wtp/web-resources/META-INF/maven/com.spring5/web/pom.xml
+  last_updated_by: sweetmilkys
+  last_updated_on: 2018-10-03 09:08:46.000000000 Z
+- name: Android OS
+  description: An open source mobile operating system by Google
+  website_url: https://www.android.com
+  version: '9.0'
+  open_source: false
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Operating Systems
+  image_url: https://img.stackshare.io/service/9586/ZvmtaSXW_400x400.jpg
+  detection_source_url: 07 AndroidWorkSpace/MySchedule/app/build.gradle
+  detection_source: 07 AndroidWorkSpace/MySchedule/app/build.gradle
+  last_updated_by: sweetmilkys
+  last_updated_on: 2018-09-04 09:16:50.000000000 Z
+- name: Shell
+  description: A shell is a text-based terminal, used for manipulating programs and
+    files. Shell scripts typically manage program execution.
+  website_url: https://en.wikipedia.org/wiki/Shell_script
+  open_source: false
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/4631/default_c2062d40130562bdc836c13dbca02d318205a962.png
+  detection_source: Repo Metadata
+- name: XSLT
+  description: The official Twitter account for the sum of all knowledge, Wikipedia.
+    Overseen by @jeffelder.
+  website_url: https://en.wikipedia.org/wiki/XSLT
+  open_source: false
+  hosted_saas: false
+  image_url: https://img.stackshare.io/service/4253/nZXfdUQq_normal.jpg
+  detection_source: Repo Metadata
+- name: org.jetbrains.kotlin:kotlin-stdlib-jdk7
+  description: Kotlin Standard Library JDK 7 extension
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source: 07 AndroidWorkSpace/MyApp/app/build.gradle
+  last_updated_by: sweetmilkys
+  last_updated_on: 2018-09-04 06:46:58.000000000 Z
