@@ -2,7 +2,7 @@ repo_name: danah-kim/bitcamp
 report_id: b0b8dc2598c318a091270d833738c4ea
 version: 0.1
 repo_type: Public
-timestamp: '2024-01-05T08:48:43+00:00'
+timestamp: '2024-02-29T18:40:26+00:00'
 requested_by: danah-kim
 provider: github
 branch: master
@@ -213,8 +213,8 @@ tools:
   last_updated_by: sweetmilkys
   last_updated_on: 2018-09-11 01:49:53.000000000 Z
 - name: Scalr
-  description: 'Scalr is a remote state &amp; operations backend for Terraform with
-    access controls and policy as code '
+  description: Scalr is a remote state &amp; operations backend for Terraform with
+    access controls and policy as code
   website_url: http://scalr.com
   open_source: false
   hosted_saas: true
